@@ -1,6 +1,7 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.models.mision;
 
 
+import ProyectoFinalLaureano.ProyectoFinalLaureano.enums.EstadoMision;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.Personaje;
 import jakarta.persistence.*;
 import io.swagger.v3.oas.annotations.media.Schema;
