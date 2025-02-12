@@ -1,19 +1,20 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.models.habilidad;
 
-
 import ProyectoFinalLaureano.ProyectoFinalLaureano.enums.ObjetivoHabilidad;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.enums.TipoHabilidad;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.monstruo.Monstruo;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.Personaje;
 import jakarta.persistence.*;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Getter;
+import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "habilidades")
 @Schema(description = "Entidad que representa una habilidad en el sistema")
+@Getter
+@Setter
 public class Habilidad {
 
     @Id
@@ -32,6 +33,14 @@ public class Habilidad {
     @Column(name = "descripcion", columnDefinition = "TEXT")
     @Schema(description = "Descripción de la habilidad", example = "Un ataque rápido con la espada")
     private String descripcion;
+
+    @Column(name = "nivel_maximo", nullable = false)
+    @Schema(description = "Nivel máximo de la habilidad", example = "5")
+    private int nivel_maximo;
+
+    @Column(name = "requisito_nivel", nullable = false)
+    @Schema(description = "Nivel requerido para aprender la habilidad", example = "1")
+    private int requisito_nivel;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "tipo_habilidad", nullable = false)
@@ -67,15 +76,9 @@ public class Habilidad {
     @Schema(description = "Tiempo de enfriamiento de la habilidad", example = "2")
     private int enfriamiento;
 
-    @ManyToMany(mappedBy = "habilidades")
-    private List<Personaje> personajes = new ArrayList<>();
-
-    @ManyToMany
-    @JoinTable(
-            name = "monstruo_habilidad",
-            joinColumns = @JoinColumn(name = "habilidad_id"),
-            inverseJoinColumns = @JoinColumn(name = "monstruo_id")
-    )
-    private List<Monstruo> monstruos = new ArrayList<>();
-
+    // Relación Uno a Muchos con HabilidadEfecto
+    @OneToMany(mappedBy = "habilidad", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore // Excluir esta relación en la serialización JSON
+    @Schema(description = "Efectos asociados a la habilidad")
+    private List<HabilidadEfecto> efectos;
 }
