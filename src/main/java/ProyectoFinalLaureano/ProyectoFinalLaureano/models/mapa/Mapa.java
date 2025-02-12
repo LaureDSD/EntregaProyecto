@@ -1,16 +1,18 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.models.mapa;
 
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.efectosEstados.EfectoEstado;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.monstruo.Monstruo;
 import jakarta.persistence.*;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Getter;
+import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "mapas")
 @Schema(description = "Entidad que representa un mapa en el sistema")
+@Getter
+@Setter
 public class Mapa {
 
     @Id
@@ -32,20 +34,16 @@ public class Mapa {
 
     @ManyToOne
     @JoinColumn(name = "tipo_mapa_id", nullable = false)
-    @Schema(description = "Tipo de mapa (relación con la tabla tipo_mapa)")
+    @Schema(description = "Tipo de mapa asociado")
     private TipoMapa tipo_mapa;
 
     @Column(name = "nivel_recomendado")
     @Schema(description = "Nivel recomendado para el mapa", example = "1")
     private int nivel_recomendado;
 
-    // Relación Muchos a Muchos con Monstruo
-    @ManyToMany(mappedBy = "mapas")
-    private List<Monstruo> monstruos = new ArrayList<>();
-
-    // Relación Muchos a Uno con EfectoEstado
-    @ManyToOne
-    @JoinColumn(name = "efecto_id")
-    private EfectoEstado efecto;
-
+    // Relación Uno a Muchos con MapaEfecto
+    @OneToMany(mappedBy = "mapa", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore // Excluir esta relación en la serialización JSON
+    @Schema(description = "Efectos asociados a este mapa")
+    private List<MapaEfecto> efectos;
 }

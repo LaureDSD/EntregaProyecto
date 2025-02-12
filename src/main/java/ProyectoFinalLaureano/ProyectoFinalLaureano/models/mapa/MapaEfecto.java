@@ -1,12 +1,17 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.models.mapa;
 
+
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.efectosEstados.EfectoEstado;
 import jakarta.persistence.*;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "mapa_efecto")
 @Schema(description = "Entidad que representa la relación entre un mapa y un efecto")
+@Getter
+@Setter
 public class MapaEfecto {
 
     @EmbeddedId
@@ -23,5 +28,4 @@ public class MapaEfecto {
     @JoinColumn(name = "efecto_id", nullable = false)
     @Schema(description = "Efecto aplicado en el mapa")
     private EfectoEstado efecto;
-
 }

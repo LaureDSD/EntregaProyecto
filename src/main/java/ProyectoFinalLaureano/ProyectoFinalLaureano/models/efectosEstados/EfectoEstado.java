@@ -1,5 +1,7 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.models.efectosEstados;
 
+import ProyectoFinalLaureano.ProyectoFinalLaureano.enums.TipoAfectado;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.enums.TipoEfecto;
 import jakarta.persistence.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 
