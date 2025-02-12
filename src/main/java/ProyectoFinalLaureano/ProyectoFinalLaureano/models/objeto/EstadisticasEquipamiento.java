@@ -1,12 +1,15 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.models.objeto;
 
-
 import jakarta.persistence.*;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "estadisticas_equipamiento")
 @Schema(description = "Entidad que representa las estadísticas de un equipamiento")
+@Getter
+@Setter
 public class EstadisticasEquipamiento {
 
     @Id
@@ -21,7 +24,7 @@ public class EstadisticasEquipamiento {
 
     @ManyToOne
     @JoinColumn(name = "tipo_equipamiento_id", nullable = false)
-    @Schema(description = "Tipo de equipamiento (relación con la tabla tipo_equipamiento)")
+    @Schema(description = "Tipo de equipamiento asociado")
     private TipoEquipamiento tipo_equipamiento;
 
     @Column(name = "ataque")
@@ -39,5 +42,4 @@ public class EstadisticasEquipamiento {
     @Column(name = "energia")
     @Schema(description = "Energía del equipamiento", example = "0")
     private int energia;
-
 }

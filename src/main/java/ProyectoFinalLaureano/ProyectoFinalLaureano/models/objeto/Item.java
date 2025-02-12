@@ -1,16 +1,19 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.models.objeto;
 
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.monstruo.DropsObjetos;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.InventarioPersonaje;
+
 import jakarta.persistence.*;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Getter;
+import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "items")
 @Schema(description = "Entidad que representa un ítem en el sistema")
+@Getter
+@Setter
 public class Item {
 
     @Id
@@ -24,7 +27,7 @@ public class Item {
 
     @ManyToOne
     @JoinColumn(name = "tipo_item", nullable = false)
-    @Schema(description = "Tipo de ítem (relación con la tabla tipo_item)")
+    @Schema(description = "Tipo de ítem asociado")
     private TipoItem tipo_item;
 
     @Column(name = "descripcion", columnDefinition = "TEXT")
@@ -43,12 +46,15 @@ public class Item {
     @Schema(description = "Valor dinámico del ítem", example = "5")
     private int valor_dinamico;
 
-    // Relación Uno a Muchos con InventarioPersonaje
+    // Relación Uno a Muchos con ItemEfecto
     @OneToMany(mappedBy = "item", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<InventarioPersonaje> inventarios = new ArrayList<>();
+    @JsonIgnore // Excluir esta relación en la serialización JSON
+    @Schema(description = "Efectos asociados al ítem")
+    private List<ItemEfecto> efectos;
 
-    // Relación Uno a Muchos con DropsObjetos
+    // Relación Uno a Muchos con EstadisticasEquipamiento
     @OneToMany(mappedBy = "item", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<DropsObjetos> drops = new ArrayList<>();
-
+    @JsonIgnore // Excluir esta relación en la serialización JSON
+    @Schema(description = "Estadísticas de equipamiento asociadas al ítem")
+    private List<EstadisticasEquipamiento> estadisticas;
 }

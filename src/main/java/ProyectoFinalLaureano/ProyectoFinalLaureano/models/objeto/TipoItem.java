@@ -2,10 +2,17 @@ package ProyectoFinalLaureano.ProyectoFinalLaureano.models.objeto;
 
 import jakarta.persistence.*;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Getter;
+import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import java.util.List;
 
 @Entity
 @Table(name = "tipo_item")
 @Schema(description = "Entidad que representa un tipo de ítem en el sistema")
+@Getter
+@Setter
 public class TipoItem {
 
     @Id
@@ -21,4 +28,9 @@ public class TipoItem {
     @Schema(description = "Descripción del tipo de ítem", example = "Consumibles que pueden ser usados para restaurar salud, energía, etc.")
     private String descripcion;
 
+    // Relación Uno a Muchos con Item
+    @OneToMany(mappedBy = "tipo_item", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore // Excluir esta relación en la serialización JSON
+    @Schema(description = "Ítems asociados a este tipo")
+    private List<Item> items;
 }
