@@ -3,10 +3,17 @@ package ProyectoFinalLaureano.ProyectoFinalLaureano.models.monstruo;
 
 import jakarta.persistence.*;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Getter;
+import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import java.util.List;
 
 @Entity
 @Table(name = "tipo_monstruo")
 @Schema(description = "Entidad que representa un tipo de monstruo en el sistema")
+@Getter
+@Setter
 public class TipoMonstruo {
 
     @Id
@@ -22,4 +29,9 @@ public class TipoMonstruo {
     @Schema(description = "Descripción del tipo de monstruo", example = "Monstruos comunes que se encuentran en cualquier zona")
     private String descripcion;
 
+    // Relación Uno a Muchos con Monstruo
+    @OneToMany(mappedBy = "tipo_monstruo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore // Excluir esta relación en la serialización JSON
+    @Schema(description = "Monstruos asociados a este tipo")
+    private List<Monstruo> monstruos;
 }

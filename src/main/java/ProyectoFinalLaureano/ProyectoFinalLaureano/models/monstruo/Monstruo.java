@@ -1,17 +1,18 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.models.monstruo;
 
-
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.habilidad.Habilidad;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.mapa.Mapa;
 import jakarta.persistence.*;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Getter;
+import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "monstruos")
 @Schema(description = "Entidad que representa un monstruo en el sistema")
+@Getter
+@Setter
 public class Monstruo {
 
     @Id
@@ -25,7 +26,7 @@ public class Monstruo {
 
     @ManyToOne
     @JoinColumn(name = "tipo_monstruo_id", nullable = false)
-    @Schema(description = "Tipo de monstruo (relación con la tabla tipo_monstruo)")
+    @Schema(description = "Tipo de monstruo asociado")
     private TipoMonstruo tipo_monstruo;
 
     @Column(name = "nivel")
@@ -64,22 +65,10 @@ public class Monstruo {
     @Schema(description = "Experiencia que otorga el monstruo al ser derrotado", example = "5")
     private int experiencia_otorgada;
 
-    // Relación Muchos a Muchos con Habilidad
-    @ManyToMany(mappedBy = "monstruos")
-    private List<Habilidad> habilidades = new ArrayList<>();
-
-    // Relación Muchos a Muchos con Mapa
-    @ManyToMany
-    @JoinTable(
-            name = "mapa_monstruos",
-            joinColumns = @JoinColumn(name = "monstruo_id"),
-            inverseJoinColumns = @JoinColumn(name = "mapa_id")
-    )
-    private List<Mapa> mapas = new ArrayList<>();
-
-    // Relación Uno a Muchos con DropsObjetos
+    // Relación Uno a Muchos con DropsNPC
     @OneToMany(mappedBy = "monstruo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<DropsObjetos> drops = new ArrayList<>();
-
+    @JsonIgnore // Excluir esta relación en la serialización JSON
+    @Schema(description = "Drops asociados a este monstruo")
+    private List<DropsObjetos> drops;
 
 }

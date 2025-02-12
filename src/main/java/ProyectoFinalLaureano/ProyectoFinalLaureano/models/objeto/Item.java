@@ -1,6 +1,7 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.models.objeto;
 
 
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.monstruo.DropsObjetos;
 import jakarta.persistence.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
@@ -57,4 +58,11 @@ public class Item {
     @JsonIgnore // Excluir esta relación en la serialización JSON
     @Schema(description = "Estadísticas de equipamiento asociadas al ítem")
     private List<EstadisticasEquipamiento> estadisticas;
+
+    // Relación Uno a Muchos con DropsObjetos
+    @OneToMany(mappedBy = "item", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore // Excluir esta relación en la serialización JSON
+    @Schema(description = "Lista de drops asociadas al ítem")
+    private List<DropsObjetos> drops;
+
 }
