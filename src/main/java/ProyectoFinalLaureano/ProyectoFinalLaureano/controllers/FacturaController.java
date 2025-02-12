@@ -10,14 +10,15 @@ import java.util.List;
 @RequestMapping("/api/factura")
 public class FacturaController {
 
+    /*
     @Autowired
     private FacturaService facturaService;
 
-    /*
+
     @GetMapping
     public List<Factura> obtenerTodos(){
         return  facturaService.getAll();
-    }*/
+
 
     //Get DTO V1
     @GetMapping
@@ -56,5 +57,5 @@ public class FacturaController {
     }
 
 
-
+*/
 }

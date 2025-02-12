@@ -4,7 +4,7 @@ USE api_rpg_bd;
 
 -- Tabla: tipo_musuario
 CREATE TABLE IF NOT EXISTS tipo_usuario (
-    tipo_usuario_id INT PRIMARY KEY AUTO_INCREMENT,
+    tipo_usuario_id bigint PRIMARY KEY AUTO_INCREMENT,
     nombre VARCHAR(100) NOT NULL,
     descripcion TEXT,
     INDEX idx_nombre (nombre)
@@ -18,7 +18,7 @@ INSERT INTO tipo_usuario (nombre, descripcion) VALUES
 
 -- Tabla: usuarios
 CREATE TABLE IF NOT EXISTS usuarios (
-    usuario_id INT PRIMARY KEY AUTO_INCREMENT,
+    usuario_id bigint PRIMARY KEY AUTO_INCREMENT,
     imagen_perfil VARCHAR(255),
     nombre_usuario_pub VARCHAR(100) NOT NULL,
     limite_personajes INT NOT NULL DEFAULT 3,
@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS usuarios (
     ip_ultima_conexion VARCHAR(45) NULL,
     fecha_creacion DATETIME NOT NULL,
     estado_cuenta BOOLEAN NOT NULL DEFAULT 1,
-    tipo_usuario INT NOT NULL DEFAULT 1,
+    tipo_usuario bigint NOT NULL DEFAULT 1,
     FOREIGN KEY (tipo_usuario) REFERENCES tipo_usuario(tipo_usuario_id),
     INDEX idx_correo (correo),
     INDEX idx_nombre_priv (nombre_usuario_priv)
@@ -46,7 +46,7 @@ INSERT INTO usuarios (imagen_perfil, nombre_usuario_pub, limite_personajes, nomb
 
 -- Tabla: logs de usuario
 CREATE TABLE IF NOT EXISTS logs (
-    log_id INT PRIMARY KEY AUTO_INCREMENT,
+    log_id bigint PRIMARY KEY AUTO_INCREMENT,
     usuario_id INT NULL,
     tipo_log ENUM('informacion','fallo', 'advertencia','creacion','actulizacion','borrado') DEFAULT 'informacion',
     mensaje TEXT NOT NULL,
@@ -64,8 +64,8 @@ INSERT INTO logs (usuario_id, tipo_log, mensaje, fecha_log) VALUES
 
 -- Tabla: personajes
 CREATE TABLE IF NOT EXISTS personajes (
-    personaje_id INT PRIMARY KEY AUTO_INCREMENT,
-    usuario_id INT NOT NULL,
+    personaje_id bigint PRIMARY KEY AUTO_INCREMENT,
+    usuario_id bigint NOT NULL,
     imagen_modelo VARCHAR(255),
     nombre VARCHAR(100) NOT NULL,
     fecha_creacion DATETIME NOT NULL,
@@ -85,7 +85,7 @@ INSERT INTO personajes (usuario_id, imagen_modelo, nombre, fecha_creacion) VALUE
 (4, 'model5.jpg', 'Caballero1', NOW());
 
 CREATE TABLE IF NOT EXISTS estadisticas_personaje (
-    personaje_id INT PRIMARY KEY,
+    personaje_id bigint PRIMARY KEY,
     nivel INT NOT NULL DEFAULT 1,
     xp_acumulada INT NOT NULL DEFAULT 0,
     vida_base INT NOT NULL DEFAULT 100,
@@ -110,8 +110,8 @@ INSERT INTO estadisticas_personaje (personaje_id, nivel, xp_acumulada, vida_base
 
 -- Tabla: registro_cacerias
 CREATE TABLE if not exists registro_personaje (
-    registro_id INT PRIMARY KEY AUTO_INCREMENT,
-    personaje_id INT NOT NULL,
+    registro_id bigint PRIMARY KEY AUTO_INCREMENT,
+    personaje_id bigint NOT NULL,
     normal INT DEFAULT 0,
     miniboss INT DEFAULT 0,
     boss INT DEFAULT 0,
@@ -135,7 +135,7 @@ INSERT INTO registro_personaje (personaje_id, normal, miniboss, boss, muertes_to
 
 -- Tabla: tipo_monstruo
 CREATE TABLE IF NOT EXISTS tipo_monstruo (
-    tipo_monstruo_id INT PRIMARY KEY AUTO_INCREMENT,
+    tipo_monstruo_id bigint PRIMARY KEY AUTO_INCREMENT,
     nombre VARCHAR(100) NOT NULL,
     descripcion TEXT,
     INDEX idx_nombre (nombre)
@@ -149,9 +149,9 @@ INSERT INTO tipo_monstruo (nombre, descripcion) VALUES
 
 -- Tabla: monstruos
 CREATE TABLE IF NOT EXISTS monstruos (
-    monstruo_id INT PRIMARY KEY AUTO_INCREMENT,
+    monstruo_id bigint PRIMARY KEY AUTO_INCREMENT,
     nombre VARCHAR(100) NOT NULL,
-    tipo_monstruo_id INT NOT NULL,
+    tipo_monstruo_id bigint NOT NULL,
 	nivel INT DEFAULT 1,
     descripcion TEXT,
     imagen VARCHAR(255),
@@ -185,7 +185,7 @@ INSERT INTO monstruos (nombre, tipo_monstruo_id, nivel, descripcion, imagen, vid
 
 -- Tabla: efectos_estados
 CREATE TABLE IF NOT EXISTS efectos_estados (
-    efecto_id INT PRIMARY KEY AUTO_INCREMENT,
+    efecto_id bigint PRIMARY KEY AUTO_INCREMENT,
     imagen_icono VARCHAR(255),
     nombre VARCHAR(100) NOT NULL,
     tipo ENUM('buff', 'debuff') NOT NULL,
@@ -212,7 +212,7 @@ INSERT INTO efectos_estados (imagen_icono, nombre, tipo, tipo_afectado, duracion
 ('regeneracion.png', 'Regen de vida', 'buff', 'personaje', 4, 2, 0, 0, 50, 0, 'Regenera vida a intervalos regulares');
 
 CREATE TABLE IF NOT EXISTS tipo_mapa (
-    tipo_mapa_id INT PRIMARY KEY AUTO_INCREMENT,
+    tipo_mapa_id bigint PRIMARY KEY AUTO_INCREMENT,
     nombre VARCHAR(100) NOT NULL,
     descripcion TEXT,
     INDEX idx_nombre (nombre)
@@ -231,15 +231,13 @@ INSERT INTO tipo_mapa (nombre, descripcion) VALUES
 
 -- Tabla: mapas
 CREATE TABLE IF NOT EXISTS mapas (
-    mapa_id INT PRIMARY KEY AUTO_INCREMENT,
+    mapa_id bigint PRIMARY KEY AUTO_INCREMENT,
     nombre VARCHAR(100) NOT NULL,
     descripcion TEXT,
     imagen VARCHAR(255),
-    tipo_mapa_id INT NOT NULL,
+    tipo_mapa_id bigint NOT NULL,
     nivel_recomendado INT DEFAULT 1,
-    efecto_id INT NULL,
     FOREIGN KEY (tipo_mapa_id) REFERENCES tipo_mapa(tipo_mapa_id),
-    FOREIGN KEY (efecto_id) REFERENCES efectos_estados(efecto_id),
     INDEX idx_nombre (nombre),
     INDEX idx_tipo_mapa (tipo_mapa_id)
 );
@@ -256,8 +254,8 @@ INSERT INTO mapas (nombre, descripcion, imagen, tipo_mapa_id, nivel_recomendado)
 
 -- Tabla: mapa_efecto
 CREATE TABLE IF NOT EXISTS mapa_efecto (
-    mapa_id INT NOT NULL,
-    efecto_id INT NOT NULL,
+    mapa_id bigint NOT NULL,
+    efecto_id bigint NOT NULL,
     PRIMARY KEY (mapa_id, efecto_id),
     FOREIGN KEY (efecto_id) REFERENCES efectos_estados(efecto_id),
     FOREIGN KEY (mapa_id) REFERENCES mapas(mapa_id)
@@ -273,7 +271,7 @@ INSERT INTO mapa_efecto (mapa_id, efecto_id) VALUES
 
 -- Tabla: tipo_item
 CREATE TABLE IF NOT EXISTS tipo_item (
-    tipo_item_id INT PRIMARY KEY AUTO_INCREMENT,
+    tipo_item_id bigint PRIMARY KEY AUTO_INCREMENT,
     nombre VARCHAR(100) NOT NULL,
     descripcion TEXT,
     INDEX idx_nombre (nombre)
@@ -287,9 +285,9 @@ INSERT INTO tipo_item (nombre, descripcion) VALUES
 
 -- Tabla: items
 CREATE TABLE IF NOT EXISTS items (
-    item_id INT PRIMARY KEY AUTO_INCREMENT,
+    item_id bigint PRIMARY KEY AUTO_INCREMENT,
     nombre VARCHAR(100) NOT NULL,
-    tipo_item INT NOT NULL,
+    tipo_item bigint NOT NULL,
     descripcion TEXT,
     acumulaciones_max INT NOT NULL DEFAULT 99,
     precio_base INT DEFAULT 0,
@@ -313,8 +311,8 @@ INSERT INTO items (nombre, tipo_item, descripcion, acumulaciones_max, precio_bas
 
 -- Tabla: item_efecto
 CREATE TABLE IF NOT EXISTS item_efecto (
-    item_id INT NOT NULL,
-    efecto_id INT NOT NULL,
+    item_id bigint NOT NULL,
+    efecto_id bigint NOT NULL,
     PRIMARY KEY (item_id, efecto_id),
     FOREIGN KEY (efecto_id) REFERENCES efectos_estados(efecto_id),
     FOREIGN KEY (item_id) REFERENCES items(item_id)
@@ -330,7 +328,7 @@ INSERT INTO item_efecto (item_id, efecto_id) VALUES
 
 -- Tabla: tipos_equipamiento
 CREATE TABLE IF NOT EXISTS tipo_equipamiento (
-    tipo_equipamiento_id INT PRIMARY KEY AUTO_INCREMENT,
+    tipo_equipamiento_id bigint PRIMARY KEY AUTO_INCREMENT,
     nombre VARCHAR(100) NOT NULL,
     descripcion TEXT,
     INDEX idx_nombre (nombre)
@@ -350,10 +348,10 @@ INSERT INTO tipo_equipamiento (nombre, descripcion) VALUES
 
 -- Tabla: drops_objetos
 CREATE TABLE IF NOT EXISTS drops_objetos (
-    drop_id INT PRIMARY KEY AUTO_INCREMENT,
-    monstruo_id INT NOT NULL,
-    item_id INT NOT NULL,
+    monstruo_id bigint NOT NULL,
+    item_id bigint NOT NULL,
     probabilidad INT NOT NULL DEFAULT 100,  -- Probabilidad de que el objeto sea soltado
+	primary key(monstruo_id,item_id),
     FOREIGN KEY (monstruo_id) REFERENCES monstruos(monstruo_id) 
     ON DELETE CASCADE 
     ON UPDATE CASCADE,
@@ -372,9 +370,9 @@ INSERT INTO drops_objetos (monstruo_id, item_id, probabilidad) VALUES
 
 -- Tabla: objetos_equipables
 CREATE TABLE IF NOT EXISTS estadisticas_equipamiento ( 
-    equipamiento_id INT PRIMARY KEY AUTO_INCREMENT,
-    item_id INT NOT NULL,
-    tipo_equipamiento_id INT NOT NULL,
+    equipamiento_id bigint PRIMARY KEY AUTO_INCREMENT,
+    item_id bigint NOT NULL,
+    tipo_equipamiento_id bigint NOT NULL,
     ataque INT DEFAULT 0,
     defensa INT DEFAULT 0,
     vida INT DEFAULT 0,
@@ -435,8 +433,8 @@ INSERT INTO equipamiento_personaje (personaje_id, equipamiento_id) VALUES
 */
 -- Tabla: inventario de personajes
 CREATE TABLE IF NOT EXISTS inventario_personaje (
-    personaje_id INT NOT NULL,
-    item_id INT NOT NULL,
+    personaje_id bigint NOT NULL,
+    item_id bigint NOT NULL,
     cantidad INT NOT NULL DEFAULT 1,
     equipado BOOLEAN DEFAULT 0,
 	fecha_obtencion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -465,7 +463,7 @@ INSERT INTO inventario_personaje (personaje_id, item_id, cantidad, equipado) VAL
 
 -- Tabla: habilidades 
 CREATE TABLE IF NOT EXISTS habilidades (
-    habilidad_id INT PRIMARY KEY AUTO_INCREMENT,
+    habilidad_id bigint PRIMARY KEY AUTO_INCREMENT,
     imagen VARCHAR(255),
     nombre VARCHAR(100) NOT NULL,
     descripcion TEXT,
@@ -492,8 +490,8 @@ INSERT INTO habilidades (imagen, nombre, descripcion, tipo_habilidad, objetivo_h
 
 -- Tabla: habilidad_efecto
 CREATE TABLE IF NOT EXISTS habilidad_efecto (
-    habilidad_id INT NOT NULL,
-    efecto_id INT NOT NULL,
+    habilidad_id bigint NOT NULL,
+    efecto_id bigint NOT NULL,
     PRIMARY KEY (efecto_id, habilidad_id),
     FOREIGN KEY (efecto_id) REFERENCES efectos_estados(efecto_id),
     FOREIGN KEY (habilidad_id) REFERENCES habilidades(habilidad_id)
@@ -509,8 +507,8 @@ INSERT INTO habilidad_efecto (habilidad_id, efecto_id) VALUES
 
 -- Tabla: personaje_habilidad
 CREATE TABLE IF NOT EXISTS personaje_habilidad (
-    personaje_id INT NOT NULL,
-    habilidad_id INT NOT NULL,
+    personaje_id bigint NOT NULL,
+    habilidad_id bigint NOT NULL,
     nivel INT NOT NULL DEFAULT 1,
     ultimo_uso DATETIME,
     PRIMARY KEY (personaje_id, habilidad_id),
@@ -529,8 +527,8 @@ INSERT INTO personaje_habilidad (personaje_id, habilidad_id, nivel, ultimo_uso) 
 
 -- Tabla: monstruo_habilidad
 CREATE TABLE IF NOT EXISTS monstruo_habilidad (
-    monstruo_id INT NOT NULL,
-    habilidad_id INT NOT NULL,
+    monstruo_id bigint NOT NULL,
+    habilidad_id bigint NOT NULL,
     nivel_habilidad INT NOT NULL DEFAULT 1,
     probabilidad_uso INT DEFAULT 100,
     PRIMARY KEY (monstruo_id, habilidad_id),
@@ -552,7 +550,7 @@ INSERT INTO monstruo_habilidad (monstruo_id, habilidad_id, nivel_habilidad, prob
 
 -- Tabla: tipo_npc
 CREATE TABLE IF NOT EXISTS tipo_npc (
-    tipo_npc_id INT PRIMARY KEY AUTO_INCREMENT,
+    tipo_npc_id bigint PRIMARY KEY AUTO_INCREMENT,
     nombre VARCHAR(100) NOT NULL,
     descripcion TEXT,
     INDEX idx_nombre (nombre)
@@ -568,11 +566,11 @@ INSERT INTO tipo_npc (nombre, descripcion) VALUES
 
 -- Tabla: npc
 CREATE TABLE IF NOT EXISTS npc (
-    npc_id INT PRIMARY KEY AUTO_INCREMENT,
+    npc_id bigint PRIMARY KEY AUTO_INCREMENT,
     nombre VARCHAR(100) NOT NULL,
     descripcion TEXT,
     imagen VARCHAR(255),
-    tipo_npc INT NOT NULL,
+    tipo_npc bigint NOT NULL,
     FOREIGN KEY (tipo_npc) REFERENCES tipo_npc(tipo_npc_id),
     INDEX idx_nombre (nombre)
 );
@@ -587,7 +585,7 @@ INSERT INTO npc (nombre, descripcion, imagen, tipo_npc) VALUES
 
 -- Tabla: misiones
 CREATE TABLE IF NOT EXISTS misiones (
-    mision_id INT PRIMARY KEY AUTO_INCREMENT,
+    mision_id bigint PRIMARY KEY AUTO_INCREMENT,
     nombre VARCHAR(100) NOT NULL,
     descripcion TEXT NOT NULL,
     nivel_minimo INT NOT NULL,
@@ -609,8 +607,8 @@ INSERT INTO misiones (nombre, descripcion, nivel_minimo, recompensa_almas, recom
 
 -- Tabla: recompensa_objetos
 CREATE TABLE IF NOT EXISTS mision_objetos (
-    mision_id INT NOT NULL,
-    item_id INT NOT NULL,
+    mision_id bigint NOT NULL,
+    item_id bigint NOT NULL,
     cantidad INT NOT NULL DEFAULT 1,
     PRIMARY KEY(mision_id,item_id),
     FOREIGN KEY (mision_id) REFERENCES misiones(mision_id),
@@ -629,8 +627,8 @@ INSERT INTO mision_objetos (mision_id, item_id, cantidad) VALUES
 
 -- Tabla: personaje_mision
 CREATE TABLE IF NOT EXISTS personaje_mision (
-    personaje_id INT NOT NULL,
-    mision_id INT NOT NULL,
+    personaje_id bigint NOT NULL,
+    mision_id bigint NOT NULL,
     fecha_inicio DATETIME NOT NULL,
     fecha_fin DATETIME NULL,
     estado ENUM('en_progreso', 'completada', 'fallida') DEFAULT 'en_progreso',
@@ -651,8 +649,8 @@ INSERT INTO personaje_mision (personaje_id, mision_id, fecha_inicio, fecha_fin, 
 
 -- Tabla: npc_mision
 CREATE TABLE IF NOT EXISTS npc_mision (
-    npc_id INT NOT NULL,
-    mision_id INT NOT NULL,
+    npc_id bigint NOT NULL,
+    mision_id bigint NOT NULL,
     PRIMARY KEY (npc_id, mision_id),
     FOREIGN KEY (npc_id) REFERENCES npc(npc_id),
     FOREIGN KEY (mision_id) REFERENCES misiones(mision_id),
@@ -670,8 +668,8 @@ INSERT INTO npc_mision (npc_id, mision_id) VALUES
 
 -- Tabla: mapa_monstruos
 CREATE TABLE IF NOT EXISTS mapa_monstruos (
-    mapa_id INT NOT NULL,
-    monstruo_id INT NOT NULL,
+    mapa_id bigint NOT NULL,
+    monstruo_id bigint NOT NULL,
     probabilidad_aparicion INT DEFAULT 100,
     PRIMARY KEY (mapa_id, monstruo_id),
     FOREIGN KEY (mapa_id) REFERENCES mapas(mapa_id),
@@ -690,8 +688,8 @@ INSERT INTO mapa_monstruos (mapa_id, monstruo_id, probabilidad_aparicion) VALUES
 
 -- Tabla: tienda_producto
 CREATE TABLE IF NOT EXISTS npc_producto (
-    npc_id INT NOT NULL,
-    item_id INT NOT NULL,
+    npc_id bigint NOT NULL,
+    item_id bigint NOT NULL,
     precio_compra INT NOT NULL,
     precio_venta INT NOT NULL,
     cantidad_venta INT NOT NULL,
@@ -712,11 +710,11 @@ INSERT INTO npc_producto (npc_id, item_id, precio_compra, precio_venta, cantidad
 
 -- Tabla: transacciones_comercio
 CREATE TABLE IF NOT EXISTS transacciones_npc_personaje (
-    transaccion_id INT PRIMARY KEY AUTO_INCREMENT,
-    personaje_id INT NOT NULL,
+    transaccion_id bigint PRIMARY KEY AUTO_INCREMENT,
+    personaje_id bigint NOT NULL,
     tipo_transaccion ENUM('compra', 'venta') NOT NULL,
-    npc_id INT not NULL,
-    item_id INT NOT NULL,
+    npc_id bigint not NULL,
+    item_id bigint NOT NULL,
     cantidad INT NOT NULL DEFAULT 1,
     precio_almas INT NOT NULL,
     fecha_transaccion DATETIME NOT NULL,

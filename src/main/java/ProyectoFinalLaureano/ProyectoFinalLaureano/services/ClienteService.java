@@ -1,5 +1,5 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.services;
-
+/*
 import ad.RepasoExamen.Model.Cliente;
 import ad.RepasoExamen.ModelDTO.ClienteDTO;
 import ad.RepasoExamen.ModelDTO.ClienteV2DTO;
@@ -113,3 +113,4 @@ public class ClienteService {
 
 
 }
+*/
