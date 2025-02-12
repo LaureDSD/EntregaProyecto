@@ -1,15 +1,19 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.models.mision;
 
-
 import ProyectoFinalLaureano.ProyectoFinalLaureano.enums.EstadoMision;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.Personaje;
 import jakarta.persistence.*;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "personaje_mision")
 @Schema(description = "Entidad que representa la relación entre un personaje y una misión")
+@Getter
+@Setter
 public class PersonajeMision {
 
     @EmbeddedId
@@ -40,3 +44,4 @@ public class PersonajeMision {
     @Schema(description = "Estado de la misión (en_progreso, completada, fallida)", example = "en_progreso")
     private EstadoMision estado;
 }
+

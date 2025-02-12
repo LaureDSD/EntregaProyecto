@@ -1,16 +1,18 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.models.mision;
 
-
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.npc.NPC;
 import jakarta.persistence.*;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Getter;
+import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "misiones")
 @Schema(description = "Entidad que representa una misión en el sistema")
+@Getter
+@Setter
 public class Mision {
 
     @Id
@@ -42,21 +44,15 @@ public class Mision {
     @Schema(description = "Fecha límite para completar la misión", example = "30")
     private int fecha_limite;
 
+    // Relación Uno a Muchos con PersonajeMision
     @OneToMany(mappedBy = "mision", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<PersonajeMision> personajes = new ArrayList<>();
+    @JsonIgnore // Excluir esta relación en la serialización JSON
+    @Schema(description = "Personajes asociados a esta misión")
+    private List<PersonajeMision> personajes;
 
-    // Relación Muchos a Muchos con NPC
-    @ManyToMany
-    @JoinTable(
-            name = "npc_mision",
-            joinColumns = @JoinColumn(name = "mision_id"),
-            inverseJoinColumns = @JoinColumn(name = "npc_id")
-    )
-    private List<NPC> npcs = new ArrayList<>();
-
-    // Relación Uno a Muchos con MisionObjetos
+    // Relación Uno a Muchos con MisionObjeto
     @OneToMany(mappedBy = "mision", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<MisionObjetos> recompensas = new ArrayList<>();
-
-
+    @JsonIgnore // Excluir esta relación en la serialización JSON
+    @Schema(description = "Objetos de recompensa asociados a esta misión")
+    private List<MisionObjetos> recompensas;
 }

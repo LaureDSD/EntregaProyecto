@@ -1,4 +1,5 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.models.monstruo;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.objeto.Item;
 import jakarta.persistence.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
