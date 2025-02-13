@@ -1,6 +1,7 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.models.usuario;
 
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.Personaje;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
@@ -12,7 +13,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @NoArgsConstructor
-@RequiredArgsConstructor
 @Getter
 @Setter
 
@@ -75,5 +75,6 @@ public class Usuario {
     // Relación Uno a Muchos con Personaje
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @Schema(description = "Lista de personajes asociados al usuario")
+    @JsonIgnore
     private List<Personaje> personajes;
 }
