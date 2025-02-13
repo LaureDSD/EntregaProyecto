@@ -12,8 +12,6 @@ import java.io.Serializable;
 @EqualsAndHashCode
 @Embeddable
 public class MisionObjetosId implements Serializable {
-
     private Long mision_id;
     private Long item_id;
-
 }

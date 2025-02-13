@@ -11,7 +11,7 @@ import java.io.Serializable;
 @Setter
 @EqualsAndHashCode
 @Embeddable
-class DropsObjetosId implements Serializable {
+public class DropsObjetosId implements Serializable {
     private Long monstruo_id;
     private Long item_id;
 }
