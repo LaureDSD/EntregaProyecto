@@ -30,17 +30,17 @@ public class Gremio {
     @Schema(description = "Descripción del gremio", example = "Gremio de cazadores")
     private String descripcion;
 
-
-
-
     //Gremio
-    @OneToMany(mappedBy = "gremio", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonIgnore // Excluir esta relación en la serialización JSON
-    @Schema(description = "Persoanjes asociados a este gremio")
-    private List<Personaje> persoanjes;
-
+    /*
     @ManyToOne
-    @JoinColumn(name = "liderDeGremio")
+    @JoinColumn(name = "liderDeGremio" , nullable = false)
     @Schema(description = "Lider del gremio")
     private Personaje lider_gremio;
+
+    @OneToMany(mappedBy = "gremio", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore // Excluir esta relación en la serialización JSON
+    @Schema(description = "Personajes asociados a este gremio")
+    private List<Personaje> persoanjes;
+*/
+
 }

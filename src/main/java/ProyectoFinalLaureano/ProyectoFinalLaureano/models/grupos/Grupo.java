@@ -34,14 +34,17 @@ public class Grupo {
 
 
     //Grupo
-    @OneToMany(mappedBy = "grupo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonIgnore // Excluir esta relación en la serialización JSON
-    @Schema(description = "Persoanjes asociados a este grupo")
-    private List<Personaje> persoanjes;
-
+    /*
     @OneToOne
     @JoinColumn(name = "lider")
     @Schema(description = "Lider del grupo")
     private Personaje lider_grupo;
+
+
+    @OneToMany(mappedBy = "grupo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore // Excluir esta relación en la serialización JSON
+    @Schema(description = "Personajes asociados a este grupo")
+    private List<Personaje> persoanjes;
+    */
 
 }

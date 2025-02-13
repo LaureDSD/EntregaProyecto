@@ -59,6 +59,7 @@ public class Personaje {
 
 
     //Grupo
+    /*
     @ManyToOne
     @JoinColumn(name = "grupo_id")
     @Schema(description = "Grupo del persoanje asociado")
@@ -67,12 +68,13 @@ public class Personaje {
     @OneToOne
     @JoinColumn(name = "lider_grupo")
     @Schema(description = "Lider del grupo")
-    private Grupo grupoLiderado;
+    private Grupo grupoLiderado;*/
 
 
 
 
     //Gremio
+    /*
     @ManyToOne
     @JoinColumn(name = "gremio_id")
     @Schema(description = "Gremio del persoanje asociado")
@@ -82,7 +84,7 @@ public class Personaje {
     @OneToMany(mappedBy = "lider_gremio", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnore // Excluir esta relación en la serialización JSON
     @Schema(description = "Persoanjes asociados a este gremio")
-    private List<Gremio> gremioLiderado;
+    private List<Gremio> gremioLiderado;*/
 
 
 
@@ -109,5 +111,11 @@ public class Personaje {
     //@JsonIgnore // Excluir esta relación en la serialización JSON
     @Schema(description = "Ítems en el inventario del personaje")
     private List<InventarioPersonaje> inventario;
+
+
+    //Nuevo
+    @OneToMany(mappedBy = "personaje", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @Schema(description = "Habilidades asociadas a este personaje")
+    private List<PersonajeHabilidad> personajeHabilidades;
 
 }

@@ -1,5 +1,7 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.models.habilidad;
 
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.monstruo.MonstruoHabilidad;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.PersonajeHabilidad;
 import jakarta.persistence.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
@@ -79,4 +81,13 @@ public class Habilidad {
     @JsonIgnore // Excluir esta relación en la serialización JSON
     @Schema(description = "Efectos asociados a la habilidad")
     private List<HabilidadEfecto> efectos;
+
+    //Nuevo
+    @OneToMany(mappedBy = "habilidad", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @Schema(description = "Monstruos que poseen esta habilidad")
+    private List<MonstruoHabilidad> monstruoHabilidades;
+
+    @OneToMany(mappedBy = "habilidad", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @Schema(description = "Personajes que poseen esta habilidad")
+    private List<PersonajeHabilidad> personajeHabilidades;
 }

@@ -33,23 +33,34 @@ public class ClasePersonaje {
     @Column(name = "vida_base", nullable = false)
     @Schema(description = "Vida base de la  clase", example = "100")
     private int vida_base;
+    @Column(name = "escudo_base", nullable = false)
+    @Schema(description = "Escudo base de la  clase", example = "0")
+    private int escudo_base;
+
 
     @Column(name = "energia_base", nullable = false)
     @Schema(description = "Energía base de la clase", example = "50")
     private int energia_base;
-
-    @Column(name = "mana_base", nullable = true)
-    @ColumnDefault("50")
+    @Column(name = "mana_base", nullable = false)
     @Schema(description = "Mana base de la clase", example = "50")
     private int emana_base;
 
-    @Column(name = "ataque_base", nullable = false)
-    @Schema(description = "Ataque base de la clase", example = "10")
-    private int ataque_base;
 
-    @Column(name = "defensa")
+    @Column(name = "ataque_fisico_base", nullable = false)
+    @Schema(description = "Ataque base de la clase", example = "10")
+    private int ataquefiscobase;
+    @Column(name = "ataque_magico_base", nullable = false)
+    @Schema(description = "Ataque base de la clase", example = "10")
+    private int ataqueMagicoBase;
+
+
+    @Column(name = "defensa_fisica")
     @Schema(description = "Defensa de la clase", example = "5")
-    private int defensa;
+    private int defensamagica;
+    @Column(name = "defensa_magica")
+    @Schema(description = "Defensa de la clase", example = "5")
+    private int defensafisica;
+
 
     // Relación Uno a Muchos con persoanje
     @OneToMany(mappedBy = "clase_persoanje", cascade = CascadeType.ALL, fetch = FetchType.LAZY)

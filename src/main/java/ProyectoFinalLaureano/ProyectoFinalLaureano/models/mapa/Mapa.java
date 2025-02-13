@@ -46,4 +46,8 @@ public class Mapa {
     @JsonIgnore // Excluir esta relación en la serialización JSON
     @Schema(description = "Efectos asociados a este mapa")
     private List<MapaEfecto> efectos;
+
+    @OneToMany(mappedBy = "mapa", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @Schema(description = "Monstruos que pueden aparecer en este mapa")
+    private List<MapaMonstruo> mapaMonstruos;
 }

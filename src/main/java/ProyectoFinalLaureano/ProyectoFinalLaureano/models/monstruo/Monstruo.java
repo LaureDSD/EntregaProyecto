@@ -1,5 +1,6 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.models.monstruo;
 
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.mapa.MapaMonstruo;
 import jakarta.persistence.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
@@ -70,5 +71,15 @@ public class Monstruo {
     @JsonIgnore // Excluir esta relación en la serialización JSON
     @Schema(description = "Drops asociados a este monstruo")
     private List<DropsObjetos> drops;
+
+
+    //Nuevo
+    @OneToMany(mappedBy = "monstruo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @Schema(description = "Mapas donde este monstruo puede aparecer")
+    private List<MapaMonstruo> mapaMonstruos;
+
+    @OneToMany(mappedBy = "monstruo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @Schema(description = "Habilidades asociadas a este monstruo")
+    private List<MonstruoHabilidad> monstruoHabilidades;
 
 }

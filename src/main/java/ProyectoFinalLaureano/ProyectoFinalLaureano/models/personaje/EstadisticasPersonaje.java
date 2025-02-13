@@ -37,25 +37,27 @@ public class EstadisticasPersonaje {
     private int xp_acumulada;
 
     @Column(name = "vida_base", nullable = false)
-    @Schema(description = "Vida base del personaje", example = "100")
+    @Schema(description = "Vida base del persoanje", example = "100")
     private int vida_base;
+    @Column(name = "escudo_base", nullable = false)
+    @Schema(description = "Escudo base del persoanje", example = "0")
+    private int escudo_base;
+
 
     @Column(name = "energia_base", nullable = false)
-    @Schema(description = "Energía base del personaje", example = "50")
+    @Schema(description = "Energía base del persoanje", example = "50")
     private int energia_base;
+    @Column(name = "mana_base", nullable = false)
+    @Schema(description = "Mana base del persoanje", example = "50")
+    private int emana_base;
 
-    @Column(name = "mana_base", nullable = true)
-    @ColumnDefault("50")
-    @Schema(description = "Mana base del personaje", example = "50")
-    private int mana_base;
 
-    @Column(name = "ataque_base", nullable = false)
-    @Schema(description = "Ataque base del personaje", example = "10")
-    private int ataque_base;
-
-    @Column(name = "defensa")
-    @Schema(description = "Defensa del personaje", example = "5")
-    private int defensa;
+    @Column(name = "ataque_fisico_base", nullable = false)
+    @Schema(description = "Ataque base del persoanje", example = "10")
+    private int ataquefiscobase;
+    @Column(name = "ataque_magico_base", nullable = false)
+    @Schema(description = "Ataque base del persoanje", example = "10")
+    private int ataqueMagicoBase;
 
     @Column(name = "almas", nullable = false)
     @Schema(description = "Almas acumuladas por el personaje", example = "0")

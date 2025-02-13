@@ -84,14 +84,33 @@ INSERT INTO personajes (usuario_id, imagen_modelo, nombre, fecha_creacion) VALUE
 (3, 'model4.jpg', 'Hechicero1', NOW()),
 (4, 'model5.jpg', 'Caballero1', NOW());
 
+CREATE TABLE IF NOT EXISTS clase_persoanje (
+    clase_id bigint PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(100) NOT NULL,
+    descripcion TEXT,
+	vida_base INT NOT NULL DEFAULT 100,
+    escudo_base INT NOT NULL DEFAULT 0,
+    energia_base INT NOT NULL DEFAULT 50,
+    mana_base INT NOT NULL DEFAULT 50,
+    ataque_fisico_base INT NOT NULL DEFAULT 10,
+    ataque_magico_base INT NOT NULL DEFAULT 10,
+    defensa_fisica INT DEFAULT 0,
+    defensa_magica INT DEFAULT 0,
+    INDEX idx_nombre (nombre)
+);
+
 CREATE TABLE IF NOT EXISTS estadisticas_personaje (
     personaje_id bigint PRIMARY KEY,
     nivel INT NOT NULL DEFAULT 1,
     xp_acumulada INT NOT NULL DEFAULT 0,
     vida_base INT NOT NULL DEFAULT 100,
+    escudo_base INT NOT NULL DEFAULT 0,
     energia_base INT NOT NULL DEFAULT 50,
-    ataque_base INT NOT NULL DEFAULT 10,
-    defensa INT DEFAULT 0,
+    mana_base INT NOT NULL DEFAULT 50,
+    ataque_fisico_base INT NOT NULL DEFAULT 10,
+    ataque_magico_base INT NOT NULL DEFAULT 10,
+    defensa_fisica INT DEFAULT 0,
+    defensa_magica INT DEFAULT 0,
     almas INT NOT NULL DEFAULT 0,
     capacidad_inventario INT NOT NULL DEFAULT 10,
     FOREIGN KEY (personaje_id) REFERENCES personajes(personaje_id)
@@ -100,12 +119,12 @@ CREATE TABLE IF NOT EXISTS estadisticas_personaje (
 );
 
 -- Insertar estadísticas de personajes
-INSERT INTO estadisticas_personaje (personaje_id, nivel, xp_acumulada, vida_base, energia_base, ataque_base, defensa, almas, capacidad_inventario) VALUES
-(1, 1, 0, 100, 50, 10, 5, 0, 10),
-(2, 1, 0, 80, 60, 8, 4, 0, 10),
-(3, 1, 0, 90, 55, 9, 6, 0, 10),
-(4, 1, 0, 70, 70, 7, 3, 0, 10),
-(5, 1, 0, 120, 40, 12, 7, 0, 10);
+INSERT INTO estadisticas_personaje (personaje_id, nivel, xp_acumulada, vida_base,escudo_base, energia_base,mana_base, ataque_fisico_base,ataque_magico_base, defensa_fisica,defensa_magica, almas, capacidad_inventario) VALUES
+(1, 1, 0, 100,0, 50,50, 10,8, 5,5, 0, 10),
+(2, 1, 0, 80,0, 60,60, 8,8, 4, 0,5, 10),
+(3, 1, 0, 90,0, 55,55, 9, 6,8, 0,5, 10),
+(4, 1, 0, 70,0, 70,70, 7, 3,8, 0,5, 10),
+(5, 1, 0, 120,0, 40,40, 12, 7,8,5, 0, 10);
 
 
 -- Tabla: registro_cacerias

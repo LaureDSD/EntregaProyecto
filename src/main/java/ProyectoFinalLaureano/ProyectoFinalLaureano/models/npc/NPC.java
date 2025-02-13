@@ -42,4 +42,9 @@ public class NPC {
     @JsonIgnore // Excluir esta relación en la serialización JSON
     @Schema(description = "Transacciones asociadas a este NPC")
     private List<TransaccionesNPC> transacciones;
+
+    @OneToMany(mappedBy = "npc", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @Schema(description = "Productos asociados a este NPC")
+    private List<NPCProducto> npcProductos;
+
 }
