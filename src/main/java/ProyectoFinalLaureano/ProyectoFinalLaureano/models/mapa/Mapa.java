@@ -42,12 +42,13 @@ public class Mapa {
     private int nivel_recomendado;
 
     // Relación Uno a Muchos con MapaEfecto
-    @OneToMany(mappedBy = "mapa", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "mapa", cascade = CascadeType.ALL)
     @JsonIgnore // Excluir esta relación en la serialización JSON
     @Schema(description = "Efectos asociados a este mapa")
     private List<MapaEfecto> efectos;
 
-    @OneToMany(mappedBy = "mapa", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "mapa", cascade = CascadeType.ALL)
     @Schema(description = "Monstruos que pueden aparecer en este mapa")
+    @JsonIgnore // Excluir esta relación en la serialización JSON
     private List<MapaMonstruo> mapaMonstruos;
 }

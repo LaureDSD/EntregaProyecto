@@ -11,18 +11,26 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Schema(description = "Entidad que representa el registro de actividades de un personaje")
 @Getter
 @Setter
-public class RegistroPersonaje {
+public class LogrosPersonaje {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Schema(description = "ID único del registro", example = "1")
     private Long registro_id;
 
+    /*
     // Relación Muchos a Uno con Personaje
     @ManyToOne
     @JoinColumn(name = "personaje_id", nullable = false)
     @JsonIgnore // Excluir esta relación en la serialización JSON
     @Schema(description = "Personaje asociado a este registro")
+    private Personaje personaje;
+*/
+    @OneToOne
+    @MapsId
+    @JoinColumn(name = "personaje_id")
+    @JsonIgnore
+    @Schema(description = "Personaje asociado a estas estadísticas")
     private Personaje personaje;
 
     @Column(name = "normal", nullable = false)

@@ -35,20 +35,24 @@ CREATE TABLE IF NOT EXISTS usuarios (
     INDEX idx_nombre_priv (nombre_usuario_priv)
 );
 
--- Insertar usuarios
-INSERT INTO usuarios (imagen_perfil, nombre_usuario_pub, limite_personajes, nombre_usuario_priv, correo, contraseña, ultima_conexion, ip_ultima_conexion, fecha_creacion, estado_cuenta, tipo_usuario) VALUES
-('img1.jpg', 'Usuario1', 3, 'user1', 'user1@example.com', 'password1', NOW(), '192.168.1.1', NOW(), 1, 1),
-('img2.jpg', 'Usuario2', 3, 'user2', 'user2@example.com', 'password2', NOW(), '192.168.1.2', NOW(), 1, 2),
-('img3.jpg', 'Usuario3', 3, 'user3', 'user3@example.com', 'password3', NOW(), '192.168.1.3', NOW(), 1, 3),
-('img4.jpg', 'Usuario4', 3, 'user4', 'user4@example.com', 'password4', NOW(), '192.168.1.4', NOW(), 1, 1),
-('img5.jpg', 'Usuario5', 3, 'user5', 'user5@example.com', 'password5', NOW(), '192.168.1.5', NOW(), 1, 1);
-
+INSERT INTO usuarios (imagen_perfil, nombre_usuario_pub, limite_personajes, nombre_usuario_priv, correo, contraseña, ultima_conexion, ip_ultima_conexion, fecha_creacion, estado_cuenta, tipo_usuario)
+VALUES
+    ('perfil1.jpg', 'Aragorn23', 3, 'aragorn_priv', 'aragorn@example.com', 'contraseña123', '2023-10-01 12:00:00', '192.168.1.1', '2023-10-01 12:00:00', 1, 1),
+    ('perfil2.jpg', 'GandalfTheWise', 3, 'gandalf_priv', 'gandalf@example.com', 'contraseña456', '2023-10-02 13:00:00', '192.168.1.2', '2023-10-02 13:00:00', 1, 1),
+    ('perfil3.jpg', 'LegolasGreenleaf', 3, 'legolas_priv', 'legolas@example.com', 'contraseña789', '2023-10-03 14:00:00', '192.168.1.3', '2023-10-03 14:00:00', 1, 1),
+    ('perfil4.jpg', 'FrodoBaggins', 3, 'frodo_priv', 'frodo@example.com', 'contraseña101', '2023-10-04 15:00:00', '192.168.1.4', '2023-10-04 15:00:00', 1, 1),
+    ('perfil5.jpg', 'GimliSonOfGloin', 3, 'gimli_priv', 'gimli@example.com', 'contraseña112', '2023-10-05 16:00:00', '192.168.1.5', '2023-10-05 16:00:00', 1, 1),
+    ('perfil6.jpg', 'BoromirOfGondor', 3, 'boromir_priv', 'boromir@example.com', 'contraseña131', '2023-10-06 17:00:00', '192.168.1.6', '2023-10-06 17:00:00', 1, 1),
+    ('perfil7.jpg', 'GaladrielLadyOfLight', 3, 'galadriel_priv', 'galadriel@example.com', 'contraseña415', '2023-10-07 18:00:00', '192.168.1.7', '2023-10-07 18:00:00', 1, 1),
+    ('perfil8.jpg', 'SarumanTheWhite', 3, 'saruman_priv', 'saruman@example.com', 'contraseña161', '2023-10-08 19:00:00', '192.168.1.8', '2023-10-08 19:00:00', 1, 1),
+    ('perfil9.jpg', 'ArwenUndomiel', 3, 'arwen_priv', 'arwen@example.com', 'contraseña718', '2023-10-09 20:00:00', '192.168.1.9', '2023-10-09 20:00:00', 1, 1),
+    ('perfil10.jpg', 'SauronTheDarkLord', 3, 'sauron_priv', 'sauron@example.com', 'contraseña192', '2023-10-10 21:00:00', '192.168.1.10', '2023-10-10 21:00:00', 1, 1);
 
 -- Tabla: logs de usuario
 CREATE TABLE IF NOT EXISTS logs (
     log_id bigint PRIMARY KEY AUTO_INCREMENT,
     usuario_id INT NULL,
-    tipo_log ENUM('informacion','fallo', 'advertencia','creacion','actulizacion','borrado') DEFAULT 'informacion',
+    tipo_log ENUM('INFORMACION','FALLO', 'ADVERTENCIA','CREACION','ACTUALIZACION','BORRADO') DEFAULT 'INFORMACION',
     mensaje TEXT NOT NULL,
     fecha_log DATETIME NOT NULL,
     INDEX idx_usuario_id (usuario_id)
@@ -56,33 +60,11 @@ CREATE TABLE IF NOT EXISTS logs (
 
 -- Insertar logs
 INSERT INTO logs (usuario_id, tipo_log, mensaje, fecha_log) VALUES
-(1, 'informacion', 'Usuario1 ha iniciado sesión.', NOW()),
-(2, 'fallo', 'Usuario2 ha intentado iniciar sesión con una contraseña incorrecta.', NOW()),
-(3, 'advertencia', 'Usuario3 ha intentado acceder a una zona restringida.', NOW()),
-(4, 'creacion', 'Usuario4 ha creado un nuevo personaje.', NOW()),
-(5, 'actulizacion', 'Usuario5 ha actualizado su perfil.', NOW());
-
--- Tabla: personajes
-CREATE TABLE IF NOT EXISTS personajes (
-    personaje_id bigint PRIMARY KEY AUTO_INCREMENT,
-    usuario_id bigint NOT NULL,
-    imagen_modelo VARCHAR(255),
-    nombre VARCHAR(100) NOT NULL,
-    fecha_creacion DATETIME NOT NULL,
-    FOREIGN KEY (usuario_id) REFERENCES usuarios(usuario_id) 
-    ON DELETE CASCADE
-    ON UPDATE CASCADE,
-    INDEX idx_usuario_id (usuario_id),
-    INDEX idx_nombre (nombre)
-);
-
--- Insertar personajes
-INSERT INTO personajes (usuario_id, imagen_modelo, nombre, fecha_creacion) VALUES
-(1, 'model1.jpg', 'Guerrero1', NOW()),
-(1, 'model2.jpg', 'Mago1', NOW()),
-(2, 'model3.jpg', 'Arquero1', NOW()),
-(3, 'model4.jpg', 'Hechicero1', NOW()),
-(4, 'model5.jpg', 'Caballero1', NOW());
+(1, 'INFORMACION', 'Usuario1 ha iniciado sesión.', NOW()),
+(2, 'FALLO', 'Usuario2 ha intentado iniciar sesión con una contraseña incorrecta.', NOW()),
+(3, 'ADVERTENCIA', 'Usuario3 ha intentado acceder a una zona restringida.', NOW()),
+(4, 'CREACION', 'Usuario4 ha creado un nuevo personaje.', NOW()),
+(5, 'ACTUALIZACION', 'Usuario5 ha actualizado su perfil.', NOW());
 
 CREATE TABLE IF NOT EXISTS clase_persoanje (
     clase_id bigint PRIMARY KEY AUTO_INCREMENT,
@@ -98,6 +80,93 @@ CREATE TABLE IF NOT EXISTS clase_persoanje (
     defensa_magica INT DEFAULT 0,
     INDEX idx_nombre (nombre)
 );
+
+INSERT INTO clase_persoanje (nombre, descripcion, vida_base, escudo_base, energia_base, mana_base, ataque_fisico_base, ataque_magico_base, defensa_fisica, defensa_magica)
+VALUES
+    ('Guerrero', 'Un luchador fuerte y resistente, especializado en combate cuerpo a cuerpo.', 150, 20, 60, 20, 20, 5, 15, 5),
+    ('Mago', 'Un maestro de las artes arcanas, capaz de lanzar hechizos devastadores.', 80, 5, 30, 100, 5, 25, 5, 20),
+    ('Arquero', 'Un tirador experto que ataca desde la distancia con precisión letal.', 100, 10, 70, 30, 15, 10, 10, 10),
+    ('Sacerdote', 'Un sanador divino que protege y cura a sus aliados.', 90, 15, 40, 80, 8, 15, 8, 15),
+    ('Asesino', 'Un combatiente sigiloso que ataca por sorpresa con golpes críticos.', 110, 5, 80, 20, 25, 5, 5, 5),
+    ('Caballero', 'Un defensor acorazado que protege a sus aliados en el frente de batalla.', 140, 30, 50, 30, 18, 8, 20, 10),
+    ('Bárbaro', 'Un guerrero salvaje que se enfurece en combate, aumentando su fuerza y resistencia.', 160, 10, 90, 10, 22, 3, 12, 3),
+    ('Druida', 'Un guardián de la naturaleza que combina magia y habilidades de transformación.', 120, 15, 60, 70, 10, 18, 10, 15),
+    ('Nigromante', 'Un hechicero oscuro que invoca y controla a los muertos.', 85, 5, 35, 90, 6, 22, 6, 18),
+    ('Bardo', 'Un artista versátil que usa música y magia para apoyar a sus aliados.', 95, 10, 50, 60, 10, 15, 8, 12);
+
+CREATE TABLE gremios (
+    gremio_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    descripcion TEXT
+);
+
+INSERT INTO gremios (nombre, descripcion)
+VALUES
+    ('La Hermandad de la Luz', 'Un gremio dedicado a proteger a los inocentes y luchar contra las fuerzas de la oscuridad.'),
+    ('Los Mercenarios de Hierro', 'Un grupo de mercenarios que acepta cualquier trabajo, siempre que el pago sea bueno.'),
+    ('El Círculo Arcano', 'Una organización de magos que busca el conocimiento y el poder arcano.'),
+    ('Los Cazadores de Sombras', 'Un gremio especializado en la caza de criaturas oscuras y monstruos.'),
+    ('La Orden del Dragón', 'Una orden de caballeros que venera a los dragones y busca su protección.'),
+    ('Los Ladrones de la Noche', 'Un gremio de ladrones y espías que opera en las sombras.'),
+    ('Los Guardianes del Bosque', 'Un grupo de druidas y rangers que protegen la naturaleza.'),
+    ('Los Forjadores de Leyendas', 'Un gremio de artesanos y herreros que crean armas y armaduras legendarias.'),
+    ('Los Exploradores del Abismo', 'Un grupo de aventureros que explora ruinas antiguas y mazmorras peligrosas.'),
+    ('Los Hijos del Caos', 'Una facción caótica que busca el desorden y la destrucción del orden establecido.');
+
+CREATE TABLE grupos (
+    grupo_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    descripcion TEXT
+);
+INSERT INTO grupos (nombre, descripcion)
+VALUES
+    ('Los Cuatro Elementos', 'Un grupo de aventureros que dominan los cuatro elementos: fuego, agua, tierra y aire.'),
+    ('Los Guardianes del Amanecer', 'Un equipo de héroes que protegen el mundo de las amenazas que surgen con la luz del amanecer.'),
+    ('Las Sombras del Destino', 'Un grupo sigiloso que opera en las sombras para cumplir misiones peligrosas.'),
+    ('Los Hijos del Trueno', 'Un equipo de guerreros que luchan con la fuerza y el poder del trueno.'),
+    ('Los Exploradores Perdidos', 'Un grupo de aventureros que buscan tesoros y secretos en lugares olvidados.'),
+    ('Los Defensores de la Luz', 'Un equipo de paladines y clérigos que luchan contra las fuerzas de la oscuridad.'),
+    ('Los Cazadores de Bestias', 'Un grupo especializado en la caza de criaturas peligrosas y monstruos.'),
+    ('Los Maestros del Caos', 'Un equipo de magos y hechiceros que manipulan el caos para sus propios fines.'),
+    ('Los Guardianes del Bosque', 'Un grupo de druidas y rangers que protegen la naturaleza y sus secretos.'),
+    ('Los Mercenarios del Hierro', 'Un equipo de mercenarios que aceptan cualquier trabajo a cambio de oro.');
+
+-- Tabla: personajes
+CREATE TABLE IF NOT EXISTS personajes (
+    personaje_id bigint PRIMARY KEY AUTO_INCREMENT,
+    usuario_id bigint NOT NULL,
+    imagen_modelo VARCHAR(255),
+    nombre VARCHAR(100) NOT NULL,
+    fecha_creacion DATETIME NOT NULL,
+    clase_id bigint NULL,
+    gremio_id bigint NULL,
+    grupo_id bigint NULL,
+    FOREIGN KEY (gremio_id) REFERENCES gremios(gremio_id),
+    FOREIGN KEY (grupo_id) REFERENCES grupos(grupo_id),
+    FOREIGN KEY (clase_id) REFERENCES clase_persoanje(clase_id),
+    FOREIGN KEY (usuario_id) REFERENCES usuarios(usuario_id) 
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+    INDEX idx_usuario_id (usuario_id),
+    INDEX idx_nombre (nombre)
+);
+
+INSERT INTO personajes (usuario_id, imagen_modelo, nombre, fecha_creacion, clase_id, gremio_id, grupo_id)
+VALUES
+    (1, 'imagen1.jpg', 'Aragorn', '2023-10-01 12:00:00', 1, 1, 1),  -- Guerrero, La Hermandad de la Luz, Los Cuatro Elementos
+    (2, 'imagen2.jpg', 'Gandalf', '2023-10-02 13:00:00', 2, 3, 1),  -- Mago, El Círculo Arcano, Los Cuatro Elementos
+    (3, 'imagen3.jpg', 'Legolas', '2023-10-03 14:00:00', 3, 4, 1),  -- Arquero, Los Cazadores de Sombras, Los Cuatro Elementos
+    (4, 'imagen4.jpg', 'Frodo', '2023-10-04 15:00:00', 4, 2, 2),   -- Sacerdote, Los Mercenarios de Hierro, Los Guardianes del Amanecer
+    (5, 'imagen5.jpg', 'Gimli', '2023-10-05 16:00:00', 1, 5, 2),   -- Guerrero, La Orden del Dragón, Los Guardianes del Amanecer
+    (6, 'imagen6.jpg', 'Boromir', '2023-10-06 17:00:00', 5, 6, 3), -- Asesino, Los Ladrones de la Noche, Las Sombras del Destino
+    (7, 'imagen7.jpg', 'Galadriel', '2023-10-07 18:00:00', 2, 7, 4),-- Mago, Los Guardianes del Bosque, Los Hijos del Trueno
+    (8, 'imagen8.jpg', 'Saruman', '2023-10-08 19:00:00', 9, 8, 5), -- Nigromante, Los Forjadores de Leyendas, Los Exploradores Perdidos
+    (9, 'imagen9.jpg', 'Arwen', '2023-10-09 20:00:00', 10, 9, 6),  -- Bardo, Los Exploradores del Abismo, Los Defensores de la Luz
+    (10, 'imagen10.jpg', 'Sauron', '2023-10-10 21:00:00', 9, 10, 7);-- Nigromante, Los Hijos del Caos, Los Cazadores de Bestias
+
+
+
+
 
 CREATE TABLE IF NOT EXISTS estadisticas_personaje (
     personaje_id bigint PRIMARY KEY,
@@ -118,18 +187,22 @@ CREATE TABLE IF NOT EXISTS estadisticas_personaje (
     ON UPDATE CASCADE
 );
 
--- Insertar estadísticas de personajes
-INSERT INTO estadisticas_personaje (personaje_id, nivel, xp_acumulada, vida_base,escudo_base, energia_base,mana_base, ataque_fisico_base,ataque_magico_base, defensa_fisica,defensa_magica, almas, capacidad_inventario) VALUES
-(1, 1, 0, 100,0, 50,50, 10,8, 5,5, 0, 10),
-(2, 1, 0, 80,0, 60,60, 8,8, 4, 0,5, 10),
-(3, 1, 0, 90,0, 55,55, 9, 6,8, 0,5, 10),
-(4, 1, 0, 70,0, 70,70, 7, 3,8, 0,5, 10),
-(5, 1, 0, 120,0, 40,40, 12, 7,8,5, 0, 10);
+INSERT INTO estadisticas_personaje (personaje_id, nivel, xp_acumulada, vida_base, escudo_base, energia_base, mana_base, ataque_fisico_base, ataque_magico_base, defensa_fisica, defensa_magica, almas, capacidad_inventario)
+VALUES
+    (1, 5, 1200, 150, 20, 60, 20, 20, 5, 15, 5, 50, 15),  -- Aragorn
+    (2, 10, 5000, 80, 5, 30, 100, 5, 25, 5, 20, 100, 10), -- Gandalf
+    (3, 8, 3000, 100, 10, 70, 30, 15, 10, 10, 10, 75, 12), -- Legolas
+    (4, 3, 800, 90, 15, 40, 80, 8, 15, 8, 15, 30, 10),    -- Frodo
+    (5, 7, 2500, 140, 30, 50, 30, 18, 8, 20, 10, 60, 14),  -- Gimli
+    (6, 6, 2000, 110, 5, 80, 20, 25, 5, 5, 5, 40, 12),    -- Boromir
+    (7, 12, 8000, 120, 15, 60, 70, 10, 18, 10, 15, 150, 16), -- Galadriel
+    (8, 15, 12000, 85, 5, 35, 90, 6, 22, 6, 18, 200, 10), -- Saruman
+    (9, 9, 4000, 95, 10, 50, 60, 10, 15, 8, 12, 80, 12),  -- Arwen
+    (10, 20, 20000, 160, 10, 90, 10, 22, 3, 12, 3, 300, 18); -- Sauron
 
 
--- Tabla: registro_cacerias
-CREATE TABLE if not exists registro_personaje (
-    registro_id bigint PRIMARY KEY AUTO_INCREMENT,
+-- Tabla: logros_cacerias
+CREATE TABLE if not exists logros_personaje (
     personaje_id bigint NOT NULL,
     normal INT DEFAULT 0,
     miniboss INT DEFAULT 0,
@@ -145,12 +218,18 @@ CREATE TABLE if not exists registro_personaje (
 );
 
 -- Insertar registros de personajes
-INSERT INTO registro_personaje (personaje_id, normal, miniboss, boss, muertes_totales, total_daño_inflijido, total_daño_recibido, tiempo_total_jugado, mazmorras_totales_superadas) VALUES
-(1, 10, 2, 1, 0, 500, 200, 3600, 1),
-(2, 5, 1, 0, 1, 300, 150, 1800, 0),
-(3, 8, 3, 2, 0, 700, 300, 5400, 2),
-(4, 3, 0, 0, 2, 100, 50, 900, 0),
-(5, 15, 5, 3, 0, 1000, 400, 7200, 3);
+INSERT INTO logros_personaje (personaje_id, normal, miniboss, boss, muertes_totales, total_daño_inflijido, total_daño_recibido, tiempo_total_jugado, mazmorras_totales_superadas)
+VALUES
+    (1, 50, 5, 2, 3, 15000, 5000, 3600, 10),  -- Aragorn
+    (2, 30, 3, 1, 1, 20000, 3000, 4800, 8),   -- Gandalf
+    (3, 70, 7, 3, 5, 12000, 7000, 3000, 12),  -- Legolas
+    (4, 20, 2, 0, 2, 8000, 4000, 2400, 5),    -- Frodo
+    (5, 60, 6, 2, 4, 18000, 6000, 4200, 9),   -- Gimli
+    (6, 40, 4, 1, 3, 10000, 5000, 3600, 7),   -- Boromir
+    (7, 80, 8, 4, 6, 25000, 8000, 5400, 15),  -- Galadriel
+    (8, 100, 10, 5, 8, 30000, 10000, 6000, 20), -- Saruman
+    (9, 35, 3, 1, 2, 9000, 3500, 2700, 6),    -- Arwen
+    (10, 120, 12, 6, 10, 40000, 12000, 7200, 25); -- Sauron
 
 -- Tabla: tipo_monstruo
 CREATE TABLE IF NOT EXISTS tipo_monstruo (
@@ -160,12 +239,20 @@ CREATE TABLE IF NOT EXISTS tipo_monstruo (
     INDEX idx_nombre (nombre)
 );
 
--- Insertar tipos de monstruos
-INSERT INTO tipo_monstruo (nombre, descripcion) VALUES
-('normal', 'Monstruos comunes que se encuentran en cualquier zona.'),
-('miniboss', 'Monstruos más fuertes que los normales, pero no tan poderosos como los jefes.'),
-('boss', 'Jefes de mazmorra o zona, extremadamente poderosos.');
-
+INSERT INTO tipo_monstruo (nombre, descripcion)
+VALUES
+    ('Normal', 'Monstruos comunes que se encuentran en áreas abiertas y mazmorras.'),
+    ('Miniboss', 'Enemigos más poderosos que los normales, pero menos que los bosses. Suelen guardar tesoros o áreas especiales.'),
+    ('Boss', 'Enemigos extremadamente poderosos que actúan como jefes de mazmorras o áreas. Derrotarlos suele ser un gran logro.'),
+    ('Élite', 'Monstruos raros y poderosos que son más fuertes que los normales pero no tanto como los bosses.'),
+    ('Legendario', 'Monstruos únicos y extremadamente poderosos, a menudo relacionados con historias o misiones especiales.'),
+    ('Criatura de Caos', 'Monstruos corruptos por el caos, con habilidades impredecibles y peligrosas.'),
+    ('Guardian', 'Monstruos que protegen lugares sagrados o tesoros valiosos.'),
+    ('Depredador', 'Monstruos ágiles y letales que cazan a sus presas en manadas o en solitario.'),
+    ('Espíritu', 'Entidades espirituales o fantasmas que suelen ser inmunes a ciertos tipos de daño.'),
+    ('Gigante', 'Monstruos de gran tamaño y fuerza bruta, pero lentos y predecibles.');
+    
+    
 -- Tabla: monstruos
 CREATE TABLE IF NOT EXISTS monstruos (
     monstruo_id bigint PRIMARY KEY AUTO_INCREMENT,
@@ -174,10 +261,14 @@ CREATE TABLE IF NOT EXISTS monstruos (
 	nivel INT DEFAULT 1,
     descripcion TEXT,
     imagen VARCHAR(255),
-    vida_maxima INT NOT NULL,
-    energia_maxima INT NOT NULL DEFAULT 0,
-    ataque_base INT NOT NULL DEFAULT 0,
-    defensa INT NOT NULL DEFAULT 0,
+    vida_base INT NOT NULL DEFAULT 100,
+    escudo_base INT NOT NULL DEFAULT 0,
+    energia_base INT NOT NULL DEFAULT 50,
+    mana_base INT NOT NULL DEFAULT 50,
+    ataque_fisico_base INT NOT NULL DEFAULT 10,
+    ataque_magico_base INT NOT NULL DEFAULT 10,
+    defensa_fisica INT DEFAULT 0,
+    defensa_magica INT DEFAULT 0,
     almas INT NOT NULL,
     experiencia_otorgada INT DEFAULT 0,
     FOREIGN KEY (tipo_monstruo_id) REFERENCES tipo_monstruo(tipo_monstruo_id),
@@ -186,49 +277,124 @@ CREATE TABLE IF NOT EXISTS monstruos (
 );
 
 -- Insertar monstruos
-INSERT INTO monstruos (nombre, tipo_monstruo_id, nivel, descripcion, imagen, vida_maxima, energia_maxima, ataque_base, defensa, almas, experiencia_otorgada) VALUES
-('Goblin', 1, 1, 'Un pequeño monstruo verde', 'goblin.jpg', 50, 20, 5, 2, 10, 5),
-('Ogro', 2, 5, 'Un monstruo grande y fuerte', 'ogro.jpg', 200, 50, 20, 10, 50, 20),
-('Dragón', 3, 10, 'Un poderoso dragón', 'dragon.jpg', 1000, 200, 50, 30, 200, 100),
-('Bandido', 1, 3, 'Un bandido común que ataca a los viajeros', 'bandido.jpg', 80, 30, 12, 5, 20, 15),
-('Lobo Salvaje', 1, 2, 'Un lobo feroz que habita en los bosques', 'lobo.jpg', 60, 20, 8, 3, 15, 10),
-('Esqueleto Guerrero', 2, 5, 'Un esqueleto revivido con habilidades de combate', 'esqueleto.jpg', 120, 40, 18, 8, 40, 25),
-('Araña Gigante', 2, 4, 'Una araña gigante que teje telarañas venenosas', 'araña.jpg', 100, 35, 15, 6, 30, 20),
-('Bandido Líder', 3, 7, 'El líder de una banda de bandidos', 'bandido_lider.jpg', 200, 60, 25, 12, 80, 50),
-('Nigromante', 3, 7, 'El líder de esqueletos', 'nigromante.jpg', 200, 60, 25, 12, 80, 50),
-('Araña', 1, 7, 'Araña pequeña que ataca en grupo', 'araña.jpg', 50, 10, 15, 2, 20, 20),
-('Lobo Gigante', 2, 10, 'Un lobo gigante que habita en los bosques', 'lobo2.jpg', 100, 40, 8, 3, 25, 10),
-('Lobo Sagrado', 3, 50, 'Un lobo sagrado feroz que habita en los bosques', 'lobo3.jpg', 200, 40, 8, 3, 25, 10),
-('Janeiro', 3, 100, 'Un boss peligroso cuanto más le alarga la batalla', 'janeiro.jpg', 500, 1000, 150, 200, 200, 200);
+INSERT INTO monstruos (nombre, tipo_monstruo_id, nivel, descripcion, imagen, vida_base, escudo_base, energia_base, mana_base, ataque_fisico_base, ataque_magico_base, defensa_fisica, defensa_magica, almas, experiencia_otorgada) VALUES
+('Goblin', 1, 1, 'Un pequeño monstruo verde', 'goblin.jpg', 50, 0, 20, 5, 10, 5, 2, 1, 50, 20),
+('Ogro', 2, 5, 'Un monstruo grande y fuerte', 'ogro.jpg', 200, 0, 50, 20, 50, 20, 10, 5, 200, 50),
+('Dragón', 3, 10, 'Un poderoso dragón', 'dragon.jpg', 1000, 100, 200, 50, 200, 100, 30, 20, 1000, 200),
+('Bandido', 1, 3, 'Un bandido común que ataca a los viajeros', 'bandido.jpg', 80, 0, 30, 12, 20, 15, 5, 3, 80, 30),
+('Lobo Salvaje', 1, 2, 'Un lobo feroz que habita en los bosques', 'lobo.jpg', 60, 0, 20, 8, 15, 10, 3, 2, 60, 20),
+('Esqueleto Guerrero', 2, 5, 'Un esqueleto revivido con habilidades de combate', 'esqueleto.jpg', 120, 0, 40, 18, 40, 25, 8, 5, 120, 40),
+('Araña Gigante', 2, 4, 'Una araña gigante que teje telarañas venenosas', 'araña.jpg', 100, 0, 35, 15, 30, 20, 6, 4, 100, 35),
+('Bandido Líder', 3, 7, 'El líder de una banda de bandidos', 'bandido_lider.jpg', 200, 50, 60, 25, 80, 50, 12, 8, 200, 60),
+('Nigromante', 3, 7, 'El líder de esqueletos', 'nigromante.jpg', 200, 50, 60, 25, 80, 50, 12, 8, 200, 60),
+('Araña', 1, 7, 'Araña pequeña que ataca en grupo', 'araña.jpg', 50, 0, 10, 15, 20, 20, 2, 1, 50, 10),
+('Lobo Gigante', 2, 10, 'Un lobo gigante que habita en los bosques', 'lobo2.jpg', 100, 0, 40, 8, 25, 10, 3, 2, 100, 40),
+('Lobo Sagrado', 3, 50, 'Un lobo sagrado feroz que habita en los bosques', 'lobo3.jpg', 200, 100, 40, 8, 25, 10, 3, 2, 200, 40),
+('Janeiro', 3, 100, 'Un boss peligroso cuanto más le alarga la batalla', 'janeiro.jpg', 50000, 200, 1000, 150, 200, 200, 200, 150, 500, 1000);
 
+INSERT INTO monstruos (nombre, tipo_monstruo_id, nivel, descripcion, imagen, vida_base, escudo_base, energia_base, mana_base, ataque_fisico_base, ataque_magico_base, defensa_fisica, defensa_magica, almas, experiencia_otorgada)
+VALUES
+    ('Troll de Montaña', 2, 8, 'Un troll enorme que habita en las montañas.', 'troll_montana.jpg', 300, 20, 80, 30, 70, 25, 15, 10, 300, 80),
+    ('Harpía', 1, 4, 'Una criatura voladora con garras afiladas.', 'harpia.jpg', 90, 0, 40, 15, 25, 20, 5, 5, 90, 30),
+    ('Golem de Piedra', 3, 12, 'Un golem creado a partir de roca sólida.', 'golem_piedra.jpg', 500, 100, 120, 50, 100, 40, 30, 20, 500, 120),
+    ('Esqueleto Mago', 2, 6, 'Un esqueleto que domina la magia oscura.', 'esqueleto_mago.jpg', 150, 0, 50, 100, 20, 60, 8, 15, 150, 50),
+    ('Dragón de Hielo', 3, 15, 'Un dragón que escupe hielo y congela a sus enemigos.', 'dragon_hielo.jpg', 1200, 150, 250, 100, 250, 150, 40, 30, 1200, 250),
+    ('Goblin Líder', 2, 5, 'El líder de una tribu de goblins.', 'goblin_lider.jpg', 150, 10, 50, 20, 40, 25, 10, 8, 150, 50),
+    ('Serpiente Venenosa', 1, 3, 'Una serpiente que ataca con veneno mortal.', 'serpiente.jpg', 70, 0, 25, 10, 15, 10, 3, 2, 70, 20),
+    ('Demonio Menor', 2, 7, 'Un demonio de bajo rango que sirve a poderes oscuros.', 'demonio_menor.jpg', 180, 30, 60, 40, 60, 50, 12, 15, 180, 60),
+    ('Gárgola', 2, 6, 'Una estatua animada que protege lugares sagrados.', 'gargola.jpg', 200, 50, 70, 30, 50, 40, 15, 10, 200, 70),
+    ('Kraken', 3, 20, 'Una criatura marina gigante que ataca con sus tentáculos.', 'kraken.jpg', 1500, 200, 300, 150, 300, 200, 50, 40, 1500, 300),
+    ('Fénix', 3, 18, 'Un ave legendaria que renace de sus cenizas.', 'fenix.jpg', 1000, 150, 200, 200, 150, 250, 30, 40, 1000, 200),
+    ('Cíclope', 2, 10, 'Un gigante de un solo ojo con fuerza descomunal.', 'ciclop.jpg', 400, 50, 100, 40, 120, 30, 20, 15, 400, 100),
+    ('Hidra', 3, 25, 'Una criatura de múltiples cabezas que regenera sus heridas.', 'hidra.jpg', 2000, 300, 400, 200, 350, 250, 60, 50, 2000, 400),
+    ('Licántropo', 2, 9, 'Un humano que se transforma en lobo durante la luna llena.', 'licantropo.jpg', 250, 30, 80, 20, 90, 25, 15, 10, 250, 80),
+    ('Basilisco', 3, 14, 'Una serpiente gigante que petrifica con su mirada.', 'basilisco.jpg', 800, 100, 150, 80, 200, 100, 25, 20, 800, 150),
+    ('Gigante de Hielo', 2, 11, 'Un gigante que habita en regiones heladas.', 'gigante_hielo.jpg', 600, 80, 120, 50, 150, 60, 25, 20, 600, 120),
+    ('Dragón de Fuego', 3, 16, 'Un dragón que escupe llamas y arrasa con todo a su paso.', 'dragon_fuego.jpg', 1300, 200, 300, 120, 300, 200, 45, 35, 1300, 300),
+    ('Esqueleto Gigante', 2, 8, 'Un esqueleto de tamaño colosal que aterroriza a sus enemigos.', 'esqueleto_gigante.jpg', 400, 50, 100, 30, 100, 40, 20, 15, 400, 100),
+    ('Araña Reina', 3, 13, 'La líder de una colonia de arañas gigantes.', 'araña_reina.jpg', 700, 100, 150, 60, 120, 80, 25, 20, 700, 150),
+    ('Leviatán', 3, 30, 'Una criatura marina legendaria que devora barcos enteros.', 'leviatan.jpg', 2500, 500, 500, 300, 500, 400, 80, 60, 2500, 500);
+    
+CREATE TABLE registro_caza (
+    registro_caza_id BIGINT AUTO_INCREMENT PRIMARY KEY, 
+    personaje_id BIGINT NOT NULL,                        
+    monstruo_id BIGINT NOT NULL,                         
+    fecha_caza DATETIME NOT NULL,                       
+    almas_obtenidas INT NOT NULL,                     
+    experiencia_obtenida INT NOT NULL,                  
+    FOREIGN KEY (personaje_id) REFERENCES personajes(personaje_id),
+    FOREIGN KEY (monstruo_id) REFERENCES monstruos(monstruo_id)      
+);
 
+INSERT INTO registro_caza (personaje_id, monstruo_id, fecha_caza, almas_obtenidas, experiencia_obtenida)
+VALUES
+    (1, 1, '2023-10-01 12:00:00', 50, 20),   -- Aragorn cazó un Goblin
+    (2, 3, '2023-10-02 13:00:00', 1000, 200), -- Gandalf cazó un Dragón
+    (3, 2, '2023-10-03 14:00:00', 200, 50),  -- Legolas cazó un Ogro
+    (4, 5, '2023-10-04 15:00:00', 60, 20),   -- Frodo cazó un Lobo Salvaje
+    (5, 4, '2023-10-05 16:00:00', 80, 30),   -- Gimli cazó un Bandido
+    (6, 6, '2023-10-06 17:00:00', 120, 40),  -- Boromir cazó un Esqueleto Guerrero
+    (7, 7, '2023-10-07 18:00:00', 100, 35),  -- Galadriel cazó una Araña Gigante
+    (8, 8, '2023-10-08 19:00:00', 200, 60),  -- Saruman cazó un Bandido Líder
+    (9, 9, '2023-10-09 20:00:00', 200, 60),  -- Arwen cazó un Nigromante
+    (10, 10, '2023-10-10 21:00:00', 50, 10), -- Sauron cazó una Araña
+    (1, 11, '2023-10-11 12:00:00', 100, 40), -- Aragorn cazó un Lobo Gigante
+    (2, 12, '2023-10-12 13:00:00', 200, 40), -- Gandalf cazó un Lobo Sagrado
+    (3, 13, '2023-10-13 14:00:00', 500, 1000), -- Legolas cazó un Janeiro
+    (4, 14, '2023-10-14 15:00:00', 300, 80), -- Frodo cazó un Troll de Montaña
+    (5, 15, '2023-10-15 16:00:00', 90, 30),  -- Gimli cazó una Harpía
+    (6, 16, '2023-10-16 17:00:00', 500, 120), -- Boromir cazó un Golem de Piedra
+    (7, 17, '2023-10-17 18:00:00', 150, 50), -- Galadriel cazó un Esqueleto Mago
+    (8, 18, '2023-10-18 19:00:00', 1200, 250), -- Saruman cazó un Dragón de Hielo
+    (9, 19, '2023-10-19 20:00:00', 150, 50), -- Arwen cazó un Goblin Líder
+    (10, 20, '2023-10-20 21:00:00', 70, 20); -- Sauron cazó una Serpiente Venenosa
+    
 -- Tabla: efectos_estados
 CREATE TABLE IF NOT EXISTS efectos_estados (
     efecto_id bigint PRIMARY KEY AUTO_INCREMENT,
     imagen_icono VARCHAR(255),
     nombre VARCHAR(100) NOT NULL,
-    tipo ENUM('buff', 'debuff') NOT NULL,
-    tipo_afectado ENUM('personaje', 'monstruo', 'todo') DEFAULT 'personaje',
+    tipo ENUM('BUFF', 'DEBUFF') NOT NULL,
+    tipo_afectado ENUM('PERSONAJE', 'MONSTRUO', 'TODO') DEFAULT 'personaje',
     duracion_efecto INT NOT NULL DEFAULT 0,
     intervalos_efecto INT NOT NULL DEFAULT 0,
     acumulaciones INT NOT NULL DEFAULT 0,
-    ataque INT DEFAULT 0,
-    defensa INT DEFAULT 0,
-    vida INT DEFAULT 0,
-    energia INT DEFAULT 0,
+    vida_base INT NOT NULL DEFAULT 0,
+	escudo_base INT NOT NULL DEFAULT 0,
+    energia_base INT NOT NULL DEFAULT 0,
+    mana_base INT NOT NULL DEFAULT 0,
+    ataque_fisico_base INT NOT NULL DEFAULT 0,
+    ataque_magico_base INT NOT NULL DEFAULT 0,
+    defensa_fisica INT DEFAULT 0,
+    defensa_magica INT DEFAULT 0,
     descripcion TEXT,
     INDEX idx_nombre (nombre)
 );
 
 -- Insertar efectos y estados
-INSERT INTO efectos_estados (imagen_icono, nombre, tipo, tipo_afectado, duracion_efecto, intervalos_efecto, ataque, defensa, vida, energia, descripcion) VALUES
-('potenciacion.png', 'Fuerza', 'buff', 'personaje', 5, 1, 5, 0, 0, 0, 'Aumenta el ataque en 5 puntos'),
-('veneno.png', 'Veneno', 'debuff', 'personaje', 3, 1, 0, 0, -3, 0, 'Reduce la vida en 3 puntos por turno'),
-('venenoV2.png', 'VenenoV2', 'debuff', 'todo', 5, 1, 0, 0, -5, 0, 'Reduce la vida en 5 puntos por turno'),
-('proteccion.png', 'Protección', 'buff', 'personaje', 3, 1, 0, 10, 0, 0, 'Aumenta la defensa en 10 puntos'),
-('fuerza.png', 'Fuerza Mejorada', 'buff', 'personaje', 4, 1, 10, 0, 0, 0, 'Aumenta el ataque en 10 puntos'),
-('fortaleza.png', 'Defensa Mejorada', 'buff', 'personaje', 4, 1, 0, 30, 0, 0, 'Aumenta la defensa en 10 puntos'),
-('regeneracion.png', 'Regen de vida', 'buff', 'personaje', 4, 2, 0, 0, 50, 0, 'Regenera vida a intervalos regulares');
+INSERT INTO efectos_estados (imagen_icono, nombre, tipo, tipo_afectado, duracion_efecto, intervalos_efecto, acumulaciones, vida_base, escudo_base, energia_base, mana_base, ataque_fisico_base, ataque_magico_base, defensa_fisica, defensa_magica, descripcion)
+VALUES
+    ('fuerza_icono.jpg', 'Fuerza Mejorada', 'BUFF', 'PERSONAJE', 60, 10, 1, 0, 0, 0, 0, 20, 0, 0, 0, 'Aumenta el ataque físico en 20 puntos durante 1 minuto.'),
+    ('veneno_icono.jpg', 'Veneno', 'DEBUFF', 'MONSTRUO', 30, 5, 3, -10, 0, 0, 0, 0, 0, 0, 0, 'Reduce la vida en 10 puntos cada 5 segundos durante 30 segundos.'),
+    ('proteccion_icono.jpg', 'Escudo de Protección', 'BUFF', 'PERSONAJE', 120, 0, 1, 0, 50, 0, 0, 0, 0, 0, 0, 'Aumenta el escudo en 50 puntos durante 2 minutos.'),
+    ('congelacion_icono.jpg', 'Congelación', 'DEBUFF', 'MONSTRUO', 20, 0, 1, 0, 0, -20, 0, 0, 0, 0, 0, 'Reduce la energía en 20 puntos durante 20 segundos.'),
+    ('regeneracion_icono.jpg', 'Regeneración', 'BUFF', 'PERSONAJE', 60, 10, 1, 10, 0, 0, 0, 0, 0, 0, 0, 'Regenera 10 puntos de vida cada 10 segundos durante 1 minuto.'),
+    ('maldicion_icono.jpg', 'Maldición Oscura', 'DEBUFF', 'MONSTRUO', 45, 15, 2, 0, 0, 0, -30, 0, 0, 0, 0, 'Reduce el maná en 30 puntos cada 15 segundos durante 45 segundos.'),
+    ('ira_icono.jpg', 'Ira del Guerrero', 'BUFF', 'PERSONAJE', 30, 0, 1, 0, 0, 0, 0, 30, 0, 0, 0, 'Aumenta el ataque físico en 30 puntos durante 30 segundos.'),
+    ('ceguera_icono.jpg', 'Ceguera', 'DEBUFF', 'MONSTRUO', 25, 0, 1, 0, 0, 0, 0, -15, 0, 0, 0, 'Reduce el ataque físico en 15 puntos durante 25 segundos.'),
+    ('bendicion_icono.jpg', 'Bendición Divina', 'BUFF', 'PERSONAJE', 90, 0, 1, 50, 0, 0, 50, 0, 0, 0, 0, 'Aumenta la vida y el maná en 50 puntos durante 90 segundos.'),
+    ('quemadura_icono.jpg', 'Quemadura', 'DEBUFF', 'MONSTRUO', 40, 10, 4, -15, 0, 0, 0, 0, 0, 0, 0, 'Reduce la vida en 15 puntos cada 10 segundos durante 40 segundos.'),
+    ('invisibilidad_icono.jpg', 'Invisibilidad', 'BUFF', 'PERSONAJE', 60, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 'Hace al personaje invisible durante 1 minuto.'),
+    ('miedo_icono.jpg', 'Miedo', 'DEBUFF', 'MONSTRUO', 30, 0, 1, 0, 0, 0, 0, 0, -20, 0, 0, 'Reduce el ataque mágico en 20 puntos durante 30 segundos.'),
+    ('furia_icono.jpg', 'Furia del Dragón', 'BUFF', 'PERSONAJE', 45, 0, 1, 0, 0, 0, 0, 40, 0, 0, 0, 'Aumenta el ataque físico en 40 puntos durante 45 segundos.'),
+    ('paralisis_icono.jpg', 'Parálisis', 'DEBUFF', 'MONSTRUO', 20, 0, 1, 0, 0, -30, 0, 0, 0, 0, 0, 'Reduce la energía en 30 puntos durante 20 segundos.'),
+    ('aura_sagrada_icono.jpg', 'Aura Sagrada', 'BUFF', 'PERSONAJE', 120, 0, 1, 0, 0, 0, 0, 0, 0, 10, 10, 'Aumenta la defensa física y mágica en 10 puntos durante 2 minutos.'),
+    ('corrupcion_icono.jpg', 'Corrupción', 'DEBUFF', 'MONSTRUO', 60, 15, 3, -20, 0, 0, 0, 0, 0, 0, 0, 'Reduce la vida en 20 puntos cada 15 segundos durante 1 minuto.'),
+    ('velocidad_icono.jpg', 'Velocidad Mejorada', 'BUFF', 'PERSONAJE', 60, 0, 1, 0, 0, 20, 0, 0, 0, 0, 0, 'Aumenta la energía en 20 puntos durante 1 minuto.'),
+    ('silenciamiento_icono.jpg', 'Silenciamiento', 'DEBUFF', 'MONSTRUO', 30, 0, 1, 0, 0, 0, -50, 0, 0, 0, 0, 'Reduce el maná en 50 puntos durante 30 segundos.'),
+    ('invulnerabilidad_icono.jpg', 'Invulnerabilidad', 'BUFF', 'PERSONAJE', 10, 0, 1, 0, 100, 0, 0, 0, 0, 0, 0, 'Aumenta el escudo en 100 puntos durante 10 segundos.'),
+    ('envenenamiento_icono.jpg', 'Envenenamiento Grave', 'DEBUFF', 'MONSTRUO', 50, 10, 5, -25, 0, 0, 0, 0, 0, 0, 0, 'Reduce la vida en 25 puntos cada 10 segundos durante 50 segundos.');
+
 
 CREATE TABLE IF NOT EXISTS tipo_mapa (
     tipo_mapa_id bigint PRIMARY KEY AUTO_INCREMENT,
@@ -238,15 +404,19 @@ CREATE TABLE IF NOT EXISTS tipo_mapa (
 );
 
 -- Insertar tipos de mapa
-INSERT INTO tipo_mapa (nombre, descripcion) VALUES
-('mazmorra', 'Un lugar peligroso lleno de enemigos y tesoros.'),
-('ciudad', 'Un área segura con NPCs y servicios.'),
-('bosque', 'Un área natural con criaturas y recursos.'),
-('montaña', 'Un terreno elevado con desafíos únicos.'),
-('desierto', 'Un terreno muy caliente'),
-('cueva', 'Un lugar oscuro y misterioso.'),
-('pantano', 'Un terreno muy húmedo'),
-('tienda', 'Zona de comercio');
+INSERT INTO tipo_mapa (nombre, descripcion)
+VALUES
+    ('Bosque', 'Un área densamente poblada de árboles y vegetación, hogar de criaturas salvajes y secretos ocultos.'),
+    ('Montaña', 'Una región escarpada y rocosa, con altos picos y peligrosas criaturas que habitan en las alturas.'),
+    ('Mazmorra', 'Un laberinto subterráneo lleno de trampas, monstruos y tesoros ocultos.'),
+    ('Desierto', 'Una vasta extensión de arena y calor extremo, donde el agua es escasa y las criaturas son resistentes.'),
+    ('Ciudad', 'Un área urbana llena de vida, comercios y oportunidades para interactuar con otros personajes.'),
+    ('Pantano', 'Una zona húmeda y peligrosa, con criaturas venenosas y terrenos traicioneros.'),
+    ('Llanura', 'Una extensión abierta de tierra, ideal para viajar pero con peligros ocultos.'),
+    ('Cueva', 'Una formación subterránea oscura y misteriosa, hogar de criaturas adaptadas a la oscuridad.'),
+    ('Ruinas', 'Restos de una civilización antigua, llenos de secretos, trampas y tesoros perdidos.'),
+    ('Isla', 'Una masa de tierra rodeada de agua, con ecosistemas únicos y criaturas exóticas.'),
+	('tienda', 'Zona de comercio');
 
 -- Tabla: mapas
 CREATE TABLE IF NOT EXISTS mapas (
@@ -262,14 +432,19 @@ CREATE TABLE IF NOT EXISTS mapas (
 );
 
 -- Insertar mapas
-INSERT INTO mapas (nombre, descripcion, imagen, tipo_mapa_id, nivel_recomendado) VALUES
-('Mazmorra Oscura', 'Una mazmorra llena de peligros', 'mazmorra.jpg', 1, 1),
-('Ciudad de los Héroes', 'Una ciudad segura para descansar', 'ciudad.jpg', 2, 1),
-('Bosque Encantado', 'Un bosque lleno de criaturas mágicas', 'bosque.jpg', 3, 3),
-('Bosque Tenebroso', 'Un bosque oscuro lleno de criaturas peligrosas', 'bosque_tenebroso.jpg', 3, 4),
-('Ciudad de los Caídos', 'Una ciudad llena de bandidos', 'ciudad_caidos.jpg', 2, 1),
-('Montaña del Dragón', 'Una montaña donde habita un poderoso dragón', 'montaña_dragon.jpg', 4, 8),
-('Pantano Maldito', 'Un pantano lleno de criaturas venenosas', 'pantano_maldito.jpg', 7, 5);
+INSERT INTO mapas (nombre, descripcion, imagen, tipo_mapa_id, nivel_recomendado)
+VALUES
+    ('Bosque Oscuro', 'Un bosque denso y misterioso lleno de criaturas peligrosas.', 'bosque_oscuro.jpg', 1, 5),
+    ('Montañas del Dragón', 'Una cadena montañosa donde los dragones hacen sus nidos.', 'montañas_dragon.jpg', 2, 10),
+    ('Mazmorra de las Sombras', 'Una mazmorra oscura y llena de trampas mortales.', 'mazmorra_sombras.jpg', 3, 15),
+    ('Desierto Ardiente', 'Un desierto vasto y abrasador con criaturas resistentes al calor.', 'desierto_ardiente.jpg', 4, 8),
+    ('Ciudad de los Mercaderes', 'Una bulliciosa ciudad llena de comercios y oportunidades.', 'ciudad_mercaderes.jpg', 5, 3),
+    ('Pantano Venenoso', 'Un pantano lleno de criaturas venenosas y terrenos traicioneros.', 'pantano_venenoso.jpg', 6, 7),
+    ('Llanuras del Viento', 'Una extensión abierta de tierra con peligros ocultos.', 'llanuras_viento.jpg', 7, 4),
+    ('Cueva de Cristal', 'Una cueva brillante con formaciones de cristal y criaturas únicas.', 'cueva_cristal.jpg', 8, 12),
+    ('Ruinas Antiguas', 'Restos de una civilización perdida, llenos de secretos y tesoros.', 'ruinas_antiguas.jpg', 9, 20),
+    ('Isla del Misterio', 'Una isla remota con ecosistemas únicos y criaturas exóticas.', 'isla_misterio.jpg', 10, 18),
+    ('Tienda Central', 'El principal centro de comercio de la región.', 'tienda_central.jpg', 11, 1);
 
 -- Tabla: mapa_efecto
 CREATE TABLE IF NOT EXISTS mapa_efecto (
@@ -281,12 +456,28 @@ CREATE TABLE IF NOT EXISTS mapa_efecto (
 );
 
 -- Insertar efectos de mapas
-INSERT INTO mapa_efecto (mapa_id, efecto_id) VALUES
-(1, 1),  -- Mazmorra Oscura tiene efecto Fuerza
-(2, 2),  -- Ciudad de los Héroes tiene efecto Veneno
-(3, 3),  -- Bosque Encantado tiene efecto VenenoV2
-(4, 4),  -- Bosque Tenebroso tiene efecto Protección
-(5, 5);  -- Ciudad de los Caídos tiene efecto Fuerza Mejorada
+INSERT INTO mapa_efecto (mapa_id, efecto_id)
+VALUES
+    (1, 1),  -- Bosque Oscuro: Fuerza Mejorada
+    (1, 2),  -- Bosque Oscuro: Veneno
+    (2, 3),  -- Montañas del Dragón: Escudo de Protección
+    (2, 4),  -- Montañas del Dragón: Congelación
+    (3, 5),  -- Mazmorra de las Sombras: Regeneración
+    (3, 6),  -- Mazmorra de las Sombras: Maldición Oscura
+    (4, 7),  -- Desierto Ardiente: Ira del Guerrero
+    (4, 8),  -- Desierto Ardiente: Ceguera
+    (5, 9),  -- Ciudad de los Mercaderes: Bendición Divina
+    (5, 10), -- Ciudad de los Mercaderes: Quemadura
+    (6, 1),  -- Pantano Venenoso: Fuerza Mejorada
+    (6, 2),  -- Pantano Venenoso: Veneno
+    (7, 3),  -- Llanuras del Viento: Escudo de Protección
+    (7, 4),  -- Llanuras del Viento: Congelación
+    (8, 5),  -- Cueva de Cristal: Regeneración
+    (8, 6),  -- Cueva de Cristal: Maldición Oscura
+    (9, 7),  -- Ruinas Antiguas: Ira del Guerrero
+    (9, 8),  -- Ruinas Antiguas: Ceguera
+    (10, 9), -- Isla del Misterio: Bendición Divina
+    (10, 10);-- Isla del Misterio: Quemadura
 
 -- Tabla: tipo_item
 CREATE TABLE IF NOT EXISTS tipo_item (
@@ -392,64 +583,27 @@ CREATE TABLE IF NOT EXISTS estadisticas_equipamiento (
     equipamiento_id bigint PRIMARY KEY AUTO_INCREMENT,
     item_id bigint NOT NULL,
     tipo_equipamiento_id bigint NOT NULL,
-    ataque INT DEFAULT 0,
-    defensa INT DEFAULT 0,
-    vida INT DEFAULT 0,
-    energia INT DEFAULT 0,
+    vida_base INT NOT NULL DEFAULT 0,
+	escudo_base INT NOT NULL DEFAULT 0,
+    energia_base INT NOT NULL DEFAULT 0,
+    mana_base INT NOT NULL DEFAULT 0,
+    ataque_fisico_base INT NOT NULL DEFAULT 0,
+    ataque_magico_base INT NOT NULL DEFAULT 0,
+    defensa_fisica INT DEFAULT 0,
+    defensa_magica INT DEFAULT 0,
     FOREIGN KEY (item_id) REFERENCES items(item_id) ON DELETE CASCADE,
     FOREIGN KEY (tipo_equipamiento_id) REFERENCES tipo_equipamiento(tipo_equipamiento_id),
     INDEX idx_tipo_equipamiento (tipo_equipamiento_id)
 );
 
 -- Insertar objetos equipables
-INSERT INTO estadisticas_equipamiento (item_id, tipo_equipamiento_id, ataque, defensa, vida, energia) VALUES
-(2, 1, 10, 0, 0, 0),  -- Espada de Acero es un Arma Principal
-(8, 1, 15, 0, 0, 0),  -- Espada Larga es un Arma Principal
-(9, 2, 0, 10, 0, 0),  -- Escudo de Hierro es un Arma Secundaria
-(6, 7, 0, 0, 20, 0),  -- Gema Brillante es un Accesorio 1
-(7, 8, 0, 0, 0, 30);  -- Mapa del Tesoro es un Accesorio 2
+INSERT INTO estadisticas_equipamiento (item_id, tipo_equipamiento_id, vida_base, escudo_base, energia_base, mana_base, ataque_fisico_base, ataque_magico_base, defensa_fisica, defensa_magica) VALUES
+(2, 1, 0, 0, 0, 0, 10, 0, 0, 0),  -- Espada de Acero es un Arma Principal (aumenta ataque físico)
+(8, 1, 0, 0, 0, 0, 15, 0, 0, 0),  -- Espada Larga es un Arma Principal (aumenta ataque físico)
+(9, 2, 0, 10, 0, 0, 0, 0, 5, 5),  -- Escudo de Hierro es un Arma Secundaria (aumenta escudo y defensas)
+(6, 7, 0, 0, 20, 0, 0, 0, 0, 0),  -- Gema Brillante es un Accesorio 1 (aumenta energía)
+(7, 8, 0, 0, 0, 30, 0, 0, 0, 0);  -- Mapa del Tesoro es un Accesorio 2 (aumenta maná)
 
-/*
--- Tabla: inventario_personaje
-CREATE TABLE IF NOT EXISTS inventario_personaje (
-    inventario_id INT PRIMARY KEY AUTO_INCREMENT,
-    personaje_id INT NOT NULL,
-    item_id INT NOT NULL,
-    cantidad INT NOT NULL DEFAULT 1,
-    equipado BOOLEAN DEFAULT 0,
-    FOREIGN KEY (personaje_id) REFERENCES personajes(personaje_id) ON DELETE CASCADE,
-    FOREIGN KEY (item_id) REFERENCES items(item_id) ON DELETE CASCADE,
-    INDEX idx_personaje_id (personaje_id),
-    INDEX idx_item_id (item_id)
-);
-
--- Insertar inventario de personajes
-INSERT INTO inventario_personaje (personaje_id, item_id, cantidad, equipado) VALUES
-(1, 1, 5, 0),  -- Guerrero1 tiene 5 Pociones de Vida
-(1, 2, 1, 1),  -- Guerrero1 tiene 1 Espada de Acero equipada
-(2, 4, 3, 0),  -- Mago1 tiene 3 Pociones de Energía
-(3, 3, 10, 0), -- Arquero1 tiene 10 Hierbas Mágicas
-(4, 5, 2, 0);  -- Hechicero1 tiene 2 Pociones de Veneno
-
--- Tabla: equipamiento_personaje
-CREATE TABLE IF NOT EXISTS equipamiento_personaje (
-    personaje_id INT NOT NULL,
-    equipamiento_id INT NOT NULL,
-    PRIMARY KEY (personaje_id, equipamiento_id),
-    FOREIGN KEY (personaje_id) REFERENCES personajes(personaje_id),
-    FOREIGN KEY (equipamiento_id) REFERENCES objetos_equipables(equipamiento_id),
-    INDEX idx_personaje_id (personaje_id),
-    INDEX idx_equipamiento_id (equipamiento_id)
-);
-
--- Insertar equipamiento de personajes
-INSERT INTO equipamiento_personaje (personaje_id, equipamiento_id) VALUES
-(1, 1),  -- Guerrero1 equipa Espada de Acero
-(2, 2),  -- Mago1 equipa Escudo de Hierro
-(3, 3),  -- Arquero1 equipa Espada Larga
-(4, 4),  -- Hechicero1 equipa Gema Brillante
-(5, 5);  -- Caballero1 equipa Mapa del Tesoro
-*/
 -- Tabla: inventario de personajes
 CREATE TABLE IF NOT EXISTS inventario_personaje (
     personaje_id bigint NOT NULL,
@@ -488,24 +642,30 @@ CREATE TABLE IF NOT EXISTS habilidades (
     descripcion TEXT,
     nivel_maximo INT NOT NULL DEFAULT 1,
     requisito_nivel INT NOT NULL DEFAULT 1,
-    tipo_habilidad ENUM('ofensiva', 'defensiva','apoyo') DEFAULT 'ofensiva',
-    objetivo_habilidad ENUM('jugador','aliado','enemigo','todo') DEFAULT 'todo',
+    tipo_habilidad ENUM('OFENSIVA', 'DEFENSIVA','APOYO') DEFAULT 'ofensiva',
+    objetivo_habilidad ENUM('JUGADOR','ALIADO','ENEMIGO','TODO') DEFAULT 'todo',
     area_efecto INT NOT NULL DEFAULT 1,
     unidades_afectadas INT NOT NULL DEFAULT 1,
-    consumo_energia INT NOT NULL DEFAULT 0,
-    daño_base INT NOT NULL DEFAULT 0,
     curacion_base INT NOT NULL DEFAULT 0,
+    escudo_base INT NOT NULL DEFAULT 0,
+    energia_base INT NOT NULL DEFAULT 30,
+    mana_base INT NOT NULL DEFAULT 0,
+    ataque_fisico_base INT NOT NULL DEFAULT 0,
+    ataque_magico_base INT NOT NULL DEFAULT 0,
+    defensa_fisica INT DEFAULT 0,
+    defensa_magica INT DEFAULT 0,
     enfriamiento INT NOT NULL DEFAULT 0, 
     INDEX idx_nombre (nombre)
 );
 
 -- Insertar habilidades
-INSERT INTO habilidades (imagen, nombre, descripcion, tipo_habilidad, objetivo_habilidad, area_efecto, consumo_energia, daño_base, curacion_base, enfriamiento) VALUES
-('habilidad1.png', 'Corte rápido', 'Un ataque rápido con la espada', 'ofensiva', 'enemigo', 1, 10, 15, 0, 2),
-('habilidad2.png', 'Curación menor', 'Cura 20 puntos de vida', 'defensiva', 'jugador', 1, 15, 0, 20, 3),
-('corte_sombra.png', 'Corte de Sombra', 'Un ataque rápido que ignora la defensa', 'ofensiva', 'enemigo', 1, 20, 25, 0, 3),
-('escudo_proteccion.png', 'Escudo de Protección', 'Aumenta la defensa temporalmente', 'defensiva', 'jugador', 1, 15, 0, 0, 4),
-('lluvia_flechas.png', 'Lluvia de Flechas', 'Ataque de área que afecta a múltiples enemigos', 'ofensiva', 'enemigo', 3, 25, 20, 0, 5);
+INSERT INTO habilidades (imagen, nombre, descripcion, tipo_habilidad, objetivo_habilidad, area_efecto, unidades_afectadas, curacion_base, escudo_base, energia_base, mana_base, ataque_fisico_base, ataque_magico_base, defensa_fisica, defensa_magica, enfriamiento) VALUES
+('habilidad1.png', 'Corte rápido', 'Un ataque rápido con la espada', 'ofensiva', 'enemigo', 1, 1, 0, 0, 10, 0, 15, 0, 0, 0, 2),
+('habilidad2.png', 'Curación menor', 'Cura 20 puntos de vida', 'defensiva', 'jugador', 1, 1, 20, 0, 15, 0, 0, 0, 0, 0, 3),
+('corte_sombra.png', 'Corte de Sombra', 'Un ataque rápido que ignora la defensa', 'ofensiva', 'enemigo', 1, 1, 0, 0, 20, 0, 25, 0, 0, 0, 3),
+('escudo_proteccion.png', 'Escudo de Protección', 'Aumenta la defensa temporalmente', 'defensiva', 'jugador', 1, 1, 0, 30, 15, 0, 0, 0, 10, 10, 4),
+('lluvia_flechas.png', 'Lluvia de Flechas', 'Ataque de área que afecta a múltiples enemigos', 'ofensiva', 'enemigo', 3, 3, 0, 0, 25, 0, 20, 0, 0, 0, 5);
+
 
 -- Tabla: habilidad_efecto
 CREATE TABLE IF NOT EXISTS habilidad_efecto (
@@ -610,12 +770,12 @@ CREATE TABLE IF NOT EXISTS misiones (
     nivel_minimo INT NOT NULL,
     recompensa_almas INT DEFAULT 0,
     recompensa_experiencia INT DEFAULT 0,
-    fecha_limite INT NULL DEFAULT 30,
+    tiempo_limite INT NULL DEFAULT 30,
     INDEX idx_nombre (nombre)
 );
 
 -- Insertar misiones
-INSERT INTO misiones (nombre, descripcion, nivel_minimo, recompensa_almas, recompensa_experiencia, fecha_limite) VALUES
+INSERT INTO misiones (nombre, descripcion, nivel_minimo, recompensa_almas, recompensa_experiencia, tiempo_limite) VALUES
 ('Cazar Goblin', 'Derrota a 5 Goblins', 1, 50, 100, 30),
 ('Recoger Hierbas', 'Recoge 10 Hierbas Mágicas', 2, 30, 50, 20),
 ('Derrota a los Bandidos', 'Elimina a 5 bandidos que aterrorizan la región', 3, 100, 200, 40),
@@ -650,7 +810,7 @@ CREATE TABLE IF NOT EXISTS personaje_mision (
     mision_id bigint NOT NULL,
     fecha_inicio DATETIME NOT NULL,
     fecha_fin DATETIME NULL,
-    estado ENUM('en_progreso', 'completada', 'fallida') DEFAULT 'en_progreso',
+    estado ENUM('EN_PROGRESO', 'COMPLETADA', 'FALLIDA') DEFAULT 'EN_PROGRESO',
     PRIMARY KEY (personaje_id, mision_id),
     FOREIGN KEY (personaje_id) REFERENCES personajes(personaje_id),
     FOREIGN KEY (mision_id) REFERENCES misiones(mision_id),
@@ -731,7 +891,7 @@ INSERT INTO npc_producto (npc_id, item_id, precio_compra, precio_venta, cantidad
 CREATE TABLE IF NOT EXISTS transacciones_npc_personaje (
     transaccion_id bigint PRIMARY KEY AUTO_INCREMENT,
     personaje_id bigint NOT NULL,
-    tipo_transaccion ENUM('compra', 'venta') NOT NULL,
+    tipo_transaccion ENUM('COMPRA', 'VENTA') NOT NULL,
     npc_id bigint not NULL,
     item_id bigint NOT NULL,
     cantidad INT NOT NULL DEFAULT 1,
@@ -757,34 +917,125 @@ INSERT INTO transacciones_npc_personaje (personaje_id, tipo_transaccion, npc_id,
 
 
 
--- Vistas
 
-drop view if exists estadisticas_personaje_completo;
+-- Drop existing views
+DROP VIEW IF EXISTS estadisticas_personaje_completo;
+DROP VIEW IF EXISTS inventario_completo;
+DROP VIEW IF EXISTS habilidades_completas;
+DROP VIEW IF EXISTS mapas_detalles_completos;
+
+
 CREATE VIEW estadisticas_personaje_completo AS
 SELECT 
     p.personaje_id,
     p.nombre AS nombre_personaje,
     ep.nivel,
     ep.vida_base,
+    ep.escudo_base,
     ep.energia_base,
-    ep.ataque_base,
-    ep.defensa,
+    ep.mana_base,
+    ep.ataque_fisico_base,
+    ep.ataque_magico_base,
+    ep.defensa_fisica,
+    ep.defensa_magica,
     ep.almas,
     ep.capacidad_inventario,
-    SUM(ies.ataque) AS ataque_equipamiento,
-    SUM(ies.defensa) AS defensa_equipamiento,
-    SUM(ies.vida) AS vida_equipamiento,
-    SUM(ies.energia) AS energia_equipamiento
+    COALESCE(SUM(ee.vida_base), 0) AS vida_equipamiento,
+    COALESCE(SUM(ee.escudo_base), 0) AS escudo_equipamiento,
+    COALESCE(SUM(ee.energia_base), 0) AS energia_equipamiento,
+    COALESCE(SUM(ee.mana_base), 0) AS mana_equipamiento,
+    COALESCE(SUM(ee.ataque_fisico_base), 0) AS ataque_fisico_equipamiento,
+    COALESCE(SUM(ee.ataque_magico_base), 0) AS ataque_magico_equipamiento,
+    COALESCE(SUM(ee.defensa_fisica), 0) AS defensa_fisica_equipamiento,
+    COALESCE(SUM(ee.defensa_magica), 0) AS defensa_magica_equipamiento
 FROM estadisticas_personaje ep
 JOIN personajes p ON ep.personaje_id = p.personaje_id
 LEFT JOIN inventario_personaje ip ON p.personaje_id = ip.personaje_id AND ip.equipado = 1
-LEFT JOIN estadisticas_equipamiento ies ON ip.item_id = ies.item_id
+LEFT JOIN estadisticas_equipamiento ee ON ip.item_id = ee.item_id
 GROUP BY p.personaje_id;
 
+DROP VIEW IF EXISTS inventario_completo;
+
+CREATE VIEW inventario_completo AS
+SELECT 
+    ip.personaje_id,
+    p.nombre AS nombre_personaje,
+    ip.item_id,
+    i.nombre AS nombre_item,
+    i.descripcion AS descripcion_item,
+    ip.cantidad,
+    ip.equipado,
+    ip.fecha_obtencion,
+    ti.nombre AS tipo_item,
+    ee.vida_base AS vida_item,
+    ee.escudo_base AS escudo_item,
+    ee.energia_base AS energia_item,
+    ee.mana_base AS mana_item,
+    ee.ataque_fisico_base AS ataque_fisico_item,
+    ee.ataque_magico_base AS ataque_magico_item,
+    ee.defensa_fisica AS defensa_fisica_item,
+    ee.defensa_magica AS defensa_magica_item,
+    te.nombre AS tipo_equipamiento
+FROM inventario_personaje ip
+JOIN items i ON ip.item_id = i.item_id
+JOIN tipo_item ti ON i.tipo_item = ti.tipo_item_id
+LEFT JOIN estadisticas_equipamiento ee ON ip.item_id = ee.item_id
+LEFT JOIN tipo_equipamiento te ON ee.tipo_equipamiento_id = te.tipo_equipamiento_id
+JOIN personajes p ON ip.personaje_id = p.personaje_id;
+
+DROP VIEW IF EXISTS habilidades_completas;
+
+CREATE VIEW habilidades_completas AS
+SELECT 
+    h.habilidad_id,
+    h.nombre AS nombre_habilidad,
+    h.descripcion AS descripcion_habilidad,
+    h.nivel_maximo,
+    h.requisito_nivel,
+    h.tipo_habilidad,
+    h.objetivo_habilidad,
+    h.area_efecto,
+    h.unidades_afectadas,
+    h.curacion_base,
+    h.escudo_base,
+    h.energia_base,
+    h.mana_base,
+    h.ataque_fisico_base,
+    h.ataque_magico_base,
+    h.defensa_fisica,
+    h.defensa_magica,
+    h.enfriamiento,
+    he.efecto_id,
+    ee.nombre AS nombre_efecto,
+    ee.descripcion AS descripcion_efecto
+FROM habilidades h
+LEFT JOIN habilidad_efecto he ON h.habilidad_id = he.habilidad_id
+LEFT JOIN efectos_estados ee ON he.efecto_id = ee.efecto_id;
 
 
+DROP VIEW IF EXISTS mapas_detalles_completos;
 
-
+CREATE VIEW mapas_detalles_completos AS
+SELECT 
+    ma.mapa_id,
+    ma.nombre AS nombre_mapa,
+    ma.descripcion AS descripcion_mapa,
+    ma.imagen,
+    ma.nivel_recomendado,
+    tm.nombre AS tipo_mapa,
+    tm.descripcion AS descripcion_tipo_mapa,
+    mm.monstruo_id,
+    mo.nombre AS nombre_monstruo,
+    mm.probabilidad_aparicion,
+    me.efecto_id,
+    ee.nombre AS nombre_efecto,
+    ee.descripcion AS descripcion_efecto
+FROM mapas ma
+JOIN tipo_mapa tm ON ma.tipo_mapa_id = tm.tipo_mapa_id
+LEFT JOIN mapa_monstruos mm ON ma.mapa_id = mm.mapa_id
+LEFT JOIN monstruos mo ON mm.monstruo_id = mo.monstruo_id
+LEFT JOIN mapa_efecto me ON ma.mapa_id = me.mapa_id
+LEFT JOIN efectos_estados ee ON me.efecto_id = ee.efecto_id;
 
 
 
@@ -792,14 +1043,17 @@ GROUP BY p.personaje_id;
 
 
 -- Trigers y funciones
-DROP TRIGGER IF EXISTS verificar_limite_personajes;
--- DROP TRIGGER IF EXISTS hash_contraseña;
+DROP TRIGGER IF EXISTS AI_actualizar_logros_caza;
+DROP TRIGGER IF EXISTS AI_validar_misiones_caza;
+DROP TRIGGER IF EXISTS BI_verificar_limite_personajes;
+DROP TRIGGER IF EXISTS hash_contraseña;
 DROP TRIGGER IF EXISTS BI_inventario_personaje;
 DROP TRIGGER IF EXISTS BU_inventario_personaje;
 DROP TRIGGER IF EXISTS AD_inventario_personaje;
 
 
-/*
+
+
 -- encriptar contrasenas
 DELIMITER //
 
@@ -811,7 +1065,7 @@ BEGIN
 END//
 
 DELIMITER ;
-*/
+
 
 DELIMITER //
 
@@ -841,24 +1095,36 @@ BEFORE INSERT ON inventario_personaje
 FOR EACH ROW
 BEGIN
     DECLARE tipo_equipamiento INT;
-    DECLARE ataque_item INT;
-    DECLARE defensa_item INT;
     DECLARE vida_item INT;
+    DECLARE escudo_item INT;
     DECLARE energia_item INT;
+    DECLARE mana_item INT;
+    DECLARE ataque_fisico_item INT;
+    DECLARE ataque_magico_item INT;
+    DECLARE defensa_fisica_item INT;
+    DECLARE defensa_magica_item INT;
 
     -- Obtener el tipo de equipamiento y las estadísticas del ítem
     SELECT 
         tipo_equipamiento_id, 
-        ataque, 
-        defensa, 
-        vida, 
-        energia
+        vida_base, 
+        escudo_base, 
+        energia_base, 
+        mana_base, 
+        ataque_fisico_base, 
+        ataque_magico_base, 
+        defensa_fisica, 
+        defensa_magica
     INTO 
         tipo_equipamiento, 
-        ataque_item, 
-        defensa_item, 
         vida_item, 
-        energia_item
+        escudo_item, 
+        energia_item, 
+        mana_item, 
+        ataque_fisico_item, 
+        ataque_magico_item, 
+        defensa_fisica_item, 
+        defensa_magica_item
     FROM estadisticas_equipamiento
     WHERE item_id = NEW.item_id;
 
@@ -879,10 +1145,14 @@ BEGIN
         -- Sumar las estadísticas del ítem al personaje
         UPDATE estadisticas_personaje
         SET 
-            ataque_base = ataque_base + ataque_item,
-            defensa = defensa + defensa_item,
             vida_base = vida_base + vida_item,
-            energia_base = energia_base + energia_item
+            escudo_base = escudo_base + escudo_item,
+            energia_base = energia_base + energia_item,
+            mana_base = mana_base + mana_item,
+            ataque_fisico_base = ataque_fisico_base + ataque_fisico_item,
+            ataque_magico_base = ataque_magico_base + ataque_magico_item,
+            defensa_fisica = defensa_fisica + defensa_fisica_item,
+            defensa_magica = defensa_magica + defensa_magica_item
         WHERE personaje_id = NEW.personaje_id;
     END IF;
 END//
@@ -896,10 +1166,14 @@ BEFORE UPDATE ON inventario_personaje
 FOR EACH ROW
 BEGIN
     DECLARE tipo_equipamiento INT;
-    DECLARE ataque_item INT;
-    DECLARE defensa_item INT;
     DECLARE vida_item INT;
+    DECLARE escudo_item INT;
     DECLARE energia_item INT;
+    DECLARE mana_item INT;
+    DECLARE ataque_fisico_item INT;
+    DECLARE ataque_magico_item INT;
+    DECLARE defensa_fisica_item INT;
+    DECLARE defensa_magica_item INT;
     DECLARE max_inventory INT;
     DECLARE max_stack INT;
     DECLARE total_spaces INT;
@@ -950,16 +1224,24 @@ BEGIN
     -- Obtener el tipo de equipamiento y las estadísticas del ítem
     SELECT 
         tipo_equipamiento_id, 
-        ataque, 
-        defensa, 
-        vida, 
-        energia
+        vida_base, 
+        escudo_base, 
+        energia_base, 
+        mana_base, 
+        ataque_fisico_base, 
+        ataque_magico_base, 
+        defensa_fisica, 
+        defensa_magica
     INTO 
         tipo_equipamiento, 
-        ataque_item, 
-        defensa_item, 
         vida_item, 
-        energia_item
+        escudo_item, 
+        energia_item, 
+        mana_item, 
+        ataque_fisico_item, 
+        ataque_magico_item, 
+        defensa_fisica_item, 
+        defensa_magica_item
     FROM estadisticas_equipamiento
     WHERE item_id = NEW.item_id;
 
@@ -983,10 +1265,14 @@ BEGIN
     IF OLD.equipado = 1 AND NEW.equipado = 0 THEN
         UPDATE estadisticas_personaje
         SET 
-            ataque_base = ataque_base - ataque_item,
-            defensa = defensa - defensa_item,
             vida_base = vida_base - vida_item,
-            energia_base = energia_base - energia_item
+            escudo_base = escudo_base - escudo_item,
+            energia_base = energia_base - energia_item,
+            mana_base = mana_base - mana_item,
+            ataque_fisico_base = ataque_fisico_base - ataque_fisico_item,
+            ataque_magico_base = ataque_magico_base - ataque_magico_item,
+            defensa_fisica = defensa_fisica - defensa_fisica_item,
+            defensa_magica = defensa_magica - defensa_magica_item
         WHERE personaje_id = NEW.personaje_id;
     END IF;
 
@@ -994,15 +1280,10 @@ BEGIN
     IF OLD.equipado = 0 AND NEW.equipado = 1 THEN
         UPDATE estadisticas_personaje
         SET 
-            ataque_base = ataque_base + ataque_item,
-            defensa = defensa + defensa_item,
             vida_base = vida_base + vida_item,
-            energia_base = energia_base + energia_item
-        WHERE personaje_id = NEW.personaje_id;
-    END IF;
-END//
-
-DELIMITER ;
+            escudo_base = escudo_base + escudo_item,
+            energia_base = energia_base + energia_item,
+            mana_base = mana
 
 DELIMITER //
 
@@ -1011,24 +1292,36 @@ AFTER DELETE ON inventario_personaje
 FOR EACH ROW
 BEGIN
     DECLARE tipo_equipamiento INT;
-    DECLARE ataque_item INT;
-    DECLARE defensa_item INT;
     DECLARE vida_item INT;
+    DECLARE escudo_item INT;
     DECLARE energia_item INT;
+    DECLARE mana_item INT;
+    DECLARE ataque_fisico_item INT;
+    DECLARE ataque_magico_item INT;
+    DECLARE defensa_fisica_item INT;
+    DECLARE defensa_magica_item INT;
 
     -- Obtener el tipo de equipamiento y las estadísticas del ítem eliminado
     SELECT 
         tipo_equipamiento_id, 
-        ataque, 
-        defensa, 
-        vida, 
-        energia
+        vida_base, 
+        escudo_base, 
+        energia_base, 
+        mana_base, 
+        ataque_fisico_base, 
+        ataque_magico_base, 
+        defensa_fisica, 
+        defensa_magica
     INTO 
         tipo_equipamiento, 
-        ataque_item, 
-        defensa_item, 
         vida_item, 
-        energia_item
+        escudo_item, 
+        energia_item, 
+        mana_item, 
+        ataque_fisico_item, 
+        ataque_magico_item, 
+        defensa_fisica_item, 
+        defensa_magica_item
     FROM estadisticas_equipamiento
     WHERE item_id = OLD.item_id;
 
@@ -1036,12 +1329,128 @@ BEGIN
     IF OLD.equipado = 1 THEN
         UPDATE estadisticas_personaje
         SET 
-            ataque_base = ataque_base - ataque_item,
-            defensa = defensa - defensa_item,
             vida_base = vida_base - vida_item,
-            energia_base = energia_base - energia_item
+            escudo_base = escudo_base - escudo_item,
+            energia_base = energia_base - energia_item,
+            mana_base = mana_base - mana_item,
+            ataque_fisico_base = ataque_fisico_base - ataque_fisico_item,
+            ataque_magico_base = ataque_magico_base - ataque_magico_item,
+            defensa_fisica = defensa_fisica - defensa_fisica_item,
+            defensa_magica = defensa_magica - defensa_magica_item
         WHERE personaje_id = OLD.personaje_id;
     END IF;
 END//
 
 DELIMITER ;
+
+DELIMITER //
+
+CREATE TRIGGER AI_actualizar_logros_caza
+AFTER INSERT ON registro_caza
+FOR EACH ROW
+BEGIN
+    DECLARE tipo_monstruo ENUM('NORMAL', 'MINIBOSS', 'BOSS');
+
+    -- Obtener el tipo de monstruo derrotado
+    SELECT tipo_monstruo INTO tipo_monstruo
+    FROM monstruos
+    WHERE monstruo_id = NEW.monstruo_id;
+
+    -- Actualizar los logros del personaje según el tipo de monstruo
+    CASE tipo_monstruo
+        WHEN 'normal' THEN
+            UPDATE logros_personaje
+            SET normal = normal + 1
+            WHERE personaje_id = NEW.personaje_id;
+        WHEN 'miniboss' THEN
+            UPDATE logros_personaje
+            SET miniboss = miniboss + 1
+            WHERE personaje_id = NEW.personaje_id;
+        WHEN 'boss' THEN
+            UPDATE logros_personaje
+            SET boss = boss + 1
+            WHERE personaje_id = NEW.personaje_id;
+    END CASE;
+END//
+
+DELIMITER ;
+
+
+DELIMITER //
+
+CREATE TRIGGER AI_validar_misiones_caza
+AFTER INSERT ON registro_caza
+FOR EACH ROW
+BEGIN
+    DECLARE mision_id BIGINT;
+    DECLARE monstruo_requerido_id BIGINT;
+    DECLARE cantidad_requerida INT;
+    DECLARE tiempo_limite INT;
+    DECLARE fecha_inicio_mision DATETIME;
+    DECLARE cantidad_actual INT;
+    DECLARE tiempo_transcurrido INT;
+
+    -- Cursor para recorrer las misiones relacionadas con la caza de monstruos
+    DECLARE cur_misiones CURSOR FOR
+    SELECT m.mision_id, mo.monstruo_id, mo.cantidad, m.tiempo_limite
+    FROM misiones m
+    JOIN mision_objetos mo ON m.mision_id = mo.mision_id
+    WHERE mo.monstruo_id IS NOT NULL;
+
+    -- Handler para cuando no haya más filas en el cursor
+    DECLARE CONTINUE HANDLER FOR NOT FOUND SET @fin = 1;
+
+    -- Abrir el cursor
+    OPEN cur_misiones;
+
+    -- Recorrer las misiones
+    bucle_misiones: LOOP
+        FETCH cur_misiones INTO mision_id, monstruo_requerido_id, cantidad_requerida, tiempo_limite;
+        IF @fin = 1 THEN
+            LEAVE bucle_misiones;
+        END IF;
+
+        -- Verificar si el monstruo cazado coincide con el requerido por la misión
+        IF NEW.monstruo_id = monstruo_requerido_id THEN
+            -- Obtener la fecha de inicio de la misión para este personaje
+            SELECT fecha_inicio INTO fecha_inicio_mision
+            FROM personaje_mision
+            WHERE personaje_id = NEW.personaje_id
+              AND mision_id = mision_id;
+
+            -- Calcular el tiempo transcurrido desde que se aceptó la misión
+            SET tiempo_transcurrido = TIMESTAMPDIFF(MINUTE, fecha_inicio_mision, NOW());
+
+            -- Verificar si el tiempo transcurrido es menor o igual al tiempo límite
+            IF tiempo_transcurrido <= tiempo_limite THEN
+                -- Obtener la cantidad actual de monstruos cazados para esta misión
+                SELECT COUNT(*) INTO cantidad_actual
+                FROM registro_caza rc
+                WHERE rc.personaje_id = NEW.personaje_id
+                  AND rc.monstruo_id = monstruo_requerido_id
+                  AND rc.fecha_caza BETWEEN fecha_inicio_mision AND NOW();
+
+                -- Verificar si se ha alcanzado la cantidad requerida
+                IF cantidad_actual >= cantidad_requerida THEN
+                    -- Actualizar el estado de la misión a "completada"
+                    UPDATE personaje_mision
+                    SET estado = 'completada'
+                    WHERE personaje_id = NEW.personaje_id
+                      AND mision_id = mision_id;
+                END IF;
+            ELSE
+                -- Si se excedió el tiempo límite, marcar la misión como "fallida"
+                UPDATE personaje_mision
+                SET estado = 'fallida'
+                WHERE personaje_id = NEW.personaje_id
+                  AND mision_id = mision_id;
+            END IF;
+        END IF;
+    END LOOP bucle_misiones;
+
+    -- Cerrar el cursor
+    CLOSE cur_misiones;
+END//
+
+DELIMITER ;
+

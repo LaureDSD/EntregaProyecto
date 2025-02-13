@@ -27,19 +27,34 @@ public class EstadisticasEquipamiento {
     @Schema(description = "Tipo de equipamiento asociado")
     private TipoEquipamiento tipo_equipamiento;
 
-    @Column(name = "ataque")
-    @Schema(description = "Ataque del equipamiento", example = "10")
-    private int ataque;
+    @Column(name = "vida_base", nullable = false)
+    @Schema(description = "Vida base de la  clase", example = "100")
+    private int vida_base;
+    @Column(name = "escudo_base", nullable = false)
+    @Schema(description = "Escudo base de la  clase", example = "0")
+    private int escudo_base;
 
-    @Column(name = "defensa")
-    @Schema(description = "Defensa del equipamiento", example = "5")
-    private int defensa;
 
-    @Column(name = "vida")
-    @Schema(description = "Vida del equipamiento", example = "0")
-    private int vida;
+    @Column(name = "energia_base", nullable = false)
+    @Schema(description = "Energía base de la clase", example = "50")
+    private int energia_base;
+    @Column(name = "mana_base", nullable = false)
+    @Schema(description = "Mana base de la clase", example = "50")
+    private int emana_base;
 
-    @Column(name = "energia")
-    @Schema(description = "Energía del equipamiento", example = "0")
-    private int energia;
+
+    @Column(name = "ataque_fisico_base", nullable = false)
+    @Schema(description = "Ataque base de la clase", example = "10")
+    private int ataquefiscobase;
+    @Column(name = "ataque_magico_base", nullable = false)
+    @Schema(description = "Ataque base de la clase", example = "10")
+    private int ataqueMagicoBase;
+
+
+    @Column(name = "defensa_fisica")
+    @Schema(description = "Defensa de la clase", example = "5")
+    private int defensamagica;
+    @Column(name = "defensa_magica")
+    @Schema(description = "Defensa de la clase", example = "5")
+    private int defensafisica;
 }

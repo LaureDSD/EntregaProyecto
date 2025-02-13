@@ -1,6 +1,6 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.services.persoanjeService;
 
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.RegistroPersonaje;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.LogrosPersonaje;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.repositories.personajeRepository.RegistroPersonajeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,15 +12,15 @@ public class RegistroPersonajeService {
     @Autowired
     private RegistroPersonajeRepository registroPersonajeRepository;
 
-    public List<RegistroPersonaje> getAll(){
+    public List<LogrosPersonaje> getAll(){
         return  registroPersonajeRepository.findAll();
     }
 
-    public RegistroPersonaje getByID(Long id){
+    public LogrosPersonaje getByID(Long id){
         return registroPersonajeRepository.findById(id).orElse(null);
     }
 
-    public RegistroPersonaje setItem(RegistroPersonaje o){
+    public LogrosPersonaje setItem(LogrosPersonaje o){
         return  registroPersonajeRepository.save(o);
     }
 

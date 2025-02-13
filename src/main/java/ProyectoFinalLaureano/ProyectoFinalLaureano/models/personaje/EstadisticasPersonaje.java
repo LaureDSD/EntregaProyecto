@@ -59,6 +59,15 @@ public class EstadisticasPersonaje {
     @Schema(description = "Ataque base del persoanje", example = "10")
     private int ataqueMagicoBase;
 
+
+    @Column(name = "defensa_fisica")
+    @Schema(description = "Defensa de la clase", example = "5")
+    private int defensamagica;
+    @Column(name = "defensa_magica")
+    @Schema(description = "Defensa de la clase", example = "5")
+    private int defensafisica;
+
+
     @Column(name = "almas", nullable = false)
     @Schema(description = "Almas acumuladas por el personaje", example = "0")
     private int almas;

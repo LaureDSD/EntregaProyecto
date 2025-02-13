@@ -60,17 +60,37 @@ public class Habilidad {
     @Schema(description = "Número de unidades afectadas por la habilidad", example = "1")
     private int unidades_afectadas;
 
-    @Column(name = "consumo_energia", nullable = false)
-    @Schema(description = "Energía consumida por la habilidad", example = "10")
-    private int consumo_energia;
 
-    @Column(name = "daño_base", nullable = false)
-    @Schema(description = "Daño base de la habilidad", example = "15")
-    private int daño_base;
+    @Column(name = "vida_base", nullable = false)
+    @Schema(description = "Vida base del monstruo", example = "100")
+    private int vida_base;
+    @Column(name = "escudo_base", nullable = false)
+    @Schema(description = "Escudo base del monstruo", example = "0")
+    private int escudo_base;
 
-    @Column(name = "curacion_base", nullable = false)
-    @Schema(description = "Curación base de la habilidad", example = "0")
-    private int curacion_base;
+
+    @Column(name = "energia_base", nullable = false)
+    @Schema(description = "Energía base del monstruo", example = "50")
+    private int energia_base;
+    @Column(name = "mana_base", nullable = false)
+    @Schema(description = "Mana base del monstruo", example = "50")
+    private int emana_base;
+
+
+    @Column(name = "ataque_fisico_base", nullable = false)
+    @Schema(description = "Ataque base del monstruo", example = "10")
+    private int ataquefiscobase;
+    @Column(name = "ataque_magico_base", nullable = false)
+    @Schema(description = "Ataque base del persoanje", example = "10")
+    private int ataqueMagicoBase;
+
+    @Column(name = "defensa_fisica")
+    @Schema(description = "Defensa de la clase", example = "5")
+    private int defensamagica;
+    @Column(name = "defensa_magica")
+    @Schema(description = "Defensa de la clase", example = "5")
+    private int defensafisica;
+
 
     @Column(name = "enfriamiento", nullable = false)
     @Schema(description = "Tiempo de enfriamiento de la habilidad", example = "2")

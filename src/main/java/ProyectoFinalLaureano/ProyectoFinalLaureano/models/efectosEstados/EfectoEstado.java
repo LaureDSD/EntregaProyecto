@@ -47,21 +47,37 @@ public class EfectoEstado {
     @Schema(description = "Número de acumulaciones del efecto", example = "0")
     private int acumulaciones;
 
-    @Column(name = "ataque")
-    @Schema(description = "Modificador de ataque del efecto", example = "5")
-    private int ataque;
 
-    @Column(name = "defensa")
-    @Schema(description = "Modificador de defensa del efecto", example = "0")
-    private int defensa;
+    @Column(name = "vida_base", nullable = false)
+    @Schema(description = "Vida base de la  clase", example = "100")
+    private int vida_base;
+    @Column(name = "escudo_base", nullable = false)
+    @Schema(description = "Escudo base de la  clase", example = "0")
+    private int escudo_base;
 
-    @Column(name = "vida")
-    @Schema(description = "Modificador de vida del efecto", example = "0")
-    private int vida;
 
-    @Column(name = "energia")
-    @Schema(description = "Modificador de energía del efecto", example = "0")
-    private int energia;
+    @Column(name = "energia_base", nullable = false)
+    @Schema(description = "Energía base de la clase", example = "50")
+    private int energia_base;
+    @Column(name = "mana_base", nullable = false)
+    @Schema(description = "Mana base de la clase", example = "50")
+    private int emana_base;
+
+
+    @Column(name = "ataque_fisico_base", nullable = false)
+    @Schema(description = "Ataque base de la clase", example = "10")
+    private int ataquefiscobase;
+    @Column(name = "ataque_magico_base", nullable = false)
+    @Schema(description = "Ataque base de la clase", example = "10")
+    private int ataqueMagicoBase;
+
+
+    @Column(name = "defensa_fisica")
+    @Schema(description = "Defensa de la clase", example = "5")
+    private int defensamagica;
+    @Column(name = "defensa_magica")
+    @Schema(description = "Defensa de la clase", example = "5")
+    private int defensafisica;
 
     @Column(name = "descripcion", columnDefinition = "TEXT")
     @Schema(description = "Descripción del efecto", example = "Aumenta el ataque en 5 puntos")

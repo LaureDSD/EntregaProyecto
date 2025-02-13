@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+
 import java.util.List;
 
 @Entity
@@ -40,9 +41,9 @@ public class Mision {
     @Schema(description = "Experiencia otorgada como recompensa", example = "100")
     private int recompensa_experiencia;
 
-    @Column(name = "fecha_limite")
+    @Column(name = "tiempo_limite")
     @Schema(description = "Fecha límite para completar la misión", example = "30")
-    private int fecha_limite;
+    private int tiempo_limite; //Minutos
 
     // Relación Uno a Muchos con PersonajeMision
     @OneToMany(mappedBy = "mision", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
