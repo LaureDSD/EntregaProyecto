@@ -1,4 +1,4 @@
-package ProyectoFinalLaureano.ProyectoFinalLaureano.enums;
+package ProyectoFinalLaureano.ProyectoFinalLaureano.models.mision;
 
 public enum EstadoMision {
     EN_PROGRESO,

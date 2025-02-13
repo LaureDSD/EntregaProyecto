@@ -1,11 +1,13 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje;
 
 
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.mapa.TipoMapa;
 import jakarta.persistence.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.ColumnDefault;
 
 @Entity
 @Table(name = "estadisticas_personaje")
@@ -41,6 +43,11 @@ public class EstadisticasPersonaje {
     @Column(name = "energia_base", nullable = false)
     @Schema(description = "Energía base del personaje", example = "50")
     private int energia_base;
+
+    @Column(name = "mana_base", nullable = true)
+    @ColumnDefault("50")
+    @Schema(description = "Mana base del personaje", example = "50")
+    private int mana_base;
 
     @Column(name = "ataque_base", nullable = false)
     @Schema(description = "Ataque base del personaje", example = "10")

@@ -1,6 +1,9 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje;
 
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.grupos.Gremio;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.grupos.Grupo;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.habilidad.Habilidad;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.mapa.TipoMapa;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.usuario.Usuario;
 import jakarta.persistence.*;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -46,6 +49,44 @@ public class Personaje {
     @Schema(description = "Estadísticas asociadas al personaje")
     private EstadisticasPersonaje estadisticas;
 
+    //Clase
+    @ManyToOne
+    @JoinColumn(name = "clase_id")
+    @Schema(description = "Clase del persoanje asociado")
+    private ClasePersonaje clase_persoanje;
+
+
+
+
+    //Grupo
+    @ManyToOne
+    @JoinColumn(name = "grupo_id")
+    @Schema(description = "Grupo del persoanje asociado")
+    private Grupo grupo;
+
+    @OneToOne
+    @JoinColumn(name = "lider_grupo")
+    @Schema(description = "Lider del grupo")
+    private Grupo grupoLiderado;
+
+
+
+
+    //Gremio
+    @ManyToOne
+    @JoinColumn(name = "gremio_id")
+    @Schema(description = "Gremio del persoanje asociado")
+    private Gremio gremio;
+
+
+    @OneToMany(mappedBy = "lider_gremio", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore // Excluir esta relación en la serialización JSON
+    @Schema(description = "Persoanjes asociados a este gremio")
+    private List<Gremio> gremioLiderado;
+
+
+
+
     // Relación Uno a Muchos con RegistroPersonaje
     @OneToMany(mappedBy = "personaje", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnore // Excluir esta relación en la serialización JSON
@@ -68,4 +109,5 @@ public class Personaje {
     //@JsonIgnore // Excluir esta relación en la serialización JSON
     @Schema(description = "Ítems en el inventario del personaje")
     private List<InventarioPersonaje> inventario;
+
 }

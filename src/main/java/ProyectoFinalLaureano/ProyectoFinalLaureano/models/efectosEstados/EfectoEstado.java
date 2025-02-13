@@ -1,13 +1,15 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.models.efectosEstados;
 
-import ProyectoFinalLaureano.ProyectoFinalLaureano.enums.TipoAfectado;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.enums.TipoEfecto;
 import jakarta.persistence.*;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "efectos_estados")
 @Schema(description = "Entidad que representa un efecto o estado en el sistema")
+@Getter
+@Setter
 public class EfectoEstado {
 
     @Id

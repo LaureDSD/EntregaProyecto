@@ -1,4 +1,4 @@
-package ProyectoFinalLaureano.ProyectoFinalLaureano.enums;
+package ProyectoFinalLaureano.ProyectoFinalLaureano.models.habilidad;
 
 public enum ObjetivoHabilidad {
     JUGADOR,

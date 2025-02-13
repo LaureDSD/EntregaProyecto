@@ -1,7 +1,5 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.models.habilidad;
 
-import ProyectoFinalLaureano.ProyectoFinalLaureano.enums.ObjetivoHabilidad;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.enums.TipoHabilidad;
 import jakarta.persistence.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;

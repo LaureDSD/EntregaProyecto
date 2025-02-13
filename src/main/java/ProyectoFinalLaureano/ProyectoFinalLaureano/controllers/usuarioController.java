@@ -19,18 +19,34 @@ public class usuarioController {
     @Autowired
     private UsuarioService usuarioService;
 
+    // Tipo Usuario
     @GetMapping("/tipo")
     public List<TipoUsuario> obtenerTiposUsuario(){
         return  tipoUsuarioService.getAll();
     }
 
-    /*
-    @GetMapping("/")
-    public List<Usuario> obtenerUsuario(){
-        return  usuarioService.getAll();
-    }*/
+    @GetMapping("/tipo/{id}")
+    public TipoUsuario obtenerTipoUsuario(@PathVariable Long id){
+        return tipoUsuarioService.getByID(id);
+    }
 
-    //Filtrar usuario por tipo
+    @PutMapping("/tipo/{id}")
+    public  TipoUsuario actualizarTipoUusario(@PathVariable Long id, @RequestBody TipoUsuario usuarioActualizar){
+        usuarioActualizar.setTipo_usuario_id(id);
+        return  tipoUsuarioService.setItem(usuarioActualizar);
+    }
+
+    @PostMapping("/tipo")
+    public TipoUsuario guardarTipoUsuario(@RequestBody TipoUsuario usuarioGuardar){
+        return  tipoUsuarioService.setItem(usuarioGuardar);
+    }
+
+    @DeleteMapping("/tipo/{id}")
+    public void borrarTipoUsuario (@PathVariable Long id){
+        tipoUsuarioService.deleteByID(id);
+    }
+
+    //Usuario
     @GetMapping
     public List<Usuario> obtenerLista(@RequestParam(required = false) Long id){
         if(id==null){
@@ -62,5 +78,4 @@ public class usuarioController {
     public void borrar (@PathVariable Long id){
         usuarioService.deleteByID(id);
     }
-
 }
