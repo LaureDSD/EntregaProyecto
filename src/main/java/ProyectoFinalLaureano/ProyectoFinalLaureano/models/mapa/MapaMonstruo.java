@@ -23,10 +23,10 @@ public class MapaMonstruo {
     // Relación con la tabla mapa
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "mapa_id", insertable = false, updatable = false)
-    private Mapa mapaRelacionado;
+    private Mapa mapa;
 
     // Relación con la tabla monstruo
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "monstruo_id", insertable = false, updatable = false)
-    private Monstruo monstruoRelacionado;
+    private Monstruo monstruo;
 }

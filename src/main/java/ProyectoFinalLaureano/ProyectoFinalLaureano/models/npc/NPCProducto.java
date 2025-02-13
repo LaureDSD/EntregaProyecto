@@ -1,6 +1,7 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.models.npc;
 
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.objeto.Item;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -29,14 +30,14 @@ public class NPCProducto {
     private Integer cantidadVenta;
 
     // Relación con la tabla npc
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne()
     @JoinColumn(name = "npc_id", insertable = false, updatable = false)
-    //@JsonIgnore // Excluir esta relación en la serialización JSON
-    private NPC npcRelacionado;
+    @JsonIgnore // Excluir esta relación en la serialización JSON
+    private NPC npc;
 
     // Relación con la tabla items
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne()
     @JoinColumn(name = "item_id", insertable = false, updatable = false)
-    //@JsonIgnore // Excluir esta relación en la serialización JSON
-    private Item itemRelacionado;
+    @JsonIgnore // Excluir esta relación en la serialización JSON
+    private Item item;
 }

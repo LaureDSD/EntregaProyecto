@@ -96,6 +96,7 @@ public class Personaje {
     private List<RegistroPersonaje> registros;
 
     // Relación Muchos a Muchos con Habilidad
+    /*
     @ManyToMany
     @JoinTable(
             name = "personaje_habilidad",
@@ -105,6 +106,7 @@ public class Personaje {
     @JsonIgnore // Excluir esta relación en la serialización JSON
     @Schema(description = "Habilidades aprendidas por el personaje")
     private List<Habilidad> habilidades;
+*/
 
     // Relación Uno a Muchos con InventarioPersonaje
     @OneToMany(mappedBy = "personaje", cascade = CascadeType.ALL, fetch = FetchType.LAZY)

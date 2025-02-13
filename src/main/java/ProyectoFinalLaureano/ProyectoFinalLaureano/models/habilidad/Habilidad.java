@@ -85,9 +85,11 @@ public class Habilidad {
     //Nuevo
     @OneToMany(mappedBy = "habilidad", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @Schema(description = "Monstruos que poseen esta habilidad")
+    @JsonIgnore // Excluir esta relación en la serialización JSON
     private List<MonstruoHabilidad> monstruoHabilidades;
 
     @OneToMany(mappedBy = "habilidad", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @Schema(description = "Personajes que poseen esta habilidad")
+    @JsonIgnore // Excluir esta relación en la serialización JSON
     private List<PersonajeHabilidad> personajeHabilidades;
 }

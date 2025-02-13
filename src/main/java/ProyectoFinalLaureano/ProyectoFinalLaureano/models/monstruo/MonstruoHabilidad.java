@@ -24,13 +24,14 @@ public class MonstruoHabilidad {
     @Schema(description = "Probabilidad de uso de la habilidad por el monstruo", example = "100")
     private Integer probabilidadUso;
 
+
     // Relación con la tabla monstruo
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "monstruo_id", insertable = false, updatable = false)
-    private Monstruo monstruoRelacionado;
+    private Monstruo monstruo;
 
     // Relación con la tabla habilidad
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "habilidad_id", insertable = false, updatable = false)
-    private Habilidad habilidadRelacionado;
+    private Habilidad habilidad;
 }
