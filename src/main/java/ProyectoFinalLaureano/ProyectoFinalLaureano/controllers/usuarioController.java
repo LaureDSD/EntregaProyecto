@@ -1,16 +1,37 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers;
 
-
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.usuario.TipoUsuario;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.usuario.Usuario;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.services.usuarioService.TipoUsuarioService;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.services.usuarioService.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/factura")
-public class FacturaController {
+@RequestMapping("/api/usuario")
+public class usuarioController {
 
-    /*
+    @Autowired
+    private TipoUsuarioService tipoUsuarioService;
+    @Autowired
+    private UsuarioService usuarioService;
+
+
+    @GetMapping("/tipo")
+    public List<TipoUsuario> obtenerTiposUsuario(){
+        return  tipoUsuarioService.getAll();
+    }
+    @GetMapping("/")
+    public List<Usuario> obtenerUsuario(){
+        return  usuarioService.getAll();
+    }
+
+
+     /*
     @Autowired
     private FacturaService facturaService;
 
@@ -58,4 +79,5 @@ public class FacturaController {
 
 
 */
+
 }

@@ -11,7 +11,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 public class MisionObjetos {
 
     @EmbeddedId
-    private MisionObjetosId id;
+    private MisionObjetoId id;
 
     @ManyToOne
     @MapsId("mision_id")
