@@ -7,13 +7,13 @@ import lombok.*;
 
 import java.util.List;
 
-@NoArgsConstructor
-@Getter
-@Setter
+
 
 @Entity
 @Table(name = "tipo_usuario")
 @Schema(description = "Entidad que representa un tipo de usuario en el sistema")
+@Getter
+@Setter
 public class TipoUsuario {
 
     @Id
@@ -30,8 +30,15 @@ public class TipoUsuario {
     private String descripcion;
 
     // Relación Uno a Muchos con Usuario
-    @OneToMany(mappedBy = "tipo_usuario", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "tipoUsuario", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnore
     private List<Usuario> usuarios;
 
+    public Long getTipo_usuario_id() {
+        return tipo_usuario_id;
+    }
+
+    public void setTipo_usuario_id(Long tipo_usuario_id) {
+        this.tipo_usuario_id = tipo_usuario_id;
+    }
 }

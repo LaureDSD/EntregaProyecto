@@ -12,13 +12,13 @@ import lombok.Setter;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@NoArgsConstructor
-@Getter
-@Setter
+
 
 @Entity
 @Table(name = "usuarios")
 @Schema(description = "Entidad que representa a un usuario en el sistema")
+@Getter
+@Setter
 public class Usuario {
 
     @Id
@@ -70,11 +70,21 @@ public class Usuario {
     @ManyToOne
     @JoinColumn(name = "tipo_usuario", nullable = false)
     @Schema(description = "Tipo de usuario asociado")
-    private TipoUsuario tipo_usuario;
+    private TipoUsuario tipoUsuario;
 
     // Relación Uno a Muchos con Personaje
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @Schema(description = "Lista de personajes asociados al usuario")
     @JsonIgnore
     private List<Personaje> personajes;
+
+
+    public Long getUsuario_id() {
+        return usuario_id;
+    }
+
+    public void setUsuario_id(Long usuario_id) {
+        this.usuario_id = usuario_id;
+    }
+
 }

@@ -65,7 +65,7 @@ public class Personaje {
 
     // Relación Uno a Muchos con InventarioPersonaje
     @OneToMany(mappedBy = "personaje", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonIgnore // Excluir esta relación en la serialización JSON
+    //@JsonIgnore // Excluir esta relación en la serialización JSON
     @Schema(description = "Ítems en el inventario del personaje")
     private List<InventarioPersonaje> inventario;
 }

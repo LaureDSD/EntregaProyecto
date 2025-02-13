@@ -1,5 +1,6 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.services.usuarioService;
 
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.usuario.TipoUsuario;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.usuario.Usuario;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.repositories.usuarioRepository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,5 +30,7 @@ public class UsuarioService {
         usuarioRepository.deleteById(id);
     }
 
-
+    public List<Usuario> getByTipoUsuarioID(TipoUsuario tu) {
+        return usuarioRepository.getByTipoUsuario(tu);
+    }
 }

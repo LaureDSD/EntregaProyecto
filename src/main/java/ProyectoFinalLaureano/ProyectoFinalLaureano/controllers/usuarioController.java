@@ -5,10 +5,9 @@ import ProyectoFinalLaureano.ProyectoFinalLaureano.models.usuario.Usuario;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.usuarioService.TipoUsuarioService;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.usuarioService.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -20,64 +19,48 @@ public class usuarioController {
     @Autowired
     private UsuarioService usuarioService;
 
-
     @GetMapping("/tipo")
     public List<TipoUsuario> obtenerTiposUsuario(){
         return  tipoUsuarioService.getAll();
     }
+
+    /*
     @GetMapping("/")
     public List<Usuario> obtenerUsuario(){
         return  usuarioService.getAll();
-    }
+    }*/
 
-
-     /*
-    @Autowired
-    private FacturaService facturaService;
-
-
+    //Filtrar usuario por tipo
     @GetMapping
-    public List<Factura> obtenerTodos(){
-        return  facturaService.getAll();
-
-
-    //Get DTO V1
-    @GetMapping
-    public List<FacturaDTO> obtenerLista(@RequestParam(required = false) Long id){
+    public List<Usuario> obtenerLista(@RequestParam(required = false) Long id){
         if(id==null){
-            return  facturaService.getAll();
+            return  usuarioService.getAll();
         }else{
-            var c = new Cliente();
-            c.setId(id);
-            return facturaService.getByCliente(c);
+            TipoUsuario  tu = new TipoUsuario();
+            tu.setTipo_usuario_id(id);
+            return usuarioService.getByTipoUsuarioID(tu);
         }
-
     }
 
-    //GET SIN DTO
     @GetMapping("/{id}")
-    public FacturaV3DTO obtener(@PathVariable Long id){
-        return facturaService.getByID(id);
+    public Usuario obtener(@PathVariable Long id){
+        return usuarioService.getByID(id);
     }
-
 
     @PutMapping("/{id}")
-    public  Factura actualizar(@PathVariable Long id, @RequestBody Factura f){
-        f.setId(id);
-        return  facturaService.setItem(f);
+    public  Usuario actualizar(@PathVariable Long id, @RequestBody Usuario usuarioActualizar){
+        usuarioActualizar.setUsuario_id(id);
+        return  usuarioService.setItem(usuarioActualizar);
     }
 
     @PostMapping
-    public Factura guardar(@RequestBody Factura f){
-        return  facturaService.setItem(f);
+    public Usuario guardar(@RequestBody Usuario usuarioGuardar){
+        return  usuarioService.setItem(usuarioGuardar);
     }
 
     @DeleteMapping("/{id}")
     public void borrar (@PathVariable Long id){
-        facturaService.deleteByID(id);
+        usuarioService.deleteByID(id);
     }
-
-
-*/
 
 }
