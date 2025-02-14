@@ -1,5 +1,6 @@
-package ProyectoFinalLaureano.ProyectoFinalLaureano.models.npc;
+package ProyectoFinalLaureano.ProyectoFinalLaureano.models.npc.tienda;
 
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.npc.NPC;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.objeto.Item;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.v3.oas.annotations.media.Schema;

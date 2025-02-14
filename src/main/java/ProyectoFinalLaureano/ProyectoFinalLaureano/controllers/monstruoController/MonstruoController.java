@@ -1,6 +1,7 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.monstruoController;
 
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.monstruo.Monstruo;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.services.monstruoService.MonstruoHabilidadService;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.monstruoService.MonstruosService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +14,9 @@ public class MonstruoController {
 
     @Autowired
     private MonstruosService monstruosService;
+
+    @Autowired
+    private MonstruoHabilidadService monstruoHabilidadService;
 
     @GetMapping("/")
     public List<Monstruo> obtenerUsuario(){

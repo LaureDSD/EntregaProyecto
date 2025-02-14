@@ -1,7 +1,7 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.services.misionService;
 
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.mision.MisionObjetos;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.mision.MisionObjetoId;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.mision.recompensas.MisionObjetos;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.mision.recompensas.MisionObjetoId;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.repositories.misionRepository.MisionObjetoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

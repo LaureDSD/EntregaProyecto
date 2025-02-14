@@ -1,4 +1,4 @@
-package ProyectoFinalLaureano.ProyectoFinalLaureano.models.monstruo;
+package ProyectoFinalLaureano.ProyectoFinalLaureano.models.mapa.efectosEstados;
 
 import jakarta.persistence.Embeddable;
 import lombok.EqualsAndHashCode;
@@ -11,7 +11,7 @@ import java.io.Serializable;
 @Setter
 @EqualsAndHashCode
 @Embeddable
-public class MonstruoHabilidadId implements Serializable {
-    private Long monstruo_id;
-    private Long habilidad_id;
+public class MapaEfectoId implements Serializable {
+    private Long mapa_id;
+    private Long efecto_id;
 }

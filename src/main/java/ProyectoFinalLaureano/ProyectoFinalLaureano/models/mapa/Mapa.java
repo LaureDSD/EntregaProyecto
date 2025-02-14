@@ -1,5 +1,7 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.models.mapa;
 
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.mapa.efectosEstados.MapaEfecto;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.mapa.monstruos.MapaMonstruo;
 import jakarta.persistence.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;

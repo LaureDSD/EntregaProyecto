@@ -1,6 +1,7 @@
-package ProyectoFinalLaureano.ProyectoFinalLaureano.models.mision;
+package ProyectoFinalLaureano.ProyectoFinalLaureano.models.mision.recompensas;
 
 
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.mision.Mision;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.objeto.Item;
 import jakarta.persistence.*;
 import io.swagger.v3.oas.annotations.media.Schema;

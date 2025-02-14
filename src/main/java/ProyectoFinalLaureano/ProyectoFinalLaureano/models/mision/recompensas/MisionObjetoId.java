@@ -1,4 +1,4 @@
-package ProyectoFinalLaureano.ProyectoFinalLaureano.models.mapa;
+package ProyectoFinalLaureano.ProyectoFinalLaureano.models.mision.recompensas;
 
 import jakarta.persistence.Embeddable;
 import lombok.EqualsAndHashCode;
@@ -11,7 +11,7 @@ import java.io.Serializable;
 @Setter
 @EqualsAndHashCode
 @Embeddable
-public class MapaMonstruoId implements Serializable {
-    private Long monstruo_id;
-    private Long mapa_id;
+public class MisionObjetoId implements Serializable {
+    private Long mision_id;
+    private Long item_id;
 }

@@ -2,6 +2,8 @@ package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.npcController;
 
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.npc.NPC;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.npcService.NPCService;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.services.npcService.TiendaNPCService;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.services.npcService.TipoNPCService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,6 +15,13 @@ public class NPCController {
 
     @Autowired
     private NPCService npcService;
+
+    @Autowired
+    private TipoNPCService tipoNPCService;
+
+    @Autowired
+    private TiendaNPCService tiendaNPCService;
+
 
     @GetMapping("/")
     public List<NPC> obtenerUsuario(){

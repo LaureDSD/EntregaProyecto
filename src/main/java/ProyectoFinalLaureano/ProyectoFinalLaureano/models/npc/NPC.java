@@ -1,5 +1,8 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.models.npc;
 
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.log.LogTransacciones;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.mision.Mision;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.npc.tienda.NPCProducto;
 import jakarta.persistence.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
@@ -41,10 +44,21 @@ public class NPC {
     @OneToMany(mappedBy = "npc", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnore // Excluir esta relación en la serialización JSON
     @Schema(description = "Transacciones asociadas a este NPC")
-    private List<TransaccionesNPC> transacciones;
+    private List<LogTransacciones> transacciones;
 
     @OneToMany(mappedBy = "npc", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @Schema(description = "Productos asociados a este NPC")
     private List<NPCProducto> npcProductos;
+
+    //Relacion muchos a muchos con mision
+    @ManyToMany
+    @JoinTable(
+            name = "npc_mision",
+            joinColumns = @JoinColumn(name = "npc_id"),
+            inverseJoinColumns = @JoinColumn(name = "mision_id")
+    )
+    @JsonIgnore // Excluir esta relación en la serialización JSON
+    @Schema(description = "Misiones  que da cada npc")
+    private List<Mision> misiones;
 
 }

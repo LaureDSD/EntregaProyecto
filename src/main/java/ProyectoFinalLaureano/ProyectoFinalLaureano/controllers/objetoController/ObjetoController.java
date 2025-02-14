@@ -1,7 +1,7 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.objetoController;
 
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.objeto.Item;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.services.objetoService.ItemService;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.services.objetoService.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,6 +13,21 @@ public class ObjetoController {
 
     @Autowired
     private ItemService itemService;
+
+    @Autowired
+    private EstadisticasEquipamientoService estadisticasEquipamientoService;
+
+    @Autowired
+    private ItemEfectoService efectoService;
+
+    @Autowired
+    private TipoEquipamientoService tipoEquipamientoService;
+
+    @Autowired
+    private TipoItemService tipoItemService;
+
+
+
 
     // CRUD ITEM
     @GetMapping("/")

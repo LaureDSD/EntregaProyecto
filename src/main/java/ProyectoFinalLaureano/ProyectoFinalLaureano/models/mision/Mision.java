@@ -1,5 +1,8 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.models.mision;
 
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.mision.recompensas.MisionObjetos;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.npc.NPC;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.misiones.PersonajeMision;
 import jakarta.persistence.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
@@ -56,4 +59,16 @@ public class Mision {
     @JsonIgnore // Excluir esta relación en la serialización JSON
     @Schema(description = "Objetos de recompensa asociados a esta misión")
     private List<MisionObjetos> recompensas;
+
+    //Relacion muchos a muchos con npc
+    @ManyToMany
+    @JoinTable(
+            name = "npc_mision",
+            joinColumns = @JoinColumn(name = "mision_id"),
+            inverseJoinColumns = @JoinColumn(name = "npc_id")
+    )
+    @JsonIgnore // Excluir esta relación en la serialización JSON
+    @Schema(description = "Misiones  que da cada npc")
+    private List<NPC> npcs;
+
 }

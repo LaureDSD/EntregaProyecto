@@ -1,5 +1,6 @@
-package ProyectoFinalLaureano.ProyectoFinalLaureano.models.npc;
+package ProyectoFinalLaureano.ProyectoFinalLaureano.models.log;
 
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.npc.NPC;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.objeto.Item;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.Personaje;
 import jakarta.persistence.*;
@@ -14,7 +15,7 @@ import java.time.LocalDateTime;
 @Schema(description = "Entidad que representa una transacción entre un NPC y un personaje")
 @Getter
 @Setter
-public class TransaccionesNPC {
+public class LogTransacciones {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,7 +37,6 @@ public class TransaccionesNPC {
     @Schema(description = "Ítem involucrado en la transacción")
     private Item item;
 
-    //Reparar
     @Enumerated(EnumType.STRING)
     @Column(name = "tipo_transaccion", nullable = false)
     @Schema(description = "Tipo de transacción (compra/venta)", example = "compra")

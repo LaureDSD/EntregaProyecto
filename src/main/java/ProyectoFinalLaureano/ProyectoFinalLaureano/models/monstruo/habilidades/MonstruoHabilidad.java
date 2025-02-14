@@ -1,6 +1,7 @@
-package ProyectoFinalLaureano.ProyectoFinalLaureano.models.monstruo;
+package ProyectoFinalLaureano.ProyectoFinalLaureano.models.monstruo.habilidades;
 
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.habilidad.Habilidad;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.monstruo.Monstruo;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import lombok.Getter;

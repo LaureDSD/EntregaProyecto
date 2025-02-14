@@ -1,7 +1,8 @@
-package ProyectoFinalLaureano.ProyectoFinalLaureano.models.mapa;
+package ProyectoFinalLaureano.ProyectoFinalLaureano.models.mapa.efectosEstados;
 
 
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.efectosEstados.EfectoEstado;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.mapa.Mapa;
 import jakarta.persistence.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;

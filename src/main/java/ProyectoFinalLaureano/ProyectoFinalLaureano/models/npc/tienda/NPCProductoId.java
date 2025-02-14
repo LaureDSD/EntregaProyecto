@@ -1,4 +1,4 @@
-package ProyectoFinalLaureano.ProyectoFinalLaureano.models.mision;
+package ProyectoFinalLaureano.ProyectoFinalLaureano.models.npc.tienda;
 
 import jakarta.persistence.Embeddable;
 import lombok.EqualsAndHashCode;
@@ -11,7 +11,7 @@ import java.io.Serializable;
 @Setter
 @EqualsAndHashCode
 @Embeddable
-public class MisionObjetoId implements Serializable {
-    private Long mision_id;
+public class NPCProductoId implements Serializable {
+    private Long npc_id;
     private Long item_id;
 }

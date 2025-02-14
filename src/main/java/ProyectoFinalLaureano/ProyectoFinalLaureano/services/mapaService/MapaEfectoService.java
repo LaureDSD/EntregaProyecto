@@ -1,7 +1,7 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.services.mapaService;
 
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.mapa.MapaEfecto;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.mapa.MapaEfectoId;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.mapa.efectosEstados.MapaEfecto;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.mapa.efectosEstados.MapaEfectoId;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.repositories.mapaRepository.MapaEfectoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -29,6 +29,8 @@ public class PersoanjeController {
     @Autowired
     private LogrosPersoanjeService logrosPersoanjeService;
 
+    @Autowired
+    private PersoanjeMisionService persoanjeMisionService;
 
 
 

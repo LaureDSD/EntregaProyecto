@@ -1,6 +1,7 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.habilidadController;
 
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.habilidad.Habilidad;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.services.habilidadService.HabildadEfectoService;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.habilidadService.HabilidadService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +14,9 @@ public class HabilidadController {
 
     @Autowired
     private HabilidadService habilidadService;
+
+    @Autowired
+    private HabildadEfectoService habildadEfectoService;
 
     @GetMapping("/")
     public List<Habilidad> obtenerUsuario(){

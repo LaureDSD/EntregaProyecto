@@ -2,8 +2,10 @@ package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.logController;
 
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.log.LogPersoanje;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.log.LogUsuario;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.log.LogTransacciones;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.logService.LogPersonajeService;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.logService.LogService;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.services.logService.LogTransaccionesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,6 +20,9 @@ public class LogController {
 
     @Autowired
     private LogPersonajeService logPersonajeService;
+
+    @Autowired
+    private LogTransaccionesService logTransaccionesService;
 
 
     //Seccion usuarios

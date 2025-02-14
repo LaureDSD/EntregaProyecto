@@ -1,6 +1,7 @@
-package ProyectoFinalLaureano.ProyectoFinalLaureano.models.habilidad;
+package ProyectoFinalLaureano.ProyectoFinalLaureano.models.habilidad.efectoEstado;
 
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.efectosEstados.EfectoEstado;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.habilidad.Habilidad;
 import jakarta.persistence.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;

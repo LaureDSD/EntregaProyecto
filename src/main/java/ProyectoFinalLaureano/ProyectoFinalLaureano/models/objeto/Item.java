@@ -1,8 +1,8 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.models.objeto;
 
 
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.monstruo.DropsObjetos;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.npc.NPCProducto;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.monstruo.drops.DropsObjetos;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.npc.tienda.NPCProducto;
 import jakarta.persistence.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;

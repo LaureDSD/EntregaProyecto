@@ -1,7 +1,7 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.services.monstruoService;
 
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.monstruo.DropsObjetos;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.monstruo.DropsObjetosId;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.monstruo.drops.DropsObjetos;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.monstruo.drops.DropsObjetosId;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.repositories.monstruoRepository.DropsObjetosRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

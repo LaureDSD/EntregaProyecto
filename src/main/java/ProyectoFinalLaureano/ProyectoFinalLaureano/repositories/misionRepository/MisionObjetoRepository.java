@@ -1,7 +1,7 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.repositories.misionRepository;
 
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.mision.MisionObjetos;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.mision.MisionObjetoId;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.mision.recompensas.MisionObjetos;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.mision.recompensas.MisionObjetoId;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

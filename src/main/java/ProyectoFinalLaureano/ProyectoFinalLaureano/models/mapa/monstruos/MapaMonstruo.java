@@ -1,5 +1,6 @@
-package ProyectoFinalLaureano.ProyectoFinalLaureano.models.mapa;
+package ProyectoFinalLaureano.ProyectoFinalLaureano.models.mapa.monstruos;
 
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.mapa.Mapa;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.monstruo.Monstruo;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;

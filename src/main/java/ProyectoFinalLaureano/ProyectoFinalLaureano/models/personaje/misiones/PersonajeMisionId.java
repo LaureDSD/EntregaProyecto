@@ -1,4 +1,4 @@
-package ProyectoFinalLaureano.ProyectoFinalLaureano.models.monstruo;
+package ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.misiones;
 
 import jakarta.persistence.Embeddable;
 import lombok.EqualsAndHashCode;
@@ -11,7 +11,7 @@ import java.io.Serializable;
 @Setter
 @EqualsAndHashCode
 @Embeddable
-public class DropsObjetosId implements Serializable {
-    private Long monstruo_id;
-    private Long item_id;
+public class PersonajeMisionId implements Serializable {
+    private Long personaje_id;
+    private Long mision_id;
 }

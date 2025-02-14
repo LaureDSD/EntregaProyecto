@@ -1,4 +1,4 @@
-package ProyectoFinalLaureano.ProyectoFinalLaureano.models.habilidad;
+package ProyectoFinalLaureano.ProyectoFinalLaureano.models.habilidad.efectoEstado;
 
 import jakarta.persistence.Embeddable;
 import lombok.EqualsAndHashCode;
