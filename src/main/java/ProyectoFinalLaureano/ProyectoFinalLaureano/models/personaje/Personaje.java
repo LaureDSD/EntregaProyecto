@@ -1,5 +1,6 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje;
 
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.grupos.Grupo;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.log.LogPersoanje;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.habilidades.PersonajeHabilidad;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.inventario.InventarioPersonaje;
@@ -59,44 +60,18 @@ public class Personaje {
     private ClasePersonaje clase_persoanje;
 
     //Grupo
-    /*
+
     @ManyToOne
     @JoinColumn(name = "grupo_id")
     @Schema(description = "Grupo del persoanje asociado")
     private Grupo grupo;
 
-    @OneToOne
-    @JoinColumn(name = "lider_grupo")
-    @Schema(description = "Lider del grupo")
-    private Grupo grupoLiderado;*/
 
-    //Gremio
-    /*
-    @ManyToOne
-    @JoinColumn(name = "gremio_id")
-    @Schema(description = "Gremio del persoanje asociado")
-    private Gremio gremio;
-
-
-    @OneToMany(mappedBy = "lider_gremio", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "lider", cascade = CascadeType.ALL)
     @JsonIgnore // Excluir esta relación en la serialización JSON
-    @Schema(description = "Persoanjes asociados a este gremio")
-    private List<Gremio> gremioLiderado;*/
+    @Schema(description = "Ítems en el inventario del personaje")
+    private List<Grupo> gruposLiderados;
 
-
-
-    // Relación Muchos a Muchos con Habilidad version 1
-    /*
-    @ManyToMany
-    @JoinTable(
-            name = "personaje_habilidad",
-            joinColumns = @JoinColumn(name = "personaje_id"),
-            inverseJoinColumns = @JoinColumn(name = "habilidad_id")
-    )
-    @JsonIgnore // Excluir esta relación en la serialización JSON
-    @Schema(description = "Habilidades aprendidas por el personaje")
-    private List<Habilidad> habilidades;
-   */
 
     // Relación Uno a Muchos con InventarioPersonaje
     @OneToMany(mappedBy = "personaje", cascade = CascadeType.ALL)
@@ -110,6 +85,8 @@ public class Personaje {
     @Schema(description = "Habilidades asociadas a este personaje")
     @JsonIgnore // Excluir esta relación en la serialización JSON
     private List<PersonajeHabilidad> personajeHabilidades;
+
+
     @OneToMany(mappedBy = "personaje", cascade = CascadeType.ALL)
     private List<LogPersoanje> registrosCaza;
 

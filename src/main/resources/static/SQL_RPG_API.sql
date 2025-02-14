@@ -97,42 +97,36 @@ VALUES
     ('Nigromante', 'Un hechicero oscuro que invoca y controla a los muertos.', 85, 5, 35, 90, 6, 22, 6, 18),
     ('Bardo', 'Un artista versátil que usa música y magia para apoyar a sus aliados.', 95, 10, 50, 60, 10, 15, 8, 12);
 
-CREATE TABLE gremios (
-    gremio_id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    nombre VARCHAR(100) NOT NULL,
-    descripcion TEXT
-);
-
-INSERT INTO gremios (nombre, descripcion)
-VALUES
-    ('La Hermandad de la Luz', 'Un gremio dedicado a proteger a los inocentes y luchar contra las fuerzas de la oscuridad.'),
-    ('Los Mercenarios de Hierro', 'Un grupo de mercenarios que acepta cualquier trabajo, siempre que el pago sea bueno.'),
-    ('El Círculo Arcano', 'Una organización de magos que busca el conocimiento y el poder arcano.'),
-    ('Los Cazadores de Sombras', 'Un gremio especializado en la caza de criaturas oscuras y monstruos.'),
-    ('La Orden del Dragón', 'Una orden de caballeros que venera a los dragones y busca su protección.'),
-    ('Los Ladrones de la Noche', 'Un gremio de ladrones y espías que opera en las sombras.'),
-    ('Los Guardianes del Bosque', 'Un grupo de druidas y rangers que protegen la naturaleza.'),
-    ('Los Forjadores de Leyendas', 'Un gremio de artesanos y herreros que crean armas y armaduras legendarias.'),
-    ('Los Exploradores del Abismo', 'Un grupo de aventureros que explora ruinas antiguas y mazmorras peligrosas.'),
-    ('Los Hijos del Caos', 'Una facción caótica que busca el desorden y la destrucción del orden establecido.');
 
 CREATE TABLE grupos (
     grupo_id BIGINT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
+    tipo_grupo enum ('GREMIO','INCURSION','PARTY') not null,
+    lider_grupo bigint,
     descripcion TEXT
 );
-INSERT INTO grupos (nombre, descripcion)
+INSERT INTO grupos (nombre, descripcion,lider_grupo)
 VALUES
-    ('Los Cuatro Elementos', 'Un grupo de aventureros que dominan los cuatro elementos: fuego, agua, tierra y aire.'),
-    ('Los Guardianes del Amanecer', 'Un equipo de héroes que protegen el mundo de las amenazas que surgen con la luz del amanecer.'),
-    ('Las Sombras del Destino', 'Un grupo sigiloso que opera en las sombras para cumplir misiones peligrosas.'),
-    ('Los Hijos del Trueno', 'Un equipo de guerreros que luchan con la fuerza y el poder del trueno.'),
-    ('Los Exploradores Perdidos', 'Un grupo de aventureros que buscan tesoros y secretos en lugares olvidados.'),
-    ('Los Defensores de la Luz', 'Un equipo de paladines y clérigos que luchan contra las fuerzas de la oscuridad.'),
-    ('Los Cazadores de Bestias', 'Un grupo especializado en la caza de criaturas peligrosas y monstruos.'),
-    ('Los Maestros del Caos', 'Un equipo de magos y hechiceros que manipulan el caos para sus propios fines.'),
-    ('Los Guardianes del Bosque', 'Un grupo de druidas y rangers que protegen la naturaleza y sus secretos.'),
-    ('Los Mercenarios del Hierro', 'Un equipo de mercenarios que aceptan cualquier trabajo a cambio de oro.');
+    ('Los Cuatro Elementos', 'Un grupo de aventureros que dominan los cuatro elementos: fuego, agua, tierra y aire.',1),
+    ('Los Guardianes del Amanecer', 'Un equipo de héroes que protegen el mundo de las amenazas que surgen con la luz del amanecer.',2),
+    ('Las Sombras del Destino', 'Un grupo sigiloso que opera en las sombras para cumplir misiones peligrosas.',2),
+    ('Los Hijos del Trueno', 'Un equipo de guerreros que luchan con la fuerza y el poder del trueno.',3),
+    ('Los Exploradores Perdidos', 'Un grupo de aventureros que buscan tesoros y secretos en lugares olvidados.',4),
+    ('Los Defensores de la Luz', 'Un equipo de paladines y clérigos que luchan contra las fuerzas de la oscuridad.',5),
+    ('Los Cazadores de Bestias', 'Un grupo especializado en la caza de criaturas peligrosas y monstruos.',6),
+    ('Los Maestros del Caos', 'Un equipo de magos y hechiceros que manipulan el caos para sus propios fines.',3),
+    ('Los Guardianes del Bosque', 'Un grupo de druidas y rangers que protegen la naturaleza y sus secretos.',2),
+    ('Los Mercenarios del Hierro', 'Un equipo de mercenarios que aceptan cualquier trabajo a cambio de oro.',2),
+    ('La Hermandad de la Luz', 'Un gremio dedicado a proteger a los inocentes y luchar contra las fuerzas de la oscuridad.',4),
+    ('Los Mercenarios de Hierro', 'Un grupo de mercenarios que acepta cualquier trabajo, siempre que el pago sea bueno.',5),
+    ('El Círculo Arcano', 'Una organización de magos que busca el conocimiento y el poder arcano.',6),
+    ('Los Cazadores de Sombras', 'Un gremio especializado en la caza de criaturas oscuras y monstruos.',2),
+    ('La Orden del Dragón', 'Una orden de caballeros que venera a los dragones y busca su protección.',3),
+    ('Los Ladrones de la Noche', 'Un gremio de ladrones y espías que opera en las sombras.',4),
+    ('Los Guardianes del Bosque', 'Un grupo de druidas y rangers que protegen la naturaleza.',2),
+    ('Los Forjadores de Leyendas', 'Un gremio de artesanos y herreros que crean armas y armaduras legendarias.',3),
+    ('Los Exploradores del Abismo', 'Un grupo de aventureros que explora ruinas antiguas y mazmorras peligrosas.',4),
+    ('Los Hijos del Caos', 'Una facción caótica que busca el desorden y la destrucción del orden establecido.',4);
 
 -- Tabla: personajes
 CREATE TABLE IF NOT EXISTS personajes (
@@ -142,9 +136,7 @@ CREATE TABLE IF NOT EXISTS personajes (
     nombre VARCHAR(100) NOT NULL,
     fecha_creacion DATETIME NOT NULL,
     clase_id bigint NULL,
-    gremio_id bigint NULL,
     grupo_id bigint NULL,
-    FOREIGN KEY (gremio_id) REFERENCES gremios(gremio_id),
     FOREIGN KEY (grupo_id) REFERENCES grupos(grupo_id),
     FOREIGN KEY (clase_id) REFERENCES clase_persoanje(clase_id),
     FOREIGN KEY (usuario_id) REFERENCES usuarios(usuario_id) 
@@ -154,22 +146,25 @@ CREATE TABLE IF NOT EXISTS personajes (
     INDEX idx_nombre (nombre)
 );
 
-INSERT INTO personajes (usuario_id, imagen_modelo, nombre, fecha_creacion, clase_id, gremio_id, grupo_id)
+
+
+
+INSERT INTO personajes (usuario_id, imagen_modelo, nombre, fecha_creacion, clase_id,  grupo_id)
 VALUES
-    (1, 'imagen1.jpg', 'Aragorn', '2023-10-01 12:00:00', 1, 1, 1),  -- Guerrero, La Hermandad de la Luz, Los Cuatro Elementos
-    (2, 'imagen2.jpg', 'Gandalf', '2023-10-02 13:00:00', 2, 3, 1),  -- Mago, El Círculo Arcano, Los Cuatro Elementos
-    (3, 'imagen3.jpg', 'Legolas', '2023-10-03 14:00:00', 3, 4, 1),  -- Arquero, Los Cazadores de Sombras, Los Cuatro Elementos
-    (4, 'imagen4.jpg', 'Frodo', '2023-10-04 15:00:00', 4, 2, 2),   -- Sacerdote, Los Mercenarios de Hierro, Los Guardianes del Amanecer
-    (5, 'imagen5.jpg', 'Gimli', '2023-10-05 16:00:00', 1, 5, 2),   -- Guerrero, La Orden del Dragón, Los Guardianes del Amanecer
-    (6, 'imagen6.jpg', 'Boromir', '2023-10-06 17:00:00', 5, 6, 3), -- Asesino, Los Ladrones de la Noche, Las Sombras del Destino
-    (7, 'imagen7.jpg', 'Galadriel', '2023-10-07 18:00:00', 2, 7, 4),-- Mago, Los Guardianes del Bosque, Los Hijos del Trueno
-    (8, 'imagen8.jpg', 'Saruman', '2023-10-08 19:00:00', 9, 8, 5), -- Nigromante, Los Forjadores de Leyendas, Los Exploradores Perdidos
-    (9, 'imagen9.jpg', 'Arwen', '2023-10-09 20:00:00', 10, 9, 6),  -- Bardo, Los Exploradores del Abismo, Los Defensores de la Luz
-    (10, 'imagen10.jpg', 'Sauron', '2023-10-10 21:00:00', 9, 10, 7);-- Nigromante, Los Hijos del Caos, Los Cazadores de Bestias
+    (1, 'imagen1.jpg', 'Aragorn', '2023-10-01 12:00:00', 1, 1),  -- Guerrero, La Hermandad de la Luz, Los Cuatro Elementos
+    (2, 'imagen2.jpg', 'Gandalf', '2023-10-02 13:00:00', 2, 1),  -- Mago, El Círculo Arcano, Los Cuatro Elementos
+    (3, 'imagen3.jpg', 'Legolas', '2023-10-03 14:00:00', 3, 1),  -- Arquero, Los Cazadores de Sombras, Los Cuatro Elementos
+    (4, 'imagen4.jpg', 'Frodo', '2023-10-04 15:00:00', 4, 2),   -- Sacerdote, Los Mercenarios de Hierro, Los Guardianes del Amanecer
+    (5, 'imagen5.jpg', 'Gimli', '2023-10-05 16:00:00', 1, 2),   -- Guerrero, La Orden del Dragón, Los Guardianes del Amanecer
+    (6, 'imagen6.jpg', 'Boromir', '2023-10-06 17:00:00', 5, 3), -- Asesino, Los Ladrones de la Noche, Las Sombras del Destino
+    (7, 'imagen7.jpg', 'Galadriel', '2023-10-07 18:00:00', 2, 4),-- Mago, Los Guardianes del Bosque, Los Hijos del Trueno
+    (8, 'imagen8.jpg', 'Saruman', '2023-10-08 19:00:00', 9, 5), -- Nigromante, Los Forjadores de Leyendas, Los Exploradores Perdidos
+    (9, 'imagen9.jpg', 'Arwen', '2023-10-09 20:00:00', 10, 6),  -- Bardo, Los Exploradores del Abismo, Los Defensores de la Luz
+    (10, 'imagen10.jpg', 'Sauron', '2023-10-10 21:00:00', 9, 7);-- Nigromante, Los Hijos del Caos, Los Cazadores de Bestias
 
 
 
-
+alter table grupos add foreign key (lider_grupo) references personajes (personaje_id);
 
 CREATE TABLE IF NOT EXISTS estadisticas_personaje (
     personaje_id bigint PRIMARY KEY,

@@ -1,5 +1,6 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.models.grupos;
 
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.habilidad.ObjetivoHabilidad;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.Personaje;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -29,22 +30,20 @@ public class Grupo {
     @Schema(description = "Descripción del grupo", example = "Grupo de caza")
     private String descripcion;
 
-
-
-
+    @Enumerated(EnumType.STRING)
+    @Column(name = "tipo_Grupo", nullable = false)
+    @Schema(description = "Tipo de grupo y limitador de integrantes", example = "enemigo")
+    private TipoGrupo grupo;
 
     //Grupo
-    /*
     @OneToOne
-    @JoinColumn(name = "lider")
+    @JoinColumn(name = "lider_grupo")
     @Schema(description = "Lider del grupo")
-    private Personaje lider_grupo;
-
+    private Personaje lider;
 
     @OneToMany(mappedBy = "grupo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnore // Excluir esta relación en la serialización JSON
     @Schema(description = "Personajes asociados a este grupo")
     private List<Personaje> persoanjes;
-    */
 
 }
