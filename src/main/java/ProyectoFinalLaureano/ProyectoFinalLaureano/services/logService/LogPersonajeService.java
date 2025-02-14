@@ -1,30 +1,33 @@
-package ProyectoFinalLaureano.ProyectoFinalLaureano.services.persoanjeService;
+package ProyectoFinalLaureano.ProyectoFinalLaureano.services.logService;
 
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.LogrosPersonaje;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.repositories.personajeRepository.RegistroPersonajeRepository;
+
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.log.LogPersoanje;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.repositories.logRepository.LogPesonajeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class RegistroPersonajeService {
+public class LogPersonajeService {
+
     @Autowired
-    private RegistroPersonajeRepository registroPersonajeRepository;
+    private LogPesonajeRepository logPesonajeRepository;
 
-    public List<LogrosPersonaje> getAll(){
-        return  registroPersonajeRepository.findAll();
+    public List<LogPersoanje> getAll(){
+        return  logPesonajeRepository.findAll();
     }
 
-    public LogrosPersonaje getByID(Long id){
-        return registroPersonajeRepository.findById(id).orElse(null);
+    public LogPersoanje getByID(Long id){
+        return logPesonajeRepository.findById(id).orElse(null);
     }
 
-    public LogrosPersonaje setItem(LogrosPersonaje o){
-        return  registroPersonajeRepository.save(o);
+    public LogPersoanje setItem(LogPersoanje o){
+        return  logPesonajeRepository.save(o);
     }
 
     public  void deleteByID(Long id){
-        registroPersonajeRepository.deleteById(id);
+        logPesonajeRepository.deleteById(id);
     }
+
 }

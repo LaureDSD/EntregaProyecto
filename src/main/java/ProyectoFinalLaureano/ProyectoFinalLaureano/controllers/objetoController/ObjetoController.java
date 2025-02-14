@@ -16,7 +16,7 @@ public class ObjetoController {
 
     // CRUD ITEM
     @GetMapping("/")
-    public List<Item> obtenerUsuario(){
+    public List<Item> obtenerObjeto(){
         return  itemService.getAll();
     }
 

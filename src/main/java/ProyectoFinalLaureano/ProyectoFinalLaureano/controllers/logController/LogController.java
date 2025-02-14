@@ -1,6 +1,8 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.logController;
 
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.log.LogPersoanje;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.log.LogUsuario;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.services.logService.LogPersonajeService;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.logService.LogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -14,29 +16,71 @@ public class LogController {
     @Autowired
     private LogService logService;
 
-    @GetMapping("/")
-    public List<LogUsuario> obtenerUsuario(){
+    @Autowired
+    private LogPersonajeService logPersonajeService;
+
+
+    //Seccion usuarios
+
+    @GetMapping("/usuario/")
+    public List<LogUsuario> obtenerUsuariosLog(){
         return  logService.getAll();
     }
 
-    @GetMapping("/{id}")
-    public LogUsuario obtener(@PathVariable Long id){
+    @GetMapping("/usuario/{id}")
+    public LogUsuario obtenerUsuarioLog(@PathVariable Long id){
         return logService.getByID(id);
     }
 
-    @PutMapping("/{id}")
-    public LogUsuario actualizar(@PathVariable Long id, @RequestBody LogUsuario logActualizar){
+    @PutMapping("/usuario/{id}")
+    public LogUsuario actualizarUsuarioLog(@PathVariable Long id, @RequestBody LogUsuario logActualizar){
         logActualizar.setLogId(id);
         return  logService.setItem(logActualizar);
     }
 
-    @PostMapping
-    public LogUsuario guardar(@RequestBody LogUsuario logGuardar){
+    @PostMapping("/usuario")
+    public LogUsuario guardarUsuarioLog(@RequestBody LogUsuario logGuardar){
         return  logService.setItem(logGuardar);
     }
 
-    @DeleteMapping("/{id}")
-    public void borrar (@PathVariable Long id){
+    @DeleteMapping("/usuario/{id}")
+    public void borrarUsuarioLog (@PathVariable Long id){
         logService.deleteByID(id);
     }
+
+
+    //Seccion persoanjes
+
+    @GetMapping("/persoanje/")
+    public List<LogPersoanje> obtenerPersonajesLog(){
+        return  logPersonajeService.getAll();
+    }
+
+    @GetMapping("/persoanje/{id}")
+    public LogPersoanje obtenerPersonajeLog(@PathVariable Long id){
+        return logPersonajeService.getByID(id);
+    }
+
+    @PutMapping("/persoanje/{id}")
+    public LogPersoanje actualizarPersonajeLog(@PathVariable Long id, @RequestBody LogPersoanje logActualizar){
+        logActualizar.setRegistroCazaId(id);
+        return  logPersonajeService.setItem(logActualizar);
+    }
+
+    @PostMapping("/persoanje")
+    public LogPersoanje guardarPersonajeLog(@RequestBody LogPersoanje logGuardar){
+        return  logPersonajeService.setItem(logGuardar);
+    }
+
+    @DeleteMapping("/persoanje/{id}")
+    public void borrarPersonajeLog (@PathVariable Long id){
+        logPersonajeService.deleteByID(id);
+    }
+
+
+
+
+
+
+
 }

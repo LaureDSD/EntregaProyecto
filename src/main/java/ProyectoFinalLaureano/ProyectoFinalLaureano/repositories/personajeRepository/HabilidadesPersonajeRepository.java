@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface HabilidadesPersoanjeRepository extends JpaRepository<PersonajeHabilidad, PersonajeHabilidadId> {
+public interface HabilidadesPersonajeRepository extends JpaRepository<PersonajeHabilidad, PersonajeHabilidadId> {
 }

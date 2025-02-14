@@ -1,10 +1,7 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.personajeController;
 
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.Personaje;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.services.persoanjeService.EstadisticasPersonajeService;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.services.persoanjeService.InventarioPersonajeService;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.services.persoanjeService.PersoanjeService;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.services.logService.LogPersonajeService;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.services.persoanjeService.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,17 +15,27 @@ public class PersoanjeController {
     private PersoanjeService persoanjeService;
 
     @Autowired
-    private LogPersonajeService registroPersoanjeService;
-
-    @Autowired
     private EstadisticasPersonajeService estadisticasPersonajesService;
 
     @Autowired
     private InventarioPersonajeService inventarioPersonajeService;
 
+    @Autowired
+    private HabilidadesPersonajeService habilidadesPersonajeService;
+
+    @Autowired
+    private ClasePersoanjeService clasePersoanjeService;
+
+    @Autowired
+    private LogrosPersoanjeService logrosPersoanjeService;
+
+
+
+
+
     // CRUD PERSONAJE
     @GetMapping("/")
-    public List<Personaje> obtenerUsuario(){
+    public List<Personaje> obtenerPersonaje(){
         return  persoanjeService.getAll();
     }
 
