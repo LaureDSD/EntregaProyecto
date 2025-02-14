@@ -55,9 +55,6 @@ public class Personaje {
     @Schema(description = "Clase del persoanje asociado")
     private ClasePersonaje clase_persoanje;
 
-
-
-
     //Grupo
     /*
     @ManyToOne
@@ -69,9 +66,6 @@ public class Personaje {
     @JoinColumn(name = "lider_grupo")
     @Schema(description = "Lider del grupo")
     private Grupo grupoLiderado;*/
-
-
-
 
     //Gremio
     /*
@@ -88,16 +82,7 @@ public class Personaje {
 
 
 
-    /*
-    // Relación Uno a Muchos con RegistroPersonaje
-    @OneToMany(mappedBy = "personaje", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonIgnore // Excluir esta relación en la serialización JSON
-    @Schema(description = "Registros de actividades del personaje")
-    private List<RegistroPersonaje> registros;
-    */
-
-
-    // Relación Muchos a Muchos con Habilidad
+    // Relación Muchos a Muchos con Habilidad version 1
     /*
     @ManyToMany
     @JoinTable(
@@ -108,7 +93,7 @@ public class Personaje {
     @JsonIgnore // Excluir esta relación en la serialización JSON
     @Schema(description = "Habilidades aprendidas por el personaje")
     private List<Habilidad> habilidades;
-*/
+   */
 
     // Relación Uno a Muchos con InventarioPersonaje
     @OneToMany(mappedBy = "personaje", cascade = CascadeType.ALL)

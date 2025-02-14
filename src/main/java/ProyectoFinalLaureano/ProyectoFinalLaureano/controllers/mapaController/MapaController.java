@@ -1,4 +1,4 @@
-package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers;
+package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.mapaController;
 
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.mapa.Mapa;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.mapaService.MapaService;
@@ -9,7 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/mapa")
-public class mapaController {
+public class MapaController {
 
     @Autowired
     private MapaService mapaService;

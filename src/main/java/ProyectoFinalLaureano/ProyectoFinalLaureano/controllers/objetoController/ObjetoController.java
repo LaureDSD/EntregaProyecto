@@ -1,4 +1,4 @@
-package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers;
+package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.objetoController;
 
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.objeto.Item;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.objetoService.ItemService;
@@ -9,7 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/objeto")
-public class objetoController {
+public class ObjetoController {
 
     @Autowired
     private ItemService itemService;

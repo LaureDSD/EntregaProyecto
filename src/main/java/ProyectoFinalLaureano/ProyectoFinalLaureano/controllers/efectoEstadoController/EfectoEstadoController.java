@@ -1,4 +1,4 @@
-package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers;
+package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.efectoEstadoController;
 
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.efectosEstados.EfectoEstado;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.efectoEstadoService.EfectoEstadoService;
@@ -9,7 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/efectosEstados")
-public class efectoEstadoController {
+public class EfectoEstadoController {
 
     @Autowired
     private EfectoEstadoService efectoEstadoService;

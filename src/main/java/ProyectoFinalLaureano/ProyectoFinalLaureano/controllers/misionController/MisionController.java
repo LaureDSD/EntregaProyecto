@@ -1,4 +1,4 @@
-package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers;
+package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.misionController;
 
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.mision.Mision;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.misionService.MisionService;
@@ -9,7 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/mision")
-public class misionController {
+public class MisionController {
 
     @Autowired
     private MisionService misionService;

@@ -16,9 +16,11 @@ import java.time.LocalDateTime;
 @Setter
 public class InventarioPersonaje {
 
+    //Clase que relaciona las dos claves de la tabla persoanje_id e item_id
     @EmbeddedId
     private InventarioPersonajeId id;
 
+    //Relacion de persoanje con item N:1
     @ManyToOne
     @MapsId("personaje_id")
     @JoinColumn(name = "personaje_id", nullable = false)
@@ -26,20 +28,24 @@ public class InventarioPersonaje {
     @Schema(description = "Personaje asociado al inventario")
     private Personaje personaje;
 
+    //Relacion de item con persoanje N:1
     @ManyToOne
     @MapsId("item_id")
     @JoinColumn(name = "item_id", nullable = false)
     @Schema(description = "Ítem en el inventario")
     private Item item;
 
+    //Cantidad especifica en el inventario
     @Column(name = "cantidad", nullable = false)
     @Schema(description = "Cantidad del ítem en el inventario", example = "1")
     private int cantidad;
 
+    //Si es equipables , indica si esta o no equipado mediante booleano
     @Column(name = "equipado", nullable = false)
     @Schema(description = "Indica si el ítem está equipado", example = "false")
     private boolean equipado;
 
+    //Fecha de obtencion del item (Por si pongo caducidad/degradacion)
     @Column(name = "fecha_obtencion", nullable = false)
     @Schema(description = "Fecha y hora de obtención del ítem", example = "2023-10-01T12:00:00")
     private LocalDateTime fecha_obtencion;

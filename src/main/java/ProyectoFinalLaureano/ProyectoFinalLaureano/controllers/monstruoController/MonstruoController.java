@@ -1,4 +1,4 @@
-package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers;
+package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.monstruoController;
 
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.monstruo.Monstruo;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.monstruoService.MonstruosService;
@@ -9,7 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/monstruo")
-public class monstruoController {
+public class MonstruoController {
 
     @Autowired
     private MonstruosService monstruosService;

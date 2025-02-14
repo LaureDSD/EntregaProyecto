@@ -1,4 +1,4 @@
-package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers;
+package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.usuarioController;
 
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.usuario.TipoUsuario;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.usuario.Usuario;
@@ -7,12 +7,11 @@ import ProyectoFinalLaureano.ProyectoFinalLaureano.services.usuarioService.Usuar
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/usuario")
-public class usuarioController {
+public class UsuarioController {
 
     @Autowired
     private TipoUsuarioService tipoUsuarioService;

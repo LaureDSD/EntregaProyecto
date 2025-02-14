@@ -51,7 +51,7 @@ VALUES
 -- Tabla: logs de usuario
 CREATE TABLE IF NOT EXISTS logs (
     log_id bigint PRIMARY KEY AUTO_INCREMENT,
-    usuario_id INT NULL,
+    usuario_id bigint NULL,
     tipo_log ENUM('INFORMACION','FALLO', 'ADVERTENCIA','CREACION','ACTUALIZACION','BORRADO') DEFAULT 'INFORMACION',
     mensaje TEXT NOT NULL,
     fecha_log DATETIME NOT NULL,
@@ -243,15 +243,7 @@ INSERT INTO tipo_monstruo (nombre, descripcion)
 VALUES
     ('Normal', 'Monstruos comunes que se encuentran en áreas abiertas y mazmorras.'),
     ('Miniboss', 'Enemigos más poderosos que los normales, pero menos que los bosses. Suelen guardar tesoros o áreas especiales.'),
-    ('Boss', 'Enemigos extremadamente poderosos que actúan como jefes de mazmorras o áreas. Derrotarlos suele ser un gran logro.'),
-    ('Élite', 'Monstruos raros y poderosos que son más fuertes que los normales pero no tanto como los bosses.'),
-    ('Legendario', 'Monstruos únicos y extremadamente poderosos, a menudo relacionados con historias o misiones especiales.'),
-    ('Criatura de Caos', 'Monstruos corruptos por el caos, con habilidades impredecibles y peligrosas.'),
-    ('Guardian', 'Monstruos que protegen lugares sagrados o tesoros valiosos.'),
-    ('Depredador', 'Monstruos ágiles y letales que cazan a sus presas en manadas o en solitario.'),
-    ('Espíritu', 'Entidades espirituales o fantasmas que suelen ser inmunes a ciertos tipos de daño.'),
-    ('Gigante', 'Monstruos de gran tamaño y fuerza bruta, pero lentos y predecibles.');
-    
+    ('Boss', 'Enemigos extremadamente poderosos que actúan como jefes de mazmorras o áreas. Derrotarlos suele ser un gran logro.');
     
 -- Tabla: monstruos
 CREATE TABLE IF NOT EXISTS monstruos (
@@ -488,10 +480,11 @@ CREATE TABLE IF NOT EXISTS tipo_item (
 );
 
 -- Insertar tipos de item
-INSERT INTO tipo_item (nombre, descripcion) VALUES
-('consumible', 'Consumibles que pueden ser usados para restaurar salud, energía, etc.'),
-('equipo', 'Equipo que puede ser equipado por los personajes.'),
-('material', 'Materiales que pueden ser usados para misiones o crafteo.');
+INSERT INTO tipo_item (nombre, descripcion)
+VALUES
+    ('consumible', 'Consumibles que pueden ser usados para restaurar salud, energía, etc.'),
+    ('equipo', 'Equipo que puede ser equipado por los personajes.'),
+    ('material', 'Materiales que pueden ser usados para misiones o crafteo.');
 
 -- Tabla: items
 CREATE TABLE IF NOT EXISTS items (
@@ -507,17 +500,43 @@ CREATE TABLE IF NOT EXISTS items (
     INDEX idx_tipo_item (tipo_item)
 );
 
--- Insertar items
-INSERT INTO items (nombre, tipo_item, descripcion, acumulaciones_max, precio_base, valor_dinamico) VALUES
-('Poción de Vida', 1, 'Restaura 50 puntos de vida', 99, 10, 5),
-('Espada de Acero', 2, 'Una espada básica', 1, 50, 10),
-('Hierba Mágica', 3, 'Material para misiones', 99, 5, 2),
-('Poción de Energía', 1, 'Restaura 30 puntos de energía', 99, 20, 5),
-('Poción de Veneno', 1, 'Aplica veneno al enemigo', 99, 15, 3),
-('Gema Brillante', 3, 'Una gema valiosa para misiones', 99, 100, 20),
-('Mapa del Tesoro', 3, 'Un mapa que lleva a un tesoro escondido', 1, 200, 50),
-('Espada Larga', 2, 'Una espada más poderosa que la de acero', 1, 80, 15),
-('Escudo de Hierro', 2, 'Escudo básico', 1, 40, 10);
+INSERT INTO items (nombre, tipo_item, descripcion, acumulaciones_max, precio_base, valor_dinamico)
+VALUES
+    -- Consumibles
+    ('Poción de Vida', 1, 'Restaura 50 puntos de vida.', 99, 20, 50),
+    ('Poción de Maná', 1, 'Restaura 30 puntos de maná.', 99, 30, 30),
+    ('Poción de Energía', 1, 'Restaura 40 puntos de energía.', 99, 25, 40),
+    ('Elixir de Vida', 1, 'Restaura 100 puntos de vida.', 99, 50, 100),
+    ('Elixir de Maná', 1, 'Restaura 80 puntos de maná.', 99, 60, 80),
+    ('Poción de Fuerza', 1, 'Aumenta el ataque físico en 10 puntos durante 5 minutos.', 99, 40, 10),
+    ('Poción de Defensa', 1, 'Aumenta la defensa física en 10 puntos durante 5 minutos.', 99, 40, 10),
+    ('Poción de Invisibilidad', 1, 'Otorga invisibilidad durante 1 minuto.', 99, 100, 0),
+
+    -- Equipo
+    ('Espada de Acero', 2, 'Una espada resistente hecha de acero.', 1, 100, 20),
+    ('Escudo de Madera', 2, 'Un escudo ligero hecho de madera.', 1, 50, 10),
+    ('Daga Afilada', 2, 'Una daga ligera y rápida.', 1, 80, 15),
+    ('Armadura de Platino', 2, 'Una armadura pesada pero muy resistente.', 1, 300, 50),
+    ('Anillo de Poder', 2, 'Aumenta el ataque mágico en 15 puntos.', 1, 150, 15),
+    ('Martillo de Guerra', 2, 'Un martillo pesado que inflige gran daño.', 1, 200, 30),
+    ('Capa del Mago', 2, 'Aumenta la defensa mágica en 20 puntos.', 1, 120, 20),
+    ('Báculo Arcano', 2, 'Un báculo que potencia las habilidades mágicas.', 1, 180, 25),
+    ('Botas de Velocidad', 2, 'Aumentan la velocidad de movimiento.', 1, 90, 15),
+    ('Cinturón de Resistencia', 2, 'Aumenta la resistencia física.', 1, 70, 10),
+    ('Guantes de Acero', 2, 'Mejoran la destreza y el ataque.', 1, 110, 18),
+    ('Amuleto de Protección', 2, 'Otorga protección mágica.', 1, 130, 20),
+
+    -- Materiales
+    ('Hierro', 3, 'Material de crafteo común.', 99, 5, 0),
+    ('Piedra Mágica', 3, 'Material raro usado en crafteo avanzado.', 99, 50, 0),
+    ('Piedra de Fuego', 3, 'Material usado para crear armas de fuego.', 99, 30, 0),
+    ('Cuero', 3, 'Material usado para fabricar armaduras ligeras.', 99, 10, 0),
+    ('Cristal Mágico', 3, 'Material mágico usado en encantamientos.', 99, 100, 0),
+    ('Madera de Roble', 3, 'Madera resistente usada en crafteo.', 99, 15, 0),
+    ('Hueso de Dragón', 3, 'Material legendario usado en crafteo de alto nivel.', 99, 200, 0),
+    ('Plata', 3, 'Metal precioso usado en joyería y crafteo.', 99, 40, 0),
+    ('Oro', 3, 'Metal valioso usado en crafteo de élite.', 99, 80, 0),
+    ('Gema Brillante', 3, 'Gema rara usada en crafteo mágico.', 99, 150, 0);
 
 -- Tabla: item_efecto
 CREATE TABLE IF NOT EXISTS item_efecto (
@@ -528,13 +547,31 @@ CREATE TABLE IF NOT EXISTS item_efecto (
     FOREIGN KEY (item_id) REFERENCES items(item_id)
 );
 
--- Insertar efectos de items
-INSERT INTO item_efecto (item_id, efecto_id) VALUES
-(1, 1),  -- Poción de Vida tiene efecto Fuerza
-(2, 2),  -- Espada de Acero tiene efecto Veneno
-(3, 3),  -- Hierba Mágica tiene efecto VenenoV2
-(4, 4),  -- Poción de Energía tiene efecto Protección
-(5, 5);  -- Poción de Veneno tiene efecto Fuerza Mejorada
+INSERT INTO item_efecto (item_id, efecto_id)
+VALUES
+    -- Consumibles
+    (1, 5),   -- Poción de Vida: Regeneración
+    (2, 9),   -- Poción de Maná: Bendición Divina
+    (3, 17),  -- Poción de Energía: Velocidad Mejorada
+    (4, 5),   -- Elixir de Vida: Regeneración
+    (5, 9),   -- Elixir de Maná: Bendición Divina
+    (6, 1),   -- Poción de Fuerza: Fuerza Mejorada
+    (7, 15),  -- Poción de Defensa: Aura Sagrada
+    (8, 11),  -- Poción de Invisibilidad: Invisibilidad
+
+    -- Equipo
+    (9, 1),   -- Espada de Acero: Fuerza Mejorada
+    (10, 3),  -- Escudo de Madera: Escudo de Protección
+    (11, 1),  -- Daga Afilada: Fuerza Mejorada
+    (12, 3),  -- Armadura de Platino: Escudo de Protección
+    (13, 9),  -- Anillo de Poder: Bendición Divina
+    (14, 1),  -- Martillo de Guerra: Fuerza Mejorada
+    (15, 15), -- Capa del Mago: Aura Sagrada
+    (16, 9),  -- Báculo Arcano: Bendición Divina
+    (17, 17), -- Botas de Velocidad: Velocidad Mejorada
+    (18, 15), -- Cinturón de Resistencia: Aura Sagrada
+    (19, 1),  -- Guantes de Acero: Fuerza Mejorada
+    (20, 15); -- Amuleto de Protección: Aura Sagrada
 
 -- Tabla: tipos_equipamiento
 CREATE TABLE IF NOT EXISTS tipo_equipamiento (
@@ -571,12 +608,55 @@ CREATE TABLE IF NOT EXISTS drops_objetos (
 );
 
 -- Insertar drops de monstruos
-INSERT INTO drops_objetos (monstruo_id, item_id, probabilidad) VALUES
-(1, 1, 50),  -- Goblin puede soltar Poción de Vida
-(2, 2, 30),  -- Ogro puede soltar Espada de Acero
-(3, 3, 20),  -- Dragón puede soltar Hierba Mágica
-(4, 4, 40),  -- Bandido puede soltar Poción de Energía
-(5, 5, 10);  -- Lobo Salvaje puede soltar Poción de Veneno
+INSERT INTO drops_objetos (monstruo_id, item_id, probabilidad)
+VALUES
+    -- Goblin (monstruo_id = 1)
+    (1, 1, 50),   -- Goblin puede soltar Poción de Vida con 50% de probabilidad
+    (1, 21, 30),  -- Goblin puede soltar Hierro con 30% de probabilidad
+    (1, 24, 10),  -- Goblin puede soltar Cuero con 10% de probabilidad
+
+    -- Ogro (monstruo_id = 2)
+    (2, 2, 40),   -- Ogro puede soltar Poción de Maná con 40% de probabilidad
+    (2, 21, 50),  -- Ogro puede soltar Hierro con 50% de probabilidad
+    (2, 22, 20),  -- Ogro puede soltar Piedra Mágica con 20% de probabilidad
+
+    -- Dragón (monstruo_id = 3)
+    (3, 4, 30),   -- Dragón puede soltar Elixir de Vida con 30% de probabilidad
+    (3, 5, 30),   -- Dragón puede soltar Elixir de Maná con 30% de probabilidad
+    (3, 27, 10),  -- Dragón puede soltar Hueso de Dragón con 10% de probabilidad
+    (3, 26, 20),  -- Dragón puede soltar Madera de Roble con 20% de probabilidad
+
+    -- Bandido (monstruo_id = 4)
+    (4, 1, 60),   -- Bandido puede soltar Poción de Vida con 60% de probabilidad
+    (4, 21, 40),  -- Bandido puede soltar Hierro con 40% de probabilidad
+    (4, 24, 20),  -- Bandido puede soltar Cuero con 20% de probabilidad
+
+    -- Lobo Salvaje (monstruo_id = 5)
+    (5, 24, 70),  -- Lobo Salvaje puede soltar Cuero con 70% de probabilidad
+    (5, 21, 30),  -- Lobo Salvaje puede soltar Hierro con 30% de probabilidad
+
+    -- Esqueleto Guerrero (monstruo_id = 6)
+    (6, 2, 40),   -- Esqueleto Guerrero puede soltar Poción de Maná con 40% de probabilidad
+    (6, 22, 30),  -- Esqueleto Guerrero puede soltar Piedra Mágica con 30% de probabilidad
+    (6, 25, 10),  -- Esqueleto Guerrero puede soltar Cristal Mágico con 10% de probabilidad
+
+    -- Araña Gigante (monstruo_id = 7)
+    (7, 24, 80),  -- Araña Gigante puede soltar Cuero con 80% de probabilidad
+    (7, 22, 20),  -- Araña Gigante puede soltar Piedra Mágica con 20% de probabilidad
+
+    -- Bandido Líder (monstruo_id = 8)
+    (8, 4, 50),   -- Bandido Líder puede soltar Elixir de Vida con 50% de probabilidad
+    (8, 5, 50),   -- Bandido Líder puede soltar Elixir de Maná con 50% de probabilidad
+    (8, 28, 10),  -- Bandido Líder puede soltar Plata con 10% de probabilidad
+
+    -- Nigromante (monstruo_id = 9)
+    (9, 5, 60),   -- Nigromante puede soltar Elixir de Maná con 60% de probabilidad
+    (9, 25, 30),  -- Nigromante puede soltar Cristal Mágico con 30% de probabilidad
+    (9, 22, 20),  -- Nigromante puede soltar Piedra Mágica con 20% de probabilidad
+
+    -- Araña (monstruo_id = 10)
+    (10, 24, 90), -- Araña puede soltar Cuero con 90% de probabilidad
+    (10, 21, 10); -- Araña puede soltar Hierro con 10% de probabilidad
 
 -- Tabla: objetos_equipables
 CREATE TABLE IF NOT EXISTS estadisticas_equipamiento ( 
@@ -597,12 +677,37 @@ CREATE TABLE IF NOT EXISTS estadisticas_equipamiento (
 );
 
 -- Insertar objetos equipables
-INSERT INTO estadisticas_equipamiento (item_id, tipo_equipamiento_id, vida_base, escudo_base, energia_base, mana_base, ataque_fisico_base, ataque_magico_base, defensa_fisica, defensa_magica) VALUES
-(2, 1, 0, 0, 0, 0, 10, 0, 0, 0),  -- Espada de Acero es un Arma Principal (aumenta ataque físico)
-(8, 1, 0, 0, 0, 0, 15, 0, 0, 0),  -- Espada Larga es un Arma Principal (aumenta ataque físico)
-(9, 2, 0, 10, 0, 0, 0, 0, 5, 5),  -- Escudo de Hierro es un Arma Secundaria (aumenta escudo y defensas)
-(6, 7, 0, 0, 20, 0, 0, 0, 0, 0),  -- Gema Brillante es un Accesorio 1 (aumenta energía)
-(7, 8, 0, 0, 0, 30, 0, 0, 0, 0);  -- Mapa del Tesoro es un Accesorio 2 (aumenta maná)
+INSERT INTO estadisticas_equipamiento (item_id, tipo_equipamiento_id, vida_base, escudo_base, energia_base, mana_base, ataque_fisico_base, ataque_magico_base, defensa_fisica, defensa_magica)
+VALUES
+    -- Arma Principal
+    (9, 1, 0, 0, 0, 0, 20, 0, 0, 0),   -- Espada de Acero: Aumenta el ataque físico en 20
+    (11, 1, 0, 0, 0, 0, 15, 0, 0, 0),  -- Daga Afilada: Aumenta el ataque físico en 15
+    (14, 1, 0, 0, 0, 0, 30, 0, 0, 0),  -- Martillo de Guerra: Aumenta el ataque físico en 30
+    (16, 1, 0, 0, 0, 0, 0, 25, 0, 0),  -- Báculo Arcano: Aumenta el ataque mágico en 25
+
+    -- Arma Secundaria
+    (10, 2, 0, 10, 0, 0, 0, 0, 0, 0),  -- Escudo de Madera: Aumenta el escudo en 10
+    (19, 2, 0, 0, 0, 0, 18, 0, 0, 0),  -- Guantes de Acero: Aumenta el ataque físico en 18
+
+    -- Casco
+    (12, 3, 0, 0, 0, 0, 0, 0, 15, 10), -- Armadura de Platino: Aumenta la defensa física en 15 y mágica en 10
+
+    -- Pecho
+    (12, 4, 0, 0, 0, 0, 0, 0, 50, 0),  -- Armadura de Platino: Aumenta la defensa física en 50
+
+    -- Pantalón
+    (12, 5, 0, 0, 0, 0, 0, 0, 30, 0),  -- Armadura de Platino: Aumenta la defensa física en 30
+
+    -- Botas
+    (17, 6, 0, 0, 20, 0, 0, 0, 0, 0),  -- Botas de Velocidad: Aumenta la energía en 20
+
+    -- Accesorio 1
+    (13, 7, 0, 0, 0, 15, 0, 0, 0, 0),  -- Anillo de Poder: Aumenta el maná en 15
+    (20, 7, 0, 0, 0, 0, 0, 0, 20, 20), -- Amuleto de Protección: Aumenta la defensa física y mágica en 20
+
+    -- Accesorio 2
+    (15, 8, 0, 0, 0, 0, 0, 20, 0, 0),  -- Capa del Mago: Aumenta la defensa mágica en 20
+    (18, 8, 0, 0, 0, 0, 0, 0, 10, 0);  -- Cinturón de Resistencia: Aumenta la defensa física en 10
 
 -- Tabla: inventario de personajes
 CREATE TABLE IF NOT EXISTS inventario_personaje (
@@ -618,21 +723,37 @@ CREATE TABLE IF NOT EXISTS inventario_personaje (
     INDEX idx_item_id (item_id)
 );
 -- Insertar inventario de personajes
-INSERT INTO inventario_personaje (personaje_id, item_id, cantidad, equipado) VALUES
--- Guerrero1
-(1, 1, 5, 0),  -- 5 Pociones de Vida (no equipables)
-(1, 2, 1, 1),     -- 1 Espada de Acero (equipada, tipo: Arma Principal)
--- Mago1
-(2, 4, 3, 0),  -- 3 Pociones de Energía (no equipables)
-(2, 9, 1, 1),     -- 1 Escudo de Hierro (equipado, tipo: Arma Secundaria)
--- Arquero1
-(3, 3, 10, 0), -- 10 Hierbas Mágicas (no equipables)
-(3, 8, 1, 1),     -- 1 Espada Larga (equipada, tipo: Arma Principal)
--- Hechicero1
-(4, 5, 2, 0),  -- 2 Pociones de Veneno (no equipables)
-(4, 6, 1, 1),     -- 1 Gema Brillante (equipada, tipo: Accesorio 1)
--- Caballero1
-(5, 7, 1, 1);     -- 1 Mapa del Tesoro (equipado, tipo: Accesorio 2)
+INSERT INTO inventario_personaje (personaje_id, item_id, cantidad, equipado, fecha_obtencion)
+VALUES
+    -- Aragorn (personaje_id = 1)
+    (1, 9, 1, 1, '2023-10-01 12:00:00'),  -- Espada de Acero (equipada)
+    (1, 10, 1, 1, '2023-10-01 12:05:00'), -- Escudo de Madera (equipado)
+    (1, 1, 5, 0, '2023-10-01 12:10:00'),  -- Poción de Vida (5 unidades, no equipada)
+    (1, 21, 10, 0, '2023-10-01 12:15:00'), -- Hierro (10 unidades, no equipado)
+
+    -- Gandalf (personaje_id = 2)
+    (2, 16, 1, 1, '2023-10-02 13:00:00'), -- Báculo Arcano (equipado)
+    (2, 15, 1, 1, '2023-10-02 13:05:00'), -- Capa del Mago (equipada)
+    (2, 2, 3, 0, '2023-10-02 13:10:00'),  -- Poción de Maná (3 unidades, no equipada)
+    (2, 22, 5, 0, '2023-10-02 13:15:00'), -- Piedra Mágica (5 unidades, no equipada)
+
+    -- Legolas (personaje_id = 3)
+    (3, 11, 1, 1, '2023-10-03 14:00:00'), -- Daga Afilada (equipada)
+    (3, 17, 1, 1, '2023-10-03 14:05:00'), -- Botas de Velocidad (equipadas)
+    (3, 3, 2, 0, '2023-10-03 14:10:00'),  -- Poción de Energía (2 unidades, no equipada)
+    (3, 24, 8, 0, '2023-10-03 14:15:00'), -- Cuero (8 unidades, no equipado)
+
+    -- Frodo (personaje_id = 4)
+    (4, 12, 1, 1, '2023-10-04 15:00:00'), -- Armadura de Platino (equipada)
+    (4, 18, 1, 1, '2023-10-04 15:05:00'), -- Cinturón de Resistencia (equipado)
+    (4, 4, 1, 0, '2023-10-04 15:10:00'),  -- Elixir de Vida (1 unidad, no equipada)
+    (4, 25, 3, 0, '2023-10-04 15:15:00'), -- Cristal Mágico (3 unidades, no equipado)
+
+    -- Gimli (personaje_id = 5)
+    (5, 14, 1, 1, '2023-10-05 16:00:00'), -- Martillo de Guerra (equipado)
+    (5, 10, 1, 1, '2023-10-05 16:05:00'), -- Escudo de Madera (equipado)
+    (5, 5, 2, 0, '2023-10-05 16:10:00'),  -- Elixir de Maná (2 unidades, no equipado)
+    (5, 26, 4, 0, '2023-10-05 16:15:00'); -- Madera de Roble (4 unidades, no equipada)
 
 -- Tabla: habilidades 
 CREATE TABLE IF NOT EXISTS habilidades (
@@ -646,6 +767,7 @@ CREATE TABLE IF NOT EXISTS habilidades (
     objetivo_habilidad ENUM('JUGADOR','ALIADO','ENEMIGO','TODO') DEFAULT 'todo',
     area_efecto INT NOT NULL DEFAULT 1,
     unidades_afectadas INT NOT NULL DEFAULT 1,
+    vida_base INT NOT NULL DEFAULT 0,
     curacion_base INT NOT NULL DEFAULT 0,
     escudo_base INT NOT NULL DEFAULT 0,
     energia_base INT NOT NULL DEFAULT 30,
@@ -659,14 +781,38 @@ CREATE TABLE IF NOT EXISTS habilidades (
 );
 
 -- Insertar habilidades
-INSERT INTO habilidades (imagen, nombre, descripcion, tipo_habilidad, objetivo_habilidad, area_efecto, unidades_afectadas, curacion_base, escudo_base, energia_base, mana_base, ataque_fisico_base, ataque_magico_base, defensa_fisica, defensa_magica, enfriamiento) VALUES
-('habilidad1.png', 'Corte rápido', 'Un ataque rápido con la espada', 'ofensiva', 'enemigo', 1, 1, 0, 0, 10, 0, 15, 0, 0, 0, 2),
-('habilidad2.png', 'Curación menor', 'Cura 20 puntos de vida', 'defensiva', 'jugador', 1, 1, 20, 0, 15, 0, 0, 0, 0, 0, 3),
-('corte_sombra.png', 'Corte de Sombra', 'Un ataque rápido que ignora la defensa', 'ofensiva', 'enemigo', 1, 1, 0, 0, 20, 0, 25, 0, 0, 0, 3),
-('escudo_proteccion.png', 'Escudo de Protección', 'Aumenta la defensa temporalmente', 'defensiva', 'jugador', 1, 1, 0, 30, 15, 0, 0, 0, 10, 10, 4),
-('lluvia_flechas.png', 'Lluvia de Flechas', 'Ataque de área que afecta a múltiples enemigos', 'ofensiva', 'enemigo', 3, 3, 0, 0, 25, 0, 20, 0, 0, 0, 5);
+INSERT INTO habilidades (imagen, nombre, descripcion, nivel_maximo, requisito_nivel, tipo_habilidad, objetivo_habilidad, area_efecto, unidades_afectadas, curacion_base,vida_base, escudo_base, energia_base, mana_base, ataque_fisico_base, ataque_magico_base, defensa_fisica, defensa_magica, enfriamiento)
+VALUES
+    -- Habilidades Ofensivas
+    ('golpe_critico.jpg', 'Golpe Crítico', 'Un ataque poderoso que inflige daño crítico.', 5, 1, 'OFENSIVA', 'ENEMIGO', 1, 1, 0, 0, 20, 0, 50, 0,0, 0, 0, 10),
+    ('bola_fuego.jpg', 'Bola de Fuego', 'Lanza una bola de fuego que quema a los enemigos.', 3, 3, 'OFENSIVA', 'ENEMIGO', 3, 3, 0, 0, 0, 30, 0, 0,40, 0, 0, 15),
+    ('rayo_helado.jpg', 'Rayo Helado', 'Un rayo de hielo que congela a los enemigos.', 4, 5, 'OFENSIVA', 'ENEMIGO', 2, 2, 0, 0, 0, 25, 0, 35, 0,0, 0, 12),
 
+    -- Habilidades Defensivas
+    ('escudo_proteccion.jpg', 'Escudo de Protección', 'Crea un escudo que absorbe daño.', 3, 2, 'DEFENSIVA', 'JUGADOR', 1, 1, 0, 50, 0, 20, 0,0, 0, 0, 0, 20),
+    ('cura_menor.jpg', 'Cura Menor', 'Cura una pequeña cantidad de vida.', 4, 2, 'DEFENSIVA', 'ALIADO', 1, 1, 30, 0, 0, 15, 0, 0, 0, 0,0, 10),
+    ('fortalecer.jpg', 'Fortalecer', 'Aumenta la defensa física y mágica.', 2, 4, 'DEFENSIVA', 'JUGADOR', 1, 1, 0, 0, 0, 20, 0, 0, 10,0, 10, 15),
 
+    -- Habilidades de Apoyo
+    ('bendicion.jpg', 'Bendición', 'Aumenta el ataque y la defensa de los aliados.', 3, 5, 'APOYO', 'ALIADO', 5, 5, 0, 0, 0, 40, 10, 10, 10,0, 10, 30),
+    ('invisibilidad.jpg', 'Invisibilidad', 'Hace al jugador invisible por un tiempo.', 2, 6, 'APOYO', 'JUGADOR', 1, 1, 0, 0, 0, 50, 0, 0, 0,0, 0, 60),
+    ('regeneracion.jpg', 'Regeneración', 'Regenera la vida y el maná de los aliados.', 4, 7, 'APOYO', 'ALIADO', 4, 4, 20, 0, 0, 30, 0, 0, 0,0, 0, 25),
+
+    -- Habilidades Ofensivas
+    ('corte_sombrio.jpg', 'Corte Sombrío', 'Un ataque rápido que inflige daño oscuro.', 4, 4, 'OFENSIVA', 'ENEMIGO', 1, 1, 0, 0, 25, 0, 40, 0, 0,0, 0, 8),
+    ('tormenta_electrica.jpg', 'Tormenta Eléctrica', 'Invoca una tormenta eléctrica que daña a múltiples enemigos.', 3, 6, 'OFENSIVA', 'ENEMIGO', 4, 4, 0, 0, 0, 50, 0, 60,0, 0, 0, 20),
+    ('lanzamiento_dual.jpg', 'Lanzamiento Dual', 'Ataca dos veces con armas arrojadizas.', 5, 3, 'OFENSIVA', 'ENEMIGO', 1, 1, 0, 0, 30, 0, 35, 0,0, 0, 0, 12),
+
+    -- Habilidades Defensivas
+    ('escudo_divino.jpg', 'Escudo Divino', 'Protege al jugador con un escudo mágico.', 3, 5, 'DEFENSIVA', 'JUGADOR', 1, 1, 0, 100, 0, 40, 0, 0, 0,0, 0, 30),
+    ('regeneracion_rapida.jpg', 'Regeneración Rápida', 'Cura una cantidad moderada de vida rápidamente.', 4, 4, 'DEFENSIVA', 'ALIADO', 1, 1, 50, 0, 0, 25, 0, 0,0, 0, 0, 15),
+    ('aura_proteccion.jpg', 'Aura de Protección', 'Aumenta la defensa de todos los aliados en un área.', 3, 7, 'DEFENSIVA', 'ALIADO', 5, 5, 0, 0, 0, 35, 0, 0, 15,0, 15, 25),
+
+    -- Habilidades de Apoyo
+    ('bendicion_sagrada.jpg', 'Bendición Sagrada', 'Aumenta el ataque y la defensa mágica de los aliados.', 4, 8, 'APOYO', 'ALIADO', 5, 5, 0, 0, 0, 50, 15, 15, 0,0, 20, 40),
+    ('teletransportacion.jpg', 'Teletransportación', 'Teletransporta al jugador a un lugar seguro.', 2, 9, 'APOYO', 'JUGADOR', 1, 1, 0, 0, 0, 60, 0, 0, 0,0, 0, 90),
+    ('lluvia_curacion.jpg', 'Lluvia de Curación', 'Cura a todos los aliados en un área amplia.', 5, 10, 'APOYO', 'ALIADO', 6, 6, 40, 0, 0, 45, 0, 0, 0,0, 0, 35);
+    
 -- Tabla: habilidad_efecto
 CREATE TABLE IF NOT EXISTS habilidad_efecto (
     habilidad_id bigint NOT NULL,
@@ -677,18 +823,68 @@ CREATE TABLE IF NOT EXISTS habilidad_efecto (
 );
 
 -- Insertar efectos de habilidades
-INSERT INTO habilidad_efecto (habilidad_id, efecto_id) VALUES
-(1, 1),  -- Corte rápido tiene efecto Fuerza
-(2, 2),  -- Curación menor tiene efecto Veneno
-(3, 3),  -- Corte de Sombra tiene efecto VenenoV2
-(4, 4),  -- Escudo de Protección tiene efecto Protección
-(5, 5);  -- Lluvia de Flechas tiene efecto Fuerza Mejorada
+INSERT INTO habilidad_efecto (habilidad_id, efecto_id)
+VALUES
+    -- Golpe Crítico (habilidad_id = 1)
+    (1, 1),  -- Golpe Crítico: Fuerza Mejorada
+
+    -- Bola de Fuego (habilidad_id = 2)
+    (2, 10), -- Bola de Fuego: Quemadura
+
+    -- Rayo Helado (habilidad_id = 3)
+    (3, 4),  -- Rayo Helado: Congelación
+
+    -- Escudo de Protección (habilidad_id = 4)
+    (4, 3),  -- Escudo de Protección: Escudo de Protección
+
+    -- Cura Menor (habilidad_id = 5)
+    (5, 5),  -- Cura Menor: Regeneración
+
+    -- Fortalecer (habilidad_id = 6)
+    (6, 15), -- Fortalecer: Aura Sagrada
+
+    -- Bendición (habilidad_id = 7)
+    (7, 9),  -- Bendición: Bendición Divina
+
+    -- Invisibilidad (habilidad_id = 8)
+    (8, 11), -- Invisibilidad: Invisibilidad
+
+    -- Regeneración (habilidad_id = 9)
+    (9, 5),  -- Regeneración: Regeneración
+
+    -- Corte Sombrío (habilidad_id = 10)
+    (10, 1), -- Corte Sombrío: Fuerza Mejorada
+
+    -- Tormenta Eléctrica (habilidad_id = 11)
+    (11, 12),-- Tormenta Eléctrica: Parálisis
+
+    -- Lanzamiento Dual (habilidad_id = 12)
+    (12, 1), -- Lanzamiento Dual: Fuerza Mejorada
+
+    -- Escudo Divino (habilidad_id = 13)
+    (13, 3), -- Escudo Divino: Escudo de Protección
+
+    -- Regeneración Rápida (habilidad_id = 14)
+    (14, 5), -- Regeneración Rápida: Regeneración
+
+    -- Aura de Protección (habilidad_id = 15)
+    (15, 15),-- Aura de Protección: Aura Sagrada
+
+    -- Bendición Sagrada (habilidad_id = 16)
+    (16, 9), -- Bendición Sagrada: Bendición Divina
+
+    -- Teletransportación (habilidad_id = 17)
+    (17, 11),-- Teletransportación: Invisibilidad
+
+    -- Lluvia de Curación (habilidad_id = 18)
+    (18, 5); -- Lluvia de Curación: Regeneración
 
 -- Tabla: personaje_habilidad
 CREATE TABLE IF NOT EXISTS personaje_habilidad (
     personaje_id bigint NOT NULL,
     habilidad_id bigint NOT NULL,
-    nivel INT NOT NULL DEFAULT 1,
+    nivel_habilidad INT NOT NULL DEFAULT 1,
+    probabilidad_uso INT NOT NULL DEFAULT 1,
     ultimo_uso DATETIME,
     PRIMARY KEY (personaje_id, habilidad_id),
     FOREIGN KEY (personaje_id) REFERENCES personajes(personaje_id),
@@ -697,12 +893,32 @@ CREATE TABLE IF NOT EXISTS personaje_habilidad (
 );
 
 -- Insertar habilidades de personajes
-INSERT INTO personaje_habilidad (personaje_id, habilidad_id, nivel, ultimo_uso) VALUES
-(1, 1, 1, NOW()),  -- Guerrero1 tiene Corte rápido
-(2, 2, 1, NOW()),  -- Mago1 tiene Curación menor
-(3, 3, 1, NOW()),  -- Arquero1 tiene Corte de Sombra
-(4, 4, 1, NOW()),  -- Hechicero1 tiene Escudo de Protección
-(5, 5, 1, NOW());  -- Caballero1 tiene Lluvia de Flechas
+INSERT INTO personaje_habilidad (personaje_id, habilidad_id, nivel_habilidad, ultimo_uso)
+VALUES
+    -- Aragorn (personaje_id = 1)
+    (1, 1, 3, '2023-10-01 12:30:00'),  -- Golpe Crítico (nivel 3)
+    (1, 4, 2, '2023-10-01 12:35:00'),  -- Escudo de Protección (nivel 2)
+    (1, 7, 1, '2023-10-01 12:40:00'),  -- Bendición (nivel 1)
+
+    -- Gandalf (personaje_id = 2)
+    (2, 2, 4, '2023-10-02 13:30:00'),  -- Bola de Fuego (nivel 4)
+    (2, 5, 3, '2023-10-02 13:35:00'),  -- Cura Menor (nivel 3)
+    (2, 8, 2, '2023-10-02 13:40:00'),  -- Invisibilidad (nivel 2)
+
+    -- Legolas (personaje_id = 3)
+    (3, 3, 2, '2023-10-03 14:30:00'),  -- Rayo Helado (nivel 2)
+    (3, 6, 1, '2023-10-03 14:35:00'),  -- Fortalecer (nivel 1)
+    (3, 9, 3, '2023-10-03 14:40:00'),  -- Regeneración (nivel 3)
+
+    -- Frodo (personaje_id = 4)
+    (4, 4, 1, '2023-10-04 15:30:00'),  -- Escudo de Protección (nivel 1)
+    (4, 7, 2, '2023-10-04 15:35:00'),  -- Bendición (nivel 2)
+    (4, 10, 1, '2023-10-04 15:40:00'), -- Corte Sombrío (nivel 1)
+
+    -- Gimli (personaje_id = 5)
+    (5, 1, 5, '2023-10-05 16:30:00'),  -- Golpe Crítico (nivel 5)
+    (5, 12, 2, '2023-10-05 16:35:00'), -- Lanzamiento Dual (nivel 2)
+    (5, 15, 1, '2023-10-05 16:40:00'); -- Aura de Protección (nivel 1)
 
 -- Tabla: monstruo_habilidad
 CREATE TABLE IF NOT EXISTS monstruo_habilidad (
@@ -720,12 +936,46 @@ CREATE TABLE IF NOT EXISTS monstruo_habilidad (
 );
 
 -- Insertar habilidades de monstruos
-INSERT INTO monstruo_habilidad (monstruo_id, habilidad_id, nivel_habilidad, probabilidad_uso) VALUES
-(1, 1, 1, 50),  -- Goblin tiene Corte rápido
-(2, 2, 1, 30),  -- Ogro tiene Curación menor
-(3, 3, 1, 70),  -- Dragón tiene Corte de Sombra
-(4, 4, 1, 40),  -- Bandido tiene Escudo de Protección
-(5, 5, 1, 60);  -- Lobo Salvaje tiene Lluvia de Flechas
+INSERT INTO monstruo_habilidad (monstruo_id, habilidad_id, nivel_habilidad, probabilidad_uso)
+VALUES
+    -- Goblin (monstruo_id = 1)
+    (1, 1, 2, 50),  -- Goblin usa Golpe Crítico (nivel 2) con 50% de probabilidad
+    (1, 10, 1, 30), -- Goblin usa Corte Sombrío (nivel 1) con 30% de probabilidad
+
+    -- Ogro (monstruo_id = 2)
+    (2, 1, 3, 70),  -- Ogro usa Golpe Crítico (nivel 3) con 70% de probabilidad
+    (2, 12, 2, 40), -- Ogro usa Lanzamiento Dual (nivel 2) con 40% de probabilidad
+
+    -- Dragón (monstruo_id = 3)
+    (3, 2, 4, 80),  -- Dragón usa Bola de Fuego (nivel 4) con 80% de probabilidad
+    (3, 3, 3, 60),  -- Dragón usa Rayo Helado (nivel 3) con 60% de probabilidad
+    (3, 11, 2, 50), -- Dragón usa Tormenta Eléctrica (nivel 2) con 50% de probabilidad
+
+    -- Bandido (monstruo_id = 4)
+    (4, 1, 2, 60),  -- Bandido usa Golpe Crítico (nivel 2) con 60% de probabilidad
+    (4, 10, 1, 40), -- Bandido usa Corte Sombrío (nivel 1) con 40% de probabilidad
+
+    -- Lobo Salvaje (monstruo_id = 5)
+    (5, 1, 1, 70),  -- Lobo Salvaje usa Golpe Crítico (nivel 1) con 70% de probabilidad
+
+    -- Esqueleto Guerrero (monstruo_id = 6)
+    (6, 1, 2, 50),  -- Esqueleto Guerrero usa Golpe Crítico (nivel 2) con 50% de probabilidad
+    (6, 12, 1, 30), -- Esqueleto Guerrero usa Lanzamiento Dual (nivel 1) con 30% de probabilidad
+
+    -- Araña Gigante (monstruo_id = 7)
+    (7, 10, 2, 60), -- Araña Gigante usa Corte Sombrío (nivel 2) con 60% de probabilidad
+    (7, 11, 1, 40), -- Araña Gigante usa Tormenta Eléctrica (nivel 1) con 40% de probabilidad
+
+    -- Bandido Líder (monstruo_id = 8)
+    (8, 1, 3, 80),  -- Bandido Líder usa Golpe Crítico (nivel 3) con 80% de probabilidad
+    (8, 12, 2, 50), -- Bandido Líder usa Lanzamiento Dual (nivel 2) con 50% de probabilidad
+
+    -- Nigromante (monstruo_id = 9)
+    (9, 2, 3, 70),  -- Nigromante usa Bola de Fuego (nivel 3) con 70% de probabilidad
+    (9, 3, 2, 50),  -- Nigromante usa Rayo Helado (nivel 2) con 50% de probabilidad
+
+    -- Araña (monstruo_id = 10)
+    (10, 10, 1, 60); -- Araña usa Corte Sombrío (nivel 1) con 60% de probabilidad
 
 -- Tabla: tipo_npc
 CREATE TABLE IF NOT EXISTS tipo_npc (
@@ -736,12 +986,18 @@ CREATE TABLE IF NOT EXISTS tipo_npc (
 );
 
 -- Insertar tipos de NPC
-INSERT INTO tipo_npc (nombre, descripcion) VALUES
-('Aldeano', 'Un aldeano común que ofrece misiones simples.'),
-('Mercader', 'Un mercader que vende objetos útiles.'),
-('Guardia', 'Un guardia que protege la ciudad.'),
-('Mago', 'Un mago que ofrece misiones mágicas.'),
-('Herrero', 'Un herrero que puede mejorar tu equipo.');
+INSERT INTO tipo_npc (nombre, descripcion)
+VALUES
+    ('Aldeano', 'Un aldeano común que ofrece misiones simples.'),
+    ('Mercader', 'Un mercader que vende objetos útiles.'),
+    ('Guardia', 'Un guardia que protege la ciudad.'),
+    ('Mago', 'Un mago que ofrece misiones mágicas.'),
+    ('Herrero', 'Un herrero que puede mejorar tu equipo.'),
+    ('Bruja', 'Una bruja que ofrece pociones y hechizos.'),
+    ('Explorador', 'Un explorador que conoce los secretos del mundo.'),
+    ('Sacerdote', 'Un sacerdote que cura y bendice a los aventureros.'),
+    ('Bardo', 'Un bardo que cuenta historias y ofrece entretenimiento.'),
+    ('Cazador', 'Un cazador que ofrece misiones de cacería.');
 
 -- Tabla: npc
 CREATE TABLE IF NOT EXISTS npc (
@@ -755,12 +1011,47 @@ CREATE TABLE IF NOT EXISTS npc (
 );
 
 -- Insertar NPCs
-INSERT INTO npc (nombre, descripcion, imagen, tipo_npc) VALUES
-('Aldeano', 'Un aldeano común que ofrece misiones simples.', 'aldeano.jpg', 1),
-('Mercader', 'Un mercader que vende objetos útiles.', 'mercader.jpg', 2),
-('Guardia', 'Un guardia que protege la ciudad.', 'guardia.jpg', 3),
-('Mago', 'Un mago que ofrece misiones mágicas.', 'mago.jpg', 4),
-('Herrero', 'Un herrero que puede mejorar tu equipo.', 'herrero.jpg', 5);
+INSERT INTO npc (nombre, descripcion, imagen, tipo_npc)
+VALUES
+    -- Aldeanos
+    ('Juan el Granjero', 'Un granjero amable que necesita ayuda con sus cultivos.', 'juan_granjero.jpg', 1),
+    ('María la Tejedora', 'Una tejedora que busca materiales para sus telares.', 'maria_tejedora.jpg', 1),
+
+    -- Mercaderes
+    ('Luis el Mercader', 'Un mercader que vende objetos útiles para aventureros.', 'luis_mercader.jpg', 2),
+    ('Ana la Comerciante', 'Una comerciante que ofrece productos exóticos.', 'ana_comerciante.jpg', 2),
+
+    -- Guardias
+    ('Carlos el Guardia', 'Un guardia que protege la entrada de la ciudad.', 'carlos_guardia.jpg', 3),
+    ('Sofía la Capitana', 'La capitana de la guardia, conocida por su valentía.', 'sofia_capitana.jpg', 3),
+
+    -- Magos
+    ('Merlín el Sabio', 'Un mago anciano que conoce los secretos del mundo.', 'merlin_sabio.jpg', 4),
+    ('Elena la Hechicera', 'Una hechicera poderosa que ofrece misiones mágicas.', 'elena_hechicera.jpg', 4),
+
+    -- Herreros
+    ('Pedro el Herrero', 'Un herrero experto en forjar armas y armaduras.', 'pedro_herrero.jpg', 5),
+    ('Lucía la Forjadora', 'Una forjadora que crea equipo de alta calidad.', 'lucia_forjadora.jpg', 5),
+
+    -- Brujas
+    ('Morgana la Bruja', 'Una bruja que vive en el bosque y ofrece pociones.', 'morgana_bruja.jpg', 6),
+    ('Helga la Alquimista', 'Una alquimista que busca ingredientes raros.', 'helga_alquimista.jpg', 6),
+
+    -- Exploradores
+    ('Lucas el Explorador', 'Un explorador que conoce los rincones más oscuros del mundo.', 'lucas_explorador.jpg', 7),
+    ('Isabel la Cartógrafa', 'Una cartógrafa que dibuja mapas detallados.', 'isabel_cartografa.jpg', 7),
+
+    -- Sacerdotes
+    ('Padre Miguel', 'Un sacerdote que bendice a los aventureros.', 'padre_miguel.jpg', 8),
+    ('Hermana Clara', 'Una monja que cura a los heridos.', 'hermana_clara.jpg', 8),
+
+    -- Bardos
+    ('Roberto el Bardo', 'Un bardo que canta historias de héroes antiguos.', 'roberto_bardo.jpg', 9),
+    ('Laura la Juglaresa', 'Una juglaresa que entretiene con sus trucos.', 'laura_juglaresa.jpg', 9),
+
+    -- Cazadores
+    ('Diego el Cazador', 'Un cazador que rastrea bestias peligrosas.', 'diego_cazador.jpg', 10),
+    ('Carmen la Rastreadora', 'Una rastreadora que conoce los hábitos de las criaturas.', 'carmen_rastreadora.jpg', 10);
 
 -- Tabla: misiones
 CREATE TABLE IF NOT EXISTS misiones (
@@ -775,14 +1066,41 @@ CREATE TABLE IF NOT EXISTS misiones (
 );
 
 -- Insertar misiones
-INSERT INTO misiones (nombre, descripcion, nivel_minimo, recompensa_almas, recompensa_experiencia, tiempo_limite) VALUES
-('Cazar Goblin', 'Derrota a 5 Goblins', 1, 50, 100, 30),
-('Recoger Hierbas', 'Recoge 10 Hierbas Mágicas', 2, 30, 50, 20),
-('Derrota a los Bandidos', 'Elimina a 5 bandidos que aterrorizan la región', 3, 100, 200, 40),
-('Rescata al Niño Perdido', 'Encuentra y lleva al niño perdido de vuelta a la ciudad', 2, 60, 150, 30),
-('Caza de Lobos', 'Caza 3 lobos salvajes para proteger a los aldeanos', 2, 40, 100, 20),
-('El Tesoro del Bandido Líder', 'Derrota al bandido líder y recupera el mapa del tesoro', 5, 150, 300, 50),
-('La Maldición del Esqueleto', 'Derrota al esqueleto guerrero que maldice el bosque', 4, 80, 250, 35);
+-- Crear la tabla misiones
+CREATE TABLE IF NOT EXISTS misiones (
+    mision_id bigint PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(100) NOT NULL,
+    descripcion TEXT,
+    nivel_minimo INT NOT NULL,
+    recompensa_almas INT NOT NULL,
+    recompensa_experiencia INT NOT NULL,
+    tiempo_limite INT NOT NULL,
+    INDEX idx_nombre (nombre)
+);
+
+-- Insertar datos en la tabla misiones
+INSERT INTO misiones (nombre, descripcion, nivel_minimo, recompensa_almas, recompensa_experiencia, tiempo_limite)
+VALUES
+    ('Cosecha en peligro', 'Ayuda al granjero Juan a proteger sus cultivos de las plagas.', 1, 50, 100, 60),
+    ('El mercader desaparecido', 'Encuentra al mercader Luis, quien ha desaparecido en el bosque.', 3, 100, 200, 120),
+    ('Protege la ciudad', 'Asiste a la capitana Sofía en la defensa de la ciudad contra bandidos.', 5, 200, 400, 180),
+    ('El secreto del mago', 'Ayuda al mago Merlín a recuperar un artefacto mágico perdido.', 7, 300, 600, 240),
+    ('Forja legendaria', 'Consigue los materiales necesarios para que el herrero Pedro cree una espada legendaria.', 10, 500, 1000, 300),
+    ('La poción perdida', 'Ayuda a la bruja Morgana a encontrar los ingredientes para una poción especial.', 2, 80, 150, 90),
+    ('Mapa del tesoro', 'Sigue las pistas del explorador Lucas para encontrar un tesoro oculto.', 4, 150, 300, 150),
+    ('Bendición divina', 'Obtén la bendición del padre Miguel para protegerte en tu viaje.', 6, 250, 500, 200),
+    ('Canción del héroe', 'Ayuda al bardo Roberto a componer una canción sobre tus hazañas.', 8, 350, 700, 250),
+    ('Caza mayor', 'Acompaña al cazador Diego en la caza de una bestia peligrosa.', 9, 400, 800, 270),
+    ('Protege los cultivos', 'Ayuda al granjero Juan a proteger sus cultivos de las plagas.', 1, 60, 120, 60),
+    ('Recupera la mercancía perdida', 'Encuentra la mercancía robada del mercader Luis.', 3, 120, 240, 120),
+    ('Entrena a los reclutas', 'Ayuda a la capitana Sofía a entrenar a los nuevos guardias.', 5, 220, 440, 180),
+    ('Recupera el grimorio perdido', 'Encuentra el grimorio que el mago Merlín necesita.', 7, 320, 640, 240),
+    ('Consigue minerales raros', 'Busca minerales raros para el herrero Pedro.', 10, 520, 1040, 300),
+    ('Encuentra la flor mágica', 'Localiza la flor que la bruja Morgana necesita para su poción.', 2, 90, 180, 90),
+    ('Explora las ruinas antiguas', 'Investiga las ruinas en busca de secretos.', 4, 160, 320, 150),
+    ('Protege el templo', 'Defiende el templo de los invasores.', 6, 260, 520, 200),
+    ('Encuentra la lira dorada', 'Busca la lira perdida para el bardo Roberto.', 8, 360, 720, 250),
+    ('Caza mayor', 'Caza una bestia peligrosa en el bosque.', 9, 420, 840, 270);
 
 -- Tabla: recompensa_objetos
 CREATE TABLE IF NOT EXISTS mision_objetos (
@@ -797,12 +1115,48 @@ CREATE TABLE IF NOT EXISTS mision_objetos (
 );
 
 -- Insertar recompensas de misiones
-INSERT INTO mision_objetos (mision_id, item_id, cantidad) VALUES
-(1, 1, 1),  -- Cazar Goblin recompensa con Poción de Vida
-(2, 3, 10), -- Recoger Hierbas recompensa con Hierba Mágica
-(3, 2, 1),  -- Derrota a los Bandidos recompensa con Espada de Acero
-(4, 4, 2),  -- Rescata al Niño Perdido recompensa con Poción de Energía
-(5, 5, 1);  -- Caza de Lobos recompensa con Poción de Veneno
+INSERT INTO mision_objetos (mision_id, item_id, cantidad)
+VALUES
+    -- Cosecha en peligro (mision_id = 1)
+    (1, 21, 10),  -- Recolectar 10 unidades de Hierro
+    (1, 24, 5),   -- Recolectar 5 unidades de Cuero
+
+    -- El mercader desaparecido (mision_id = 2)
+    (2, 22, 3),   -- Recolectar 3 unidades de Piedra Mágica
+    (2, 25, 2),   -- Recolectar 2 unidades de Cristal Mágico
+
+    -- Protege la ciudad (mision_id = 3)
+    (3, 26, 8),   -- Recolectar 8 unidades de Madera de Roble
+    (3, 27, 1),   -- Recolectar 1 unidad de Hueso de Dragón
+
+    -- El secreto del mago (mision_id = 4)
+    (4, 22, 5),   -- Recolectar 5 unidades de Piedra Mágica
+    (4, 25, 3),   -- Recolectar 3 unidades de Cristal Mágico
+
+    -- Forja legendaria (mision_id = 5)
+    (5, 21, 20),  -- Recolectar 20 unidades de Hierro
+    (5, 28, 5),   -- Recolectar 5 unidades de Plata
+    (5, 29, 2),   -- Recolectar 2 unidades de Oro
+
+    -- La poción perdida (mision_id = 6)
+    (6, 22, 4),   -- Recolectar 4 unidades de Piedra Mágica
+    (6, 24, 6),   -- Recolectar 6 unidades de Cuero
+
+    -- Mapa del tesoro (mision_id = 7)
+    (7, 25, 3),   -- Recolectar 3 unidades de Cristal Mágico
+    (7, 26, 10),  -- Recolectar 10 unidades de Madera de Roble
+
+    -- Bendición divina (mision_id = 8)
+    (8, 22, 2),   -- Recolectar 2 unidades de Piedra Mágica
+    (8, 25, 1),   -- Recolectar 1 unidad de Cristal Mágico
+
+    -- Canción del héroe (mision_id = 9)
+    (9, 24, 7),   -- Recolectar 7 unidades de Cuero
+    (9, 26, 5),   -- Recolectar 5 unidades de Madera de Roble
+
+    -- Caza mayor (mision_id = 10)
+    (10, 27, 3),  -- Recolectar 3 unidades de Hueso de Dragón
+    (10, 28, 2);  -- Recolectar 2 unidades de Plata
 
 -- Tabla: personaje_mision
 CREATE TABLE IF NOT EXISTS personaje_mision (
@@ -819,12 +1173,27 @@ CREATE TABLE IF NOT EXISTS personaje_mision (
 );
 
 -- Insertar misiones de personajes
-INSERT INTO personaje_mision (personaje_id, mision_id, fecha_inicio, fecha_fin, estado) VALUES
-(1, 1, NOW(), NULL, 'en_progreso'),  -- Guerrero1 está en la misión Cazar Goblin
-(2, 2, NOW(), NULL, 'en_progreso'),  -- Mago1 está en la misión Recoger Hierbas
-(3, 3, NOW(), NULL, 'en_progreso'),  -- Arquero1 está en la misión Derrota a los Bandidos
-(4, 4, NOW(), NULL, 'en_progreso'),  -- Hechicero1 está en la misión Rescata al Niño Perdido
-(5, 5, NOW(), NULL, 'en_progreso');  -- Caballero1 está en la misión Caza de Lobos
+INSERT INTO personaje_mision (personaje_id, mision_id, fecha_inicio, fecha_fin, estado)
+VALUES
+    -- Aragorn (personaje_id = 1)
+    (1, 1, '2023-10-01 12:00:00', '2023-10-01 13:00:00', 'COMPLETADA'),  -- Cosecha en peligro
+    (1, 2, '2023-10-02 14:00:00', NULL, 'EN_PROGRESO'),                 -- El mercader desaparecido
+
+    -- Gandalf (personaje_id = 2)
+    (2, 3, '2023-10-03 15:00:00', '2023-10-03 17:00:00', 'COMPLETADA'),  -- Protege la ciudad
+    (2, 4, '2023-10-04 18:00:00', NULL, 'EN_PROGRESO'),                 -- El secreto del mago
+
+    -- Legolas (personaje_id = 3)
+    (3, 5, '2023-10-05 19:00:00', NULL, 'EN_PROGRESO'),                 -- Forja legendaria
+    (3, 6, '2023-10-06 20:00:00', '2023-10-06 21:00:00', 'COMPLETADA'),  -- La poción perdida
+
+    -- Frodo (personaje_id = 4)
+    (4, 7, '2023-10-07 22:00:00', NULL, 'EN_PROGRESO'),                 -- Mapa del tesoro
+    (4, 8, '2023-10-08 23:00:00', '2023-10-09 00:00:00', 'COMPLETADA'),  -- Bendición divina
+
+    -- Gimli (personaje_id = 5)
+    (5, 9, '2023-10-09 10:00:00', NULL, 'EN_PROGRESO'),                 -- Canción del héroe
+    (5, 10, '2023-10-10 11:00:00', '2023-10-10 12:00:00', 'FALLIDA');   -- Caza mayor
 
 -- Tabla: npc_mision
 CREATE TABLE IF NOT EXISTS npc_mision (
@@ -838,12 +1207,47 @@ CREATE TABLE IF NOT EXISTS npc_mision (
 );
 
 -- Insertar misiones de NPCs
-INSERT INTO npc_mision (npc_id, mision_id) VALUES
-(1, 1),  -- Aldeano ofrece la misión Cazar Goblin
-(1, 2),  -- Aldeano ofrece la misión Recoger Hierbas
-(3, 3),  -- Guardia ofrece la misión Derrota a los Bandidos
-(4, 4),  -- Mago ofrece la misión Rescata al Niño Perdido
-(5, 5);  -- Herrero ofrece la misión Caza de Lobos
+INSERT INTO npc_mision (npc_id, mision_id)
+VALUES
+    -- Juan el Granjero (npc_id = 1)
+    (1, 1),  -- Cosecha en peligro
+    (1, 11), -- Misión adicional: Protege los cultivos
+
+    -- Luis el Mercader (npc_id = 2)
+    (2, 2),  -- El mercader desaparecido
+    (2, 12), -- Misión adicional: Recupera la mercancía perdida
+
+    -- Sofía la Capitana (npc_id = 3)
+    (3, 3),  -- Protege la ciudad
+    (3, 13), -- Misión adicional: Entrena a los reclutas
+
+    -- Merlín el Sabio (npc_id = 4)
+    (4, 4),  -- El secreto del mago
+    (4, 14), -- Misión adicional: Recupera el grimorio perdido
+
+    -- Pedro el Herrero (npc_id = 5)
+    (5, 5),  -- Forja legendaria
+    (5, 15), -- Misión adicional: Consigue minerales raros
+
+    -- Morgana la Bruja (npc_id = 6)
+    (6, 6),  -- La poción perdida
+    (6, 16), -- Misión adicional: Encuentra la flor mágica
+
+    -- Lucas el Explorador (npc_id = 7)
+    (7, 7),  -- Mapa del tesoro
+    (7, 17), -- Misión adicional: Explora las ruinas antiguas
+
+    -- Padre Miguel (npc_id = 8)
+    (8, 8),  -- Bendición divina
+    (8, 18), -- Misión adicional: Protege el templo
+
+    -- Roberto el Bardo (npc_id = 9)
+    (9, 9),  -- Canción del héroe
+    (9, 19), -- Misión adicional: Encuentra la lira dorada
+
+    -- Diego el Cazador (npc_id = 10)
+    (10, 10), -- Caza mayor
+    (10, 20); -- Misión adicional: Caza mayor
 
 -- Tabla: mapa_monstruos
 CREATE TABLE IF NOT EXISTS mapa_monstruos (
@@ -858,12 +1262,55 @@ CREATE TABLE IF NOT EXISTS mapa_monstruos (
 );
 
 -- Insertar monstruos en mapas
-INSERT INTO mapa_monstruos (mapa_id, monstruo_id, probabilidad_aparicion) VALUES
-(1, 1, 80),  -- Mazmorra Oscura tiene Goblins
-(2, 2, 50),  -- Ciudad de los Héroes tiene Ogros
-(3, 3, 30),  -- Bosque Encantado tiene Dragones
-(4, 4, 70),  -- Bosque Tenebroso tiene Bandidos
-(5, 5, 60);  -- Ciudad de los Caídos tiene Lobos Salvajes
+INSERT INTO mapa_monstruos (mapa_id, monstruo_id, probabilidad_aparicion)
+VALUES
+    -- Bosque Oscuro (mapa_id = 1)
+    (1, 1, 70),  -- Goblin (70% de probabilidad)
+    (1, 5, 50),  -- Lobo Salvaje (50% de probabilidad)
+    (1, 7, 30),  -- Araña Gigante (30% de probabilidad)
+
+    -- Montañas del Dragón (mapa_id = 2)
+    (2, 2, 60),  -- Ogro (60% de probabilidad)
+    (2, 3, 40),  -- Dragón (40% de probabilidad)
+    (2, 6, 20),  -- Esqueleto Guerrero (20% de probabilidad)
+
+    -- Mazmorra de las Sombras (mapa_id = 3)
+    (3, 6, 80),  -- Esqueleto Guerrero (80% de probabilidad)
+    (3, 9, 50),  -- Nigromante (50% de probabilidad)
+    (3, 10, 30), -- Araña (30% de probabilidad)
+
+    -- Desierto Ardiente (mapa_id = 4)
+    (4, 4, 70),  -- Bandido (70% de probabilidad)
+    (4, 8, 40),  -- Bandido Líder (40% de probabilidad)
+    (4, 11, 20), -- Lobo Gigante (20% de probabilidad)
+
+    -- Ciudad de los Mercaderes (mapa_id = 5)
+    (5, 4, 50),  -- Bandido (50% de probabilidad)
+    (5, 8, 30),  -- Bandido Líder (30% de probabilidad)
+
+    -- Pantano Venenoso (mapa_id = 6)
+    (6, 5, 60),  -- Lobo Salvaje (60% de probabilidad)
+    (6, 7, 40),  -- Araña Gigante (40% de probabilidad)
+    (6, 10, 20), -- Araña (20% de probabilidad)
+
+    -- Llanuras del Viento (mapa_id = 7)
+    (7, 1, 50),  -- Goblin (50% de probabilidad)
+    (7, 5, 30),  -- Lobo Salvaje (30% de probabilidad)
+
+    -- Cueva de Cristal (mapa_id = 8)
+    (8, 6, 70),  -- Esqueleto Guerrero (70% de probabilidad)
+    (8, 9, 50),  -- Nigromante (50% de probabilidad)
+    (8, 12, 20), -- Lobo Sagrado (20% de probabilidad)
+
+    -- Ruinas Antiguas (mapa_id = 9)
+    (9, 3, 60),  -- Dragón (60% de probabilidad)
+    (9, 6, 40),  -- Esqueleto Guerrero (40% de probabilidad)
+    (9, 13, 20), -- Janeiro (20% de probabilidad)
+
+    -- Isla del Misterio (mapa_id = 10)
+    (10, 3, 50),  -- Dragón (50% de probabilidad)
+    (10, 12, 30), -- Lobo Sagrado (30% de probabilidad)
+    (10, 14, 20); -- Troll de Montaña (20% de probabilidad)
 
 -- Tabla: tienda_producto
 CREATE TABLE IF NOT EXISTS npc_producto (
@@ -880,11 +1327,40 @@ CREATE TABLE IF NOT EXISTS npc_producto (
 );
 
 -- Insertar productos de NPCs
-INSERT INTO npc_producto (npc_id, item_id, precio_compra, precio_venta, cantidad_venta) VALUES
-(2, 1, 15, 10, 10),  -- Mercader vende Poción de Vida
-(2, 4, 25, 20, 5),   -- Mercader vende Poción de Energía
-(5, 2, 60, 50, 1),   -- Herrero vende Espada de Acero
-(5, 8, 90, 80, 1);   -- Herrero vende Espada Larga
+-- Insertar datos en la tabla npc_producto
+INSERT INTO npc_producto (npc_id, item_id, precio_compra, precio_venta, cantidad_venta)
+VALUES
+    -- Aldeanos
+    (1, 1, 10, 20, 5),  -- Juan el Granjero vende Poción de Vida
+    (1, 2, 15, 30, 3),  -- Juan el Granjero vende Poción de Maná
+    (2, 3, 20, 40, 4),  -- María la Tejedora vende Poción de Energía
+    (2, 4, 25, 50, 2),  -- María la Tejedora vende Elixir de Vida
+
+    -- Mercaderes
+    (3, 5, 50, 100, 10), -- Luis el Mercader vende Elixir de Maná
+    (3, 6, 60, 120, 8),  -- Luis el Mercader vende Poción de Fuerza
+    (4, 7, 70, 140, 6),  -- Ana la Comerciante vende Poción de Defensa
+    (4, 8, 80, 160, 4),  -- Ana la Comerciante vende Poción de Invisibilidad
+
+    -- Guardias
+    (5, 9, 30, 60, 7),   -- Carlos el Guardia vende Espada de Acero
+    (5, 10, 40, 80, 5),  -- Carlos el Guardia vende Escudo de Madera
+    (6, 11, 50, 100, 6), -- Sofía la Capitana vende Daga Afilada
+    (6, 12, 60, 120, 4), -- Sofía la Capitana vende Armadura de Platino
+
+    -- Magos
+    (7, 13, 100, 200, 3), -- Merlín el Sabio vende Anillo de Poder
+    (7, 14, 120, 240, 2), -- Merlín el Sabio vende Martillo de Guerra
+    (8, 15, 150, 300, 1), -- Elena la Hechicera vende Capa del Mago
+    (8, 16, 200, 400, 1), -- Elena la Hechicera vende Báculo Arcano
+
+    -- Herreros
+    (9, 17, 80, 160, 5),  -- Pedro el Herrero vende Botas de Velocidad
+    (9, 18, 90, 180, 4),  -- Pedro el Herrero vende Cinturón de Resistencia
+    (10, 19, 100, 200, 3), -- Lucía la Forjadora vende Guantes de Acero
+    (10, 20, 110, 220, 2); -- Lucía la Forjadora vende Amuleto de Protección
+
+
 
 
 -- Tabla: transacciones_comercio
@@ -906,12 +1382,30 @@ CREATE TABLE IF NOT EXISTS transacciones_npc_personaje (
 );
 
 -- Insertar transacciones de NPCs y personajes
-INSERT INTO transacciones_npc_personaje (personaje_id, tipo_transaccion, npc_id, item_id, cantidad, precio_almas, fecha_transaccion) VALUES
-(1, 'compra', 2, 1, 5, 50, NOW()),  -- Guerrero1 compra 5 Pociones de Vida
-(2, 'venta', 2, 4, 3, 60, NOW()),   -- Mago1 vende 3 Pociones de Energía
-(3, 'compra', 5, 2, 1, 60, NOW()),  -- Arquero1 compra 1 Espada de Acero
-(4, 'venta', 5, 8, 1, 90, NOW()),   -- Hechicero1 vende 1 Espada Larga
-(5, 'compra', 2, 3, 10, 50, NOW()); -- Caballero1 compra 10 Hierbas Mágicas
+-- Insertar datos en la tabla transacciones_npc_personaje
+INSERT INTO transacciones_npc_personaje (personaje_id, tipo_transaccion, npc_id, item_id, cantidad, precio_almas, fecha_transaccion)
+VALUES
+    -- Transacciones de compra
+    (1, 'COMPRA', 1, 1, 2, 40, '2023-10-01 10:00:00'),
+    (2, 'COMPRA', 3, 5, 1, 100, '2023-10-01 11:30:00'),
+    (3, 'COMPRA', 5, 9, 3, 180, '2023-10-02 09:15:00'),
+    (4, 'COMPRA', 7, 13, 1, 200, '2023-10-02 14:45:00'),
+    -- Transacciones de venta
+    (1, 'VENTA', 2, 3, 1, 20, '2023-10-01 12:00:00'),
+    (2, 'VENTA', 4, 7, 2, 140, '2023-10-01 15:30:00'),
+    (3, 'VENTA', 6, 11, 1, 50, '2023-10-02 10:00:00'),
+
+
+    -- Más transacciones de compra
+    (6, 'COMPRA', 11, 21, 2, 140, '2023-10-03 12:00:00'),
+    (7, 'COMPRA', 13, 25, 1, 60, '2023-10-03 13:45:00'),
+    (8, 'COMPRA', 15, 29, 4, 200, '2023-10-04 07:30:00'),
+
+
+    -- Más transacciones de venta
+    (6, 'VENTA', 12, 23, 2, 180, '2023-10-03 15:00:00'),
+    (7, 'VENTA', 14, 27, 1, 80, '2023-10-03 16:30:00');
+
 
 
 

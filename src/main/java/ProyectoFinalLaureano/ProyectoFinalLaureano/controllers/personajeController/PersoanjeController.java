@@ -1,7 +1,6 @@
-package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers;
+package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.personajeController;
 
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.Personaje;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.usuario.Usuario;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.persoanjeService.EstadisticasPersonajeService;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.persoanjeService.InventarioPersonajeService;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.persoanjeService.PersoanjeService;
@@ -13,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/pesonaje")
-public class persoanjeController {
+public class PersoanjeController {
 
     @Autowired
     private PersoanjeService persoanjeService;

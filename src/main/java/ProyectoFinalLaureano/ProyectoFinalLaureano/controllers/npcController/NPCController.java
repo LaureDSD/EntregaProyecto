@@ -1,4 +1,4 @@
-package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers;
+package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.npcController;
 
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.npc.NPC;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.npcService.NPCService;
@@ -9,7 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/npc")
-public class npcController {
+public class NPCController {
 
     @Autowired
     private NPCService npcService;

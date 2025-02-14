@@ -36,9 +36,11 @@ public class TransaccionesNPC {
     @Schema(description = "Ítem involucrado en la transacción")
     private Item item;
 
+    //Reparar
+    @Enumerated(EnumType.STRING)
     @Column(name = "tipo_transaccion", nullable = false)
     @Schema(description = "Tipo de transacción (compra/venta)", example = "compra")
-    private String tipo_transaccion;
+    private TipoTransaccion tipo_transaccion;
 
     @Column(name = "cantidad", nullable = false)
     @Schema(description = "Cantidad de ítems involucrados en la transacción", example = "1")
