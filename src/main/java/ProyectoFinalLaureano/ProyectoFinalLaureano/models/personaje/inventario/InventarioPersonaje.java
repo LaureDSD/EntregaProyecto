@@ -1,6 +1,7 @@
-package ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje;
+package ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.inventario;
 
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.objeto.Item;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.Personaje;
 import jakarta.persistence.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;

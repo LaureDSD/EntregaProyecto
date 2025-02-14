@@ -1,4 +1,5 @@
-package ProyectoFinalLaureano.ProyectoFinalLaureano.models.usuario;
+package ProyectoFinalLaureano.ProyectoFinalLaureano.models.log;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.usuario.Usuario;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -11,7 +12,7 @@ import java.time.LocalDateTime;
 @Schema(description = "Entidad que representa los registros de logs del sistema")
 @Getter
 @Setter
-public class Log {
+public class LogUsuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

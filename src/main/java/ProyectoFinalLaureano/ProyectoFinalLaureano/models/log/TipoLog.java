@@ -1,4 +1,4 @@
-package ProyectoFinalLaureano.ProyectoFinalLaureano.models.usuario;
+package ProyectoFinalLaureano.ProyectoFinalLaureano.models.log;
 
 public enum TipoLog {
     INFORMACION,

@@ -1,6 +1,7 @@
-package ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje;
+package ProyectoFinalLaureano.ProyectoFinalLaureano.models.log;
 
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.monstruo.Monstruo;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.Personaje;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,7 +11,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Entity
 @Table(name = "registro_caza")
-public class RegistroCaza {
+public class LogPersoanje {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

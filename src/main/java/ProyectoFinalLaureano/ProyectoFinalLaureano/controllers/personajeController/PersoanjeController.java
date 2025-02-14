@@ -4,7 +4,7 @@ import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.Personaje;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.persoanjeService.EstadisticasPersonajeService;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.persoanjeService.InventarioPersonajeService;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.persoanjeService.PersoanjeService;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.services.persoanjeService.RegistroPersonajeService;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.services.logService.LogPersonajeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,7 +18,7 @@ public class PersoanjeController {
     private PersoanjeService persoanjeService;
 
     @Autowired
-    private RegistroPersonajeService registroPersoanjeService;
+    private LogPersonajeService registroPersoanjeService;
 
     @Autowired
     private EstadisticasPersonajeService estadisticasPersonajesService;

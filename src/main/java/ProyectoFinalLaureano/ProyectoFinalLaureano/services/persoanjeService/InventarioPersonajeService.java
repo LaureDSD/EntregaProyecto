@@ -1,7 +1,7 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.services.persoanjeService;
 
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.InventarioPersonaje;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.InventarioPersonajeId;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.inventario.InventarioPersonaje;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.inventario.InventarioPersonajeId;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.repositories.personajeRepository.InventarioPersonajeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

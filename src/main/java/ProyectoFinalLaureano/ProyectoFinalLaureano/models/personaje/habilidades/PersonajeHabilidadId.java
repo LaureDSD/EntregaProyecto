@@ -1,4 +1,5 @@
-package ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje;
+package ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.habilidades;
+
 import jakarta.persistence.Embeddable;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -10,7 +11,7 @@ import java.io.Serializable;
 @Setter
 @EqualsAndHashCode
 @Embeddable
-public class InventarioPersonajeId implements Serializable {
+public class PersonajeHabilidadId implements Serializable {
     private Long personaje_id;
-    private Long item_id;
+    private Long habilidad_id;
 }

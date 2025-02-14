@@ -1,5 +1,8 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje;
 
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.log.LogPersoanje;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.habilidades.PersonajeHabilidad;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.inventario.InventarioPersonaje;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.usuario.Usuario;
 import jakarta.persistence.*;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -108,7 +111,7 @@ public class Personaje {
     @JsonIgnore // Excluir esta relación en la serialización JSON
     private List<PersonajeHabilidad> personajeHabilidades;
     @OneToMany(mappedBy = "personaje", cascade = CascadeType.ALL)
-    private List<RegistroCaza> registrosCaza;
+    private List<LogPersoanje> registrosCaza;
 
 
 }

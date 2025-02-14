@@ -1,6 +1,7 @@
-package ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje;
+package ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.habilidades;
 
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.habilidad.Habilidad;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.Personaje;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;

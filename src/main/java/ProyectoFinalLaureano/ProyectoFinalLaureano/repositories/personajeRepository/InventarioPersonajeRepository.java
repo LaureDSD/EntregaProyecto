@@ -1,7 +1,7 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.repositories.personajeRepository;
 
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.InventarioPersonaje;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.InventarioPersonajeId;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.inventario.InventarioPersonaje;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.inventario.InventarioPersonajeId;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
