@@ -1,7 +1,6 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.gruposController;
 
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.grupos.Gremio;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.habilidad.Habilidad;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.grupoService.GremioService;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.grupoService.GrupoService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -55,6 +55,9 @@ CREATE TABLE IF NOT EXISTS logs (
     tipo_log ENUM('INFORMACION','FALLO', 'ADVERTENCIA','CREACION','ACTUALIZACION','BORRADO') DEFAULT 'INFORMACION',
     mensaje TEXT NOT NULL,
     fecha_log DATETIME NOT NULL,
+    FOREIGN KEY (usuario_id) REFERENCES usuarios(usuario_id) 
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
     INDEX idx_usuario_id (usuario_id)
 );
 
