@@ -11,6 +11,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.List;
 
+// ( Correcto )
+
 @Entity
 @Table(name = "npc")
 @Schema(description = "Entidad que representa un NPC en el sistema")
@@ -18,34 +20,40 @@ import java.util.List;
 @Setter
 public class NPC {
 
+    // ID del npc
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Schema(description = "ID único del NPC", example = "1")
     private Long npc_id;
 
+    // Nombre del npc
     @Column(name = "nombre", nullable = false, length = 100)
     @Schema(description = "Nombre del NPC", example = "Aldeano")
     private String nombre;
 
+    //Desdcripcion del npc
     @Column(name = "descripcion", columnDefinition = "TEXT")
     @Schema(description = "Descripción del NPC", example = "Un aldeano común que ofrece misiones simples")
     private String descripcion;
 
+    //Imagen del npc
     @Column(name = "imagen", length = 255)
     @Schema(description = "URL de la imagen del NPC", example = "aldeano.jpg")
     private String imagen;
 
+    // Relacion con el tipo npc N:1
     @ManyToOne
     @JoinColumn(name = "tipo_npc", nullable = false)
     @Schema(description = "Tipo de NPC asociado")
     private TipoNPC tipo_npc;
 
-    // Relación Uno a Muchos con TransaccionesNPC
-    @OneToMany(mappedBy = "npc", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonIgnore // Excluir esta relación en la serialización JSON
+    // Relación  con TransaccionesNPC 1:N
+    @OneToMany(mappedBy = "npc", cascade = CascadeType.ALL)
     @Schema(description = "Transacciones asociadas a este NPC")
+    @JsonIgnore // Excluir esta relación en la serialización JSON
     private List<LogTransacciones> transacciones;
 
+    //Relacion con los productos que vende 1:N
     @OneToMany(mappedBy = "npc", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @Schema(description = "Productos asociados a este NPC")
     private List<NPCProducto> npcProductos;

@@ -4,7 +4,7 @@ package ProyectoFinalLaureano.ProyectoFinalLaureano.models.estadisticasGenerales
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.efectosEstados.EfectoEstado;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.habilidad.Habilidad;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.monstruo.Monstruo;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.objeto.equipamiento.Equipamiento;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.objeto.Item;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.ClasePersonaje;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.Personaje;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -88,7 +88,7 @@ public class EstadisticasGenerales {
     // Relación con la tabla Equipamiento (One-to-Many)
     @OneToMany(mappedBy = "estadisticas", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @Schema(description = "Lista de equipamientos asociados a estas estadísticas.")
-    private List<Equipamiento> equipamientos;
+    private List<Item> equipamientos;
 
     // Relación con la tabla Habilidades (One-to-Many)
     @OneToMany(mappedBy = "estadisticas", cascade = CascadeType.ALL, fetch = FetchType.LAZY)

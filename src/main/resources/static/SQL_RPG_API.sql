@@ -218,7 +218,7 @@ CREATE TABLE IF NOT EXISTS mapas (
     INDEX idx_tipo_mapa (tipo_mapa_id)
 );
 
--- Tabla: mapa_efecto
+-- Tabla: mapa_efecto (Correcto)
 CREATE TABLE IF NOT EXISTS mapa_efecto (
     mapa_id bigint NOT NULL,
     efecto_id bigint NOT NULL,
@@ -227,7 +227,8 @@ CREATE TABLE IF NOT EXISTS mapa_efecto (
     FOREIGN KEY (mapa_id) REFERENCES mapas(mapa_id)
 );
 
--- Tabla: tipo_item
+-- Tabla: tipo_item (Correcto)
+-- Tipo del item (Material,Consumible,TipoEquipamiento(Pechera,Casco,Botas,Guantes,Pantalones,Zapatos,Accesorio1,Accesorio2))
 CREATE TABLE IF NOT EXISTS tipo_item (
     tipo_item_id bigint PRIMARY KEY AUTO_INCREMENT,
     nombre VARCHAR(100) NOT NULL,
@@ -242,14 +243,17 @@ CREATE TABLE IF NOT EXISTS items (
     tipo_item bigint NOT NULL,
     descripcion TEXT,
     acumulaciones_max INT NOT NULL DEFAULT 99,
-    precio_base INT DEFAULT 0,
-    valor_dinamico INT DEFAULT 0,
+    estadisticas_id BIGINT,
+    equipable boolean null ,
+    FOREIGN KEY (estadisticas_id) REFERENCES estadisticas_generales(estadisticas_id)
+    ON DELETE SET NULL
+    ON UPDATE CASCADE,
     foreign key (tipo_item) REFERENCES tipo_item(tipo_item_id),
     INDEX idx_nombre (nombre),
     INDEX idx_tipo_item (tipo_item)
 );
 
--- Tabla: item_efecto
+-- Tabla: item_efecto (Corecto)
 CREATE TABLE IF NOT EXISTS item_efecto (
     item_id bigint NOT NULL,
     efecto_id bigint NOT NULL,
@@ -258,19 +262,11 @@ CREATE TABLE IF NOT EXISTS item_efecto (
     FOREIGN KEY (item_id) REFERENCES items(item_id)
 );
 
--- Tabla: tipos_equipamiento
-CREATE TABLE IF NOT EXISTS tipo_equipamiento (
-    tipo_equipamiento_id bigint PRIMARY KEY AUTO_INCREMENT,
-    nombre VARCHAR(100) NOT NULL,
-    descripcion TEXT,
-    INDEX idx_nombre (nombre)
-);
-
--- Tabla: drops_objetos
+-- Tabla: drops_objetos (Correcto)
 CREATE TABLE IF NOT EXISTS drops_objetos (
     monstruo_id bigint NOT NULL,
     item_id bigint NOT NULL,
-    probabilidad INT NOT NULL DEFAULT 100,  -- Probabilidad de que el objeto sea soltado
+    probabilidad INT NOT NULL DEFAULT 0,  -- Probabilidad de que el objeto sea soltado
 	primary key(monstruo_id,item_id),
     FOREIGN KEY (monstruo_id) REFERENCES monstruos(monstruo_id) 
     ON DELETE CASCADE 
@@ -280,21 +276,9 @@ CREATE TABLE IF NOT EXISTS drops_objetos (
     INDEX idx_item_id (item_id)
 );
 
--- Tabla: objetos_equipables
-CREATE TABLE IF NOT EXISTS estadisticas_equipamiento ( 
-    equipamiento_id bigint PRIMARY KEY AUTO_INCREMENT,
-    item_id bigint NOT NULL,
-    tipo_equipamiento_id bigint NOT NULL,
-    estadisticas_id BIGINT,
-    FOREIGN KEY (estadisticas_id) REFERENCES estadisticas_generales(estadisticas_id)
-    ON DELETE SET NULL
-    ON UPDATE CASCADE,
-    FOREIGN KEY (item_id) REFERENCES items(item_id) ON DELETE CASCADE,
-    FOREIGN KEY (tipo_equipamiento_id) REFERENCES tipo_equipamiento(tipo_equipamiento_id),
-    INDEX idx_tipo_equipamiento (tipo_equipamiento_id)
-);
 
--- Tabla: inventario de personajes
+
+-- Tabla: inventario de personajes (Correcto)
 CREATE TABLE IF NOT EXISTS inventario_personaje (
     personaje_id bigint NOT NULL,
     item_id bigint NOT NULL,
@@ -308,7 +292,7 @@ CREATE TABLE IF NOT EXISTS inventario_personaje (
     INDEX idx_item_id (item_id)
 );
 
--- Tabla: habilidades 
+-- Tabla: habilidades (Correcto) 
 CREATE TABLE IF NOT EXISTS habilidades (
     habilidad_id bigint PRIMARY KEY AUTO_INCREMENT,
     imagen VARCHAR(255),
@@ -318,7 +302,7 @@ CREATE TABLE IF NOT EXISTS habilidades (
     requisito_nivel INT NOT NULL DEFAULT 1,
     tipo_habilidad ENUM('OFENSIVA', 'DEFENSIVA','APOYO') DEFAULT 'ofensiva',
     objetivo_habilidad ENUM('JUGADOR','ALIADO','ENEMIGO','TODO') DEFAULT 'todo',
-    area_efecto INT NOT NULL DEFAULT 1,
+    area_efecto double NOT NULL DEFAULT 1,
     unidades_afectadas INT NOT NULL DEFAULT 1,
     enfriamiento INT NOT NULL DEFAULT 0,
     estadisticas_id BIGINT,
@@ -328,7 +312,7 @@ CREATE TABLE IF NOT EXISTS habilidades (
     INDEX idx_nombre (nombre)
 );
 
--- Tabla: habilidad_efecto
+-- Tabla: habilidad_efecto (Correcto)
 CREATE TABLE IF NOT EXISTS habilidad_efecto (
     habilidad_id bigint NOT NULL,
     efecto_id bigint NOT NULL,
@@ -337,12 +321,12 @@ CREATE TABLE IF NOT EXISTS habilidad_efecto (
     FOREIGN KEY (habilidad_id) REFERENCES habilidades(habilidad_id)
 );
 
--- Tabla: personaje_habilidad
+-- Tabla: personaje_habilidad (Correcto)
 CREATE TABLE IF NOT EXISTS personaje_habilidad (
     personaje_id bigint NOT NULL,
     habilidad_id bigint NOT NULL,
-    nivel_habilidad INT NOT NULL DEFAULT 1,
-    probabilidad_uso INT NOT NULL DEFAULT 1,
+    nivel_habilidad double NOT NULL DEFAULT 1,
+    probabilidad_fallo double NOT NULL DEFAULT 1,
     ultimo_uso DATETIME,
     PRIMARY KEY (personaje_id, habilidad_id),
     FOREIGN KEY (personaje_id) REFERENCES personajes(personaje_id),
@@ -350,12 +334,13 @@ CREATE TABLE IF NOT EXISTS personaje_habilidad (
     INDEX idx_personaje_id (personaje_id,habilidad_id)
 );
 
--- Tabla: monstruo_habilidad
+-- Tabla: monstruo_habilidad (Correcto)
 CREATE TABLE IF NOT EXISTS monstruo_habilidad (
     monstruo_id bigint NOT NULL,
     habilidad_id bigint NOT NULL,
     nivel_habilidad INT NOT NULL DEFAULT 1,
-    probabilidad_uso INT DEFAULT 100,
+    probabilidad_uso double DEFAULT 100,
+    probabilidad_fallo double NOT NULL DEFAULT 1,
     PRIMARY KEY (monstruo_id, habilidad_id),
     FOREIGN KEY (monstruo_id) REFERENCES monstruos(monstruo_id) 
     ON DELETE CASCADE 
@@ -365,7 +350,7 @@ CREATE TABLE IF NOT EXISTS monstruo_habilidad (
     INDEX idx_habilidad_id (habilidad_id)
 );
 
--- Tabla: tipo_npc
+-- Tabla: tipo_npc (Correcto)
 CREATE TABLE IF NOT EXISTS tipo_npc (
     tipo_npc_id bigint PRIMARY KEY AUTO_INCREMENT,
     nombre VARCHAR(100) NOT NULL,
@@ -373,7 +358,7 @@ CREATE TABLE IF NOT EXISTS tipo_npc (
     INDEX idx_nombre (nombre)
 );
 
--- Tabla: npc
+-- Tabla: npc (Correcto)
 CREATE TABLE IF NOT EXISTS npc (
     npc_id bigint PRIMARY KEY AUTO_INCREMENT,
     nombre VARCHAR(100) NOT NULL,
@@ -384,7 +369,7 @@ CREATE TABLE IF NOT EXISTS npc (
     INDEX idx_nombre (nombre)
 );
 
--- Tabla: misiones
+-- Tabla: misiones (Correcto)
 CREATE TABLE IF NOT EXISTS misiones (
     mision_id bigint PRIMARY KEY AUTO_INCREMENT,
     nombre VARCHAR(100) NOT NULL,
@@ -396,7 +381,7 @@ CREATE TABLE IF NOT EXISTS misiones (
     INDEX idx_nombre (nombre)
 );
 
--- Tabla: recompensa_objetos
+-- Tabla: recompensa_objetos (Correcto)
 CREATE TABLE IF NOT EXISTS mision_objetos (
     mision_id bigint NOT NULL,
     item_id bigint NOT NULL,
@@ -408,7 +393,7 @@ CREATE TABLE IF NOT EXISTS mision_objetos (
     INDEX idx_item_id (item_id)
 );
 
--- Tabla: personaje_mision
+-- Tabla: personaje_mision (Correcto)
 CREATE TABLE IF NOT EXISTS personaje_mision (
     personaje_id bigint NOT NULL,
     mision_id bigint NOT NULL,
@@ -422,7 +407,7 @@ CREATE TABLE IF NOT EXISTS personaje_mision (
     INDEX idx_mision_id (mision_id)
 );
 
--- Tabla: npc_mision
+-- Tabla: npc_mision (Correcto) MUCHOS A MUCHOS CLASICO
 CREATE TABLE IF NOT EXISTS npc_mision (
     npc_id bigint NOT NULL,
     mision_id bigint NOT NULL,
@@ -433,7 +418,7 @@ CREATE TABLE IF NOT EXISTS npc_mision (
     INDEX idx_mision_id (mision_id)
 );
 
--- Tabla: mapa_monstruos
+-- Tabla: mapa_monstruos (Correcto) 
 CREATE TABLE IF NOT EXISTS mapa_monstruos (
     mapa_id bigint NOT NULL,
     monstruo_id bigint NOT NULL,
@@ -445,7 +430,7 @@ CREATE TABLE IF NOT EXISTS mapa_monstruos (
     INDEX idx_monstruo_id (monstruo_id)
 );
 
--- Tabla: tienda_producto
+-- Tabla: tienda_producto (Corecto)
 CREATE TABLE IF NOT EXISTS npc_producto (
     npc_id bigint NOT NULL,
     item_id bigint NOT NULL,
@@ -459,7 +444,7 @@ CREATE TABLE IF NOT EXISTS npc_producto (
     INDEX idx_item_id (item_id)
 );
 
--- Tabla: transacciones_comercio
+-- Tabla: transacciones_comercio (Correcto)
 CREATE TABLE IF NOT EXISTS transacciones_npc_personaje (
     transaccion_id bigint PRIMARY KEY AUTO_INCREMENT,
     personaje_id bigint NOT NULL,

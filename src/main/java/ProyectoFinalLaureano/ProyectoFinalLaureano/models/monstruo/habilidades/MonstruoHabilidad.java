@@ -7,6 +7,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+// (Correcto)
+
 @Entity
 @Table(name = "monstruo_habilidad")
 @Schema(description = "Entidad que representa la relación entre los monstruos y las habilidades que poseen")
@@ -14,25 +16,32 @@ import lombok.Setter;
 @Setter
 public class MonstruoHabilidad {
 
+    //ID de la relacion
     @EmbeddedId
     private MonstruoHabilidadId id;
 
-    @Column(name = "nivel_habilidad", nullable = false, columnDefinition = "INT DEFAULT 1")
+    //Nivel de la habilidad
+    @Column(name = "nivel_habilidad", nullable = false)
     @Schema(description = "Nivel de la habilidad del monstruo", example = "1")
-    private Integer nivelHabilidad;
+    private int nivelHabilidad;
 
-    @Column(name = "probabilidad_uso", nullable = false, columnDefinition = "INT DEFAULT 100")
+    //Posibilidad de acertar
+    @Column(name = "probabilidad_uso", nullable = false)
     @Schema(description = "Probabilidad de uso de la habilidad por el monstruo", example = "100")
-    private Integer probabilidadUso;
+    private int probabilidadUso;
 
+    //Posibilidad de fallar
+    @Column(name = "probabilidad_fallo", nullable = false)
+    @Schema(description = "Probabilidad de fallar de la habilidad por el monstruo", example = "100")
+    private double probabilidadFallo;
 
-    // Relación con la tabla monstruo
-    @ManyToOne(fetch = FetchType.LAZY)
+    // Relación con la tabla monstruo N:1
+    @ManyToOne()
     @JoinColumn(name = "monstruo_id", insertable = false, updatable = false)
     private Monstruo monstruo;
 
-    // Relación con la tabla habilidad
-    @ManyToOne(fetch = FetchType.LAZY)
+    // Relación con la tabla habilidad N:1
+    @ManyToOne()
     @JoinColumn(name = "habilidad_id", insertable = false, updatable = false)
     private Habilidad habilidad;
 }

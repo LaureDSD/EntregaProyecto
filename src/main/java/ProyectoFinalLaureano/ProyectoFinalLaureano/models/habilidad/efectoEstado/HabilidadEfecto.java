@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
 
+// (Correcto)
 
 @Entity
 @Table(name = "habilidad_efecto")
@@ -18,12 +19,14 @@ public class HabilidadEfecto {
     @EmbeddedId
     private HabilidadEfectoId id;
 
+    //Relacion habilidad N:1
     @ManyToOne
     @MapsId("habilidad_id")
     @JoinColumn(name = "habilidad_id", nullable = false)
     @Schema(description = "Habilidad asociada al efecto")
     private Habilidad habilidad;
 
+    // Relacion efecto N:1
     @ManyToOne
     @MapsId("efecto_id")
     @JoinColumn(name = "efecto_id", nullable = false)
