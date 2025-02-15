@@ -26,7 +26,7 @@ public class GruposController {
 
     @PutMapping("/{id}")
     public  Grupo actualizar(@PathVariable Long id, @RequestBody Grupo habilidadActualizar){
-        habilidadActualizar.setGrupo_id(id);
+        habilidadActualizar.setGrupoId(id);
         return  grupoService.setItem(habilidadActualizar);
     }
 

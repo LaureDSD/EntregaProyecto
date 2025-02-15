@@ -28,7 +28,7 @@ public class MonstruoHabilidad {
     //Posibilidad de acertar
     @Column(name = "probabilidad_uso", nullable = false)
     @Schema(description = "Probabilidad de uso de la habilidad por el monstruo", example = "100")
-    private int probabilidadUso;
+    private double probabilidadUso;
 
     //Posibilidad de fallar
     @Column(name = "probabilidad_fallo", nullable = false)

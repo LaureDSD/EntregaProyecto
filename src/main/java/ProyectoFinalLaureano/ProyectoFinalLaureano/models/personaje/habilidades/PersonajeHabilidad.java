@@ -22,7 +22,7 @@ public class PersonajeHabilidad {
     //Nivel de lahabilidad de la habilidad del persoanje
     @Column(name = "nivel_habilidad", nullable = false)
     @Schema(description = "Nivelde la habilidad asiganada", example = "10")
-    private Integer nivelHabilidad;
+    private int nivelHabilidad;
 
     //Posibilidad de fallar
     @Column(name = "probabilidad_fallo", nullable = false)

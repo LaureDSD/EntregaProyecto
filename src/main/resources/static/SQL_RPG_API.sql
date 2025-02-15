@@ -87,7 +87,7 @@ CREATE TABLE grupos (
     grupo_id BIGINT AUTO_INCREMENT PRIMARY KEY,
     imagen_logo VARCHAR(255),
     nombre VARCHAR(100) NOT NULL,
-    lider_grupo bigint not null,
+    lider_grupo_id bigint not null,
     descripcion TEXT,
     tipo_grupo_id BIGINT,
     FOREIGN KEY (tipo_grupo_id) REFERENCES tipo_grupo(tipo_grupo_id)
@@ -120,7 +120,7 @@ CREATE TABLE IF NOT EXISTS personajes (
 );
 
 -- Vincular tabla persoanjes y grupos (Correcto)
-alter table grupos add foreign key (lider_grupo) references personajes (personaje_id);
+alter table grupos add foreign key (lider_grupo_id) references personajes (personaje_id);
 
 -- Tabla: logros_persoanje (Correcto)
 CREATE TABLE if not exists logros_personaje (
@@ -166,7 +166,7 @@ CREATE TABLE IF NOT EXISTS monstruos (
 );
     
     -- Tabla: log_jugador_monstruo (Correcto)
-CREATE TABLE registro_juagdor_monstruo (
+CREATE TABLE registro_jugador_monstruo (
     registro_id BIGINT AUTO_INCREMENT PRIMARY KEY, 
     personaje_id BIGINT NOT NULL,
     dano_realizado INT NOT NULL DEFAULT 0,
@@ -325,7 +325,7 @@ CREATE TABLE IF NOT EXISTS habilidad_efecto (
 CREATE TABLE IF NOT EXISTS personaje_habilidad (
     personaje_id bigint NOT NULL,
     habilidad_id bigint NOT NULL,
-    nivel_habilidad double NOT NULL DEFAULT 1,
+    nivel_habilidad int NOT NULL DEFAULT 1,
     probabilidad_fallo double NOT NULL DEFAULT 1,
     ultimo_uso DATETIME,
     PRIMARY KEY (personaje_id, habilidad_id),

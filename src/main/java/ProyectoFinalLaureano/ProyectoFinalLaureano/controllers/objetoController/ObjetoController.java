@@ -15,13 +15,7 @@ public class ObjetoController {
     private ItemService itemService;
 
     @Autowired
-    private EstadisticasEquipamientoService estadisticasEquipamientoService;
-
-    @Autowired
     private ItemEfectoService efectoService;
-
-    @Autowired
-    private TipoEquipamientoService tipoEquipamientoService;
 
     @Autowired
     private TipoItemService tipoItemService;

@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @Entity
-@Table(name = "registro_juagdor_monstruo")
+@Table(name = "registro_jugador_monstruo")
 public class LogPersoanjeMonstruo {
 
     //ID  del registro

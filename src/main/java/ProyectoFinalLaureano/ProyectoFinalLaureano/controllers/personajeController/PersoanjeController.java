@@ -15,9 +15,6 @@ public class PersoanjeController {
     private PersoanjeService persoanjeService;
 
     @Autowired
-    private EstadisticasPersonajeService estadisticasPersonajesService;
-
-    @Autowired
     private InventarioPersonajeService inventarioPersonajeService;
 
     @Autowired
