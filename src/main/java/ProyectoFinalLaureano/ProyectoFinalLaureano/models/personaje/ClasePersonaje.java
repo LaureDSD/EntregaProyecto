@@ -31,35 +31,8 @@ public class ClasePersonaje {
     @Schema(description = "Descripción del la clase", example = "Especialista en ehchizos y ataques a larga distabcia")
     private String descripcion;
 
-    //Vida base de la clase
-    @Column(name = "vida_base", nullable = false)
-    @Schema(description = "Vida base de la  clase", example = "100")
-    private int vida_base;
+    //RelacionCon Estadisticas
 
-    //Escudo base de la clase
-    @Column(name = "escudo_base", nullable = false)
-    @Schema(description = "Escudo base de la  clase", example = "0")
-    private int escudo_base;
-
-    //Energia base de la clase
-    @Column(name = "energia_base", nullable = false)
-    @Schema(description = "Energía base de la clase", example = "50")
-    private int energia_base;
-
-    //Mana base de cada clase
-    @Column(name = "mana_base", nullable = false)
-    @Schema(description = "Mana base de la clase", example = "50")
-    private int emana_base;
-
-    //Ataque fisico base d ecada clase
-    @Column(name = "ataque_fisico_base", nullable = false)
-    @Schema(description = "Ataque base de la clase", example = "10")
-    private int ataquefiscobase;
-
-    //Ataque magoco de cada clase
-    @Column(name = "ataque_magico_base", nullable = false)
-    @Schema(description = "Ataque base de la clase", example = "10")
-    private int ataqueMagicoBase;
 
     //Defensa fisica de cada clase
     @Column(name = "defensa_fisica", nullable = false)

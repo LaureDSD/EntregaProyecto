@@ -1,6 +1,5 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.models.grupos;
 
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.habilidad.ObjetivoHabilidad;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.Personaje;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -33,7 +32,7 @@ public class Grupo {
     @Enumerated(EnumType.STRING)
     @Column(name = "tipo_Grupo", nullable = false)
     @Schema(description = "Tipo de grupo y limitador de integrantes", example = "enemigo")
-    private TipoGrupo grupo;
+    private TipoGrupoEnum grupo;
 
     //Grupo
     @OneToOne
