@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS tipo_usuario (
     INDEX idx_nombre (nombre)
 );
 
--- Tabla: usuarios
+-- Tabla: usuarios (Correcto)
 CREATE TABLE IF NOT EXISTS usuarios (
     usuario_id bigint PRIMARY KEY AUTO_INCREMENT,
     imagen_perfil VARCHAR(255),
@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS usuarios (
     INDEX idx_nombre_priv (nombre_usuario_priv)
 );
 
--- Tabla: logs de usuario
+-- Tabla: logs de usuario (Correcto)
 CREATE TABLE IF NOT EXISTS logs (
     log_id bigint PRIMARY KEY AUTO_INCREMENT,
     usuario_id bigint NULL,
@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS logs (
     INDEX idx_usuario_id (usuario_id)
 );
 
--- Estadisticas egenrales
+-- Estadisticas egenrales (Correcto)
 CREATE TABLE IF NOT EXISTS estadisticas_generales (
     estadisticas_id BIGINT PRIMARY KEY AUTO_INCREMENT,
     vida_base INT NOT NULL DEFAULT 0,
@@ -59,6 +59,7 @@ CREATE TABLE IF NOT EXISTS estadisticas_generales (
     defensa_magica INT DEFAULT 0
 );
 
+-- Table de clases de persoanje (Corrrecto)
 CREATE TABLE IF NOT EXISTS clase_personaje (
     clase_id bigint PRIMARY KEY AUTO_INCREMENT,
     nombre VARCHAR(100) NOT NULL,
@@ -72,6 +73,7 @@ CREATE TABLE IF NOT EXISTS clase_personaje (
     INDEX idx_nombre (nombre)
 );
 
+-- Tabla de ipo de grupo (Correcto)
 CREATE TABLE tipo_grupo (
     tipo_grupo_id BIGINT PRIMARY KEY AUTO_INCREMENT,
     nombre VARCHAR(100) NOT NULL,
@@ -80,6 +82,7 @@ CREATE TABLE tipo_grupo (
     descripcion TEXT
 );
 
+-- Tabla de grupos (Correcto)
 CREATE TABLE grupos (
     grupo_id BIGINT AUTO_INCREMENT PRIMARY KEY,
     imagen_logo VARCHAR(255),
@@ -90,7 +93,7 @@ CREATE TABLE grupos (
     FOREIGN KEY (tipo_grupo_id) REFERENCES tipo_grupo(tipo_grupo_id)
 );
 
--- Tabla: personajes
+-- Tabla: personajes (Correcto)
 CREATE TABLE IF NOT EXISTS personajes (
     personaje_id bigint PRIMARY KEY AUTO_INCREMENT,
     usuario_id bigint NOT NULL,
@@ -116,10 +119,10 @@ CREATE TABLE IF NOT EXISTS personajes (
     INDEX idx_nombre (nombre)
 );
 
--- Vincular tabla persoanjes y grupos
+-- Vincular tabla persoanjes y grupos (Correcto)
 alter table grupos add foreign key (lider_grupo) references personajes (personaje_id);
 
--- Tabla: logros_cacerias
+-- Tabla: logros_persoanje (Correcto)
 CREATE TABLE if not exists logros_personaje (
     personaje_id bigint NOT NULL,
     normal INT DEFAULT 0,
@@ -135,7 +138,7 @@ CREATE TABLE if not exists logros_personaje (
     ON UPDATE CASCADE
 );
 
--- Tabla: tipo_monstruo
+-- Tabla: tipo_monstruo (Correcto)
 CREATE TABLE IF NOT EXISTS tipo_monstruo (
     tipo_monstruo_id bigint PRIMARY KEY AUTO_INCREMENT,
     nombre VARCHAR(100) NOT NULL,
@@ -143,7 +146,7 @@ CREATE TABLE IF NOT EXISTS tipo_monstruo (
     INDEX idx_nombre (nombre)
 );
  
--- Tabla: monstruos
+-- Tabla: monstruos (Correcto) 
 CREATE TABLE IF NOT EXISTS monstruos (
     monstruo_id bigint PRIMARY KEY AUTO_INCREMENT,
     nombre VARCHAR(100) NOT NULL,
@@ -162,27 +165,29 @@ CREATE TABLE IF NOT EXISTS monstruos (
     INDEX idx_tipo_monstruo (tipo_monstruo_id)
 );
     
-    -- Tabla: log_jugador_monstruo
-CREATE TABLE registro_caza (
-    registro_caza_id BIGINT AUTO_INCREMENT PRIMARY KEY, 
-    personaje_id BIGINT NOT NULL,                        
-    monstruo_id BIGINT NOT NULL,                         
-    fecha_caza DATETIME NOT NULL,                       
+    -- Tabla: log_jugador_monstruo (Correcto)
+CREATE TABLE registro_juagdor_monstruo (
+    registro_id BIGINT AUTO_INCREMENT PRIMARY KEY, 
+    personaje_id BIGINT NOT NULL,
+    dano_realizado INT NOT NULL DEFAULT 0,
+    dano_recivido INT NOT NULL DEFAULT 0,
+    monstruo_id BIGINT NOT NULL,
+    fecha DATETIME NOT NULL,                       
     almas_obtenidas INT NOT NULL,                     
     experiencia_obtenida INT NOT NULL,                  
     FOREIGN KEY (personaje_id) REFERENCES personajes(personaje_id),
     FOREIGN KEY (monstruo_id) REFERENCES monstruos(monstruo_id)      
 );
 
--- Tabla: efectos_estados
+-- Tabla: efectos_estados (Correcto)
 CREATE TABLE IF NOT EXISTS efectos_estados (
     efecto_id bigint PRIMARY KEY AUTO_INCREMENT,
     imagen_icono VARCHAR(255),
     nombre VARCHAR(100) NOT NULL,
     tipo ENUM('BUFF', 'DEBUFF') NOT NULL,
     tipo_afectado ENUM('PERSONAJE', 'MONSTRUO', 'TODO') DEFAULT 'personaje',
-    duracion_efecto INT NOT NULL DEFAULT 0,
-    intervalos_efecto INT NOT NULL DEFAULT 0,
+    duracion_efecto double NOT NULL DEFAULT 0,
+    intervalos_efecto double NOT NULL DEFAULT 0,
     acumulaciones INT NOT NULL DEFAULT 0,
     descripcion TEXT,
     estadisticas_id BIGINT,
@@ -192,7 +197,7 @@ CREATE TABLE IF NOT EXISTS efectos_estados (
     INDEX idx_nombre (nombre)
 );
 
--- Tabla: Tipo_mapas
+-- Tabla: Tipo_mapas (Correcto)
 CREATE TABLE IF NOT EXISTS tipo_mapa (
     tipo_mapa_id bigint PRIMARY KEY AUTO_INCREMENT,
     nombre VARCHAR(100) NOT NULL,
@@ -200,7 +205,7 @@ CREATE TABLE IF NOT EXISTS tipo_mapa (
     INDEX idx_nombre (nombre)
 );
 
--- Tabla: mapas
+-- Tabla: mapas (Correcto)
 CREATE TABLE IF NOT EXISTS mapas (
     mapa_id bigint PRIMARY KEY AUTO_INCREMENT,
     nombre VARCHAR(100) NOT NULL,

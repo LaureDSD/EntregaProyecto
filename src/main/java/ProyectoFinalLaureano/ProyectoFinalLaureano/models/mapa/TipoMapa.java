@@ -7,6 +7,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.List;
 
+// (Correcto)
+
 @Entity
 @Table(name = "tipo_mapa")
 @Schema(description = "Entidad que representa un tipo de mapa en el sistema")
@@ -14,15 +16,18 @@ import java.util.List;
 @Setter
 public class TipoMapa {
 
+    //ID del tipo mapa
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Schema(description = "ID único del tipo de mapa", example = "1")
     private Long tipo_mapa_id;
 
+    //Nombre del tipo mapa
     @Column(name = "nombre", nullable = false, length = 100)
     @Schema(description = "Nombre del tipo de mapa", example = "mazmorra")
     private String nombre;
 
+    //Descripcion del tipo mapa
     @Column(name = "descripcion", columnDefinition = "TEXT")
     @Schema(description = "Descripción del tipo de mapa", example = "Un lugar peligroso lleno de enemigos y tesoros")
     private String descripcion;

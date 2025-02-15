@@ -1,8 +1,10 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.models.objeto;
 
 
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.estadisticasGenerales.EstadisticasGenerales;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.monstruo.drops.DropsObjetos;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.npc.tienda.NPCProducto;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.objeto.efecto.ItemEfecto;
 import jakarta.persistence.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
@@ -18,35 +20,32 @@ import java.util.List;
 @Setter
 public class Item {
 
+    //ID  de los Items
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Schema(description = "ID único del ítem", example = "1")
     private Long item_id;
 
+    //Nombre de los items
     @Column(name = "nombre", nullable = false, length = 100)
     @Schema(description = "Nombre del ítem", example = "Poción de Vida")
     private String nombre;
 
+    //Tipo del item (Material,Consumible,TipoEquipamiento(Pechera,Casco,Botas,Guantes,Pantalones,Zapatos,Accesorio1,Accesorio2))
     @ManyToOne
     @JoinColumn(name = "tipo_item", nullable = false)
     @Schema(description = "Tipo de ítem asociado")
     private TipoItem tipo_item;
 
+    //Descripcion del item
     @Column(name = "descripcion", columnDefinition = "TEXT")
     @Schema(description = "Descripción del ítem", example = "Restaura 50 puntos de vida")
     private String descripcion;
 
+    //Acumulaciones maximas o staks
     @Column(name = "acumulaciones_max", nullable = false)
     @Schema(description = "Cantidad máxima de acumulaciones del ítem", example = "99")
     private int acumulaciones_max;
-
-    @Column(name = "precio_base")
-    @Schema(description = "Precio base del ítem", example = "10")
-    private int precio_base;
-
-    @Column(name = "valor_dinamico")
-    @Schema(description = "Valor dinámico del ítem", example = "5")
-    private int valor_dinamico;
 
     // Relación Uno a Muchos con ItemEfecto
     @OneToMany(mappedBy = "item", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -54,11 +53,10 @@ public class Item {
     @Schema(description = "Efectos asociados al ítem")
     private List<ItemEfecto> efectos;
 
-    // Relación Uno a Muchos con EstadisticasEquipamiento
-    @OneToMany(mappedBy = "item", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonIgnore // Excluir esta relación en la serialización JSON
-    @Schema(description = "Estadísticas de equipamiento asociadas al ítem")
-    private List<EstadisticasEquipamiento> estadisticas;
+    //RelacionCon Estadisticas
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "estadisticas_id", referencedColumnName = "estadisticasId")
+    private EstadisticasGenerales estadisticas;
 
     // Relación Uno a Muchos con DropsObjetos
     @OneToMany(mappedBy = "item", cascade = CascadeType.ALL, fetch = FetchType.LAZY)

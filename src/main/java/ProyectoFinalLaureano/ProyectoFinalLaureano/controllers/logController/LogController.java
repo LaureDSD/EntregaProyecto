@@ -1,8 +1,7 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.logController;
 
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.log.LogPersoanje;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.log.LogPersoanjeMonstruo;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.log.LogUsuario;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.log.LogTransacciones;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.logService.LogPersonajeService;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.logService.LogService;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.logService.LogTransaccionesService;
@@ -57,23 +56,23 @@ public class LogController {
     //Seccion persoanjes
 
     @GetMapping("/persoanje/")
-    public List<LogPersoanje> obtenerPersonajesLog(){
+    public List<LogPersoanjeMonstruo> obtenerPersonajesLog(){
         return  logPersonajeService.getAll();
     }
 
     @GetMapping("/persoanje/{id}")
-    public LogPersoanje obtenerPersonajeLog(@PathVariable Long id){
+    public LogPersoanjeMonstruo obtenerPersonajeLog(@PathVariable Long id){
         return logPersonajeService.getByID(id);
     }
 
     @PutMapping("/persoanje/{id}")
-    public LogPersoanje actualizarPersonajeLog(@PathVariable Long id, @RequestBody LogPersoanje logActualizar){
+    public LogPersoanjeMonstruo actualizarPersonajeLog(@PathVariable Long id, @RequestBody LogPersoanjeMonstruo logActualizar){
         logActualizar.setRegistroCazaId(id);
         return  logPersonajeService.setItem(logActualizar);
     }
 
     @PostMapping("/persoanje")
-    public LogPersoanje guardarPersonajeLog(@RequestBody LogPersoanje logGuardar){
+    public LogPersoanjeMonstruo guardarPersonajeLog(@RequestBody LogPersoanjeMonstruo logGuardar){
         return  logPersonajeService.setItem(logGuardar);
     }
 

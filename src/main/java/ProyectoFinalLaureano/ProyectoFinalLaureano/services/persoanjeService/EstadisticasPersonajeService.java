@@ -1,6 +1,5 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.services.persoanjeService;
 
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.EstadisticasPersonaje;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.repositories.personajeRepository.EstadisticasPersonajeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

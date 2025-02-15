@@ -1,7 +1,7 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.services.logService;
 
 
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.log.LogPersoanje;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.log.LogPersoanjeMonstruo;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.repositories.logRepository.LogPesonajeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,15 +14,15 @@ public class LogPersonajeService {
     @Autowired
     private LogPesonajeRepository logPesonajeRepository;
 
-    public List<LogPersoanje> getAll(){
+    public List<LogPersoanjeMonstruo> getAll(){
         return  logPesonajeRepository.findAll();
     }
 
-    public LogPersoanje getByID(Long id){
+    public LogPersoanjeMonstruo getByID(Long id){
         return logPesonajeRepository.findById(id).orElse(null);
     }
 
-    public LogPersoanje setItem(LogPersoanje o){
+    public LogPersoanjeMonstruo setItem(LogPersoanjeMonstruo o){
         return  logPesonajeRepository.save(o);
     }
 

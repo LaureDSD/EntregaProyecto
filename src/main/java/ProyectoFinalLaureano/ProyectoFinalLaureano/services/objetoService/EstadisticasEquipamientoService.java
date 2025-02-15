@@ -1,6 +1,6 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.services.objetoService;
 
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.objeto.EstadisticasEquipamiento;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.objeto.equipamiento.Equipamiento;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.repositories.objetoRepository.EstadisticaEquipamientoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,15 +12,15 @@ public class EstadisticasEquipamientoService {
     @Autowired
     private EstadisticaEquipamientoRepository estadisticaEquipamientoRepository;
 
-    public List<EstadisticasEquipamiento> getAll(){
+    public List<Equipamiento> getAll(){
         return  estadisticaEquipamientoRepository.findAll();
     }
 
-    public EstadisticasEquipamiento getByID(Long id){
+    public Equipamiento getByID(Long id){
         return estadisticaEquipamientoRepository.findById(id).orElse(null);
     }
 
-    public EstadisticasEquipamiento setItem(EstadisticasEquipamiento o){
+    public Equipamiento setItem(Equipamiento o){
         return  estadisticaEquipamientoRepository.save(o);
     }
 

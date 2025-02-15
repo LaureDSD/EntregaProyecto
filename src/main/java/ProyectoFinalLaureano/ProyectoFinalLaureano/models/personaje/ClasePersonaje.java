@@ -1,5 +1,6 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje;
 
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.estadisticasGenerales.EstadisticasGenerales;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
@@ -8,6 +9,7 @@ import lombok.Setter;
 
 import java.util.List;
 
+// (Correcto)
 @Getter
 @Setter
 @Entity
@@ -32,17 +34,9 @@ public class ClasePersonaje {
     private String descripcion;
 
     //RelacionCon Estadisticas
-
-
-    //Defensa fisica de cada clase
-    @Column(name = "defensa_fisica", nullable = false)
-    @Schema(description = "Defensa de la clase", example = "5")
-    private int defensamagica;
-
-    //Defensa magica de cada clase
-    @Column(name = "defensa_magica", nullable = false)
-    @Schema(description = "Defensa de la clase", example = "5")
-    private int defensafisica;
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "estadisticas_id", referencedColumnName = "estadisticasId")
+    private EstadisticasGenerales estadisticas;
 
     // Relación Uno a Muchos con persoanje
     @OneToMany(mappedBy = "clase_persoanje", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
