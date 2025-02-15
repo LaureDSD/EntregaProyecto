@@ -2,17 +2,23 @@ package ProyectoFinalLaureano.ProyectoFinalLaureano.models.log;
 
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.monstruo.Monstruo;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.Personaje;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.time.LocalDateTime;
 
 // (Correcto)
 
-@Data
-@NoArgsConstructor
+
 @Entity
 @Table(name = "registro_jugador_monstruo")
+@Schema(description = "Entidad que representa los registros de logros del personaje")
+@Getter
+@Setter
 public class LogPersoanjeMonstruo {
 
     //ID  del registro

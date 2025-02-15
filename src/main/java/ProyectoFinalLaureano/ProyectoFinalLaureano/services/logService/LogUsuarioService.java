@@ -1,16 +1,16 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.services.logService;
 
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.log.LogUsuario;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.repositories.logRepository.LogRepository;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.repositories.logRepository.LogUsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class LogService {
+public class LogUsuarioService {
     @Autowired
-    private LogRepository logRepository;
+    private LogUsuarioRepository logRepository;
 
     public List<LogUsuario> getAll(){
         return  logRepository.findAll();

@@ -1,6 +1,6 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.misiones;
 
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.mision.EstadoMision;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.mision.enums.EstadoMision;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.mision.Mision;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.Personaje;
 import jakarta.persistence.*;

@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface LogPesonajeRepository extends JpaRepository<LogPersoanjeMonstruo,Long> {
+public interface LogPesonajeMonstruoRepository extends JpaRepository<LogPersoanjeMonstruo,Long> {
 }

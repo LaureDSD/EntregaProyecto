@@ -1,4 +1,5 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.models.log;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.log.enums.TipoLog;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.usuario.Usuario;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
