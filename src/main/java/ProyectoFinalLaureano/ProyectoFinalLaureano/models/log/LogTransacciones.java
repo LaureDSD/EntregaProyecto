@@ -48,7 +48,7 @@ public class LogTransacciones {
     @Enumerated(EnumType.STRING)
     @Column(name = "tipo_transaccion", nullable = false)
     @Schema(description = "Tipo de transacción (compra/venta)", example = "compra")
-    private TipoTransaccion tipo_transaccion;
+    private TipoTransaccion tipoTransaccion;
 
     //Cantidad de transaccion
     @Column(name = "cantidad", nullable = false)

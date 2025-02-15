@@ -1,6 +1,9 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.services.habilidadService;
 
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.grupos.TipoGrupo;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.habilidad.Habilidad;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.habilidad.enums.ObjetivoHabilidad;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.habilidad.enums.TipoHabilidad;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.repositories.habilidadRepository.HabilidadRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,5 +29,9 @@ public class HabilidadService {
 
     public  void deleteByID(Long id){
         habilidadRepository.deleteById(id);
+    }
+
+    public List<Habilidad> buscarHabilidades(TipoHabilidad tipoHabilidad, ObjetivoHabilidad objetivoHabilidad) {
+        return habilidadRepository.buscarPorFiltro(tipoHabilidad, objetivoHabilidad);
     }
 }

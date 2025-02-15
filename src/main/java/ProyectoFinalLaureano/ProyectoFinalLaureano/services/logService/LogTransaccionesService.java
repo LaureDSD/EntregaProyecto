@@ -1,6 +1,7 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.services.logService;
 
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.log.LogTransacciones;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.log.enums.TipoTransaccion;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.repositories.logRepository.LogTransaccionesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,5 +27,9 @@ public class LogTransaccionesService {
 
     public  void deleteByID(Long id){
         transaccionesNPCRepository.deleteById(id);
+    }
+
+    public List<LogTransacciones> getBytipoTransaccion(TipoTransaccion tipoTransaccion) {
+        return transaccionesNPCRepository.getBytipoTransaccion(tipoTransaccion);
     }
 }

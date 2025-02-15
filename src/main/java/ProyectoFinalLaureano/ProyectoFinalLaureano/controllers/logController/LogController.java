@@ -1,10 +1,14 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.logController;
 
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.log.LogPersoanjeMonstruo;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.log.LogPersonajeMonstruo;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.log.LogTransacciones;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.log.LogUsuario;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.log.enums.TipoLog;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.log.enums.TipoTransaccion;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.logService.LogPersonajeMonstruoService;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.logService.LogUsuarioService;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.logService.LogTransaccionesService;
+import jakarta.transaction.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,11 +28,14 @@ public class LogController {
     private LogTransaccionesService logTransaccionesService;
 
 
-    //Seccion usuarios
-
+    //CRUD LOG USUARIOS
     @GetMapping("/usuario/")
-    public List<LogUsuario> obtenerUsuariosLog(){
-        return  logService.getAll();
+    public List<LogUsuario> obtenerLista(@RequestParam(required = false) TipoLog tipoLog){
+        if(tipoLog==null){
+            return  logService.getAll();
+        }else{
+            return logService.getBytipoLog(tipoLog);
+        }
     }
 
     @GetMapping("/usuario/{id}")
@@ -53,26 +60,26 @@ public class LogController {
     }
 
 
-    //Seccion persoanjes
+    //CRUD LOG PERSOANJES_MONSTRUOS
 
     @GetMapping("/persoanje/")
-    public List<LogPersoanjeMonstruo> obtenerPersonajesLog(){
+    public List<LogPersonajeMonstruo> obtenerPersonajesLog(){
         return  logPersonajeService.getAll();
     }
 
     @GetMapping("/persoanje/{id}")
-    public LogPersoanjeMonstruo obtenerPersonajeLog(@PathVariable Long id){
+    public LogPersonajeMonstruo obtenerPersonajeLog(@PathVariable Long id){
         return logPersonajeService.getByID(id);
     }
 
     @PutMapping("/persoanje/{id}")
-    public LogPersoanjeMonstruo actualizarPersonajeLog(@PathVariable Long id, @RequestBody LogPersoanjeMonstruo logActualizar){
+    public LogPersonajeMonstruo actualizarPersonajeLog(@PathVariable Long id, @RequestBody LogPersonajeMonstruo logActualizar){
         logActualizar.setRegistroCazaId(id);
         return  logPersonajeService.setItem(logActualizar);
     }
 
     @PostMapping("/persoanje")
-    public LogPersoanjeMonstruo guardarPersonajeLog(@RequestBody LogPersoanjeMonstruo logGuardar){
+    public LogPersonajeMonstruo guardarPersonajeLog(@RequestBody LogPersonajeMonstruo logGuardar){
         return  logPersonajeService.setItem(logGuardar);
     }
 
@@ -81,9 +88,38 @@ public class LogController {
         logPersonajeService.deleteByID(id);
     }
 
+    //CRUD LOG TRANSACCIONES
+
+    @GetMapping("/transaccion/")
+    public List<LogTransacciones> obtenerLista(@RequestParam(required = false) TipoTransaccion tipoTransaccion){
+        if(tipoTransaccion==null){
+            return  logTransaccionesService.getAll();
+        }else{
+            return logTransaccionesService.getBytipoTransaccion(tipoTransaccion);
+        }
+    }
 
 
+    @GetMapping("/transaccion/{id}")
+    public LogTransacciones obtenerlogTransaccionesServiceLog(@PathVariable Long id){
+        return logTransaccionesService.getByID(id);
+    }
 
+    @PutMapping("/transaccion/{id}")
+    public LogTransacciones actualizarlogTransaccionesServiceLog(@PathVariable Long id, @RequestBody LogTransacciones logActualizar){
+        logActualizar.setTransaccion_id(id);
+        return  logTransaccionesService.setItem(logActualizar);
+    }
+
+    @PostMapping("/transaccion")
+    public LogTransacciones guardarlogTransaccionesServiceLog(@RequestBody LogTransacciones logGuardar){
+        return  logTransaccionesService.setItem(logGuardar);
+    }
+
+    @DeleteMapping("/transaccion/{id}")
+    public void borrarlogTransaccionesServiceLog (@PathVariable Long id){
+        logTransaccionesService.deleteByID(id);
+    }
 
 
 

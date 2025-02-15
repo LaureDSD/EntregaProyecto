@@ -1,6 +1,7 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.services.grupoService;
 
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.grupos.Grupo;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.grupos.TipoGrupo;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.repositories.grupoRepository.GrupoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,5 +28,9 @@ public class GrupoService {
 
     public  void deleteByID(Long id){
         grupoRepository.deleteById(id);
+    }
+
+    public List<Grupo> getBytipoGrupo(TipoGrupo tu) {
+        return grupoRepository.getBytipoGrupo(tu);
     }
 }

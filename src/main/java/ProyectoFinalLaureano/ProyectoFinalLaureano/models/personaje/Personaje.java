@@ -2,7 +2,7 @@ package ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje;
 
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.estadisticasGenerales.EstadisticasGenerales;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.grupos.Grupo;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.log.LogPersoanjeMonstruo;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.log.LogPersonajeMonstruo;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.habilidades.PersonajeHabilidad;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.inventario.InventarioPersonaje;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.usuario.Usuario;
@@ -116,6 +116,6 @@ public class Personaje {
     // Union conregistro de logros
     @OneToMany(mappedBy = "personaje", cascade = CascadeType.ALL)
     @JsonIgnore // Excluir esta relación en la serialización JSON
-    private List<LogPersoanjeMonstruo> logPersonaje;
+    private List<LogPersonajeMonstruo> logPersonaje;
 
 }

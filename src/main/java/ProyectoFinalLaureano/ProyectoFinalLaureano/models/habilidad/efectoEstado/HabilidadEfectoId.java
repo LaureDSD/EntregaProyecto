@@ -15,4 +15,8 @@ public class HabilidadEfectoId implements Serializable {
     private Long habilidad_id;
     private Long efecto_id;
 
+    public HabilidadEfectoId(Long habilidad_id, Long efecto_id) {
+        this.habilidad_id = habilidad_id;
+        this.efecto_id = efecto_id;
+    }
 }

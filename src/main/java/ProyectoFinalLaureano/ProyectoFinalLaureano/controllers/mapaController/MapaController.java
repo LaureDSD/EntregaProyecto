@@ -1,5 +1,7 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.mapaController;
 
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.log.LogTransacciones;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.log.enums.TipoTransaccion;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.mapa.Mapa;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.mapaService.MapaEfectoService;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.mapaService.MapaMonstruoService;
@@ -27,9 +29,23 @@ public class MapaController {
     private TipoMapaService tipoMapaService;
 
 
+    //CRUD TIPO MAPA
+
+
+
+
+
+
+    //CRUD MAPA
+
     @GetMapping("/")
-    public List<Mapa> obtenerUsuario(){
-        return  mapaService.getAll();
+    public List<Mapa> obtenerListaMapas(@RequestParam(required = false) TipoTransaccion tipoTransaccion){
+        if(tipoTransaccion==null){
+            return  mapaService.getAll();
+        }else{
+            //return logTransaccionesService.getBytipoTransaccion(tipoTransaccion);
+            return null;
+        }
     }
 
     @GetMapping("/{id}")
@@ -52,4 +68,11 @@ public class MapaController {
     public void borrar (@PathVariable Long id){
         mapaService.deleteByID(id);
     }
+
+    //CRUD MAPA MONSTRUO
+
+
+
+    //CRUD MAPA EFECTO
+
 }

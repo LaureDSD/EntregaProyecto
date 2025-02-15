@@ -56,13 +56,13 @@ public class Habilidad {
     @Enumerated(EnumType.STRING)
     @Column(name = "tipo_habilidad", nullable = false)
     @Schema(description = "Tipo de habilidad (ofensiva, defensiva, apoyo)", example = "ofensiva")
-    private TipoHabilidad tipo_habilidad;
+    private TipoHabilidad tipoHabilidad;
 
     //Objetivo de habilidad
     @Enumerated(EnumType.STRING)
     @Column(name = "objetivo_habilidad", nullable = false)
     @Schema(description = "Objetivo de la habilidad (jugador, aliado, enemigo, todo)", example = "enemigo")
-    private ObjetivoHabilidad objetivo_habilidad;
+    private ObjetivoHabilidad objetivoHabilidad;
 
     //Area de efecto
     @Column(name = "area_efecto", nullable = false)

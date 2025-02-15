@@ -1,6 +1,7 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.services.logService;
 
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.log.LogUsuario;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.log.enums.TipoLog;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.repositories.logRepository.LogUsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,4 +29,7 @@ public class LogUsuarioService {
         logRepository.deleteById(id);
     }
 
+    public List<LogUsuario> getBytipoLog(TipoLog tipoLog) {
+        return logRepository.getBytipoLog(tipoLog);
+    }
 }
