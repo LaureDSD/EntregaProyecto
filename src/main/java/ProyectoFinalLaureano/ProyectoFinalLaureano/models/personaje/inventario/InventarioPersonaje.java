@@ -5,11 +5,12 @@ import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.Personaje;
 import jakarta.persistence.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.time.LocalDateTime;
-
+@NoArgsConstructor
 @Entity
 @Table(name = "inventario_personaje")
 @Schema(description = "Entidad que representa el inventario de un personaje")

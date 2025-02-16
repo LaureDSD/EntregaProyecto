@@ -9,11 +9,12 @@ import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.habilidades.
 import jakarta.persistence.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.List;
-
+@NoArgsConstructor
 @Entity
 @Table(name = "habilidades")
 @Schema(description = "Entidad que representa una habilidad en el sistema")

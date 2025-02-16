@@ -6,10 +6,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 // (Correcto)
-
+@NoArgsConstructor
 @Entity
 @Table(name = "npc_producto")
 @Schema(description = "Entidad que representa los productos que un NPC puede vender o comprar")

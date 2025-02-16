@@ -18,43 +18,6 @@ public class ObjetoController {
     @Autowired
     private ItemService itemService;
 
-    @Autowired
-    private ItemEfectoService itemEfectoService;
-
-    @Autowired
-    private TipoItemService tipoItemService;
-
-    // CRUD TIPO ITEM
-
-    @GetMapping("/tipo/")
-    public List<TipoItem> obtenerListaTiposItem() {
-        return tipoItemService.getAll();
-    }
-
-    @GetMapping("/tipo/{id}")
-    public TipoItem obtenerTipoItem(@PathVariable Long id) {
-        return tipoItemService.getByID(id);
-    }
-
-    @PutMapping("/tipo/{id}")
-    public ResponseEntity<Object> actualizarTipoItem(@PathVariable Long id, @RequestBody TipoItem tipoItemActualizar) {
-        if (tipoItemActualizar.getTipo_item_id().equals(id)) {
-            return ResponseEntity.ok(tipoItemService.setItem(tipoItemActualizar));
-        } else {
-            return ResponseEntity.badRequest().body("El ID proporcionado no coincide con el ID del tipo de ítem.");
-        }
-    }
-
-    @PostMapping("/tipo")
-    public TipoItem guardarTipoItem(@RequestBody TipoItem tipoItemGuardar) {
-        return tipoItemService.setItem(tipoItemGuardar);
-    }
-
-    @DeleteMapping("/tipo/{id}")
-    public void borrarTipoItem(@PathVariable Long id) {
-        tipoItemService.deleteByID(id);
-    }
-
     // CRUD ITEM
 
     @GetMapping("/")
@@ -90,36 +53,5 @@ public class ObjetoController {
     @DeleteMapping("/{id}")
     public void borrarItem(@PathVariable Long id) {
         itemService.deleteByID(id);
-    }
-
-    // CRUD ITEM EFECTO
-
-    @GetMapping("/{itemId}/efecto/")
-    public List<ItemEfecto> obtenerListaEfectosItem() {
-        return itemEfectoService.getAll();
-    }
-
-    @GetMapping("/{itemId}/efecto/{efectoId}")
-    public ItemEfecto obtenerEfectoItem(@PathVariable Long itemId, @PathVariable Long efectoId) {
-        return itemEfectoService.getByID(new ItemEfectoId(itemId, efectoId));
-    }
-
-    @PutMapping("/{itemId}/efecto/{efectoId}")
-    public ResponseEntity<Object> actualizarEfectoItem(@PathVariable Long itemId, @PathVariable Long efectoId, @RequestBody ItemEfecto efectoActualizar) {
-        if (efectoActualizar.getId().equals(new ItemEfectoId(itemId, efectoId))) {
-            return ResponseEntity.ok(itemEfectoService.setItem(efectoActualizar));
-        } else {
-            return ResponseEntity.badRequest().body("El ID proporcionado no coincide con el ID del efecto.");
-        }
-    }
-
-    @PostMapping("/{itemId}/efecto/")
-    public ItemEfecto guardarEfectoItem(@RequestBody ItemEfecto efectoGuardar) {
-        return itemEfectoService.setItem(efectoGuardar);
-    }
-
-    @DeleteMapping("/{itemId}/efecto/{efectoId}")
-    public void borrarEfectoItem(@PathVariable Long itemId, @PathVariable Long efectoId) {
-        itemEfectoService.deleteByID(new ItemEfectoId(itemId, efectoId));
     }
 }

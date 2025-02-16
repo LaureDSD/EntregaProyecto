@@ -4,8 +4,12 @@ import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.Personaje;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.lang.NonNull;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -32,31 +36,38 @@ public class Usuario {
     private String imagen_perfil;
 
     //Nombre publico de cada usuario
+    @NonNull
     @Column(name = "nombre_usuario_pub", nullable = false, length = 100)
     @Schema(description = "Nombre público del usuario", example = "Usuario1")
     private String nombre_usuario_pub;
 
     //Limite de personjaes por usuario
+    @NonNull
     @Column(name = "limite_personajes", nullable = false)
     @Schema(description = "Límite de personajes que puede crear el usuario", example = "3")
     private int limite_personajes;
 
     //nombre privado y unico de cada usuario
+    @NonNull
     @Column(name = "nombre_usuario_priv", nullable = false, unique = true, length = 100)
     @Schema(description = "Nombre privado del usuario (para login)", example = "user1")
     private String nombre_usuario_priv;
 
     //Correo de cada usuario
+    @NonNull
+    @Email
     @Column(name = "correo", nullable = false, unique = true, length = 100)
     @Schema(description = "Correo electrónico del usuario", example = "user1@example.com")
     private String correo;
 
     //Contrasena de cada usuario
+    @NonNull
     @Column(name = "contraseña", nullable = false, length = 255)
     @Schema(description = "Contraseña del usuario", example = "password1")
     private String contraseña;
 
     //Ultima conexion
+    @NotNull
     @Column(name = "ultima_conexion")
     @Schema(description = "Fecha y hora de la última conexión del usuario", example = "2023-10-01T12:00:00")
     private LocalDateTime ultima_conexion;
@@ -74,7 +85,7 @@ public class Usuario {
     //Fecha en la que se crea el usuario
     @Column(name = "fecha_creacion", nullable = false)
     @Schema(description = "Fecha y hora de creación del usuario", example = "2023-10-01T12:00:00")
-    private LocalDateTime fecha_creacion;
+    private LocalDateTime fecha_creacion = LocalDateTime.now();
 
     //Estado de la cuenta sin ser borrada, activa o inactiva
     @Column(name = "estado_cuenta", nullable = false)

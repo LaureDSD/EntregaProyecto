@@ -6,12 +6,13 @@ import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.Personaje;
 import jakarta.persistence.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
 
 // (Correcto)
-
+@NoArgsConstructor
 @Entity
 @Table(name = "personaje_mision")
 @Schema(description = "Entidad que representa la relación entre un personaje y una misión")

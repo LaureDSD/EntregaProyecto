@@ -5,17 +5,18 @@ import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.Personaje;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
 
 // (Correcto)
-
+@NoArgsConstructor
 @Getter
 @Setter
 @Entity
 @Table(name = "grupos")
-@Schema(description = "Modelo que representa un grupo en el sistema.")
+@Schema(description = "Entidad que representa un grupo en el sistema.")
 public class Grupo {
 
     //ID del grupo

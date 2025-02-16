@@ -5,10 +5,11 @@ import ProyectoFinalLaureano.ProyectoFinalLaureano.models.objeto.Item;
 import jakarta.persistence.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 // (Correcto)
-
+@NoArgsConstructor
 @Entity
 @Table(name = "item_efecto")
 @Schema(description = "Entidad que representa la relación entre un ítem y un efecto")

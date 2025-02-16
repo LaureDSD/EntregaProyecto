@@ -5,10 +5,11 @@ import ProyectoFinalLaureano.ProyectoFinalLaureano.models.habilidad.Habilidad;
 import jakarta.persistence.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 // (Correcto)
-
+@NoArgsConstructor
 @Entity
 @Table(name = "habilidad_efecto")
 @Schema(description = "Entidad que representa la relación entre una habilidad y un efecto")

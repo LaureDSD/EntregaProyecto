@@ -5,11 +5,12 @@ import ProyectoFinalLaureano.ProyectoFinalLaureano.models.mapa.monstruos.MapaMon
 import jakarta.persistence.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.List;
-
+@NoArgsConstructor
 @Entity
 @Table(name = "mapas")
 @Schema(description = "Entidad que representa un mapa en el sistema")

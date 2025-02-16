@@ -15,43 +15,44 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
 @RestController
 @RequestMapping("/api/monstruo")
-public class MonstruoController {
+public class MonstruoTipoController {
 
     @Autowired
-    private MonstruosService monstruosService;
+    private TipoMonstruoService tipoMonstruoService;
 
+    // CRUD TIPO MONSTRUO
 
-    // CRUD MONSTRUO
-
-    @GetMapping("/")
-    public List<Monstruo> obtenerListaMonstruos() {
-        return monstruosService.getAll();
+    @GetMapping("/tipo/")
+    public List<TipoMonstruo> obtenerListaTiposMonstruo() {
+        return tipoMonstruoService.getAll();
     }
 
-    @GetMapping("/{id}")
-    public Monstruo obtenerMonstruo(@PathVariable Long id) {
-        return monstruosService.getByID(id);
+    @GetMapping("/tipo/{id}")
+    public TipoMonstruo obtenerTipoMonstruo(@PathVariable Long id) {
+        return tipoMonstruoService.getByID(id);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Object> actualizarMonstruo(@PathVariable Long id, @RequestBody Monstruo monstruoActualizar) {
-        if (monstruoActualizar.getMonstruo_id().equals(id)) {
-            return ResponseEntity.ok(monstruosService.setItem(monstruoActualizar));
+    @PutMapping("/tipo/{id}")
+    public ResponseEntity<Object> actualizarTipoMonstruo(@PathVariable Long id, @RequestBody TipoMonstruo tipoMonstruoActualizar) {
+        if (tipoMonstruoActualizar.getTipo_monstruo_id().equals(id)) {
+            return ResponseEntity.ok(tipoMonstruoService.setItem(tipoMonstruoActualizar));
         } else {
-            return ResponseEntity.badRequest().body("El ID proporcionado no coincide con el ID del monstruo.");
+            return ResponseEntity.badRequest().body("El ID proporcionado no coincide con el ID del tipo de monstruo.");
         }
     }
 
-    @PostMapping
-    public Monstruo guardarMonstruo(@RequestBody Monstruo monstruoGuardar) {
-        return monstruosService.setItem(monstruoGuardar);
+    @PostMapping("/tipo")
+    public TipoMonstruo guardarTipoMonstruo(@RequestBody TipoMonstruo tipoMonstruoGuardar) {
+        return tipoMonstruoService.setItem(tipoMonstruoGuardar);
     }
 
-    @DeleteMapping("/{id}")
-    public void borrarMonstruo(@PathVariable Long id) {
-        monstruosService.deleteByID(id);
+    @DeleteMapping("/tipo/{id}")
+    public void borrarTipoMonstruo(@PathVariable Long id) {
+        tipoMonstruoService.deleteByID(id);
     }
+
 
 }

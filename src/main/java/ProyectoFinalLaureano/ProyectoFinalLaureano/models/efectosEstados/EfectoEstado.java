@@ -6,10 +6,11 @@ import ProyectoFinalLaureano.ProyectoFinalLaureano.models.estadisticasGenerales.
 import jakarta.persistence.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 // (Correcto)
-
+@NoArgsConstructor
 @Entity
 @Table(name = "efectos_estados")
 @Schema(description = "Entidad que representa un efecto o estado en el sistema")

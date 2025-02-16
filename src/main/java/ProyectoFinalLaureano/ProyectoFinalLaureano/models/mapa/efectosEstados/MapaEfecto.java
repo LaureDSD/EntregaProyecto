@@ -6,10 +6,11 @@ import ProyectoFinalLaureano.ProyectoFinalLaureano.models.mapa.Mapa;
 import jakarta.persistence.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 // (Corecto)
-
+@NoArgsConstructor
 @Entity
 @Table(name = "mapa_efecto")
 @Schema(description = "Entidad que representa la relación entre un mapa y un efecto")

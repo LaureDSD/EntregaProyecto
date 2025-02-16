@@ -5,14 +5,16 @@ import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.Personaje;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 // (Correcto)
-
+@NoArgsConstructor
 @Entity
 @Table(name = "personaje_habilidad")
 @Getter
 @Setter
+@Schema(description = "Entidad que genera que represenata la relacion entre persoanje y habilidad")
 public class PersonajeHabilidad {
 
     //ID combinado de la relacion

@@ -6,12 +6,13 @@ import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.misiones.Per
 import jakarta.persistence.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 import java.util.List;
-
+@NoArgsConstructor
 @Entity
 @Table(name = "misiones")
 @Schema(description = "Entidad que representa una misión en el sistema")

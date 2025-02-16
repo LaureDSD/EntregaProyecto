@@ -2,13 +2,14 @@ package ProyectoFinalLaureano.ProyectoFinalLaureano.models.mapa;
 import jakarta.persistence.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.List;
 
 // (Correcto)
-
+@NoArgsConstructor
 @Entity
 @Table(name = "tipo_mapa")
 @Schema(description = "Entidad que representa un tipo de mapa en el sistema")

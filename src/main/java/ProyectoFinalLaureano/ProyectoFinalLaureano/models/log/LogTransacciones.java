@@ -7,12 +7,13 @@ import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.Personaje;
 import jakarta.persistence.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
 
 // (Correcto)
-
+@NoArgsConstructor
 @Entity
 @Table(name = "transacciones_npc_personaje")
 @Schema(description = "Entidad que representa una transacción entre un NPC y un personaje")

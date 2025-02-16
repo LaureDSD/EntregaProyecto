@@ -20,9 +20,6 @@ public class HabilidadController {
     @Autowired
     private HabilidadService habilidadService;
 
-    @Autowired
-    private HabildadEfectoService habilidadEfectoService;
-
     //CRUD Habilidades
 
     //Pasando ( GET /habilidades/buscar?tipoHabilidad=OFENSIVA&objetivoHabilidad=ENEMIGO )
@@ -59,42 +56,5 @@ public class HabilidadController {
     public void borrarHabilidad (@PathVariable Long id){
         habilidadService.deleteByID(id);
     }
-
-
-
-
-
-    //CRUD basico HabilidadEfecto
-
-
-    @GetMapping("/{habilidadId}/efecto/")
-    public List<HabilidadEfecto> obtenerEfectos() {
-        return habilidadEfectoService.getAll();
-    }
-
-    @GetMapping("/{habilidadId}/efecto/{efectoId}")
-    public HabilidadEfecto obtenerEfecto(@PathVariable Long habilidadId, @PathVariable Long efectoId) {
-        return habilidadEfectoService.getByID(new HabilidadEfectoId(habilidadId, efectoId));
-    }
-
-    @PutMapping("/{habilidadId}/efecto/{efectoId}")
-    public ResponseEntity<Object> actualizarEfecto(@PathVariable Long habilidadId, @PathVariable Long efectoId, @RequestBody HabilidadEfecto efectoActualizar) {
-        if(efectoActualizar.getId().equals(new HabilidadEfectoId(habilidadId,efectoId))) {
-            return ResponseEntity.ok( habilidadEfectoService.setItem(efectoActualizar) );
-        }else{
-            return ResponseEntity.badRequest().body("El ID proporcionado no coincide con el ID del mapa.");
-        }
-    }
-
-    @PostMapping("/{habilidadId}/efecto/")
-    public HabilidadEfecto guardarEfecto(@RequestBody HabilidadEfecto efectoGuardar) {
-        return habilidadEfectoService.setItem(efectoGuardar);
-    }
-
-    @DeleteMapping("/{habilidadId}/efecto/{efectoId}")
-    public void borrarEfecto(@PathVariable Long habilidadId, @PathVariable Long efectoId) {
-        habilidadEfectoService.deleteByID(new HabilidadEfectoId(habilidadId, efectoId));
-    }
-
 
 }

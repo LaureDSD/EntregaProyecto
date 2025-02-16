@@ -4,12 +4,13 @@ import ProyectoFinalLaureano.ProyectoFinalLaureano.models.usuario.Usuario;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
 
 // (Correcto)
-
+@NoArgsConstructor
 @Getter
 @Setter
 @Entity

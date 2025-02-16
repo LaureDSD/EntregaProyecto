@@ -21,43 +21,6 @@ public class NPCController {
     @Autowired
     private NPCService npcService;
 
-    @Autowired
-    private TipoNPCService tipoNPCService;
-
-    @Autowired
-    private TiendaNPCService tiendaNPCService;
-
-    // CRUD TIPO NPC
-
-    @GetMapping("/tipo/")
-    public List<TipoNPC> obtenerListaTiposNPC() {
-        return tipoNPCService.getAll();
-    }
-
-    @GetMapping("/tipo/{id}")
-    public TipoNPC obtenerTipoNPC(@PathVariable Long id) {
-        return tipoNPCService.getByID(id);
-    }
-
-    @PutMapping("/tipo/{id}")
-    public ResponseEntity<Object> actualizarTipoNPC(@PathVariable Long id, @RequestBody TipoNPC tipoNPCActualizar) {
-        if (tipoNPCActualizar.getTipo_npc_id().equals(id)) {
-            return ResponseEntity.ok(tipoNPCService.setItem(tipoNPCActualizar));
-        } else {
-            return ResponseEntity.badRequest().body("El ID proporcionado no coincide con el ID del tipo de NPC.");
-        }
-    }
-
-    @PostMapping("/tipo")
-    public TipoNPC guardarTipoNPC(@RequestBody TipoNPC tipoNPCGuardar) {
-        return tipoNPCService.setItem(tipoNPCGuardar);
-    }
-
-    @DeleteMapping("/tipo/{id}")
-    public void borrarTipoNPC(@PathVariable Long id) {
-        tipoNPCService.deleteByID(id);
-    }
-
     // CRUD NPC
 
     @GetMapping("/")
@@ -93,34 +56,4 @@ public class NPCController {
         npcService.deleteByID(id);
     }
 
-    // CRUD TIENDA NPC (NPC PRODUCTO)
-
-    @GetMapping("/{npcId}/tienda/")
-    public List<NPCProducto> obtenerListaTiendaNPC() {
-        return tiendaNPCService.getAll();
-    }
-
-    @GetMapping("/{npcId}/tienda/{productoId}")
-    public NPCProducto obtenerProductoTiendaNPC(@PathVariable Long npcId, @PathVariable Long productoId) {
-        return tiendaNPCService.getByID(new NPCProductoId(npcId, productoId));
-    }
-
-    @PutMapping("/{npcId}/tienda/{productoId}")
-    public ResponseEntity<Object> actualizarProductoTiendaNPC(@PathVariable Long npcId, @PathVariable Long productoId, @RequestBody NPCProducto tiendaActualizar) {
-        if (tiendaActualizar.getId().equals(new NPCProductoId(npcId, productoId))) {
-            return ResponseEntity.ok(tiendaNPCService.setItem(tiendaActualizar));
-        } else {
-            return ResponseEntity.badRequest().body("El ID proporcionado no coincide con el ID del producto en la tienda.");
-        }
-    }
-
-    @PostMapping("/{npcId}/tienda/")
-    public NPCProducto guardarProductoTiendaNPC(@RequestBody NPCProducto tiendaGuardar) {
-        return tiendaNPCService.setItem(tiendaGuardar);
-    }
-
-    @DeleteMapping("/{npcId}/tienda/{productoId}")
-    public void borrarProductoTiendaNPC(@PathVariable Long npcId, @PathVariable Long productoId) {
-        tiendaNPCService.deleteByID(new NPCProductoId(npcId, productoId));
-    }
 }

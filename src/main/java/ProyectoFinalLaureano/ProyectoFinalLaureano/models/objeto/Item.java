@@ -8,11 +8,12 @@ import ProyectoFinalLaureano.ProyectoFinalLaureano.models.objeto.efecto.ItemEfec
 import jakarta.persistence.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.List;
-
+@NoArgsConstructor
 @Entity
 @Table(name = "items")
 @Schema(description = "Entidad que representa un ítem en el sistema")

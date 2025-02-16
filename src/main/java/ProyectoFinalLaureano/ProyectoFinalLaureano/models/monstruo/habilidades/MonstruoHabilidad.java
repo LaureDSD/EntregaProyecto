@@ -5,10 +5,11 @@ import ProyectoFinalLaureano.ProyectoFinalLaureano.models.monstruo.Monstruo;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 // (Correcto)
-
+@NoArgsConstructor
 @Entity
 @Table(name = "monstruo_habilidad")
 @Schema(description = "Entidad que representa la relación entre los monstruos y las habilidades que poseen")

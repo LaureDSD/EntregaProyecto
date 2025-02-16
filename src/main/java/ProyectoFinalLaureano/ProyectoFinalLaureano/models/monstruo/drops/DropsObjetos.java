@@ -4,8 +4,9 @@ import ProyectoFinalLaureano.ProyectoFinalLaureano.models.objeto.Item;
 import jakarta.persistence.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
-
+@NoArgsConstructor
 @Entity
 @Table(name = "drops_objetos")
 @Schema(description = "Entidad que representa los objetos que un monstruo puede soltar")

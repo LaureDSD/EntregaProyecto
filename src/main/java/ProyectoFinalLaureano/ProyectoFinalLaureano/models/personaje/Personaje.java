@@ -9,6 +9,7 @@ import ProyectoFinalLaureano.ProyectoFinalLaureano.models.usuario.Usuario;
 import jakarta.persistence.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -16,7 +17,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 // (Correcto)
-
+@NoArgsConstructor
 @Getter
 @Setter
 @Entity
