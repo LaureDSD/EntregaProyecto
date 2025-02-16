@@ -14,4 +14,9 @@ import java.io.Serializable;
 public class MapaEfectoId implements Serializable {
     private Long mapa_id;
     private Long efecto_id;
+
+    public MapaEfectoId(Long mapa_id, Long efecto_id) {
+        this.mapa_id = mapa_id;
+        this.efecto_id = efecto_id;
+    }
 }

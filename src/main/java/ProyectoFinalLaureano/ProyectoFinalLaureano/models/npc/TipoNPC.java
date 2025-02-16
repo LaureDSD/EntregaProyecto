@@ -34,7 +34,7 @@ public class TipoNPC {
     private String descripcion;
 
     // Relación con NPC 1:N
-    @OneToMany(mappedBy = "tipo_npc", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "tipoNPC", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnore // Excluir esta relación en la serialización JSON
     @Schema(description = "NPCs asociados a este tipo")
     private List<NPC> npcs;

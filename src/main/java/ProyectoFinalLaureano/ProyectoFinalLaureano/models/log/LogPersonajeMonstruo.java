@@ -23,7 +23,7 @@ public class LogPersonajeMonstruo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "registro_id")
-    private Long registroCazaId;
+    private Long registroId;
 
     //Persoanojae registrado
     @ManyToOne

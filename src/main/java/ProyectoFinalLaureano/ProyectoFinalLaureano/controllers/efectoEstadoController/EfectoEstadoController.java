@@ -3,6 +3,7 @@ package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.efectoEstadoCont
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.efectosEstados.EfectoEstado;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.efectoEstadoService.EfectoEstadoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,9 +26,12 @@ public class EfectoEstadoController {
     }
 
     @PutMapping("/{id}")
-    public  EfectoEstado actualizar(@PathVariable Long id, @RequestBody EfectoEstado efectoEstadoActualizar){
-        efectoEstadoActualizar.setEfecto_id(id);
-        return  efectoEstadoService.setItem(efectoEstadoActualizar);
+    public ResponseEntity<Object> actualizar(@PathVariable Long id, @RequestBody EfectoEstado efectoEstadoActualizar){
+        if(efectoEstadoActualizar.getEfecto_id().equals(id)) {
+            return ResponseEntity.ok( efectoEstadoService.setItem(efectoEstadoActualizar) );
+        }else{
+            return ResponseEntity.badRequest().body("El ID proporcionado no coincide con el ID del efecto.");
+        }
     }
 
     @PostMapping

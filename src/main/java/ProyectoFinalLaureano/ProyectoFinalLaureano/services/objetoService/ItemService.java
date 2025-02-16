@@ -1,6 +1,7 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.services.objetoService;
 
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.objeto.Item;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.objeto.TipoItem;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.repositories.objetoRepository.ItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,5 +27,9 @@ public class ItemService {
 
     public  void deleteByID(Long id){
         itemRepository.deleteById(id);
+    }
+
+    public List<Item> getBytipoItem(TipoItem tipoItem) {
+        return itemRepository.getBytipoItem(tipoItem);
     }
 }

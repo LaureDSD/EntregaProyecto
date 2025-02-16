@@ -45,7 +45,7 @@ public class NPC {
     @ManyToOne
     @JoinColumn(name = "tipo_npc", nullable = false)
     @Schema(description = "Tipo de NPC asociado")
-    private TipoNPC tipo_npc;
+    private TipoNPC tipoNPC;
 
     // Relación  con TransaccionesNPC 1:N
     @OneToMany(mappedBy = "npc", cascade = CascadeType.ALL)

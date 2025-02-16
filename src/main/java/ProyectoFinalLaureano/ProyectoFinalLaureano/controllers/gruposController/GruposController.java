@@ -5,6 +5,7 @@ import ProyectoFinalLaureano.ProyectoFinalLaureano.models.grupos.TipoGrupo;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.grupoService.GrupoService;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.grupoService.TipoGrupoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -31,9 +32,12 @@ public class GruposController {
     }
 
     @PutMapping("/tipo/{id}")
-    public  Grupo actualizar(@PathVariable Long id, @RequestBody Grupo habilidadActualizar){
-        habilidadActualizar.setGrupoId(id);
-        return  grupoService.setItem(habilidadActualizar);
+    public ResponseEntity<Object> actualizar(@PathVariable Long id, @RequestBody Grupo habilidadActualizar){
+        if(habilidadActualizar.getGrupoId().equals(id)) {
+            return ResponseEntity.ok( grupoService.setItem(habilidadActualizar) );
+        }else{
+            return ResponseEntity.badRequest().body("El ID proporcionado no coincide con el ID del mapa.");
+        }
     }
 
     @PostMapping("/tipo")
@@ -65,9 +69,12 @@ public class GruposController {
     }
 
     @PutMapping("/{id}")
-    public  Grupo actualizarGrupo(@PathVariable Long id, @RequestBody Grupo habilidadActualizar){
-        habilidadActualizar.setGrupoId(id);
-        return  grupoService.setItem(habilidadActualizar);
+    public  ResponseEntity<Object> actualizarGrupo(@PathVariable Long id, @RequestBody Grupo habilidadActualizar){
+        if(habilidadActualizar.getGrupoId().equals(id)) {
+            return ResponseEntity.ok( grupoService.setItem(habilidadActualizar) );
+        }else{
+            return ResponseEntity.badRequest().body("El ID proporcionado no coincide con el ID del grupo.");
+        }
     }
 
     @PostMapping

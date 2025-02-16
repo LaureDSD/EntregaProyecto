@@ -8,6 +8,7 @@ import ProyectoFinalLaureano.ProyectoFinalLaureano.models.habilidad.enums.TipoHa
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.habilidadService.HabildadEfectoService;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.habilidadService.HabilidadService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -41,9 +42,12 @@ public class HabilidadController {
     }
 
     @PutMapping("/{id}")
-    public  Habilidad actualizarHabilidad(@PathVariable Long id, @RequestBody Habilidad habilidadActualizar){
-        habilidadActualizar.setHabilidad_id(id);
-        return  habilidadService.setItem(habilidadActualizar);
+    public ResponseEntity<Object> actualizarHabilidad(@PathVariable Long id, @RequestBody Habilidad habilidadActualizar){
+        if(habilidadActualizar.getHabilidad_id().equals(id)) {
+            return ResponseEntity.ok( habilidadService.setItem(habilidadActualizar) );
+        }else{
+            return ResponseEntity.badRequest().body("El ID proporcionado no coincide con el ID del mapa.");
+        }
     }
 
     @PostMapping
@@ -74,9 +78,12 @@ public class HabilidadController {
     }
 
     @PutMapping("/{habilidadId}/efecto/{efectoId}")
-    public HabilidadEfecto actualizarEfecto(@PathVariable Long habilidadId, @PathVariable Long efectoId, @RequestBody HabilidadEfecto efectoActualizar) {
-        efectoActualizar.setId(new HabilidadEfectoId(habilidadId,efectoId));
-        return habilidadEfectoService.setItem(efectoActualizar);
+    public ResponseEntity<Object> actualizarEfecto(@PathVariable Long habilidadId, @PathVariable Long efectoId, @RequestBody HabilidadEfecto efectoActualizar) {
+        if(efectoActualizar.getId().equals(new HabilidadEfectoId(habilidadId,efectoId))) {
+            return ResponseEntity.ok( habilidadEfectoService.setItem(efectoActualizar) );
+        }else{
+            return ResponseEntity.badRequest().body("El ID proporcionado no coincide con el ID del mapa.");
+        }
     }
 
     @PostMapping("/{habilidadId}/efecto/")

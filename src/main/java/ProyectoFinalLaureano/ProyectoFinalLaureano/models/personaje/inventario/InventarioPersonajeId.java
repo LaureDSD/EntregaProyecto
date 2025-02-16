@@ -13,4 +13,9 @@ import java.io.Serializable;
 public class InventarioPersonajeId implements Serializable {
     private Long personaje_id;
     private Long item_id;
+
+    public InventarioPersonajeId(Long personaje_id, Long item_id) {
+        this.personaje_id = personaje_id;
+        this.item_id = item_id;
+    }
 }

@@ -42,7 +42,7 @@ public class Mapa {
     @ManyToOne
     @JoinColumn(name = "tipo_mapa_id", nullable = false)
     @Schema(description = "Tipo de mapa asociado")
-    private TipoMapa tipo_mapa;
+        private TipoMapa tipoMapa;
 
     // Nivel recomendado para aceder
     @Column(name = "nivel_recomendado")

@@ -5,6 +5,7 @@ import ProyectoFinalLaureano.ProyectoFinalLaureano.models.usuario.Usuario;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.usuarioService.TipoUsuarioService;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.usuarioService.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,7 +19,7 @@ public class UsuarioController {
     @Autowired
     private UsuarioService usuarioService;
 
-    // Tipo Usuario
+    // CRUD Tipo Usuario
     @GetMapping("/tipo")
     public List<TipoUsuario> obtenerTiposUsuario(){
         return  tipoUsuarioService.getAll();
@@ -30,9 +31,12 @@ public class UsuarioController {
     }
 
     @PutMapping("/tipo/{id}")
-    public  TipoUsuario actualizarTipoUusario(@PathVariable Long id, @RequestBody TipoUsuario usuarioActualizar){
-        usuarioActualizar.setTipo_usuario_id(id);
-        return  tipoUsuarioService.setItem(usuarioActualizar);
+    public  ResponseEntity<Object> actualizarTipoUusario(@PathVariable Long id, @RequestBody TipoUsuario usuarioActualizar){
+        if (usuarioActualizar.getTipo_usuario_id().equals(id)) {
+            return ResponseEntity.ok(tipoUsuarioService.setItem(usuarioActualizar));
+        } else {
+            return ResponseEntity.badRequest().body("El ID proporcionado no coincide con el ID del tipo de ítem.");
+        }
     }
 
     @PostMapping("/tipo")
@@ -45,7 +49,7 @@ public class UsuarioController {
         tipoUsuarioService.deleteByID(id);
     }
 
-    //Usuario
+    // CRUD Usuario
     @GetMapping
     public List<Usuario> obtenerLista(@RequestParam(required = false) Long id){
         if(id==null){
@@ -63,9 +67,12 @@ public class UsuarioController {
     }
 
     @PutMapping("/{id}")
-    public  Usuario actualizar(@PathVariable Long id, @RequestBody Usuario usuarioActualizar){
-        usuarioActualizar.setUsuario_id(id);
-        return  usuarioService.setItem(usuarioActualizar);
+    public ResponseEntity<Object> actualizar(@PathVariable Long id, @RequestBody Usuario usuarioActualizar){
+        if (usuarioActualizar.getUsuario_id().equals(id)) {
+            return ResponseEntity.ok(usuarioService.setItem(usuarioActualizar));
+        } else {
+            return ResponseEntity.badRequest().body("El ID proporcionado no coincide con el ID del usuario.");
+        }
     }
 
     @PostMapping

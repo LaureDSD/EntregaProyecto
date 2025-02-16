@@ -9,28 +9,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/pesonaje")
-public class PersoanjeController {
+public class PersonajeController {
 
     @Autowired
     private PersoanjeService persoanjeService;
-
-    @Autowired
-    private InventarioPersonajeService inventarioPersonajeService;
-
-    @Autowired
-    private HabilidadesPersonajeService habilidadesPersonajeService;
-
-    @Autowired
-    private ClasePersoanjeService clasePersoanjeService;
-
-    @Autowired
-    private LogrosPersoanjeService logrosPersoanjeService;
-
-    @Autowired
-    private PersoanjeMisionService persoanjeMisionService;
-
-
-
 
     // CRUD PERSONAJE
     @GetMapping("/")

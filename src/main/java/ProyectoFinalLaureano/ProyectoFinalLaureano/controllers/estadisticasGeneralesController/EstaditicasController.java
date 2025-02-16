@@ -3,6 +3,7 @@ package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.estadisticasGene
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.estadisticasGenerales.EstadisticasGenerales;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.estadisticasService.EstadisticasService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,9 +27,12 @@ public class EstaditicasController {
     }
 
     @PutMapping("/{id}")
-    public  EstadisticasGenerales actualizar(@PathVariable Long id, @RequestBody EstadisticasGenerales estadisticaActualizar){
-        estadisticaActualizar.setEstadisticasId(id);
-        return  estadisticasService.setItem(estadisticaActualizar);
+    public ResponseEntity<Object> actualizar(@PathVariable Long id, @RequestBody EstadisticasGenerales estadisticaActualizar){
+        if(estadisticaActualizar.getEstadisticasId().equals(id)) {
+            return ResponseEntity.ok( estadisticasService.setItem(estadisticaActualizar) );
+        }else{
+                return ResponseEntity.badRequest().body("El ID proporcionado no coincide con el ID de las estadistcas.");
+        }
     }
 
     @PostMapping("/")

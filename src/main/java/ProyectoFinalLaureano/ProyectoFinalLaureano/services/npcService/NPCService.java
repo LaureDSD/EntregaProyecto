@@ -1,6 +1,7 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.services.npcService;
 
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.npc.NPC;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.npc.TipoNPC;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.repositories.npcRepository.NPCRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,5 +27,9 @@ public class NPCService {
 
     public  void deleteByID(Long id){
         npcRepository.deleteById(id);
+    }
+
+    public List<NPC> getBytipoNPC(TipoNPC tipoNPC) {
+        return npcRepository.getBytipoNPC(tipoNPC);
     }
 }

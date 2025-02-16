@@ -14,4 +14,9 @@ import java.io.Serializable;
 public class MisionObjetoId implements Serializable {
     private Long mision_id;
     private Long item_id;
+
+    public MisionObjetoId(Long mision_id, Long item_id) {
+        this.mision_id = mision_id;
+        this.item_id = item_id;
+    }
 }

@@ -35,7 +35,7 @@ public class Item {
     @ManyToOne
     @JoinColumn(name = "tipo_item", nullable = false)
     @Schema(description = "Tipo de ítem asociado")
-    private TipoItem tipo_item;
+    private TipoItem tipoItem;
 
     //Descripcion del item
     @Column(name = "descripcion", columnDefinition = "TEXT")

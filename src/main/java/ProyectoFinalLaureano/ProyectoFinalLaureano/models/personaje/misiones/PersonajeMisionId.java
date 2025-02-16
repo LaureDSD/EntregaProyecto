@@ -14,4 +14,9 @@ import java.io.Serializable;
 public class PersonajeMisionId implements Serializable {
     private Long personaje_id;
     private Long mision_id;
+
+    public PersonajeMisionId(Long personaje_id, Long mision_id) {
+        this.personaje_id = personaje_id;
+        this.mision_id = mision_id;
+    }
 }

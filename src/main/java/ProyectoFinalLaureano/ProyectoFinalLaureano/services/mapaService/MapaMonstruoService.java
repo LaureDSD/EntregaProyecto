@@ -2,6 +2,7 @@ package ProyectoFinalLaureano.ProyectoFinalLaureano.services.mapaService;
 
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.mapa.monstruos.MapaMonstruo;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.mapa.monstruos.MapaMonstruoId;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.monstruo.TipoMonstruo;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.repositories.mapaRepository.MapaMonstruoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,4 +30,5 @@ public class MapaMonstruoService {
     public  void deleteByID(MapaMonstruoId id){
         monstruoRepository.deleteById(id);
     }
+
 }

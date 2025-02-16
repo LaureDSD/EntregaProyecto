@@ -8,8 +8,8 @@ import ProyectoFinalLaureano.ProyectoFinalLaureano.models.log.enums.TipoTransacc
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.logService.LogPersonajeMonstruoService;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.logService.LogUsuarioService;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.logService.LogTransaccionesService;
-import jakarta.transaction.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -44,9 +44,13 @@ public class LogController {
     }
 
     @PutMapping("/usuario/{id}")
-    public LogUsuario actualizarUsuarioLog(@PathVariable Long id, @RequestBody LogUsuario logActualizar){
-        logActualizar.setLogId(id);
-        return  logService.setItem(logActualizar);
+    public ResponseEntity<Object> actualizarUsuarioLog(@PathVariable Long id, @RequestBody LogUsuario logActualizar){
+        if(logActualizar.getLogId().equals(id)) {
+            return ResponseEntity.ok( logService.setItem(logActualizar) );
+        }else{
+            return ResponseEntity.badRequest().body("El ID proporcionado no coincide con el ID del log.");
+        }
+
     }
 
     @PostMapping("/usuario")
@@ -73,9 +77,12 @@ public class LogController {
     }
 
     @PutMapping("/persoanje/{id}")
-    public LogPersonajeMonstruo actualizarPersonajeLog(@PathVariable Long id, @RequestBody LogPersonajeMonstruo logActualizar){
-        logActualizar.setRegistroCazaId(id);
-        return  logPersonajeService.setItem(logActualizar);
+    public ResponseEntity<Object> actualizarPersonajeLog(@PathVariable Long id, @RequestBody LogPersonajeMonstruo logActualizar){
+        if(logActualizar.getRegistroId().equals(id)) {
+            return ResponseEntity.ok( logPersonajeService.setItem(logActualizar) );
+        }else{
+            return ResponseEntity.badRequest().body("El ID proporcionado no coincide con el ID del personanje.");
+        }
     }
 
     @PostMapping("/persoanje")
@@ -87,6 +94,9 @@ public class LogController {
     public void borrarPersonajeLog (@PathVariable Long id){
         logPersonajeService.deleteByID(id);
     }
+
+
+
 
     //CRUD LOG TRANSACCIONES
 
@@ -106,9 +116,12 @@ public class LogController {
     }
 
     @PutMapping("/transaccion/{id}")
-    public LogTransacciones actualizarlogTransaccionesServiceLog(@PathVariable Long id, @RequestBody LogTransacciones logActualizar){
-        logActualizar.setTransaccion_id(id);
-        return  logTransaccionesService.setItem(logActualizar);
+    public ResponseEntity<Object> actualizarlogTransaccionesServiceLog(@PathVariable Long id, @RequestBody LogTransacciones logActualizar){
+        if(logActualizar.getTransaccion_id().equals(id)) {
+            return ResponseEntity.ok( logTransaccionesService.setItem(logActualizar) );
+        }else{
+            return ResponseEntity.badRequest().body("El ID proporcionado no coincide con el ID de la transaction.");
+        }
     }
 
     @PostMapping("/transaccion")
@@ -120,7 +133,5 @@ public class LogController {
     public void borrarlogTransaccionesServiceLog (@PathVariable Long id){
         logTransaccionesService.deleteByID(id);
     }
-
-
 
 }

@@ -5,9 +5,14 @@ import ProyectoFinalLaureano.ProyectoFinalLaureano.models.mision.Mision;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.objeto.Item;
 import jakarta.persistence.*;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 //(Corrrecto)
-
+@NoArgsConstructor
+@Getter
+@Setter
 @Entity
 @Table(name = "mision_objetos")
 @Schema(description = "Entidad que representa los objetos de recompensa de una misión")
