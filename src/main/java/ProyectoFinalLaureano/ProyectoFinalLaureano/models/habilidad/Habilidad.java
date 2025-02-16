@@ -78,6 +78,7 @@ public class Habilidad {
     //RelacionCon Estadisticas
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "estadisticas_id", referencedColumnName = "estadisticasId")
+    @JsonIgnore // Excluir esta relación en la serialización JSON
     private EstadisticasGenerales estadisticas;
 
     //Enfriamiento de la habilidad

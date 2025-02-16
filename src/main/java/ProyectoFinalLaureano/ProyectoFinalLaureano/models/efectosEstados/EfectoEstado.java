@@ -67,7 +67,7 @@ public class EfectoEstado {
     private int acumulaciones;
 
     //RelacionCon Estadisticas
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "estadisticas_id", referencedColumnName = "estadisticasId")
     private EstadisticasGenerales estadisticas;
 

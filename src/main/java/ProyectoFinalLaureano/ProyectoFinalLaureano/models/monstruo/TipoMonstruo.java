@@ -36,7 +36,7 @@ public class TipoMonstruo {
     private String descripcion;
 
     // Relación Uno a Muchos con Monstruo
-    @OneToMany(mappedBy = "tipo_monstruo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "tipo_monstruo", cascade = CascadeType.ALL)
     @JsonIgnore // Excluir esta relación en la serialización JSON
     @Schema(description = "Monstruos asociados a este tipo")
     private List<Monstruo> monstruos;

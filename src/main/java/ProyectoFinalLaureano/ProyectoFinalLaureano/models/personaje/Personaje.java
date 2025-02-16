@@ -67,31 +67,36 @@ public class Personaje {
     private int capacidad_inventario;
 
     //RelacionCon Estadisticas
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "estadisticas_id", referencedColumnName = "estadisticasId")
+    @JsonIgnore // Excluir esta relación en la serialización JSON
     private EstadisticasGenerales estadisticas;
 
     // Relación Muchos a Uno con Usuario
     @ManyToOne
     @JoinColumn(name = "usuario_id", nullable = false)
     @Schema(description = "Usuario al que pertenece el personaje")
+    @JsonIgnore // Excluir esta relación en la serialización JSON
     private Usuario usuario;
 
     //Logros del persoanje
-    @OneToOne(mappedBy = "personaje", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "personaje", cascade = CascadeType.ALL)
     @Schema(description = "Logros del persoanje")
+    @JsonIgnore // Excluir esta relación en la serialización JSON
     private LogrosPersonaje logros;
 
     //Clase
     @ManyToOne
     @JoinColumn(name = "clase_id")
     @Schema(description = "Clase del persoanje asociado")
+    @JsonIgnore // Excluir esta relación en la serialización JSON
     private ClasePersonaje clase_persoanje;
 
     //Grupo
     @ManyToOne
     @JoinColumn(name = "grupo_id")
     @Schema(description = "Grupo del persoanje asociado")
+    @JsonIgnore // Excluir esta relación en la serialización JSON
     private Grupo grupo;
 
     //Union como lider

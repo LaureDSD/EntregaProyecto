@@ -36,6 +36,7 @@ public class Item {
     @ManyToOne
     @JoinColumn(name = "tipo_item", nullable = false)
     @Schema(description = "Tipo de ítem asociado")
+    @JsonIgnore // Excluir esta relación en la serialización JSON
     private TipoItem tipoItem;
 
     //Descripcion del item
@@ -49,24 +50,25 @@ public class Item {
     private int acumulaciones_max;
 
     // Relación Uno a Muchos con ItemEfecto
-    @OneToMany(mappedBy = "item", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "item", cascade = CascadeType.ALL)
     @JsonIgnore // Excluir esta relación en la serialización JSON
     @Schema(description = "Efectos asociados al ítem")
     private List<ItemEfecto> efectos;
 
     //RelacionCon Estadisticas
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "estadisticas_id", referencedColumnName = "estadisticasId")
     private EstadisticasGenerales estadisticas;
 
     // Relación Uno a Muchos con DropsObjetos
-    @OneToMany(mappedBy = "item", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "item", cascade = CascadeType.ALL)
     @JsonIgnore // Excluir esta relación en la serialización JSON
     @Schema(description = "Lista de drops asociadas al ítem")
     private List<DropsObjetos> drops;
 
-    @OneToMany(mappedBy = "item", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "item", cascade = CascadeType.ALL)
     @Schema(description = "NPCs que venden o compran este item")
+    @JsonIgnore // Excluir esta relación en la serialización JSON
     private List<NPCProducto> npcProductos;
 
 }

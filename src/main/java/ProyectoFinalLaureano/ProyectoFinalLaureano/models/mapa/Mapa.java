@@ -43,7 +43,8 @@ public class Mapa {
     @ManyToOne
     @JoinColumn(name = "tipo_mapa_id", nullable = false)
     @Schema(description = "Tipo de mapa asociado")
-        private TipoMapa tipoMapa;
+    @JsonIgnore // Excluir esta relación en la serialización JSON
+    private TipoMapa tipoMapa;
 
     // Nivel recomendado para aceder
     @Column(name = "nivel_recomendado")

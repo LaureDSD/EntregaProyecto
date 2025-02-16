@@ -5,9 +5,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.lang.NonNull;
 
@@ -16,7 +16,7 @@ import java.util.List;
 
 
 // (Correcto)
-
+@NoArgsConstructor
 @Getter
 @Setter
 @Entity
@@ -96,12 +96,13 @@ public class Usuario {
     @ManyToOne
     @JoinColumn(name = "tipo_usuario", nullable = false)
     @Schema(description = "Tipo de usuario asociado")
+    @JsonIgnore // Excluir esta relación en la serialización JSON
     private TipoUsuario tipoUsuario;
 
     // Relación con Personaje 1:N
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     @Schema(description = "Lista de personajes asociados al usuario")
-    @JsonIgnore
+    @JsonIgnore // Excluir esta relación en la serialización JSON
     private List<Personaje> personajes;
 
 }

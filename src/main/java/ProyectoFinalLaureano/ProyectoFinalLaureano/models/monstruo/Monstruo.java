@@ -37,6 +37,7 @@ public class Monstruo {
     @ManyToOne
     @JoinColumn(name = "tipo_monstruo_id", nullable = false)
     @Schema(description = "Tipo de monstruo asociado")
+    @JsonIgnore // Excluir esta relación en la serialización JSON
     private TipoMonstruo tipo_monstruo;
 
     //Nivel del mosntruo
@@ -55,8 +56,9 @@ public class Monstruo {
     private String imagen;
 
     //RelacionCon Estadisticas
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "estadisticas_id", referencedColumnName = "estadisticasId")
+    @JsonIgnore // Excluir esta relación en la serialización JSON
     private EstadisticasGenerales estadisticas;
 
     //Almas que otorga
@@ -70,18 +72,18 @@ public class Monstruo {
     private int experienciaOtorgada;
 
     // Relación Uno a Muchos con DropsNPC
-    @OneToMany(mappedBy = "monstruo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "monstruo", cascade = CascadeType.ALL)
     @JsonIgnore // Excluir esta relación en la serialización JSON
     @Schema(description = "Drops asociados a este monstruo")
     private List<DropsObjetos> drops;
 
     //Nuevo
-    @OneToMany(mappedBy = "monstruo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "monstruo", cascade = CascadeType.ALL)
     @Schema(description = "Mapas donde este monstruo puede aparecer")
     @JsonIgnore // Excluir esta relación en la serialización JSON
     private List<MapaMonstruo> mapaMonstruos;
 
-    @OneToMany(mappedBy = "monstruo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "monstruo", cascade = CascadeType.ALL)
     @Schema(description = "Habilidades asociadas a este monstruo")
     @JsonIgnore // Excluir esta relación en la serialización JSON
     private List<MonstruoHabilidad> monstruoHabilidades;

@@ -8,6 +8,7 @@ import lombok.*;
 import java.util.List;
 
 // (Correcto)
+@NoArgsConstructor
 @Getter
 @Setter
 @Entity
@@ -32,8 +33,8 @@ public class TipoUsuario {
     private String descripcion;
 
     // Relación Uno a Muchos con Usuario
-    @OneToMany(mappedBy = "tipoUsuario", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonIgnore
+    @OneToMany(mappedBy = "tipoUsuario", cascade = CascadeType.ALL)
+    @JsonIgnore // Excluir esta relación en la serialización JSON
     private List<Usuario> usuarios;
 
 }

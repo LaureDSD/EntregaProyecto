@@ -36,12 +36,13 @@ public class ClasePersonaje {
     private String descripcion;
 
     //RelacionCon Estadisticas
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "estadisticas_id", referencedColumnName = "estadisticasId")
+    @JsonIgnore // Excluir esta relación en la serialización JSON
     private EstadisticasGenerales estadisticas;
 
     // Relación Uno a Muchos con persoanje
-    @OneToMany(mappedBy = "clase_persoanje", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "clase_persoanje", cascade = CascadeType.ALL)
     @JsonIgnore // Excluir esta relación en la serialización JSON
     @Schema(description = "Persoanjes asociados a este tipo")
     private List<Personaje> persoanjes;

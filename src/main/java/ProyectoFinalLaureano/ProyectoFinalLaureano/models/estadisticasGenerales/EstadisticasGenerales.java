@@ -7,6 +7,7 @@ import ProyectoFinalLaureano.ProyectoFinalLaureano.models.monstruo.Monstruo;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.objeto.Item;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.ClasePersonaje;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.Personaje;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -66,32 +67,38 @@ public class EstadisticasGenerales {
     private Integer defensaMagica;
 
     // Relación con la tabla ClasePersonaje (One-to-One)
-    @OneToOne(mappedBy = "estadisticas", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "estadisticas", cascade = CascadeType.ALL)
     @Schema(description = "Clase de personaje asociada a estas estadísticas.")
+    @JsonIgnore // Excluir esta relación en la serialización JSON
     private ClasePersonaje clasePersonaje;
 
     // Relación con la tabla Personajes (One-to-One)
-    @OneToOne(mappedBy = "estadisticas", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "estadisticas", cascade = CascadeType.ALL)
     @Schema(description = "Personaje asociado a estas estadísticas.")
+    @JsonIgnore // Excluir esta relación en la serialización JSON
     private Personaje personaje;
 
     // Relación con la tabla Monstruos (One-to-One)
-    @OneToOne(mappedBy = "estadisticas", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "estadisticas", cascade = CascadeType.ALL)
     @Schema(description = "Monstruo asociado a estas estadísticas.")
+    @JsonIgnore // Excluir esta relación en la serialización JSON
     private Monstruo monstruo;
 
     // Relación con la tabla EfectosEstados (One-to-Many)
-    @OneToMany(mappedBy = "estadisticas", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "estadisticas", cascade = CascadeType.ALL)
     @Schema(description = "Lista de efectos o estados asociados a estas estadísticas.")
+    @JsonIgnore // Excluir esta relación en la serialización JSON
     private List<EfectoEstado> efectosEstados;
 
     // Relación con la tabla Equipamiento (One-to-Many)
-    @OneToMany(mappedBy = "estadisticas", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "estadisticas", cascade = CascadeType.ALL)
+    @JsonIgnore // Excluir esta relación en la serialización JSON
     @Schema(description = "Lista de equipamientos asociados a estas estadísticas.")
     private List<Item> equipamientos;
 
     // Relación con la tabla Habilidades (One-to-Many)
-    @OneToMany(mappedBy = "estadisticas", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "estadisticas", cascade = CascadeType.ALL)
     @Schema(description = "Lista de habilidades asociadas a estas estadísticas.")
+    @JsonIgnore // Excluir esta relación en la serialización JSON
     private List<Habilidad> habilidades;
 }

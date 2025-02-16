@@ -24,7 +24,7 @@ public class PersonajeLogrosController {
     }*/
 
     @GetMapping("/{personajeId}/logros/")
-    public LogrosPersonaje obtenerLogroPersonaje(@PathVariable Long personajeId, @PathVariable Long logroId) {
+    public LogrosPersonaje obtenerLogroPersonaje(@PathVariable Long personajeId) {
         return logrosPersonajeService.getByID(personajeId);
     }
 

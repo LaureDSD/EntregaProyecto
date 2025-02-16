@@ -1,5 +1,6 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.models.grupos;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -45,8 +46,9 @@ public class TipoGrupo {
     private String descripcion;
 
     // Relación con Grupo
-    @OneToMany(mappedBy = "tipoGrupo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "tipoGrupo", cascade = CascadeType.ALL)
     @Schema(description = "Lista de grupos asociados a este tipo de grupo.")
+    @JsonIgnore
     private List<Grupo> grupos;
 
 }

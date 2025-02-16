@@ -55,8 +55,9 @@ public class NPC {
     private List<LogTransacciones> transacciones;
 
     //Relacion con los productos que vende 1:N
-    @OneToMany(mappedBy = "npc", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "npc", cascade = CascadeType.ALL)
     @Schema(description = "Productos asociados a este NPC")
+    @JsonIgnore // Excluir esta relación en la serialización JSON
     private List<NPCProducto> npcProductos;
 
     //Relacion muchos a muchos con mision
