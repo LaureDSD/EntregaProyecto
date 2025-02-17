@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/npc")
-public class NPCTiendaController {
+public class NpcProductoController {
 
     @Autowired
     private TiendaNPCService tiendaNPCService;
@@ -47,4 +47,5 @@ public class NPCTiendaController {
     public void borrarProductoTiendaNPC(@PathVariable Long npcId, @PathVariable Long productoId) {
         tiendaNPCService.deleteByID(new NPCProductoId(npcId, productoId));
     }
+
 }

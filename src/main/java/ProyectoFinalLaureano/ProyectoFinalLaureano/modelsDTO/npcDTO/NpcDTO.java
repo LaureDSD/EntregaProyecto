@@ -24,7 +24,7 @@ public class NpcDTO {
 
     private TipoNPC tipoNPC;
 
-    private List<ItemDTO> tienda;
+    private List<TiendaDTO> tienda;
 
     private List<MisionDTO> misiones;
 

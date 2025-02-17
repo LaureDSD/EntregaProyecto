@@ -32,6 +32,11 @@ public class Item {
     @Schema(description = "Nombre del ítem", example = "Poción de Vida")
     private String nombre;
 
+    //Nombre de los items
+    @Column(name = "imagen", nullable = false, length = 100)
+    @Schema(description = "Imagen del ítem", example = "Poción_de_Vida.jpg")
+    private String imagen;
+
     //Tipo del item (Material,Consumible,TipoEquipamiento(Pechera,Casco,Botas,Guantes,Pantalones,Zapatos,Accesorio1,Accesorio2))
     @ManyToOne
     @JoinColumn(name = "tipo_item", nullable = false)

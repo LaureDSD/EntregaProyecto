@@ -7,6 +7,7 @@ import ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.grupoDTO.GrupoDTO;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.habilidadDTO.HabilidadDTO;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.itemDTO.ItemDTO;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.misionDTO.MisionDTO;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.usuarioDTO.UsuarioDTO;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -21,11 +22,11 @@ public class PersonajeDTO {
 
     private Long id;
 
-    private String imagen_modelo;
+    private String imagen;
 
     private String nombre;
 
-    private LocalDateTime fecha_creacion;
+    private LocalDateTime creacion;
 
     private int nivel;
 
@@ -33,22 +34,23 @@ public class PersonajeDTO {
 
     private int almas;
 
-    private int capacidad_inventario;
-
     private EstadisticasPersonajeDTO estadisticas;
-
-    private Usuario usuario;
 
     private LogrosPersonaje logros;
 
-    private ClaseDTO clase_persoanje;
+    private ClaseDTO clase;
 
     private GrupoDTO grupo;
 
-    private List<ItemDTO> inventario;
+    private UsuarioDTO usuario;
+
+    private int capacidad_inventario;
+
+    private List<InventarioDTO> inventario;
 
     private List<HabilidadDTO> personajeHabilidades;
 
     private List<MisionDTO> misiones;
+
 
 }

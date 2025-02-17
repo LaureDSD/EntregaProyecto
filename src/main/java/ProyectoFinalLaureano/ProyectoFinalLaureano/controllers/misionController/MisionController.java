@@ -1,15 +1,10 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.misionController;
 
 import ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.npcController.NPCController;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.objetoController.ObjetoController;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.mapa.Mapa;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.mapa.TipoMapa;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.mision.Mision;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.mision.recompensas.MisionObjetoId;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.mision.recompensas.MisionObjetos;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.misionDTO.MisionDTO;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.misionDTO.RecompensaDTO;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.services.misionService.MisionObjetosService;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.misionService.MisionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -26,27 +21,27 @@ public class MisionController {
 
     //CRUD MSISIONES
     @GetMapping("/")
-    public List<Mision> obtenerMisones(){
-        return  misionService.getAll();
+    public List<MisionDTO> obtenerMisones(){
+        return  conversorListaMisionDTO(misionService.getAll());
     }
 
     @GetMapping("/{id}")
-    public Mision obtenerMisones(@PathVariable Long id){
-        return misionService.getByID(id);
+    public MisionDTO obtenerMisones(@PathVariable Long id){
+        return conversorMisionDTO(misionService.getByID(id));
     }
 
     @PutMapping("/{id}")
     public  ResponseEntity<Object> actualizarMisones(@PathVariable Long id, @RequestBody Mision misionActualizar){
         if(misionActualizar.getMision_id().equals(id)) {
-            return ResponseEntity.ok( misionService.setItem(misionActualizar));
+            return ResponseEntity.ok( conversorMisionDTO(misionService.setItem(misionActualizar)));
         }else{
             return ResponseEntity.badRequest().body("El ID proporcionado no coincide con el ID de la mision.");
         }
     }
 
     @PostMapping
-    public Mision guardarMisones(@RequestBody Mision misionGuardar){
-        return  misionService.setItem(misionGuardar);
+    public MisionDTO guardarMisones(@RequestBody Mision misionGuardar){
+        return  conversorMisionDTO(misionService.setItem(misionGuardar));
     }
 
     @DeleteMapping("/{id}")
@@ -59,7 +54,6 @@ public class MisionController {
         return l.stream().map(MisionController::conversorMisionDTO).toList();
     }
 
-
     //Conversor Unico DTO
     public static MisionDTO conversorMisionDTO( Mision m){
         MisionDTO misionDTO = new MisionDTO();
@@ -70,7 +64,8 @@ public class MisionController {
         misionDTO.setTiempo(m.getTiempo_limite());
         misionDTO.setAlmas(m.getRecompensa_almas());
         misionDTO.setExperiencia(m.getRecompensa_experiencia());
-        misionDTO.setRecompensas(m.getRecompensas().stream().map(MisionController::conversorRecompensaDTO).toList());
+        misionDTO.setRecompensas(
+                m.getRecompensas().stream().map(MisionController::conversorRecompensaDTO).toList());
         misionDTO.setNpcs(NPCController.conversorListaNPCDTO(m.getNpcs()));
         return misionDTO;
     }
@@ -83,6 +78,8 @@ public class MisionController {
     //Coversor Unico
     public static RecompensaDTO conversorRecompensaDTO(MisionObjetos mo){
         RecompensaDTO recompensaDTO = new RecompensaDTO();
+        recompensaDTO.setItem(mo.getItem());
+        recompensaDTO.setCantidad(mo.getCantidad());
         return recompensaDTO;
     }
 

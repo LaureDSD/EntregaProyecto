@@ -20,7 +20,7 @@ public class UsuarioDTO {
 
     private String nombrePublico;
 
-    private int persoanjesMax;
+    private int limitePersoanjes;
 
     private String nombrePrivado;
 

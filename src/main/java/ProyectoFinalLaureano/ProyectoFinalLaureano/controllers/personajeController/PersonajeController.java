@@ -1,5 +1,8 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.personajeController;
 
+import ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.estadisticasGeneralesController.EstadisticasController;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.gruposController.GrupoController;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.usuarioController.UsuarioController;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.Personaje;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.personajeDTO.PersonajeDTO;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.persoanjeService.*;
@@ -17,24 +20,24 @@ public class PersonajeController {
 
     // CRUD PERSONAJE
     @GetMapping("/")
-    public List<Personaje> obtenerPersonaje(){
-        return  persoanjeService.getAll();
+    public List<PersonajeDTO> obtenerPersonaje(){
+        return  conversorListaPersonajeDTO(persoanjeService.getAll());
     }
 
     @GetMapping("/{id}")
-    public Personaje obtener(@PathVariable Long id){
-        return persoanjeService.getByID(id);
+    public PersonajeDTO obtener(@PathVariable Long id){
+        return conversorPersonajeDTO(persoanjeService.getByID(id));
     }
 
     @PutMapping("/{id}")
-    public  Personaje actualizar(@PathVariable Long id, @RequestBody Personaje personajeActualizar){
+    public  PersonajeDTO actualizar(@PathVariable Long id, @RequestBody Personaje personajeActualizar){
         personajeActualizar.setPersonaje_id(id);
-        return  persoanjeService.setItem(personajeActualizar);
+        return  conversorPersonajeDTO(persoanjeService.setItem(personajeActualizar));
     }
 
     @PostMapping
-    public Personaje guardar(@RequestBody Personaje usuarioGuardar){
-        return  persoanjeService.setItem(usuarioGuardar);
+    public PersonajeDTO guardar(@RequestBody Personaje usuarioGuardar){
+        return  conversorPersonajeDTO(persoanjeService.setItem(usuarioGuardar));
     }
 
     @DeleteMapping("/{id}")
@@ -52,6 +55,19 @@ public class PersonajeController {
     //Conversor Unico DTO
     public static PersonajeDTO conversorPersonajeDTO( Personaje p){
         PersonajeDTO personajeDTO = new PersonajeDTO();
+        personajeDTO.setId(p.getPersonaje_id());
+        personajeDTO.setImagen(p.getImagen_modelo());
+        personajeDTO.setNombre(p.getNombre());
+        personajeDTO.setUsuario(UsuarioController.conversorUsuarioDTO(p.getUsuario()));
+        personajeDTO.setCreacion(p.getFecha_creacion());
+        personajeDTO.setClase(ClaseController.conversorClaseDTO(p.getClase_persoanje()));
+        personajeDTO.setGrupo(GrupoController.conversorGrupoDTO(p.getGrupo()));
+        personajeDTO.setNivel(p.getNivel());
+        personajeDTO.setXp_acumulada(p.getXp_acumulada());
+        personajeDTO.setAlmas(p.getAlmas());
+        personajeDTO.setCapacidad_inventario(p.getCapacidad_inventario());
+        personajeDTO.setInventario(InventarioController.conversorListaInventarioDTO(p.getInventario()));
+        personajeDTO.setEstadisticas(EstadisticasController.conversorEstadisticasPersoanejeDTO(p.getEstadisticas()));
         return  personajeDTO;
     }
 

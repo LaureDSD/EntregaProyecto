@@ -24,33 +24,33 @@ public class MapaController {
     //CRUD MAPA
 
     @GetMapping("/")
-    public List<Mapa> obtenerListaMapas(@RequestParam(required = false) Long id){
+    public List<MapaDTO> obtenerListaMapas(@RequestParam(required = false) Long id){
         if(id==null){
-            return  mapaService.getAll();
+            return  conversorListaMapaDTO(mapaService.getAll());
         }else{
             TipoMapa tipoMapa = new TipoMapa();
             tipoMapa.setTipo_mapa_id(id);
-            return mapaService.getBytipoMapa(tipoMapa);
+            return conversorListaMapaDTO(mapaService.getBytipoMapa(tipoMapa));
         }
     }
 
     @GetMapping("/{id}")
-    public Mapa obtenerMapa(@PathVariable Long id){
-        return mapaService.getByID(id);
+    public MapaDTO obtenerMapa(@PathVariable Long id){
+        return conversorMapaDTO(mapaService.getByID(id));
     }
 
     @PutMapping("/{id}")
     public  ResponseEntity<Object> actualizarMapa(@PathVariable Long id, @RequestBody Mapa mapaActualizar){
         if(mapaActualizar.getMapa_id().equals(id)) {
-            return ResponseEntity.ok( mapaService.setItem(mapaActualizar));
+            return ResponseEntity.ok( conversorMapaDTO(mapaService.setItem(mapaActualizar)));
         }else{
             return ResponseEntity.badRequest().body("El ID proporcionado no coincide con el ID del mapa.");
         }
     }
 
     @PostMapping
-    public Mapa guardarMapa(@RequestBody Mapa mapaGuardar){
-        return  mapaService.setItem(mapaGuardar);
+    public MapaDTO guardarMapa(@RequestBody Mapa mapaGuardar){
+        return  conversorMapaDTO(mapaService.setItem(mapaGuardar));
     }
 
     @DeleteMapping("/{id}")
@@ -59,12 +59,12 @@ public class MapaController {
     }
 
     //List
-    public static List<MapaDTO> conversorListaDTO( List<Mapa> lm){
-        return lm.stream().map(MapaController::conversorDTO).toList();
+    public static List<MapaDTO> conversorListaMapaDTO( List<Mapa> lm){
+        return lm.stream().map(MapaController::conversorMapaDTO).toList();
     }
 
     //Dto
-    public static MapaDTO conversorDTO (Mapa o){
+    public static MapaDTO conversorMapaDTO (Mapa o){
         MapaDTO mapaDTO = new MapaDTO();
         mapaDTO.setId(o.getMapa_id());
         mapaDTO.setImagen(o.getImagen());

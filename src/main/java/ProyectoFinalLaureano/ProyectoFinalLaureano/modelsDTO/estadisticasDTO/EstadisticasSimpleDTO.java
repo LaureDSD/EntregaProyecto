@@ -7,7 +7,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class EstadisticasDTO {
+public class EstadisticasSimpleDTO {
 
     private Integer vidaBase;
 

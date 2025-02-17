@@ -4,7 +4,7 @@ import ProyectoFinalLaureano.ProyectoFinalLaureano.models.habilidad.enums.Objeti
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.habilidad.enums.TipoHabilidad;
 
 import ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.efectosDTO.EfectoDTO;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.estadisticasDTO.EstadisticasDTO;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.estadisticasDTO.EstadisticasSimpleDTO;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.monsrtuoDTO.MonstruoDTO;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -37,7 +37,7 @@ public class HabilidadDTO {
 
     private int unidades;
 
-    private EstadisticasDTO estadisticas;
+    private EstadisticasSimpleDTO estadisticas;
 
     private int enfriamiento;
 

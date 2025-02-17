@@ -1,6 +1,6 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.personajeDTO;
 
-import ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.estadisticasDTO.EstadisticasDTO;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.estadisticasDTO.EstadisticasSimpleDTO;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,11 +14,13 @@ public class ClaseDTO {
 
     private long Id;
 
+    private String imagen;
+
     private String nombre;
 
     private String descripcion;
 
-    private EstadisticasDTO estadisticas;
+    private EstadisticasSimpleDTO estadisticas;
 
     private List<PersonajeDTO> persoanjes;
 

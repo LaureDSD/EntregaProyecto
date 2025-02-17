@@ -1,8 +1,7 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.efectosDTO;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.efectosEstados.enums.TipoAfectado;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.efectosEstados.enums.TipoEfecto;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.estadisticasGenerales.EstadisticasGenerales;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.estadisticasDTO.EstadisticasDTO;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.estadisticasDTO.EstadisticasSimpleDTO;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -30,6 +29,6 @@ public class EfectoDTO {
 
     private int acumulaciones;
 
-    private EstadisticasDTO estadisticas;
+    private EstadisticasSimpleDTO estadisticas;
 
 }

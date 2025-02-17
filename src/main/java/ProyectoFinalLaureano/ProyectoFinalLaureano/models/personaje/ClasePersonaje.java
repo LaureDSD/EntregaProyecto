@@ -34,6 +34,11 @@ public class ClasePersonaje {
     @Schema(description = "Nombre de la clase", example = "Mago")
     private String nombre;
 
+    //Imagen de la clase
+    @Column(name = "imagen")
+    @Schema(description = "Imagen del la clase", example = "mago.jpg")
+    private String imagen;
+
     //Descripcion de la clase
     @Column(name = "descripcion", columnDefinition = "TEXT")
     @Schema(description = "Descripción del la clase", example = "Especialista en ehchizos y ataques a larga distabcia")

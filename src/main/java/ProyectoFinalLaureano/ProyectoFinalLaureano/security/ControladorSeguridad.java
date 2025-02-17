@@ -16,9 +16,4 @@ public class ControladorSeguridad {
         }
         return "*".repeat(email.indexOf("@") - mostrar) + email.substring(email.indexOf("@") - mostrar, email.indexOf("@")) + email.substring(email.indexOf("@"));
     }
-
-    public static String generarToken(){
-        Random r = new Random();
-        return String.valueOf(r.nextInt(Integer.MIN_VALUE,Integer.MAX_VALUE)) ;
-    }
 }

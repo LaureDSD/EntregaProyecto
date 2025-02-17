@@ -1,7 +1,7 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.estadisticasGeneralesController;
 
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.estadisticasGenerales.EstadisticasGenerales;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.estadisticasDTO.EstadisticasDTO;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.estadisticasDTO.EstadisticasSimpleDTO;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.estadisticasDTO.EstadisticasPersonajeDTO;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.estadisticasService.EstadisticasService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,13 +49,13 @@ public class EstadisticasController {
     }
 
     //Conversor Lista estaditicas
-    public static List<EstadisticasDTO> conversorListaEstadisticasDTO (List<EstadisticasGenerales> le){
+    public static List<EstadisticasSimpleDTO> conversorListaEstadisticasDTO (List<EstadisticasGenerales> le){
         return le.stream().map(EstadisticasController::conversorEstadisticasDTO).toList();
     }
 
     //Conversor  Unico estadisticas
-    public static EstadisticasDTO conversorEstadisticasDTO (EstadisticasGenerales e) {
-        EstadisticasDTO estadisticasDTO = new EstadisticasDTO();
+    public static EstadisticasSimpleDTO conversorEstadisticasDTO (EstadisticasGenerales e) {
+        EstadisticasSimpleDTO estadisticasDTO = new EstadisticasSimpleDTO();
         estadisticasDTO.setVidaBase(e.getVida());
         estadisticasDTO.setRegeneracionVidaBase(e.getRegeneracionVida());
         estadisticasDTO.setManaBase(e.getMana());

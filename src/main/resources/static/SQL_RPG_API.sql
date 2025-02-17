@@ -212,8 +212,9 @@ VALUES
 -- Table de clases de persoanje (Corrrecto)
 CREATE TABLE IF NOT EXISTS clase_personaje (
     clase_id bigint PRIMARY KEY AUTO_INCREMENT,
+    imagen VARCHAR(255) NULL,
     nombre VARCHAR(100) NOT NULL,
-    descripcion TEXT,
+    descripcion TEXT NULL,
 	estadisticas_id BIGINT,
     CONSTRAINT fk_clase_personaje_estadisticas
     FOREIGN KEY (estadisticas_id)
@@ -603,6 +604,7 @@ VALUES
 -- Tipo del item (Material,Consumible,Pechera,Casco,Botas,Guantes,Pantalones,Zapatos,Accesorio1,Accesorio2)
 CREATE TABLE IF NOT EXISTS tipo_item (
     tipo_item_id bigint PRIMARY KEY AUTO_INCREMENT,
+    imagen VARCHAR(255),
     nombre VARCHAR(100) NOT NULL,
     descripcion TEXT,
     INDEX idx_nombre (nombre)

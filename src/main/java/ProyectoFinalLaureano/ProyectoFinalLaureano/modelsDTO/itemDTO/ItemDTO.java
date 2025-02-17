@@ -2,7 +2,7 @@ package ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.itemDTO;
 
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.objeto.TipoItem;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.efectosDTO.EfectoDTO;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.estadisticasDTO.EstadisticasDTO;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.estadisticasDTO.EstadisticasSimpleDTO;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.monsrtuoDTO.MonstruoDTO;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.npcDTO.NpcDTO;
 import lombok.Getter;
@@ -21,6 +21,8 @@ public class ItemDTO {
 
     private String nombre;
 
+    private String imagen;
+
     private TipoItem tipoItem;
 
     private String descripcion;
@@ -29,7 +31,7 @@ public class ItemDTO {
 
     private List<EfectoDTO> efectos;
 
-    private EstadisticasDTO estadisticas;
+    private EstadisticasSimpleDTO estadisticas;
 
     private List<MonstruoDTO> monstruo;
 

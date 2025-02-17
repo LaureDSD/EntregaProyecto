@@ -5,8 +5,10 @@ import ProyectoFinalLaureano.ProyectoFinalLaureano.models.objeto.Item;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 import lombok.Setter;
 
 // (Correcto)
@@ -23,19 +25,22 @@ public class NPCProducto {
     private NPCProductoId id;
 
     //Precio al que compra el npc
+    @NotNull
     @Column(name = "precio_compra", nullable = false)
     @Schema(description = "Precio al que el NPC compra el ítem", example = "500")
-    private Integer precioCompra;
+    private int precioCompra;
 
     //Precio de venta del npc
+    @NotNull
     @Column(name = "precio_venta", nullable = false)
     @Schema(description = "Precio al que el NPC vende el ítem", example = "700")
-    private Integer precioVenta;
+    private int precioVenta;
 
     //Cantidad disponible para venta (Suma la comprada)
+    @NotNull
     @Column(name = "cantidad_venta", nullable = false)
     @Schema(description = "Cantidad de ítems disponibles para la venta por el NPC", example = "50")
-    private Integer cantidadVenta;
+    private int cantidadVenta;
 
     // Relación con la tabla npc N:1
     @ManyToOne()

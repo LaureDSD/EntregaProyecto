@@ -24,27 +24,27 @@ public class MonstruoController {
     // CRUD MONSTRUO
 
     @GetMapping("/")
-    public List<Monstruo> obtenerListaMonstruos() {
-        return monstruosService.getAll();
+    public List<MonstruoDTO> obtenerListaMonstruos() {
+        return conversorListaMonstruoDTO(monstruosService.getAll());
     }
 
     @GetMapping("/{id}")
-    public Monstruo obtenerMonstruo(@PathVariable Long id) {
-        return monstruosService.getByID(id);
+    public MonstruoDTO obtenerMonstruo(@PathVariable Long id) {
+        return conversorMonstruoDTO(monstruosService.getByID(id));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Object> actualizarMonstruo(@PathVariable Long id, @RequestBody Monstruo monstruoActualizar) {
         if (monstruoActualizar.getMonstruo_id().equals(id)) {
-            return ResponseEntity.ok(monstruosService.setItem(monstruoActualizar));
+            return ResponseEntity.ok(conversorMonstruoDTO(monstruosService.setItem(monstruoActualizar)));
         } else {
             return ResponseEntity.badRequest().body("El ID proporcionado no coincide con el ID del monstruo.");
         }
     }
 
     @PostMapping
-    public Monstruo guardarMonstruo(@RequestBody Monstruo monstruoGuardar) {
-        return monstruosService.setItem(monstruoGuardar);
+    public MonstruoDTO guardarMonstruo(@RequestBody Monstruo monstruoGuardar) {
+        return conversorMonstruoDTO(monstruosService.setItem(monstruoGuardar));
     }
 
     @DeleteMapping("/{id}")
@@ -57,7 +57,6 @@ public class MonstruoController {
         return l.stream().map(MonstruoController::conversorMonstruoDTO).toList();
     }
 
-
     //Conversor Unico DTO
     public static MonstruoDTO conversorMonstruoDTO(Monstruo m){
         MonstruoDTO monstruoDTO = new MonstruoDTO();
@@ -67,8 +66,10 @@ public class MonstruoController {
         monstruoDTO.setDescripcion(m.getDescripcion());
         monstruoDTO.setAlmas(m.getAlmasOtrogadas());
         monstruoDTO.setExperiencia(m.getExperienciaOtorgada());
-        monstruoDTO.setEstadisticas(EstadisticasController.conversorEstadisticasDTO(m.getEstadisticas()));
-        monstruoDTO.setDrops(m.getDrops());
+        monstruoDTO.setEstadisticas(
+                EstadisticasController.conversorEstadisticasDTO(
+                        m.getEstadisticas()));
+        monstruoDTO.setDrops(conversorListaDropsDTO(m.getDrops()));
         monstruoDTO.setHabilidades(
                 HabilidadController.conversorListaHabilidadDTO(
                         m.getMonstruoHabilidades().stream().map(MonstruoHabilidad::getHabilidad).toList()));
@@ -83,7 +84,10 @@ public class MonstruoController {
 
     //Conversor unico drops
     private static DropsDTO conversorDropsDTO(DropsObjetos dropsObjetos) {
-        return null;
+        DropsDTO dropsDTO = new DropsDTO();
+        dropsDTO.setItem(dropsObjetos.getItem());
+        dropsDTO.setProbabilidad(dropsDTO.getProbabilidad());
+        return dropsDTO;
     }
 
 
