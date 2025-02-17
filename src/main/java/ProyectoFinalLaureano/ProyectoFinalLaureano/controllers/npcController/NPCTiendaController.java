@@ -1,12 +1,9 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.npcController;
 
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.npc.NPC;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.npc.TipoNPC;
+
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.npc.tienda.NPCProducto;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.npc.tienda.NPCProductoId;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.services.npcService.NPCService;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.npcService.TiendaNPCService;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.services.npcService.TipoNPCService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

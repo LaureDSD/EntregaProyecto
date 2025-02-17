@@ -3,6 +3,9 @@ package ProyectoFinalLaureano.ProyectoFinalLaureano.models.usuario;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 
 import java.util.List;
@@ -23,6 +26,8 @@ public class TipoUsuario {
     private Long tipo_usuario_id;
 
     //Nombre del tipo de usuario
+    @NotNull
+    @Size(max = 100)
     @Column(name = "nombre", nullable = false, length = 100)
     @Schema(description = "Nombre del tipo de usuario", example = "usuario")
     private String nombre;

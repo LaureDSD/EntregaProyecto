@@ -8,6 +8,7 @@ import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.inventario.I
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.usuario.Usuario;
 import jakarta.persistence.*;
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -98,12 +99,6 @@ public class Personaje {
     @Schema(description = "Grupo del persoanje asociado")
     @JsonIgnore // Excluir esta relación en la serialización JSON
     private Grupo grupo;
-
-    //Union como lider
-    @OneToMany(mappedBy = "lider", cascade = CascadeType.ALL)
-    @Schema(description = "Ítems en el inventario del personaje")
-    @JsonIgnore // Excluir esta relación en la serialización JSON
-    private List<Grupo> gruposLiderados;
 
 
     // Relación Uno a Muchos con InventarioPersonaje

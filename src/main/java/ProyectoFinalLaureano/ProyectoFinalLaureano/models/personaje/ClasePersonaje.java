@@ -4,6 +4,8 @@ import ProyectoFinalLaureano.ProyectoFinalLaureano.models.estadisticasGenerales.
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -26,6 +28,8 @@ public class ClasePersonaje {
     private Long clase_id;
 
     //Nombre de la clase
+    @NotNull
+    @Size(max = 100)
     @Column(name = "nombre", nullable = false, length = 100)
     @Schema(description = "Nombre de la clase", example = "Mago")
     private String nombre;
@@ -36,6 +40,7 @@ public class ClasePersonaje {
     private String descripcion;
 
     //RelacionCon Estadisticas
+    @NotNull
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "estadisticas_id", referencedColumnName = "estadisticasId")
     @JsonIgnore // Excluir esta relación en la serialización JSON
