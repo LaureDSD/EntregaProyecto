@@ -17,7 +17,7 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
-public class PersoanjeDTO {
+public class PersonajeDTO {
 
     private Long id;
 

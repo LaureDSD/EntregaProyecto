@@ -43,6 +43,6 @@ public class HabilidadDTO {
 
     private List<EfectoDTO> efectos;
 
-    private List<MonstruoDTO> monstruoHabilidades;
+    private List<MonstruoDTO> monstruos;
 
 }

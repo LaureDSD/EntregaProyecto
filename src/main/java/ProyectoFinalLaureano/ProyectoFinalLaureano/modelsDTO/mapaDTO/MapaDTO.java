@@ -29,6 +29,6 @@ public class MapaDTO {
 
     private List<EfectoDTO> efectos;
 
-    private List<MonstruoDTO> mapaMonstruos;
+    private List<MonstruoDTO> monstruos;
 
 }

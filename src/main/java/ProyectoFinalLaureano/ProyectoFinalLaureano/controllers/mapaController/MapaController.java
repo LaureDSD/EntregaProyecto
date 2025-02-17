@@ -1,18 +1,13 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.mapaController;
 
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.log.LogTransacciones;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.log.enums.TipoTransaccion;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.efectoEstadoController.EfectoEstadoController;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.monstruoController.MonstruoController;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.mapa.Mapa;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.mapa.TipoMapa;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.mapa.efectosEstados.MapaEfecto;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.mapa.efectosEstados.MapaEfectoId;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.mapa.monstruos.MapaMonstruo;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.mapa.monstruos.MapaMonstruoId;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.monstruo.TipoMonstruo;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.services.mapaService.MapaEfectoService;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.services.mapaService.MapaMonstruoService;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.mapaDTO.MapaDTO;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.mapaService.MapaService;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.services.mapaService.TipoMapaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -61,6 +56,27 @@ public class MapaController {
     @DeleteMapping("/{id}")
     public void borrarMapa(@PathVariable Long id){
         mapaService.deleteByID(id);
+    }
+
+    //List
+    public static List<MapaDTO> conversorListaDTO( List<Mapa> lm){
+        return lm.stream().map(MapaController::conversorDTO).toList();
+    }
+
+    //Dto
+    public static MapaDTO conversorDTO (Mapa o){
+        MapaDTO mapaDTO = new MapaDTO();
+        mapaDTO.setId(o.getMapa_id());
+        mapaDTO.setImagen(o.getImagen());
+        mapaDTO.setNombre(o.getNombre());
+        mapaDTO.setDescripcion(o.getDescripcion());
+        mapaDTO.setNivel_recomendado(o.getNivel_recomendado());
+        mapaDTO.setTipoMapa(o.getTipoMapa());
+        mapaDTO.setEfectos(EfectoEstadoController.conversorListaEstadoDTO(
+                o.getEfectos().stream().map(MapaEfecto::getEfecto).toList()));
+        mapaDTO.setMonstruos(MonstruoController.conversorListaMonstruoDTO(
+                o.getMapaMonstruos().stream().map(MapaMonstruo::getMonstruo).toList()));
+        return  mapaDTO;
     }
 
 }

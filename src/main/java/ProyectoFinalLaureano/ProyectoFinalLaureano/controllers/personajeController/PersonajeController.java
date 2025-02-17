@@ -1,6 +1,7 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.personajeController;
 
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.Personaje;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.personajeDTO.PersonajeDTO;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.persoanjeService.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -39,6 +40,19 @@ public class PersonajeController {
     @DeleteMapping("/{id}")
     public void borrar (@PathVariable Long id){
         persoanjeService.deleteByID(id);
+    }
+
+
+    //Conversor Lista
+    public static List<PersonajeDTO> conversorListaPersonajeDTO(List<Personaje> l){
+        return l.stream().map(PersonajeController::conversorPersonajeDTO).toList();
+    }
+
+
+    //Conversor Unico DTO
+    public static PersonajeDTO conversorPersonajeDTO( Personaje p){
+        PersonajeDTO personajeDTO = new PersonajeDTO();
+        return  personajeDTO;
     }
 
 }

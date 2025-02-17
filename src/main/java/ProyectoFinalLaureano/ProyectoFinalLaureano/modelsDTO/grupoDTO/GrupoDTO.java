@@ -1,6 +1,6 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.grupoDTO;
 
-import ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.personajeDTO.PersoanjeDTO;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.personajeDTO.PersonajeDTO;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -22,8 +22,8 @@ public class GrupoDTO {
 
     private String tipoGrupo;
 
-    private PersoanjeDTO lider;
+    private PersonajeDTO lider;
 
-    private List<PersoanjeDTO> miembros;
+    private List<PersonajeDTO> miembros;
 
 }

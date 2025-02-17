@@ -55,4 +55,16 @@ public class LogController {
         logService.deleteByID(id);
     }
 
+    //Conversor Lista
+    /*
+    public static  xxxx conversorLista( List<> l){
+        return l.stream().map( e  -> conversorDTO(e) );
+    }
+
+*/
+    //Conversor Unico DTO
+    /*
+    public static xxxx conversorDTO(){
+    }
+*/
 }

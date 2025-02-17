@@ -49,14 +49,14 @@ public class EfectoEstadoController {
 
 
 
-    //Conversor Lista
+    //Conversor lista estados
     public static List<EfectoDTO> conversorListaEstadoDTO (List<EfectoEstado> le){
         List<EfectoDTO> leDTO = new ArrayList<>();
         le.forEach(e -> leDTO.add(conversorEstadoDTO(e)) );
         return leDTO;
     }
 
-    //ConversorUnico
+    //Conversor Unico DTO Estado
     public static EfectoDTO conversorEstadoDTO (EfectoEstado e){
         EfectoDTO efectoDTO = new EfectoDTO();
         efectoDTO.setId(e.getEfecto_id());

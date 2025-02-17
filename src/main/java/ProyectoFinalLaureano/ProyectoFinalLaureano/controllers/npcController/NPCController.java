@@ -5,6 +5,7 @@ import ProyectoFinalLaureano.ProyectoFinalLaureano.models.npc.NPC;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.npc.TipoNPC;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.npc.tienda.NPCProducto;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.npc.tienda.NPCProductoId;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.npcDTO.NpcDTO;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.npcService.NPCService;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.npcService.TiendaNPCService;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.npcService.TipoNPCService;
@@ -54,6 +55,19 @@ public class NPCController {
     @DeleteMapping("/{id}")
     public void borrarNPC(@PathVariable Long id) {
         npcService.deleteByID(id);
+    }
+
+    //Conversor Lista
+    public static List<NpcDTO> conversorListaNPCDTO(List<NPC> l){
+        return l.stream().map(NPCController::conversorNPCDTO).toList();
+    }
+
+
+    //Conversor Unico DTO
+    public static NpcDTO conversorNPCDTO(NPC n){
+        NpcDTO npcDTO = new NpcDTO();
+
+        return  npcDTO;
     }
 
 }

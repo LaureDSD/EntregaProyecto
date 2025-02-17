@@ -2,6 +2,7 @@ package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.usuarioControlle
 
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.usuario.TipoUsuario;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.usuario.Usuario;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.usuarioDTO.UsuarioDTO;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.usuarioService.TipoUsuarioService;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.usuarioService.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,5 +52,18 @@ public class UsuarioController {
     @DeleteMapping("/{id}")
     public void borrar (@PathVariable Long id){
         usuarioService.deleteByID(id);
+    }
+
+
+    //Conversor Lista
+    public static List<UsuarioDTO> conversorListaUsuarioDTO(List<Usuario> l){
+        return l.stream().map(UsuarioController::conversorUsuarioDTO).toList();
+    }
+
+
+    //Conversor Unico DTO
+    public static UsuarioDTO conversorUsuarioDTO( Usuario u){
+        UsuarioDTO usuarioDTO = new UsuarioDTO();
+        return  usuarioDTO;
     }
 }

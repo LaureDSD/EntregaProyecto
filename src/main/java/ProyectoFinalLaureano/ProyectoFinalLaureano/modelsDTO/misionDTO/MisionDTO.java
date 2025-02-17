@@ -27,7 +27,7 @@ public class MisionDTO {
 
     private int tiempo;
 
-    private List<ItemDTO> recompensas;
+    private List<RecompensaDTO> recompensas;
 
     private List<NpcDTO> npcs;
 

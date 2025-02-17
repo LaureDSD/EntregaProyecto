@@ -50,9 +50,7 @@ public class EstadisticasController {
 
     //Conversor Lista estaditicas
     public static List<EstadisticasDTO> conversorListaEstadisticasDTO (List<EstadisticasGenerales> le){
-        List<EstadisticasDTO> leDTO = new ArrayList<>();
-        le.forEach(e -> leDTO.add(conversorEstadisticasDTO(e)) );
-        return leDTO;
+        return le.stream().map(EstadisticasController::conversorEstadisticasDTO).toList();
     }
 
     //Conversor  Unico estadisticas

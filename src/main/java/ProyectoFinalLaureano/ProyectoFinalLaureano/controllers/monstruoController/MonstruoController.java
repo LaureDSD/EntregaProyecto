@@ -1,15 +1,13 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.monstruoController;
 
+import ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.estadisticasGeneralesController.EstadisticasController;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.habilidadController.HabilidadController;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.monstruo.Monstruo;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.monstruo.TipoMonstruo;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.monstruo.drops.DropsObjetos;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.monstruo.drops.DropsObjetosId;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.monstruo.habilidades.MonstruoHabilidad;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.monstruo.habilidades.MonstruoHabilidadId;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.services.monstruoService.DropsObjetosService;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.services.monstruoService.MonstruoHabilidadService;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.monsrtuoDTO.DropsDTO;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.monsrtuoDTO.MonstruoDTO;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.monstruoService.MonstruosService;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.services.monstruoService.TipoMonstruoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -53,5 +51,40 @@ public class MonstruoController {
     public void borrarMonstruo(@PathVariable Long id) {
         monstruosService.deleteByID(id);
     }
+
+    //Conversor Lista
+    public static List<MonstruoDTO> conversorListaMonstruoDTO(List<Monstruo> l){
+        return l.stream().map(MonstruoController::conversorMonstruoDTO).toList();
+    }
+
+
+    //Conversor Unico DTO
+    public static MonstruoDTO conversorMonstruoDTO(Monstruo m){
+        MonstruoDTO monstruoDTO = new MonstruoDTO();
+        monstruoDTO.setId(m.getMonstruo_id());
+        monstruoDTO.setImagen(m.getImagen());
+        monstruoDTO.setNombre(m.getNombre());
+        monstruoDTO.setDescripcion(m.getDescripcion());
+        monstruoDTO.setAlmas(m.getAlmasOtrogadas());
+        monstruoDTO.setExperiencia(m.getExperienciaOtorgada());
+        monstruoDTO.setEstadisticas(EstadisticasController.conversorEstadisticasDTO(m.getEstadisticas()));
+        monstruoDTO.setDrops(m.getDrops());
+        monstruoDTO.setHabilidades(
+                HabilidadController.conversorListaHabilidadDTO(
+                        m.getMonstruoHabilidades().stream().map(MonstruoHabilidad::getHabilidad).toList()));
+        return monstruoDTO;
+    }
+
+    //Conversor Lista
+    public static List<DropsDTO> conversorListaDropsDTO(List<DropsObjetos> l){
+            return l.stream().map(MonstruoController::conversorDropsDTO).toList();
+    }
+
+
+    //Conversor unico drops
+    private static DropsDTO conversorDropsDTO(DropsObjetos dropsObjetos) {
+        return null;
+    }
+
 
 }

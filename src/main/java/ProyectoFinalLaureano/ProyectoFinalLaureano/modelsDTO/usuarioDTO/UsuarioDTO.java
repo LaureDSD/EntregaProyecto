@@ -1,7 +1,7 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.usuarioDTO;
 
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.usuario.TipoUsuario;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.personajeDTO.PersoanjeDTO;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.personajeDTO.PersonajeDTO;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -36,6 +36,6 @@ public class UsuarioDTO {
 
     private TipoUsuario tipoUsuario;
 
-    private List<PersoanjeDTO> personajes;
+    private List<PersonajeDTO> personajes;
 
 }
