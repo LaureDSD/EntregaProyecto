@@ -2,8 +2,13 @@ package ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.efectosDTO;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.efectosEstados.enums.TipoAfectado;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.efectosEstados.enums.TipoEfecto;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.estadisticasDTO.EstadisticasDTO;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-
+@NoArgsConstructor
+@Getter
+@Setter
 public class EfectoDTO {
 
     private String icono;

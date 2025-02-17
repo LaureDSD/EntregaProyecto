@@ -1,7 +1,15 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.grupoDTO;
 
+import ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.personajeDTO.PersoanjeDTO;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.util.List;
 
+@NoArgsConstructor
+@Getter
+@Setter
 public class GrupoDTO {
 
     private String imagen;
@@ -12,8 +20,8 @@ public class GrupoDTO {
 
     private String tipoGrupo;
 
-    private PersoanjePublicDTO lider;
+    private PersoanjeDTO lider;
 
-    private List<PersoanjePublicDTO> miembros;
+    private List<PersoanjeDTO> miembros;
 
 }

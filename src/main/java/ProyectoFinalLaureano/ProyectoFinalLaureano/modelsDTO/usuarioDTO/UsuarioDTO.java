@@ -2,10 +2,16 @@ package ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.usuarioDTO;
 
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.usuario.TipoUsuario;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.personajeDTO.PersoanjeDTO;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
+@NoArgsConstructor
+@Getter
+@Setter
 public class UsuarioDTO {
 
     private Long id;

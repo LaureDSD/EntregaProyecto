@@ -2,10 +2,15 @@ package ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.misionDTO;
 
 import ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.itemDTO.ItemDTO;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.npcDTO.NpcDTO;
-
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.List;
 
+@NoArgsConstructor
+@Getter
+@Setter
 public class MisionDTO {
 
     private String nombre;
