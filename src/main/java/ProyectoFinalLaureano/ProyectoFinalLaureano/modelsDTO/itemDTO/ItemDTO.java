@@ -17,6 +17,8 @@ import java.util.List;
 @Setter
 public class ItemDTO {
 
+    private long Id;
+
     private String nombre;
 
     private TipoItem tipoItem;

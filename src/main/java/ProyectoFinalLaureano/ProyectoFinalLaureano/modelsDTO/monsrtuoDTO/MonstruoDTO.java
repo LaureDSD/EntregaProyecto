@@ -16,6 +16,8 @@ import java.util.List;
 @Setter
 public class MonstruoDTO {
 
+    private long Id;
+
     private String nombre;
 
     private TipoMonstruo tipo;

@@ -34,31 +34,31 @@ public class EstadisticasGenerales {
 
     //Vida base de todo
     @Schema(description = "Vida base de la entidad.", example = "100")
-    private Integer vidaBase;
+    private Integer vida;
 
     @Schema(description = "Regeneración de vida base por intervalo de tiempo.", example = "5")
-    private Integer regeneracionVidaBase;
+    private Integer regeneracionVida;
 
     @Schema(description = "Escudo base de la entidad.", example = "50")
-    private Integer escudoBase;
+    private Integer escudo;
 
     @Schema(description = "Energía base de la entidad.", example = "100")
-    private Integer energiaBase;
+    private Integer energia;
 
     @Schema(description = "Regeneración de energía base por intervalo de tiempo.", example = "10")
-    private Integer regeneracionEnergiaBase;
+    private Integer regeneracionEnergia;
 
     @Schema(description = "Maná base entidad.", example = "100")
-    private Integer manaBase;
+    private Integer mana;
 
     @Schema(description = "Regeneración de maná base por intervalo de tiempo.", example = "5")
-    private Integer regeneracionManaBase;
+    private Integer regeneracionMana;
 
     @Schema(description = "Ataque físico base entidad.", example = "20")
-    private Integer ataqueFisicoBase;
+    private Integer ataqueFisico;
 
     @Schema(description = "Ataque mágico base entidad", example = "15")
-    private Integer ataqueMagicoBase;
+    private Integer ataqueMagico;
 
     @Schema(description = "Defensa física entidad.", example = "10")
     private Integer defensaFisica;

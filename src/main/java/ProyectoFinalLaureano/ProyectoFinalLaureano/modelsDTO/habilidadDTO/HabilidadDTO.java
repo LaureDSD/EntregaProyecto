@@ -17,6 +17,8 @@ import java.util.List;
 @Setter
 public class HabilidadDTO {
 
+    private long Id;
+
     private String imagen;
 
     private String nombre;

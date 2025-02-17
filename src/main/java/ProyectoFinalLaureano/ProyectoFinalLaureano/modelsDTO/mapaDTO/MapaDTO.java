@@ -15,6 +15,8 @@ import java.util.List;
 @Setter
 public class MapaDTO {
 
+    private long Id;
+
     private String nombre;
 
     private String descripcion;

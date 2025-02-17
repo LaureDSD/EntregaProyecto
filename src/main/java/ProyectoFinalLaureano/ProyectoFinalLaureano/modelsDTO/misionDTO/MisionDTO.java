@@ -13,6 +13,8 @@ import java.util.List;
 @Setter
 public class MisionDTO {
 
+    private long Id;
+
     private String nombre;
 
     private String descripcion;

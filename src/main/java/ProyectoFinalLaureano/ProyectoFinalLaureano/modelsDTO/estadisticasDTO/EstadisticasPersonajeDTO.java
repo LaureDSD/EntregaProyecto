@@ -9,17 +9,17 @@ import lombok.Setter;
 @Setter
 public class EstadisticasPersonajeDTO {
 
-    private Integer vida;
+    private Integer vidaMax;
 
     private Integer regeneracionVida;
 
     private Integer escudo;
 
-    private Integer energia;
+    private Integer energiaMax;
 
     private Integer regeneracionEnergia;
 
-    private Integer mana;
+    private Integer manaMax;
 
     private Integer regeneracionMana;
 

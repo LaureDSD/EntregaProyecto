@@ -12,6 +12,8 @@ import java.util.List;
 @Setter
 public class GrupoDTO {
 
+    private long Id;
+
     private String imagen;
 
     private String nombre;

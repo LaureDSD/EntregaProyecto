@@ -76,125 +76,115 @@ INSERT INTO logs (usuario_id, tipo_log, mensaje, fecha_log) VALUES
 -- Estadisticas egenrales (Correcto)
 CREATE TABLE IF NOT EXISTS estadisticas_generales (
     estadisticas_id BIGINT PRIMARY KEY AUTO_INCREMENT,
-    vida_base INT NOT NULL DEFAULT 0,
-    regeneracion_vida_base INT NOT NULL DEFAULT 0,
-    escudo_base INT NOT NULL DEFAULT 0,
-    energia_base INT NOT NULL DEFAULT 0,
-    regeneracion_energia_base INT NOT NULL DEFAULT 0,
-    mana_base INT NOT NULL DEFAULT 0,
-    regeneracion_mana_base INT NOT NULL DEFAULT 0,
-    ataque_fisico_base INT NOT NULL DEFAULT 0,
-    ataque_magico_base INT NOT NULL DEFAULT 0,
+    vida INT NOT NULL DEFAULT 0,
+    regeneracion_vida INT NOT NULL DEFAULT 0,
+    escudo INT NOT NULL DEFAULT 0,
+    energia INT NOT NULL DEFAULT 0,
+    regeneracion_energia INT NOT NULL DEFAULT 0,
+    mana INT NOT NULL DEFAULT 0,
+    regeneracion_mana INT NOT NULL DEFAULT 0,
+    ataque_fisico INT NOT NULL DEFAULT 0,
+    ataque_magico INT NOT NULL DEFAULT 0,
     defensa_fisica INT DEFAULT 0,
     defensa_magica INT DEFAULT 0
 );
 
 -- Insertar estadísticas generales
-INSERT INTO estadisticas_generales (vida_base, escudo_base, energia_base, mana_base, ataque_fisico_base, ataque_magico_base, defensa_fisica, defensa_magica)
+INSERT INTO estadisticas_generales (vida,regeneracion_vida, escudo, energia,regeneracion_energia, mana,regeneracion_mana, ataque_fisico, ataque_magico, defensa_fisica, defensa_magica)
 VALUES
     -- Habilidades Ofensivas
-    (0, 20, 0, 50, 0, 0, 0, 0), -- Golpe Crítico
-    (0, 0, 30, 0, 0, 40, 0, 0), -- Bola de Fuego
-    (0, 0, 25, 0, 35, 0, 0, 0), -- Rayo Helado
-    (50, 0, 20, 0, 0, 0, 0, 0), -- Escudo de Protección
-    (30, 0, 15, 0, 0, 0, 0, 0), -- Cura Menor
-    (0, 0, 20, 0, 0, 10, 0, 10), -- Fortalecer
-    (0, 0, 40, 10, 10, 10, 0, 10), -- Bendición
-    (0, 0, 50, 0, 0, 0, 0, 0), -- Invisibilidad
-    (20, 0, 30, 0, 0, 0, 0, 0), -- Regeneración
-    (0, 25, 0, 40, 0, 0, 0, 0), -- Corte Sombrío
-    (0, 0, 50, 0, 60, 0, 0, 0), -- Tormenta Eléctrica
-    (0, 30, 0, 35, 0, 0, 0, 0), -- Lanzamiento Dual
-    (100, 0, 40, 0, 0, 0, 0, 0), -- Escudo Divino
-    (50, 0, 25, 0, 0, 0, 0, 0), -- Regeneración Rápida
-    (0, 0, 35, 0, 0, 15, 0, 15), -- Aura de Protección
-    (0, 0, 50, 15, 15, 0, 0, 20), -- Bendición Sagrada
-    (0, 0, 60, 0, 0, 0, 0, 0), -- Teletransportación
-    (40, 0, 45, 0, 0, 0, 0, 0); -- Lluvia de Curación 18
-    
-    -- Insertar estadísticas generales
-INSERT INTO estadisticas_generales (vida_base, escudo_base, energia_base, mana_base, ataque_fisico_base, ataque_magico_base, defensa_fisica, defensa_magica)
-VALUES
+    (0, 20, 0, 50, 0, 0, 0, 0,0,0,0), -- Golpe Crítico
+    (0, 0, 30, 0, 0, 40, 0, 0,0,0,0), -- Bola de Fuego
+    (0, 0, 25, 0, 35, 0, 0, 0,0,0,0), -- Rayo Helado
+    (50, 0, 20, 0, 0, 0, 0, 0,0,0,0), -- Escudo de Protección
+    (30, 0, 15, 0, 0, 0, 0, 0,0,0,0), -- Cura Menor
+    (0, 0, 20, 0, 0, 10, 0, 10,0,0,0), -- Fortalecer
+    (0, 0, 40, 10, 10, 10, 0, 10,0,0,0), -- Bendición
+    (0, 0, 50, 0, 0, 0, 0, 0,0,0,0), -- Invisibilidad
+    (20, 0, 30, 0, 0, 0, 0, 0,0,0,0), -- Regeneración
+    (0, 25, 0, 40, 0, 0, 0, 0,0,0,0), -- Corte Sombrío
+    (0, 0, 50, 0, 60, 0, 0, 0,0,0,0), -- Tormenta Eléctrica
+    (0, 30, 0, 35, 0, 0, 0, 0,0,0,0), -- Lanzamiento Dual
+    (100, 0, 40, 0, 0, 0, 0, 0,0,0,0), -- Escudo Divino
+    (50, 0, 25, 0, 0, 0, 0, 0,0,0,0), -- Regeneración Rápida
+    (0, 0, 35, 0, 0, 15, 0, 15,0,0,0), -- Aura de Protección
+    (0, 0, 50, 15, 15, 0, 0, 20,0,0,0), -- Bendición Sagrada
+    (0, 0, 60, 0, 0, 0, 0, 0,0,0,0), -- Teletransportación
+    (40, 0, 45, 0, 0, 0, 0, 0,0,0,0), -- Lluvia de Curación 18
+
     -- Consumibles
-    (50, 0, 0, 0, 0, 0, 0, 0),   -- Poción de Vida
-    (0, 0, 0, 30, 0, 0, 0, 0),   -- Poción de Maná
-    (0, 0, 40, 0, 0, 0, 0, 0),   -- Poción de Energía
-    (100, 0, 0, 0, 0, 0, 0, 0),  -- Elixir de Vida
-    (0, 0, 0, 80, 0, 0, 0, 0),   -- Elixir de Maná
-    (0, 0, 0, 0, 10, 0, 0, 0),   -- Poción de Fuerza
-    (0, 0, 0, 0, 0, 0, 10, 0),   -- Poción de Defensa
-    (0, 0, 0, 0, 0, 0, 0, 0),    -- Poción de Invisibilidad
+    (50, 0, 0, 0, 0, 0, 0, 0,0,0,0),   -- Poción de Vida
+    (0, 0, 0, 30, 0, 0, 0, 0,0,0,0),   -- Poción de Maná
+    (0, 0, 40, 0, 0, 0, 0, 0,0,0,0),   -- Poción de Energía
+    (100, 0, 0, 0, 0, 0, 0, 0,0,0,0),  -- Elixir de Vida
+    (0, 0, 0, 80, 0, 0, 0, 0,0,0,0),   -- Elixir de Maná
+    (0, 0, 0, 0, 10, 0, 0, 0,0,0,0),   -- Poción de Fuerza
+    (0, 0, 0, 0, 0, 0, 10, 0,0,0,0),   -- Poción de Defensa
+    (0, 0, 0, 0, 0, 0, 0, 0,0,0,0),    -- Poción de Invisibilidad
 
     -- Equipo
-    (0, 0, 0, 0, 20, 0, 0, 0),   -- Espada de Acero
-    (0, 10, 0, 0, 0, 0, 0, 0),   -- Escudo de Madera
-    (0, 0, 0, 0, 15, 0, 0, 0),   -- Daga Afilada
-    (0, 0, 0, 0, 0, 0, 50, 0),   -- Armadura de Platino
-    (0, 0, 0, 15, 0, 0, 0, 0),   -- Anillo de Poder
-    (0, 0, 0, 0, 30, 0, 0, 0),   -- Martillo de Guerra
-    (0, 0, 0, 0, 0, 0, 0, 20),   -- Capa del Mago
-    (0, 0, 0, 25, 0, 0, 0, 0),   -- Báculo Arcano
-    (0, 0, 20, 0, 0, 0, 0, 0),   -- Botas de Velocidad
-    (0, 0, 0, 0, 0, 0, 10, 0),   -- Cinturón de Resistencia
-    (0, 0, 0, 0, 18, 0, 0, 0),   -- Guantes de Acero
-    (0, 0, 0, 0, 0, 0, 20, 20);  -- Amuleto de Protección 38
+    (0, 0, 0, 0, 20, 0, 0, 0,0,0,0),   -- Espada de Acero
+    (0, 10, 0, 0, 0, 0, 0, 0,0,0,0),   -- Escudo de Madera
+    (0, 0, 0, 0, 15, 0, 0, 0,0,0,0),   -- Daga Afilada
+    (0, 0, 0, 0, 0, 0, 50, 0,0,0,0),   -- Armadura de Platino
+    (0, 0, 0, 15, 0, 0, 0, 0,0,0,0),   -- Anillo de Poder
+    (0, 0, 0, 0, 30, 0, 0, 0,0,0,0),   -- Martillo de Guerra
+    (0, 0, 0, 0, 0, 0, 0, 20,0,0,0),   -- Capa del Mago
+    (0, 0, 0, 25, 0, 0, 0, 0,0,0,0),   -- Báculo Arcano
+    (0, 0, 20, 0, 0, 0, 0, 0,0,0,0),   -- Botas de Velocidad
+    (0, 0, 0, 0, 0, 0, 10, 0,0,0,0),   -- Cinturón de Resistencia
+    (0, 0, 0, 0, 18, 0, 0, 0,0,0,0),   -- Guantes de Acero
+    (0, 0, 0, 0, 0, 0, 20, 20,0,0,0),  -- Amuleto de Protección 38
     
-    -- Insertar estadísticas generales
-INSERT INTO estadisticas_generales (vida_base, escudo_base, energia_base, mana_base, ataque_fisico_base, ataque_magico_base, defensa_fisica, defensa_magica)
-VALUES
     -- Fuerza Mejorada
-    (0, 0, 0, 0, 20, 0, 0, 0),-- Veneno
-    (-10, 0, 0, 0, 0, 0, 0, 0),-- Escudo de Protección
-    (0, 50, 0, 0, 0, 0, 0, 0),-- Congelación
-    (0, 0, -20, 0, 0, 0, 0, 0),-- Regeneración
-    (10, 0, 0, 0, 0, 0, 0, 0),-- Maldición Oscura
-    (0, 0, 0, -30, 0, 0, 0, 0),-- Ira del Guerrero
-    (0, 0, 0, 0, 30, 0, 0, 0),-- Ceguera
-    (0, 0, 0, 0, -15, 0, 0, 0),-- Bendición Divina
-    (50, 0, 0, 50, 0, 0, 0, 0),-- Quemadura
-    (-15, 0, 0, 0, 0, 0, 0, 0),-- Invisibilidad
-    (0, 0, 0, 0, 0, 0, 0, 0),-- Miedo
-    (0, 0, 0, 0, 0, -20, 0, 0),-- Furia del Dragón
-    (0, 0, 0, 0, 40, 0, 0, 0),-- Parálisis
-    (0, 0, -30, 0, 0, 0, 0, 0),-- Aura Sagrada
-    (0, 0, 0, 0, 0, 0, 10, 10),-- Corrupción
-    (-20, 0, 0, 0, 0, 0, 0, 0),-- Velocidad Mejorada
-    (0, 0, 20, 0, 0, 0, 0, 0),-- Silenciamiento
-    (0, 0, 0, -50, 0, 0, 0, 0),-- Invulnerabilidad
-    (0, 100, 0, 0, 0, 0, 0, 0),-- Envenenamiento Grave
-    (-25, 0, 0, 0, 0, 0, 0, 0); -- 59
-    
-    INSERT INTO estadisticas_generales (vida_base, escudo_base, energia_base, mana_base, ataque_fisico_base, ataque_magico_base, defensa_fisica, defensa_magica)
-VALUES
-(50, 0, 20, 5, 10, 5, 2, 1),
-(200, 0, 50, 20, 50, 20, 10, 5),
-(1000, 100, 200, 50, 200, 100, 30, 20),
-(80, 0, 30, 12, 20, 15, 5, 3),
-(60, 0, 20, 8, 15, 10, 3, 2),
-(120, 0, 40, 18, 40, 25, 8, 5),
-(100, 0, 35, 15, 30, 20, 6, 4),
-(200, 50, 60, 25, 80, 50, 12, 8),
-(200, 50, 60, 25, 80, 50, 12, 8),
-(50, 0, 10, 15, 20, 20, 2, 1),
-(100, 0, 40, 8, 25, 10, 3, 2),
-(200, 100, 40, 8, 25, 10, 3, 2),
-(50000, 200, 1000, 150, 200, 200, 200, 150),
-(300, 20, 80, 30, 70, 25, 15, 10),
-(90, 0, 40, 15, 25, 20, 5, 5),
-(500, 100, 120, 50, 100, 40, 30, 20),
-(1200, 150, 250, 100, 250, 150, 40, 30),
-(150, 10, 50, 20, 40, 25, 10, 8),
-(70, 0, 25, 10, 15, 10, 3, 2),
-(180, 30, 60, 40, 60, 50, 12, 15),
-(200, 50, 70, 30, 50, 40, 15, 10),
-(1500, 200, 300, 150, 300, 200, 50, 40),
-(1000, 150, 200, 200, 150, 250, 30, 40),
-(400, 50, 100, 40, 120, 30, 20, 15),
-(2000, 300, 400, 200, 350, 250, 60, 50),
-(2500, 500, 500, 300, 500, 400, 80, 60);  -- 71
+    (0, 0, 0, 0, 20, 0, 0, 0,0,0,0),-- Veneno
+    (-10, 0, 0, 0, 0, 0, 0, 0,0,0,0),-- Escudo de Protección
+    (0, 50, 0, 0, 0, 0, 0, 0,0,0,0),-- Congelación
+    (0, 0, -20, 0, 0, 0, 0, 0,0,0,0),-- Regeneración
+    (10, 0, 0, 0, 0, 0, 0, 0,0,0,0),-- Maldición Oscura
+    (0, 0, 0, -30, 0, 0, 0, 0,0,0,0),-- Ira del Guerrero
+    (0, 0, 0, 0, 30, 0, 0, 0,0,0,0),-- Ceguera
+    (0, 0, 0, 0, -15, 0, 0, 0,0,0,0),-- Bendición Divina
+    (50, 0, 0, 50, 0, 0, 0, 0,0,0,0),-- Quemadura
+    (-15, 0, 0, 0, 0, 0, 0, 0,0,0,0),-- Invisibilidad
+    (0, 0, 0, 0, 0, 0, 0, 0,0,0,0),-- Miedo
+    (0, 0, 0, 0, 0, -20, 0, 0,0,0,0),-- Furia del Dragón
+    (0, 0, 0, 0, 40, 0, 0, 0,0,0,0),-- Parálisis
+    (0, 0, -30, 0, 0, 0, 0, 0,0,0,0),-- Aura Sagrada
+    (0, 0, 0, 0, 0, 0, 10, 10,0,0,0),-- Corrupción
+    (-20, 0, 0, 0, 0, 0, 0, 0,0,0,0),-- Velocidad Mejorada
+    (0, 0, 20, 0, 0, 0, 0, 0,0,0,0),-- Silenciamiento
+    (0, 0, 0, -50, 0, 0, 0, 0,0,0,0),-- Invulnerabilidad
+    (0, 100, 0, 0, 0, 0, 0, 0,0,0,0),-- Envenenamiento Grave
+    (-25, 0, 0, 0, 0, 0, 0, 0,0,0,0), -- 59
 
-INSERT INTO estadisticas_generales (vida_base, regeneracion_vida_base, escudo_base, energia_base, regeneracion_energia_base, mana_base, regeneracion_mana_base, ataque_fisico_base, ataque_magico_base, defensa_fisica, defensa_magica)
-VALUES
+(50, 0, 20, 5, 10, 5, 2, 1,0,0,0),
+(200, 0, 50, 20, 50, 20, 10, 5,0,0,0),
+(1000, 100, 200, 50, 200, 100, 30, 20,0,0,0),
+(80, 0, 30, 12, 20, 15, 5, 3,0,0,0),
+(60, 0, 20, 8, 15, 10, 3, 2,0,0,0),
+(120, 0, 40, 18, 40, 25, 8, 5,0,0,0),
+(100, 0, 35, 15, 30, 20, 6, 4,0,0,0),
+(200, 50, 60, 25, 80, 50, 12, 8,0,0,0),
+(200, 50, 60, 25, 80, 50, 12, 8,0,0,0),
+(50, 0, 10, 15, 20, 20, 2, 1,0,0,0),
+(100, 0, 40, 8, 25, 10, 3, 2,0,0,0),
+(200, 100, 40, 8, 25, 10, 3, 2,0,0,0),
+(50000, 200, 1000, 150, 200, 200, 200, 150,0,0,0),
+(300, 20, 80, 30, 70, 25, 15, 10,0,0,0),
+(90, 0, 40, 15, 25, 20, 5, 5,0,0,0),
+(500, 100, 120, 50, 100, 40, 30, 20,0,0,0),
+(1200, 150, 250, 100, 250, 150, 40, 30,0,0,0),
+(150, 10, 50, 20, 40, 25, 10, 8,0,0,0),
+(70, 0, 25, 10, 15, 10, 3, 2,0,0,0),
+(180, 30, 60, 40, 60, 50, 12, 15,0,0,0),
+(200, 50, 70, 30, 50, 40, 15, 10,0,0,0),
+(1500, 200, 300, 150, 300, 200, 50, 40,0,0,0),
+(1000, 150, 200, 200, 150, 250, 30, 40,0,0,0),
+(400, 50, 100, 40, 120, 30, 20, 15,0,0,0),
+(2000, 300, 400, 200, 350, 250, 60, 50,0,0,0),
+(2500, 500, 500, 300, 500, 400, 80, 60,0,0,0),  -- 71
+
 (150, 5, 20, 60, 10, 20, 5, 20, 5, 15, 5),  -- Aragorn
 (80, 3, 5, 30, 5, 100, 20, 5, 25, 5, 20),  -- Gandalf
 (100, 4, 10, 70, 8, 30, 7, 15, 10, 10, 10), -- Legolas
@@ -204,20 +194,18 @@ VALUES
 (120, 5, 15, 60, 12, 70, 10, 10, 18, 10, 15), -- Galadriel
 (85, 2, 5, 35, 7, 90, 12, 6, 22, 6, 18),   -- Saruman
 (95, 3, 10, 50, 8, 60, 15, 10, 15, 8, 12),  -- Arwen
-(160, 8, 10, 90, 15, 10, 5, 22, 3, 12, 3);   -- Sauron 81
+(160, 8, 10, 90, 15, 10, 5, 22, 3, 12, 3),   -- Sauron 81
 
-INSERT INTO estadisticas_generales (vida_base, escudo_base, energia_base, mana_base, ataque_fisico_base, ataque_magico_base, defensa_fisica, defensa_magica)
-VALUES
-    (150, 20, 60, 20, 20, 5, 15, 5),  -- Guerrero
-    (80, 5, 30, 100, 5, 25, 5, 20),  -- Mago
-    (100, 10, 70, 30, 15, 10, 10, 10),  -- Arquero
-    (90, 15, 40, 80, 8, 15, 8, 15),   -- Sacerdote
-    (110, 5, 80, 20, 25, 5, 5, 5),    -- Asesino
-    (140, 30, 50, 30, 18, 8, 20, 10), -- Caballero
-    (160, 10, 90, 10, 22, 3, 12, 3),  -- Bárbaro
-    (120, 15, 60, 70, 10, 18, 10, 15), -- Druida
-    (85, 5, 35, 90, 6, 22, 6, 18),    -- Nigromante
-    (95, 10, 50, 60, 10, 15, 8, 12);  -- Bardo
+    (150, 20, 60, 20, 20, 5, 15, 5,0,0,0),  -- Guerrero
+    (80, 5, 30, 100, 5, 25, 5, 20,0,0,0),  -- Mago
+    (100, 10, 70, 30, 15, 10, 10, 10,0,0,0),  -- Arquero
+    (90, 15, 40, 80, 8, 15, 8, 15,0,0,0),   -- Sacerdote
+    (110, 5, 80, 20, 25, 5, 5, 5,0,0,0),    -- Asesino
+    (140, 30, 50, 30, 18, 8, 20, 10,0,0,0), -- Caballero
+    (160, 10, 90, 10, 22, 3, 12, 3,0,0,0),  -- Bárbaro
+    (120, 15, 60, 70, 10, 18, 10, 15,0,0,0), -- Druida
+    (85, 5, 35, 90, 6, 22, 6, 18,0,0,0),    -- Nigromante
+    (95, 10, 50, 60, 10, 15, 8, 12,0,0,0);  -- Bardo
 
 
 

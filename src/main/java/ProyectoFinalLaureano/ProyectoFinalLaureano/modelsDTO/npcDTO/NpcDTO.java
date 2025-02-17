@@ -14,6 +14,8 @@ import java.util.List;
 @Setter
 public class NpcDTO {
 
+    private long Id;
+
     private String nombre;
 
     private String descripcion;
