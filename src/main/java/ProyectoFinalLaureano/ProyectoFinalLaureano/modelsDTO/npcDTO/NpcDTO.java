@@ -1,7 +1,6 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.npcDTO;
 
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.npc.TipoNPC;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.itemDTO.ItemDTO;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.misionDTO.MisionDTO;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,7 +24,5 @@ public class NpcDTO {
     private TipoNPC tipoNPC;
 
     private List<TiendaDTO> tienda;
-
-    private List<MisionDTO> misiones;
 
 }

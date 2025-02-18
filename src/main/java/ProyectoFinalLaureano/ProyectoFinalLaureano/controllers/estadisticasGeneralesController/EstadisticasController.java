@@ -1,8 +1,6 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.estadisticasGeneralesController;
 
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.estadisticasGenerales.EstadisticasGenerales;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.estadisticasDTO.EstadisticasSimpleDTO;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.estadisticasDTO.EstadisticasPersonajeDTO;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.estadisticasService.EstadisticasService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -48,49 +46,4 @@ public class EstadisticasController {
         estadisticasService.deleteByID(id);
     }
 
-    //Conversor Lista estaditicas
-    public static List<EstadisticasSimpleDTO> conversorListaEstadisticasDTO (List<EstadisticasGenerales> le){
-        return le.stream().map(EstadisticasController::conversorEstadisticasDTO).toList();
-    }
-
-    //Conversor  Unico estadisticas
-    public static EstadisticasSimpleDTO conversorEstadisticasDTO (EstadisticasGenerales e) {
-        EstadisticasSimpleDTO estadisticasDTO = new EstadisticasSimpleDTO();
-        estadisticasDTO.setVidaBase(e.getVida());
-        estadisticasDTO.setRegeneracionVidaBase(e.getRegeneracionVida());
-        estadisticasDTO.setManaBase(e.getMana());
-        estadisticasDTO.setRegeneracionManaBase(e.getRegeneracionMana());
-        estadisticasDTO.setEnergiaBase(e.getEnergia());
-        estadisticasDTO.setRegeneracionEnergiaBase(e.getRegeneracionEnergia());
-        estadisticasDTO.setAtaqueFisicoBase(e.getAtaqueFisico());
-        estadisticasDTO.setAtaqueMagicoBase(e.getAtaqueMagico());
-        estadisticasDTO.setDefensaFisica(e.getDefensaFisica());
-        estadisticasDTO.setDefensaMagica(e.getDefensaMagica());
-        estadisticasDTO.setEscudoBase(e.getEscudo());
-        return  estadisticasDTO;
-    }
-
-    //Conversor Lista Estadisticas persoanjes
-    public static List<EstadisticasPersonajeDTO> conversorListaEstadisticasPersoanejeDTO (List<EstadisticasGenerales> le){
-        List<EstadisticasPersonajeDTO> leDTO = new ArrayList<>();
-        le.forEach(e -> leDTO.add(conversorEstadisticasPersoanejeDTO(e)) );
-        return leDTO;
-    }
-
-    //Conversor Unico Estadisticas persoanje
-    public static EstadisticasPersonajeDTO conversorEstadisticasPersoanejeDTO (EstadisticasGenerales e) {
-        EstadisticasPersonajeDTO estadisticasDTO = new EstadisticasPersonajeDTO();
-        estadisticasDTO.setVidaMax(e.getVida());
-        estadisticasDTO.setRegeneracionVida(e.getRegeneracionVida());
-        estadisticasDTO.setManaMax(e.getMana());
-        estadisticasDTO.setRegeneracionMana(e.getRegeneracionMana());
-        estadisticasDTO.setEnergiaMax(e.getEnergia());
-        estadisticasDTO.setRegeneracionEnergia(e.getRegeneracionEnergia());
-        estadisticasDTO.setAtaqueFisico(e.getAtaqueFisico());
-        estadisticasDTO.setAtaqueMagico(e.getAtaqueMagico());
-        estadisticasDTO.setDefensaFisica(e.getDefensaFisica());
-        estadisticasDTO.setDefensaMagica(e.getDefensaMagica());
-        estadisticasDTO.setEscudo(e.getEscudo());
-        return  estadisticasDTO;
-    }
 }

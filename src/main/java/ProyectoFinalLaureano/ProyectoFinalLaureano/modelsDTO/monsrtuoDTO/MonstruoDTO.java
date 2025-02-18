@@ -1,9 +1,7 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.monsrtuoDTO;
 
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.estadisticasGenerales.EstadisticasGenerales;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.monstruo.TipoMonstruo;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.estadisticasDTO.EstadisticasSimpleDTO;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.habilidadDTO.HabilidadDTO;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.mapaDTO.MapaDTO;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -27,16 +25,12 @@ public class MonstruoDTO {
 
     private String imagen;
 
-    private EstadisticasSimpleDTO estadisticas;
+    private EstadisticasGenerales estadisticas;
 
     private int almas;
 
     private int experiencia;
 
     private List<DropsDTO> drops;
-
-    private List<MapaDTO> mapa;
-
-    private List<HabilidadDTO> habilidades;
 
 }

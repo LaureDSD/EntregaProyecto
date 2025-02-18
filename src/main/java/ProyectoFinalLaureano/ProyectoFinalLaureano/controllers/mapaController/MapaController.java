@@ -6,7 +6,6 @@ import ProyectoFinalLaureano.ProyectoFinalLaureano.models.mapa.Mapa;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.mapa.TipoMapa;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.mapa.efectosEstados.MapaEfecto;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.mapa.monstruos.MapaMonstruo;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.mapaDTO.MapaDTO;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.mapaService.MapaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -24,33 +23,33 @@ public class MapaController {
     //CRUD MAPA
 
     @GetMapping("/")
-    public List<MapaDTO> obtenerListaMapas(@RequestParam(required = false) Long id){
+    public List<Mapa> obtenerListaMapas(@RequestParam(required = false) Long id){
         if(id==null){
-            return  conversorListaMapaDTO(mapaService.getAll());
+            return  mapaService.getAll();
         }else{
             TipoMapa tipoMapa = new TipoMapa();
             tipoMapa.setTipo_mapa_id(id);
-            return conversorListaMapaDTO(mapaService.getBytipoMapa(tipoMapa));
+            return mapaService.getBytipoMapa(tipoMapa);
         }
     }
 
     @GetMapping("/{id}")
-    public MapaDTO obtenerMapa(@PathVariable Long id){
-        return conversorMapaDTO(mapaService.getByID(id));
+    public Mapa obtenerMapa(@PathVariable Long id){
+        return mapaService.getByID(id);
     }
 
     @PutMapping("/{id}")
     public  ResponseEntity<Object> actualizarMapa(@PathVariable Long id, @RequestBody Mapa mapaActualizar){
         if(mapaActualizar.getMapa_id().equals(id)) {
-            return ResponseEntity.ok( conversorMapaDTO(mapaService.setItem(mapaActualizar)));
+            return ResponseEntity.ok( mapaService.setItem(mapaActualizar));
         }else{
             return ResponseEntity.badRequest().body("El ID proporcionado no coincide con el ID del mapa.");
         }
     }
 
     @PostMapping
-    public MapaDTO guardarMapa(@RequestBody Mapa mapaGuardar){
-        return  conversorMapaDTO(mapaService.setItem(mapaGuardar));
+    public Mapa guardarMapa(@RequestBody Mapa mapaGuardar){
+        return  mapaService.setItem(mapaGuardar);
     }
 
     @DeleteMapping("/{id}")
@@ -58,25 +57,6 @@ public class MapaController {
         mapaService.deleteByID(id);
     }
 
-    //List
-    public static List<MapaDTO> conversorListaMapaDTO( List<Mapa> lm){
-        return lm.stream().map(MapaController::conversorMapaDTO).toList();
-    }
 
-    //Dto
-    public static MapaDTO conversorMapaDTO (Mapa o){
-        MapaDTO mapaDTO = new MapaDTO();
-        mapaDTO.setId(o.getMapa_id());
-        mapaDTO.setImagen(o.getImagen());
-        mapaDTO.setNombre(o.getNombre());
-        mapaDTO.setDescripcion(o.getDescripcion());
-        mapaDTO.setNivel_recomendado(o.getNivel_recomendado());
-        mapaDTO.setTipoMapa(o.getTipoMapa());
-        mapaDTO.setEfectos(EfectoEstadoController.conversorListaEstadoDTO(
-                o.getEfectos().stream().map(MapaEfecto::getEfecto).toList()));
-        mapaDTO.setMonstruos(MonstruoController.conversorListaMonstruoDTO(
-                o.getMapaMonstruos().stream().map(MapaMonstruo::getMonstruo).toList()));
-        return  mapaDTO;
-    }
 
 }

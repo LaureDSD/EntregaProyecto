@@ -22,9 +22,14 @@ public class ObjetoEfectoController {
 
     // CRUD ITEM EFECTO
 
-    @GetMapping("/{itemId}/efecto/")
-    public List<ItemEfecto> obtenerListaEfectosItem() {
+    @GetMapping("/efecto/")
+    public List<ItemEfecto> obtenerListaEfectosItems() {
         return itemEfectoService.getAll();
+    }
+
+    @GetMapping("/{itemId}/efecto/")
+    public List<ItemEfecto> obtenerListaEfectosItem(@PathVariable Long itemId) {
+        return itemEfectoService.getByObjetoId(itemId);
     }
 
     @GetMapping("/{itemId}/efecto/{efectoId}")

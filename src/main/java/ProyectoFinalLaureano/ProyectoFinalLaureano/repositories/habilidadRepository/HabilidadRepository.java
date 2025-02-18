@@ -18,6 +18,7 @@ public interface HabilidadRepository  extends JpaRepository<Habilidad,Long> {
     @Query("SELECT DISTINCT h FROM Habilidad h " +
             "WHERE (:tipoHabilidad IS NULL OR h.tipoHabilidad = :tipoHabilidad) " +
             "AND (:objetivoHabilidad IS NULL OR h.objetivoHabilidad = :objetivoHabilidad)")
+
     List<Habilidad> buscarPorFiltro(
             @Param("tipoHabilidad") TipoHabilidad tipoHabilidad,
             @Param("objetivoHabilidad") ObjetivoHabilidad objetivoHabilidad

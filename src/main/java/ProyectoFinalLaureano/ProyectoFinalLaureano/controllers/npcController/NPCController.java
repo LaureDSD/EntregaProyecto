@@ -38,7 +38,7 @@ public class NPCController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Object> actualizarNPC(@PathVariable Long id, @RequestBody NPC npcActualizar) {
-        if (npcActualizar.getNpc_id().equals(id)) {
+        if (npcActualizar.getId().equals(id)) {
             return ResponseEntity.ok(conversorNPCDTO(npcService.setItem(npcActualizar)));
         } else {
             return ResponseEntity.badRequest().body("El ID proporcionado no coincide con el ID del NPC.");
@@ -64,13 +64,12 @@ public class NPCController {
     //Conversor Unico DTO
     public static NpcDTO conversorNPCDTO(NPC n){
         NpcDTO npcDTO = new NpcDTO();
-        npcDTO.setId(n.getNpc_id());
+        npcDTO.setId(n.getId());
         npcDTO.setImagen(n.getImagen());
         npcDTO.setNombre(n.getNombre());
         npcDTO.setDescripcion(n.getDescripcion());
         npcDTO.setTipoNPC(n.getTipoNPC());
         npcDTO.setTienda(NPCController.conversorListaTiendaDTO(n.getNpcProductos()));
-        npcDTO.setMisiones(MisionController.conversorListaMisionDTO(n.getMisiones()));
         return  npcDTO;
     }
 

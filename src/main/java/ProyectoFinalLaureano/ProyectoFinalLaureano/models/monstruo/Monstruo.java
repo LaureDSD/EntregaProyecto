@@ -26,7 +26,7 @@ public class Monstruo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Schema(description = "ID único del monstruo", example = "1")
-    private Long monstruo_id;
+    private Long monstruoId;
 
     //Nombre del monstruo
     @Column(name = "nombre", nullable = false, length = 100)

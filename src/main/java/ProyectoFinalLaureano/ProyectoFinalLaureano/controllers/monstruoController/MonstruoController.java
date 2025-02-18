@@ -35,7 +35,7 @@ public class MonstruoController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Object> actualizarMonstruo(@PathVariable Long id, @RequestBody Monstruo monstruoActualizar) {
-        if (monstruoActualizar.getMonstruo_id().equals(id)) {
+        if (monstruoActualizar.getMonstruoId().equals(id)) {
             return ResponseEntity.ok(conversorMonstruoDTO(monstruosService.setItem(monstruoActualizar)));
         } else {
             return ResponseEntity.badRequest().body("El ID proporcionado no coincide con el ID del monstruo.");
@@ -60,19 +60,14 @@ public class MonstruoController {
     //Conversor Unico DTO
     public static MonstruoDTO conversorMonstruoDTO(Monstruo m){
         MonstruoDTO monstruoDTO = new MonstruoDTO();
-        monstruoDTO.setId(m.getMonstruo_id());
+        monstruoDTO.setId(m.getMonstruoId());
         monstruoDTO.setImagen(m.getImagen());
         monstruoDTO.setNombre(m.getNombre());
         monstruoDTO.setDescripcion(m.getDescripcion());
         monstruoDTO.setAlmas(m.getAlmasOtrogadas());
         monstruoDTO.setExperiencia(m.getExperienciaOtorgada());
-        monstruoDTO.setEstadisticas(
-                EstadisticasController.conversorEstadisticasDTO(
-                        m.getEstadisticas()));
+        monstruoDTO.setEstadisticas(m.getEstadisticas());
         monstruoDTO.setDrops(conversorListaDropsDTO(m.getDrops()));
-        monstruoDTO.setHabilidades(
-                HabilidadController.conversorListaHabilidadDTO(
-                        m.getMonstruoHabilidades().stream().map(MonstruoHabilidad::getHabilidad).toList()));
         return monstruoDTO;
     }
 

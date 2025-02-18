@@ -1,7 +1,5 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.misionDTO;
 
-import ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.itemDTO.ItemDTO;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.npcDTO.NpcDTO;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -28,7 +26,5 @@ public class MisionDTO {
     private int tiempo;
 
     private List<RecompensaDTO> recompensas;
-
-    private List<NpcDTO> npcs;
 
 }

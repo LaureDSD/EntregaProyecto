@@ -45,12 +45,12 @@ public class NPCProducto {
     // Relación con la tabla npc N:1
     @ManyToOne()
     @JoinColumn(name = "npc_id", insertable = false, updatable = false)
-    @JsonIgnore // Excluir esta relación en la serialización JSON
+    //@JsonIgnore // Excluir esta relación en la serialización JSON
     private NPC npc;
 
     // Relación con la tabla items N:1
     @ManyToOne()
     @JoinColumn(name = "item_id", insertable = false, updatable = false)
-    @JsonIgnore // Excluir esta relación en la serialización JSON
+    //@JsonIgnore // Excluir esta relación en la serialización JSON
     private Item item;
 }

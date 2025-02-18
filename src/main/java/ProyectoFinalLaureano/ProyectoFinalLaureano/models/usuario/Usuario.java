@@ -75,12 +75,6 @@ public class Usuario {
     @Schema(description = "Fecha y hora de la última conexión del usuario", example = "2023-10-01T12:00:00")
     private LocalDateTime ultima_conexion;
 
-    //Ultima ip de conexion (Fumada)
-    @Column(name = "ip_ultima_conexion", length = 45)
-    @Size(max = 45)
-    @Schema(description = "IP de la última conexión del usuario", example = "192.168.1.1")
-    private String ip_ultima_conexion;
-
     //Token de seguridad del usuario
     @Column(name = "token_conexion")
     @Schema(description = "Token de seguridad", example = "wy55gby34ynytwrrtgt4")

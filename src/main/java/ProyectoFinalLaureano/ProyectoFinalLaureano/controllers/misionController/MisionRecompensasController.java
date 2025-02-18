@@ -19,10 +19,17 @@ public class MisionRecompensasController {
     private MisionObjetosService misionObjetosService;
 
     //CRUD objetos de mision
-    @GetMapping("{misionId}/objeto/")
+
+    @GetMapping("/objeto/")
     public List<MisionObjetos> obtenerListaObjetos(@RequestParam(required = false) Long id){
-            return  misionObjetosService.getAll();
+        return  misionObjetosService.getAll();
     }
+
+    /*
+    @GetMapping("{misionId}/objeto/")
+    public List<MisionObjetos> obtenerListaObjeto(@RequestParam(required = false) Long id){
+            return  misionObjetosService.getByMisionId();
+    }*/
 
     @GetMapping("{misionId}/objeto/{objetoId}")
     public MisionObjetos obtenerObjetos(@PathVariable Long id_mision,@PathVariable Long id_objeto){

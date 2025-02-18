@@ -24,11 +24,16 @@ public class MonstruoHabilidadController {
     private MonstruoHabilidadService monstruoHabilidadService;
 
     // CRUD MONSTRUO HABILIDAD
-
-    @GetMapping("/{monstruoId}/habilidad/")
-    public List<MonstruoHabilidad> obtenerListaHabilidadesMonstruo() {
+    @GetMapping("/habilidad/")
+    public List<MonstruoHabilidad> obtenerListaHabilidadesMonstruos() {
         return monstruoHabilidadService.getAll();
     }
+
+    /*
+    @GetMapping("/{monstruoId}/habilidad/")
+    public List<MonstruoHabilidad> obtenerListaHabilidadesMonstruo(@PathVariable Long monstruoId) {
+        return monstruoHabilidadService.getByMonstruoId(monstruoId);
+    }*/
 
     @GetMapping("/{monstruoId}/habilidad/{habilidadId}")
     public MonstruoHabilidad obtenerHabilidadMonstruo(@PathVariable Long monstruoId, @PathVariable Long habilidadId) {

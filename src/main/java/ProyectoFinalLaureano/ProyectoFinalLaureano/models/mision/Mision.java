@@ -68,6 +68,7 @@ public class Mision {
     @Schema(description = "Objetos de recompensa asociados a esta misión")
     private List<MisionObjetos> recompensas;
 
+
     //Relacion muchos a muchos con npc
     @ManyToMany
     @JoinTable(

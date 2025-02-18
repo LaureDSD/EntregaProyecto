@@ -2,6 +2,7 @@ package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.personajeControl
 
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.misiones.PersonajeMision;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.misiones.PersonajeMisionId;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.personajeDTO.PersonajeMisionDTO;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.persoanjeService.PersoanjeMisionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,9 +22,9 @@ public class PersonajeMisionesController {
 
     // CRUD PERSONAJE MISIÓN
 
-    @GetMapping("/misiones/")
-    public List<PersonajeMision> obtenerListaMisionesPersonaje() {
-        return personajeMisionService.getAll();
+    @GetMapping("/{personajeId}/misiones")
+    public PersonajeMisionDTO obtenerListaMisionesPersonaje(@PathVariable Long personajeId) {
+        return conversorPersonajeMisiondDTO(personajeMisionService.getByPersoanjeId(personajeId));
     }
 
     @GetMapping("/misiones/{personajeId}/{misionId}")
@@ -48,5 +49,12 @@ public class PersonajeMisionesController {
     @DeleteMapping("/misiones/{personajeId}/{misionId}")
     public void borrarMisionPersonaje(@PathVariable Long personajeId, @PathVariable Long misionId) {
         personajeMisionService.deleteByID(new PersonajeMisionId(personajeId, misionId));
+    }
+
+    public static PersonajeMisionDTO conversorPersonajeMisiondDTO(List<PersonajeMision> l) {
+        PersonajeMisionDTO ps = new PersonajeMisionDTO();
+        ps.setPersonaje(l.get(1).getPersonaje());
+        ps.setMisiones( l.stream().map(PersonajeMision::getMision).toList());
+        return ps;
     }
 }

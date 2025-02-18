@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -59,7 +60,9 @@ public class UsuarioController {
 
     //Conversor Lista
     public static List<UsuarioDTO> conversorListaUsuarioDTO(List<Usuario> l){
-        return l.stream().map(UsuarioController::conversorUsuarioDTO).toList();
+        List<UsuarioDTO> lus = new ArrayList<>();
+        l.forEach( e ->  lus.add(conversorUsuarioDTO(e)));
+        return lus;
     }
 
     //Conversor Unico DTO
@@ -76,7 +79,6 @@ public class UsuarioController {
         usuarioDTO.setTipoUsuario(u.getTipoUsuario());
         usuarioDTO.setFecha_creacion(u.getFecha_creacion());
         usuarioDTO.setTipoUsuario(u.getTipoUsuario());
-        usuarioDTO.setPersonajes(PersonajeController.conversorListaPersonajeDTO(u.getPersonajes()));
         return  usuarioDTO;
     }
 }

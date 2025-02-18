@@ -26,7 +26,6 @@ CREATE TABLE IF NOT EXISTS usuarios (
     correo VARCHAR(100) UNIQUE NOT NULL,
     contraseña VARCHAR(255) NOT NULL,
     ultima_conexion DATETIME,
-    ip_ultima_conexion VARCHAR(45) NULL,
     token_conexion VARCHAR(255) NULL,
     fecha_creacion DATETIME NOT NULL,
     estado_cuenta BOOLEAN NOT NULL DEFAULT 1,
@@ -36,18 +35,18 @@ CREATE TABLE IF NOT EXISTS usuarios (
     INDEX idx_nombre_priv (nombre_usuario_priv)
 );
 
-INSERT INTO usuarios (imagen_perfil, nombre_usuario_pub, limite_personajes, nombre_usuario_priv, correo, contraseña, ultima_conexion, ip_ultima_conexion, token_conexion, fecha_creacion, estado_cuenta, tipo_usuario)
+INSERT INTO usuarios (imagen_perfil, nombre_usuario_pub, limite_personajes, nombre_usuario_priv, correo, contraseña, ultima_conexion, token_conexion, fecha_creacion, estado_cuenta, tipo_usuario)
 VALUES
-    ('perfil1.jpg', 'Aragorn23', 3, 'aragorn_priv', 'aragorn@example.com', 'contraseña123', '2023-10-01 12:00:00', '192.168.1.1', 'token123', '2023-10-01 12:00:00', 1, 1),
-    ('perfil2.jpg', 'GandalfTheWise', 3, 'gandalf_priv', 'gandalf@example.com', 'contraseña456', '2023-10-02 13:00:00', '192.168.1.2', 'token456', '2023-10-02 13:00:00', 1, 1),
-    ('perfil3.jpg', 'LegolasGreenleaf', 3, 'legolas_priv', 'legolas@example.com', 'contraseña789', '2023-10-03 14:00:00', '192.168.1.3', 'token789', '2023-10-03 14:00:00', 1, 1),
-    ('perfil4.jpg', 'FrodoBaggins', 3, 'frodo_priv', 'frodo@example.com', 'contraseña101', '2023-10-04 15:00:00', '192.168.1.4', 'token101', '2023-10-04 15:00:00', 1, 1),
-    ('perfil5.jpg', 'GimliSonOfGloin', 3, 'gimli_priv', 'gimli@example.com', 'contraseña112', '2023-10-05 16:00:00', '192.168.1.5', 'token112', '2023-10-05 16:00:00', 1, 1),
-    ('perfil6.jpg', 'BoromirOfGondor', 3, 'boromir_priv', 'boromir@example.com', 'contraseña131', '2023-10-06 17:00:00', '192.168.1.6', 'token131', '2023-10-06 17:00:00', 1, 1),
-    ('perfil7.jpg', 'GaladrielLadyOfLight', 3, 'galadriel_priv', 'galadriel@example.com', 'contraseña415', '2023-10-07 18:00:00', '192.168.1.7', 'token415', '2023-10-07 18:00:00', 1, 1),
-    ('perfil8.jpg', 'SarumanTheWhite', 3, 'saruman_priv', 'saruman@example.com', 'contraseña161', '2023-10-08 19:00:00', '192.168.1.8', 'token161', '2023-10-08 19:00:00', 1, 1),
-    ('perfil9.jpg', 'ArwenUndomiel', 3, 'arwen_priv', 'arwen@example.com', 'contraseña718', '2023-10-09 20:00:00', '192.168.1.9', 'token718', '2023-10-09 20:00:00', 1, 1),
-    ('perfil10.jpg', 'SauronTheDarkLord', 3, 'sauron_priv', 'sauron@example.com', 'contraseña192', '2023-10-10 21:00:00', '192.168.1.10', 'token192', '2023-10-10 21:00:00', 1, 1);
+    ('perfil1.jpg', 'Aragorn23', 3, 'aragorn_priv', 'aragorn@example.com', 'contraseña123', '2023-10-01 12:00:00', 'token123', '2023-10-01 12:00:00', 1, 1),
+    ('perfil2.jpg', 'GandalfTheWise', 3, 'gandalf_priv', 'gandalf@example.com', 'contraseña456', '2023-10-02 13:00:00', 'token456', '2023-10-02 13:00:00', 1, 1),
+    ('perfil3.jpg', 'LegolasGreenleaf', 3, 'legolas_priv', 'legolas@example.com', 'contraseña789', '2023-10-03 14:00:00', 'token789', '2023-10-03 14:00:00', 1, 1),
+    ('perfil4.jpg', 'FrodoBaggins', 3, 'frodo_priv', 'frodo@example.com', 'contraseña101', '2023-10-04 15:00:00', 'token101', '2023-10-04 15:00:00', 1, 1),
+    ('perfil5.jpg', 'GimliSonOfGloin', 3, 'gimli_priv', 'gimli@example.com', 'contraseña112', '2023-10-05 16:00:00', 'token112', '2023-10-05 16:00:00', 1, 1),
+    ('perfil6.jpg', 'BoromirOfGondor', 3, 'boromir_priv', 'boromir@example.com', 'contraseña131', '2023-10-06 17:00:00', 'token131', '2023-10-06 17:00:00', 1, 1),
+    ('perfil7.jpg', 'GaladrielLadyOfLight', 3, 'galadriel_priv', 'galadriel@example.com', 'contraseña415', '2023-10-07 18:00:00', 'token415', '2023-10-07 18:00:00', 1, 1),
+    ('perfil8.jpg', 'SarumanTheWhite', 3, 'saruman_priv', 'saruman@example.com', 'contraseña161', '2023-10-08 19:00:00', 'token161', '2023-10-08 19:00:00', 1, 1),
+    ('perfil9.jpg', 'ArwenUndomiel', 3, 'arwen_priv', 'arwen@example.com', 'contraseña718', '2023-10-09 20:00:00', 'token718', '2023-10-09 20:00:00', 1, 1),
+    ('perfil10.jpg', 'SauronTheDarkLord', 3, 'sauron_priv', 'sauron@example.com', 'contraseña192', '2023-10-10 21:00:00', 'token192', '2023-10-10 21:00:00', 1, 1);
 
 
 -- Tabla: logs de usuario (Correcto)
@@ -383,7 +382,7 @@ INSERT INTO tipo_monstruo (nombre, descripcion) VALUES
  
 -- Tabla: monstruos (Correcto) 
 CREATE TABLE IF NOT EXISTS monstruos (
-    monstruo_id bigint PRIMARY KEY AUTO_INCREMENT,
+    id bigint PRIMARY KEY AUTO_INCREMENT,
     nombre VARCHAR(100) NOT NULL,
     tipo_monstruo_id bigint NOT NULL,
 	nivel INT DEFAULT 1,
@@ -448,7 +447,7 @@ CREATE TABLE registro_jugador_monstruo (
     almas_obtenidas INT NOT NULL,                     
     experiencia_obtenida INT NOT NULL,                  
     FOREIGN KEY (personaje_id) REFERENCES personajes(personaje_id),
-    FOREIGN KEY (monstruo_id) REFERENCES monstruos(monstruo_id)      
+    FOREIGN KEY (monstruo_id) REFERENCES monstruos(id)      
 );
 
 INSERT INTO registro_jugador_monstruo (personaje_id, monstruo_id, fecha, almas_obtenidas, experiencia_obtenida, dano_realizado, dano_recivido)
@@ -628,6 +627,7 @@ INSERT INTO tipo_item (nombre, descripcion) VALUES
 CREATE TABLE IF NOT EXISTS items (
     item_id bigint PRIMARY KEY AUTO_INCREMENT,
     nombre VARCHAR(100) NOT NULL,
+    imagen VARCHAR(255) null,
     tipo_item bigint NOT NULL,
     descripcion TEXT,
     acumulaciones_max INT NOT NULL DEFAULT 99,
@@ -642,43 +642,43 @@ CREATE TABLE IF NOT EXISTS items (
 );
 
 -- Insertar ítems
-INSERT INTO items (nombre, tipo_item, descripcion, acumulaciones_max, estadisticas_id, equipable)
+INSERT INTO items (imagen,nombre, tipo_item, descripcion, acumulaciones_max, estadisticas_id, equipable)
 VALUES
     -- Consumibles
-    ('Poción de Vida', 2, 'Restaura 50 puntos de vida.', 99, 19, FALSE),
-    ('Poción de Maná', 2, 'Restaura 30 puntos de maná.', 99, 20, FALSE),
-    ('Poción de Energía', 2, 'Restaura 40 puntos de energía.', 99, 21, FALSE),
-    ('Elixir de Vida', 2, 'Restaura 100 puntos de vida.', 99, 22, FALSE),
-    ('Elixir de Maná', 2, 'Restaura 80 puntos de maná.', 99, 23, FALSE),
-    ('Poción de Fuerza', 2, 'Aumenta el ataque físico en 10 puntos durante 5 minutos.', 99, 24, FALSE),
-    ('Poción de Defensa', 2, 'Aumenta la defensa física en 10 puntos durante 5 minutos.', 99, 25, FALSE),
-    ('Poción de Invisibilidad', 2, 'Otorga invisibilidad durante 1 minuto.', 99, 26, FALSE),
+    ("img1.jpg",'Poción de Vida', 2, 'Restaura 50 puntos de vida.', 99, 19, FALSE),
+    ("img1.jpg",'Poción de Maná', 2, 'Restaura 30 puntos de maná.', 99, 20, FALSE),
+    ("img1.jpg",'Poción de Energía', 2, 'Restaura 40 puntos de energía.', 99, 21, FALSE),
+    ("img1.jpg",'Elixir de Vida', 2, 'Restaura 100 puntos de vida.', 99, 22, FALSE),
+    ("img1.jpg",'Elixir de Maná', 2, 'Restaura 80 puntos de maná.', 99, 23, FALSE),
+    ("img1.jpg",'Poción de Fuerza', 2, 'Aumenta el ataque físico en 10 puntos durante 5 minutos.', 99, 24, FALSE),
+    ("img1.jpg",'Poción de Defensa', 2, 'Aumenta la defensa física en 10 puntos durante 5 minutos.', 99, 25, FALSE),
+    ("img1.jpg",'Poción de Invisibilidad', 2, 'Otorga invisibilidad durante 1 minuto.', 99, 26, FALSE),
 
     -- Equipo
-    ('Espada de Acero', 3, 'Una espada resistente hecha de acero.', 1, 27, TRUE),
-    ('Escudo de Madera', 4, 'Un escudo ligero hecho de madera.', 1, 28, TRUE),
-    ('Daga Afilada', 3, 'Una daga ligera y rápida.', 1, 29, TRUE),
-    ('Armadura de Platino', 5, 'Una armadura pesada pero muy resistente.', 1, 30, TRUE),
-    ('Anillo de Poder', 9, 'Aumenta el ataque mágico en 15 puntos.', 1, 31, TRUE),
-    ('Martillo de Guerra', 3, 'Un martillo pesado que inflige gran daño.', 1, 32, TRUE),
-    ('Capa del Mago', 6, 'Aumenta la defensa mágica en 20 puntos.', 1, 33, TRUE),
-    ('Báculo Arcano', 3, 'Un báculo que potencia las habilidades mágicas.', 1, 34, TRUE),
-    ('Botas de Velocidad', 7, 'Aumentan la velocidad de movimiento.', 1, 35, TRUE),
-    ('Cinturón de Resistencia', 8, 'Aumenta la resistencia física.', 1, 36, TRUE),
-    ('Guantes de Acero', 6, 'Mejoran la destreza y el ataque.', 1, 37, TRUE),
-    ('Amuleto de Protección', 9, 'Otorga protección mágica.', 1, 38, TRUE),
+    ("img1.jpg",'Espada de Acero', 3, 'Una espada resistente hecha de acero.', 1, 27, TRUE),
+    ("img1.jpg",'Escudo de Madera', 4, 'Un escudo ligero hecho de madera.', 1, 28, TRUE),
+    ("img1.jpg",'Daga Afilada', 3, 'Una daga ligera y rápida.', 1, 29, TRUE),
+    ("img1.jpg",'Armadura de Platino', 5, 'Una armadura pesada pero muy resistente.', 1, 30, TRUE),
+    ("img1.jpg",'Anillo de Poder', 9, 'Aumenta el ataque mágico en 15 puntos.', 1, 31, TRUE),
+    ("img1.jpg",'Martillo de Guerra', 3, 'Un martillo pesado que inflige gran daño.', 1, 32, TRUE),
+    ("img1.jpg",'Capa del Mago', 6, 'Aumenta la defensa mágica en 20 puntos.', 1, 33, TRUE),
+    ("img1.jpg",'Báculo Arcano', 3, 'Un báculo que potencia las habilidades mágicas.', 1, 34, TRUE),
+    ("img1.jpg",'Botas de Velocidad', 7, 'Aumentan la velocidad de movimiento.', 1, 35, TRUE),
+    ("img1.jpg",'Cinturón de Resistencia', 8, 'Aumenta la resistencia física.', 1, 36, TRUE),
+    ("img1.jpg",'Guantes de Acero', 6, 'Mejoran la destreza y el ataque.', 1, 37, TRUE),
+    ("img1.jpg",'Amuleto de Protección', 9, 'Otorga protección mágica.', 1, 38, TRUE),
 
     -- Materiales
-    ('Hierro', 1, 'Material de crafteo común.', 99, NULL, FALSE),
-    ('Piedra Mágica', 1, 'Material raro usado en crafteo avanzado.', 99, NULL, FALSE),
-    ('Piedra de Fuego', 1, 'Material usado para crear armas de fuego.', 99, NULL, FALSE),
-    ('Cuero', 1, 'Material usado para fabricar armaduras ligeras.', 99, NULL, FALSE),
-    ('Cristal Mágico', 1, 'Material mágico usado en encantamientos.', 99, NULL, FALSE),
-    ('Madera de Roble', 1, 'Madera resistente usada en crafteo.', 99, NULL, FALSE),
-    ('Hueso de Dragón', 1, 'Material legendario usado en crafteo de alto nivel.', 99, NULL, FALSE),
-    ('Plata', 1, 'Metal precioso usado en joyería y crafteo.', 99, NULL, FALSE),
-    ('Oro', 1, 'Metal valioso usado en crafteo de élite.', 99, NULL, FALSE),
-    ('Gema Brillante', 1, 'Gema rara usada en crafteo mágico.', 99, NULL, FALSE);
+    ("img1.jpg",'Hierro', 1, 'Material de crafteo común.', 99, NULL, FALSE),
+    ("img1.jpg",'Piedra Mágica', 1, 'Material raro usado en crafteo avanzado.', 99, NULL, FALSE),
+    ("img1.jpg",'Piedra de Fuego', 1, 'Material usado para crear armas de fuego.', 99, NULL, FALSE),
+    ("img1.jpg",'Cuero', 1, 'Material usado para fabricar armaduras ligeras.', 99, NULL, FALSE),
+    ("img1.jpg",'Cristal Mágico', 1, 'Material mágico usado en encantamientos.', 99, NULL, FALSE),
+    ("img1.jpg",'Madera de Roble', 1, 'Madera resistente usada en crafteo.', 99, NULL, FALSE),
+    ("img1.jpg",'Hueso de Dragón', 1, 'Material legendario usado en crafteo de alto nivel.', 99, NULL, FALSE),
+    ("img1.jpg",'Plata', 1, 'Metal precioso usado en joyería y crafteo.', 99, NULL, FALSE),
+    ("img1.jpg",'Oro', 1, 'Metal valioso usado en crafteo de élite.', 99, NULL, FALSE),
+    ("img1.jpg",'Gema Brillante', 1, 'Gema rara usada en crafteo mágico.', 99, NULL, FALSE);
 
 -- Tabla: item_efecto (Corecto)
 CREATE TABLE IF NOT EXISTS item_efecto (
@@ -717,20 +717,20 @@ VALUES
 
 -- Tabla: drops_objetos (Correcto)
 CREATE TABLE IF NOT EXISTS drops_objetos (
-    monstruo_id bigint NOT NULL,
+    monstruoid bigint NOT NULL,
     item_id bigint NOT NULL,
     probabilidad INT NOT NULL DEFAULT 0,  -- Probabilidad de que el objeto sea soltado
 	primary key(monstruo_id,item_id),
-    FOREIGN KEY (monstruo_id) REFERENCES monstruos(monstruo_id) 
+    FOREIGN KEY (monstruoid) REFERENCES monstruos(id) 
     ON DELETE CASCADE 
     ON UPDATE CASCADE,
     FOREIGN KEY (item_id) REFERENCES items(item_id),
-    INDEX idx_monstruo_id (monstruo_id),
+    INDEX idx_monstruo_id (id),
     INDEX idx_item_id (item_id)
 );
 
 -- Insertar drops de monstruos
-INSERT INTO drops_objetos (monstruo_id, item_id, probabilidad)
+INSERT INTO drops_objetos (monstruoid, item_id, probabilidad)
 VALUES
     -- Goblin (monstruo_id = 1)
     (1, 1, 50),   -- Goblin puede soltar Poción de Vida con 50% de probabilidad
@@ -1077,7 +1077,7 @@ VALUES
 
 -- Tabla: npc (Correcto)
 CREATE TABLE IF NOT EXISTS npc (
-    npc_id bigint PRIMARY KEY AUTO_INCREMENT,
+    id bigint PRIMARY KEY AUTO_INCREMENT,
     nombre VARCHAR(100) NOT NULL,
     descripcion TEXT,
     imagen VARCHAR(255),
@@ -1279,7 +1279,7 @@ CREATE TABLE IF NOT EXISTS npc_mision (
     npc_id bigint NOT NULL,
     mision_id bigint NOT NULL,
     PRIMARY KEY (npc_id, mision_id),
-    FOREIGN KEY (npc_id) REFERENCES npc(npc_id),
+    FOREIGN KEY (npc_id) REFERENCES npc(id),
     FOREIGN KEY (mision_id) REFERENCES misiones(mision_id),
     INDEX idx_npc_id (npc_id),
     INDEX idx_mision_id (mision_id)
@@ -1404,7 +1404,7 @@ CREATE TABLE IF NOT EXISTS npc_producto (
     precio_venta INT NOT NULL,
     cantidad_venta INT NOT NULL,
     PRIMARY KEY (npc_id, item_id),
-    FOREIGN KEY (npc_id) REFERENCES npc(npc_id),
+    FOREIGN KEY (npc_id) REFERENCES npc(id),
     FOREIGN KEY (item_id) REFERENCES items(item_id),
     INDEX idx_npc_id (npc_id),
     INDEX idx_item_id (item_id)
@@ -1454,7 +1454,7 @@ CREATE TABLE IF NOT EXISTS transacciones_npc_personaje (
     precio_almas INT NOT NULL,
     fecha_transaccion DATETIME NOT NULL,
     FOREIGN KEY (personaje_id) REFERENCES personajes(personaje_id),
-    FOREIGN KEY (npc_id) REFERENCES npc(npc_id),
+    FOREIGN KEY (npc_id) REFERENCES npc(id),
     FOREIGN KEY (item_id) REFERENCES items(item_id),
     INDEX idx_personaje_id (personaje_id),
     INDEX idx_npc_id (npc_id),

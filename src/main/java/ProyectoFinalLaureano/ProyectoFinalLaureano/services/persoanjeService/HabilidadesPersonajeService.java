@@ -29,4 +29,7 @@ public class HabilidadesPersonajeService {
         habilidadesPersonajeRepository.deleteById(id);
     }
 
+    public List<PersonajeHabilidad> getByPersonajeId(Long id) {
+        return  habilidadesPersonajeRepository.getByPersonajeId(id);
+    }
 }

@@ -22,8 +22,13 @@ public class InventarioController {
     // CRUD INVENTARIO PERSONAJE
 
     @GetMapping("/inventario/")
-    public List<InventarioDTO> obtenerListaInventarioPersonaje() {
+    public List<InventarioDTO> obtenerListaInventarioPersonajes() {
         return conversorListaInventarioDTO(inventarioPersonajeService.getAll());
+    }
+
+    @GetMapping("/inventario/{personajeId}")
+    public List<InventarioDTO> obtenerListaInventarioPersonaje(@PathVariable Long personajeId) {
+        return conversorListaInventarioDTO(inventarioPersonajeService.getByPersonajeId(personajeId));
     }
 
     @GetMapping("/inventario/{personajeId}/{itemId}")
@@ -57,7 +62,7 @@ public class InventarioController {
 
     private static InventarioDTO conversorInventarioDTO(InventarioPersonaje inventarioPersonaje) {
         InventarioDTO inventarioDTO = new InventarioDTO();
-        inventarioDTO.setItem(ObjetoController.conversorItemDTO(inventarioPersonaje.getItem()));
+        inventarioDTO.setItem(inventarioPersonaje.getItem());
         inventarioDTO.setCantidad(inventarioPersonaje.getCantidad());
         inventarioDTO.setFecha_obtencion(inventarioPersonaje.getFecha_obtencion());
         return inventarioDTO;

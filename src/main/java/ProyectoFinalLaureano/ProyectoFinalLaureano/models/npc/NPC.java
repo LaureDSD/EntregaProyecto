@@ -25,7 +25,7 @@ public class NPC {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Schema(description = "ID único del NPC", example = "1")
-    private Long npc_id;
+    private Long id;
 
     // Nombre del npc
     @Column(name = "nombre", nullable = false, length = 100)

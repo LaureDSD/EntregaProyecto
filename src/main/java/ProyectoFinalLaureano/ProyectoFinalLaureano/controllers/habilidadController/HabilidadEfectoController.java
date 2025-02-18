@@ -27,6 +27,12 @@ public class HabilidadEfectoController {
         return habilidadEfectoService.getAll();
     }
 
+    /*
+    @GetMapping("/{habilidadId}/efecto/")
+    public List<HabilidadEfecto> obtenerEfectos(@PathVariable Long habilidadId) {
+        return habilidadEfectoService.getByHabilidadId();
+    }*/
+
     @GetMapping("/{habilidadId}/efecto/{efectoId}")
     public HabilidadEfecto obtenerEfecto(@PathVariable Long habilidadId, @PathVariable Long efectoId) {
         return habilidadEfectoService.getByID(new HabilidadEfectoId(habilidadId, efectoId));

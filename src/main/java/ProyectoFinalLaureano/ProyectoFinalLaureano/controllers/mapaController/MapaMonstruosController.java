@@ -25,10 +25,16 @@ public class MapaMonstruosController {
 
     //CRUD MAPA MONSTRUO
 
-    @GetMapping("{mapaId}/monstruo/")
-    public List<MapaMonstruo> obtenerListaMonstruoMapas(Long id){
+    @GetMapping("/monstruo/")
+    public List<MapaMonstruo> obtenerListaMonstruoMapas(){
         return  mapaMonstruoService.getAll();
     }
+
+    /*
+    @GetMapping("{mapaId}/monstruo/")
+    public List<MapaMonstruo> obtenerListaMonstruoMapa(@PathVariable Long id_mapa){
+        return  mapaMonstruoService.getByMapaId();
+    }*/
 
     @GetMapping("{mapaId}/monstruo/{monstruoId}")
     public MapaMonstruo obtenerMonstruoMapa(@PathVariable Long id_mapa,@PathVariable Long id_monstruo){

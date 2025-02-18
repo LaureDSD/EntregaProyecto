@@ -24,10 +24,16 @@ public class MapaEfectoController {
     private MapaEfectoService mapaEfectoService;
 
     //CRUD MAPA EFECTO
-    @GetMapping("{mapaId}/efecto/")
-    public List<MapaEfecto> obtenerListaEfectoMapas(Long id){
+    @GetMapping("/efecto/")
+    public List<MapaEfecto> obtenerListaEfectoMapas(){
         return  mapaEfectoService.getAll();
     }
+
+    /*
+    @GetMapping("{mapaId}/efecto/")
+    public List<MapaEfecto> obtenerListaEfectoMapa(@PathVariable Long id_mapa){
+        return  mapaEfectoService.getByMapaId();
+    }*/
 
     @GetMapping("{mapaId}/efecto/{monstruoId}")
     public MapaEfecto obtenerEfectoMapa(@PathVariable Long id_mapa,@PathVariable Long id_efecto){

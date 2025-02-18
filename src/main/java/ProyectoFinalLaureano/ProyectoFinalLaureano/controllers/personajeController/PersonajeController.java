@@ -1,9 +1,11 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.personajeController;
 
 import ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.estadisticasGeneralesController.EstadisticasController;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.gruposController.GrupoController;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.usuarioController.UsuarioController;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.habilidadController.HabilidadController;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.misionController.MisionController;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.Personaje;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.habilidades.PersonajeHabilidad;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.misiones.PersonajeMision;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.personajeDTO.PersonajeDTO;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.persoanjeService.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +33,7 @@ public class PersonajeController {
 
     @PutMapping("/{id}")
     public  PersonajeDTO actualizar(@PathVariable Long id, @RequestBody Personaje personajeActualizar){
-        personajeActualizar.setPersonaje_id(id);
+        personajeActualizar.setPersonajeId(id);
         return  conversorPersonajeDTO(persoanjeService.setItem(personajeActualizar));
     }
 
@@ -55,20 +57,20 @@ public class PersonajeController {
     //Conversor Unico DTO
     public static PersonajeDTO conversorPersonajeDTO( Personaje p){
         PersonajeDTO personajeDTO = new PersonajeDTO();
-        personajeDTO.setId(p.getPersonaje_id());
+        personajeDTO.setId(p.getPersonajeId());
         personajeDTO.setImagen(p.getImagen_modelo());
         personajeDTO.setNombre(p.getNombre());
-        personajeDTO.setUsuario(UsuarioController.conversorUsuarioDTO(p.getUsuario()));
         personajeDTO.setCreacion(p.getFecha_creacion());
-        personajeDTO.setClase(ClaseController.conversorClaseDTO(p.getClase_persoanje()));
-        personajeDTO.setGrupo(GrupoController.conversorGrupoDTO(p.getGrupo()));
+        personajeDTO.setClase(p.getClase_persoanje());
         personajeDTO.setNivel(p.getNivel());
         personajeDTO.setXp_acumulada(p.getXp_acumulada());
         personajeDTO.setAlmas(p.getAlmas());
+        personajeDTO.setLogros(p.getLogros());
         personajeDTO.setCapacidad_inventario(p.getCapacidad_inventario());
         personajeDTO.setInventario(InventarioController.conversorListaInventarioDTO(p.getInventario()));
-        personajeDTO.setEstadisticas(EstadisticasController.conversorEstadisticasPersoanejeDTO(p.getEstadisticas()));
+        personajeDTO.setEstadisticas(p.getEstadisticas());
         return  personajeDTO;
     }
+
 
 }

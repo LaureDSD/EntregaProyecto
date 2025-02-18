@@ -29,4 +29,8 @@ public class InventarioPersonajeService {
     public  void deleteByID(InventarioPersonajeId id){
         inventarioPersonajeRepository.deleteById(id);
     }
+
+    public List<InventarioPersonaje> getByPersonajeId(Long personajeId) {
+        return inventarioPersonajeRepository.getByPersonajeId(personajeId);
+    }
 }

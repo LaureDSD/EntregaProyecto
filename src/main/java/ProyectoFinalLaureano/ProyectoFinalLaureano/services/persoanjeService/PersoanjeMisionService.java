@@ -28,4 +28,8 @@ public class PersoanjeMisionService {
     public  void deleteByID(PersonajeMisionId id){
         personajeMisionRepository.deleteById(id);
     }
+
+    public List<PersonajeMision> getByPersoanjeId(Long personajeId) {
+        return personajeMisionRepository.getByPersonajeId(personajeId);
+    }
 }

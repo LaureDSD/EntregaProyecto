@@ -17,11 +17,10 @@ public class PersonajeLogrosController {
 
     // CRUD LOGROS PERSONAJE
 
-    /*
-    @GetMapping("{personajeId}/logros/")
+    @GetMapping("/logros/")
     public List<LogrosPersonaje> obtenerListaLogrosPersonaje() {
         return logrosPersonajeService.getAll();
-    }*/
+    }
 
     @GetMapping("/{personajeId}/logros/")
     public LogrosPersonaje obtenerLogroPersonaje(@PathVariable Long personajeId) {

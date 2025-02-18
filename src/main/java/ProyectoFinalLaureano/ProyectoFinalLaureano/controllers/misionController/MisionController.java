@@ -66,9 +66,9 @@ public class MisionController {
         misionDTO.setExperiencia(m.getRecompensa_experiencia());
         misionDTO.setRecompensas(
                 m.getRecompensas().stream().map(MisionController::conversorRecompensaDTO).toList());
-        misionDTO.setNpcs(NPCController.conversorListaNPCDTO(m.getNpcs()));
         return misionDTO;
     }
+
 
     //Conversro lista
     public static List<RecompensaDTO> converosrListaRecompensaDTO(List<MisionObjetos> ms){

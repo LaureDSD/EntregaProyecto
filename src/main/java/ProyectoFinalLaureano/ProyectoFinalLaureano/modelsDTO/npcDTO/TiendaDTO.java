@@ -13,6 +13,8 @@ public class TiendaDTO {
 
     private Item item;
 
+    private NPC npc;
+
     private int precioCompra;
 
     private int precioVenta;

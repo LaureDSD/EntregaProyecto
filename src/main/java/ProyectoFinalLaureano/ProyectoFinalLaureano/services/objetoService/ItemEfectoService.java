@@ -28,4 +28,8 @@ public class ItemEfectoService {
     public  void deleteByID(ItemEfectoId id){
         itemEfectoRepository.deleteById(id);
     }
+
+    public List<ItemEfecto> getByObjetoId(Long itemId) {
+        return itemEfectoRepository.getByItemId(itemId);
+    }
 }

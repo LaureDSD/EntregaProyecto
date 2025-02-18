@@ -5,6 +5,7 @@ import ProyectoFinalLaureano.ProyectoFinalLaureano.models.grupos.Grupo;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.log.LogPersonajeMonstruo;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.habilidades.PersonajeHabilidad;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.inventario.InventarioPersonaje;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.misiones.PersonajeMision;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.usuario.Usuario;
 import jakarta.persistence.*;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -30,7 +31,7 @@ public class Personaje {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Schema(description = "ID único del personaje", example = "1")
-    private Long personaje_id;
+    private Long personajeId;
 
     //Imagen/modelo de cada persoanje
     @Column(name = "imagen_modelo", length = 255)
@@ -118,5 +119,11 @@ public class Personaje {
     @OneToMany(mappedBy = "personaje", cascade = CascadeType.ALL)
     @JsonIgnore // Excluir esta relación en la serialización JSON
     private List<LogPersonajeMonstruo> logPersonaje;
+
+    // Union conregistro de logros
+    @OneToMany(mappedBy = "personaje", cascade = CascadeType.ALL)
+    @JsonIgnore // Excluir esta relación en la serialización JSON
+    private List<PersonajeMision> misiones;
+
 
 }

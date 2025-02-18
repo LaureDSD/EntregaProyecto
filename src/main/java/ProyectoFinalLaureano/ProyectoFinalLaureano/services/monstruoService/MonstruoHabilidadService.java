@@ -29,4 +29,6 @@ public class MonstruoHabilidadService {
     public  void deleteByID(MonstruoHabilidadId id){
         monstruoHabilidadRepository.deleteById(id);
     }
+
+
 }

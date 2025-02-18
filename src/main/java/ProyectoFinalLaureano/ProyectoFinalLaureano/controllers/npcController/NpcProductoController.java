@@ -3,6 +3,7 @@ package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.npcController;
 
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.npc.tienda.NPCProducto;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.npc.tienda.NPCProductoId;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.npcDTO.TiendaDTO;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.npcService.TiendaNPCService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,9 +20,14 @@ public class NpcProductoController {
 
     // CRUD TIENDA NPC (NPC PRODUCTO)
 
-    @GetMapping("/{npcId}/tienda/")
-    public List<NPCProducto> obtenerListaTiendaNPC() {
+    @GetMapping("/tienda/")
+    public List<NPCProducto> obtenerListaTiendaNPCs() {
         return tiendaNPCService.getAll();
+    }
+
+    @GetMapping("/{npcId}/tienda/")
+    public List<NPCProducto> obtenerListaTiendaNPC(@PathVariable Long npcId) {
+        return tiendaNPCService.getByNpcId(npcId);
     }
 
     @GetMapping("/{npcId}/tienda/{productoId}")

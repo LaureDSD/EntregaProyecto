@@ -53,8 +53,8 @@ public class ClasePersonaje {
 
     // Relación Uno a Muchos con persoanje
     @OneToMany(mappedBy = "clase_persoanje", cascade = CascadeType.ALL)
-    @JsonIgnore // Excluir esta relación en la serialización JSON
     @Schema(description = "Persoanjes asociados a este tipo")
+    @JsonIgnore // Excluir esta relación en la serialización JSON
     private List<Personaje> persoanjes;
 
 }

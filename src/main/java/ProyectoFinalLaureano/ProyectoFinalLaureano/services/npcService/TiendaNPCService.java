@@ -28,4 +28,8 @@ public class TiendaNPCService {
     public  void deleteByID(NPCProductoId id){
         tiendaNPCRepository.deleteById(id);
     }
+
+    public List<NPCProducto> getByNpcId(Long npcId) {
+        return  tiendaNPCRepository.findByNpcId(npcId);
+    }
 }
