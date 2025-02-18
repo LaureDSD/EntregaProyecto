@@ -37,7 +37,7 @@ public class MapaTipoController {
 
     @PutMapping("/tipo{id}")
     public  ResponseEntity<Object> actualizarTipoMapa(@PathVariable Long id, @RequestBody TipoMapa tipoMapaActualizar){
-        if(tipoMapaActualizar.getTipo_mapa_id().equals(id)) {
+        if(tipoMapaActualizar.getTipoMapaId().equals(id)) {
             return ResponseEntity.ok( tipoMapaService.setItem(tipoMapaActualizar) );
         }else{
             return ResponseEntity.badRequest().body("El ID proporcionado no coincide con el ID del mapa.");

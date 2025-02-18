@@ -29,7 +29,7 @@ public class PersonajeLogrosController {
 
     @PutMapping("/{personajeId}/logros/")
     public ResponseEntity<Object> actualizarLogroPersonaje(@PathVariable Long personajeId, @RequestBody LogrosPersonaje logroActualizar) {
-        if (logroActualizar.getPersonaje_id().equals(personajeId)) {
+        if (logroActualizar.getPersonajeId().equals(personajeId)) {
             return ResponseEntity.ok(logrosPersonajeService.setItem(logroActualizar));
         } else {
             return ResponseEntity.badRequest().body("El ID proporcionado no coincide con el ID del logro del personaje.");

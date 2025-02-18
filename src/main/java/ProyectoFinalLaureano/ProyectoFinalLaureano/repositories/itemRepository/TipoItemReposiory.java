@@ -1,4 +1,4 @@
-package ProyectoFinalLaureano.ProyectoFinalLaureano.repositories.objetoRepository;
+package ProyectoFinalLaureano.ProyectoFinalLaureano.repositories.itemRepository;
 
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.objeto.TipoItem;
 import org.springframework.data.jpa.repository.JpaRepository;

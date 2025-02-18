@@ -18,8 +18,8 @@ public class DropsObjetos {
     private DropsObjetosId id;
 
     @ManyToOne
-    @MapsId("monstruoId") // Mapea la parte de monstruo_id de la clave compuesta
-    @JoinColumn(name = "monstruoId", nullable = false)
+    @MapsId("monstruo_id") // Mapea la parte de monstruo_id de la clave compuesta
+    @JoinColumn(name = "monstruo_id", nullable = false)
     @Schema(description = "Monstruo asociado al drop")
     private Monstruo monstruo;
 

@@ -26,7 +26,7 @@ public class LogUsuario {
 
     // Usuario relacionado
     @ManyToOne
-    @JoinColumn(name = "usuario_id")
+    @JoinColumn(name = "usuarioId")
     @Schema(description = "Usuario relacionado con el log", example = "123")
     private Usuario usuario;
 

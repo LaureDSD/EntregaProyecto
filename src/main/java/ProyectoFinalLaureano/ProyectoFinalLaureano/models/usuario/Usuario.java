@@ -10,7 +10,6 @@ import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.lang.NonNull;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -28,7 +27,7 @@ public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Schema(description = "ID único del usuario", example = "1")
-    private Long usuario_id;
+    private Long usuarioId;
 
     //Imagen de perfil de cada usuario
     @Column(name = "imagen_perfil", length = 255)
@@ -92,13 +91,15 @@ public class Usuario {
     @Schema(description = "Estado de la cuenta del usuario (activa/inactiva)", example = "true")
     private boolean estado_cuenta;
 
+
     // Relación con TipoUsuario N:1
     @ManyToOne
     @NotNull
-    @JoinColumn(name = "tipo_usuario", nullable = false)
+    @JoinColumn(name = "tipoUsuarioId", nullable = false)
     @Schema(description = "Tipo de usuario asociado")
     @JsonIgnore // Excluir esta relación en la serialización JSON
     private TipoUsuario tipoUsuario;
+
 
     // Relación con Personaje 1:N
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)

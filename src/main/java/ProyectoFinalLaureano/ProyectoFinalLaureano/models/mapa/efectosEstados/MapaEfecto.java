@@ -20,7 +20,7 @@ public class MapaEfecto {
 
     // ID de la relacion
     @EmbeddedId
-    private MapaEfectoId id;
+    private MapaEfectoId  id;
 
     //Mapa relacionado N:1
     @ManyToOne

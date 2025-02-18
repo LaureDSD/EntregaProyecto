@@ -3,7 +3,6 @@ package ProyectoFinalLaureano.ProyectoFinalLaureano.models.usuario;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
@@ -19,11 +18,11 @@ import java.util.List;
 @Schema(description = "Entidad que representa un tipo de usuario en el sistema")
 public class TipoUsuario {
 
-    //Identificador del usuario
+    //Identificador del tipo usuario
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Schema(description = "ID único del tipo de usuario", example = "1")
-    private Long tipo_usuario_id;
+    private Long tipoUsuarioId;
 
     //Nombre del tipo de usuario
     @NotNull
@@ -38,6 +37,7 @@ public class TipoUsuario {
     private String descripcion;
 
     // Relación Uno a Muchos con Usuario
+
     @OneToMany(mappedBy = "tipoUsuario", cascade = CascadeType.ALL)
     @JsonIgnore // Excluir esta relación en la serialización JSON
     private List<Usuario> usuarios;

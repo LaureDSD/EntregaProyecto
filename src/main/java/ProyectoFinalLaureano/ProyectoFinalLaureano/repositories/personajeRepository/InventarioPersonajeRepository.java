@@ -12,6 +12,6 @@ import java.util.List;
 
 @Repository
 public interface InventarioPersonajeRepository extends JpaRepository<InventarioPersonaje, InventarioPersonajeId> {
-    @Query("SELECT ip FROM InventarioPersonaje ip WHERE ip.personaje.id = :personajeId")
+    @Query("SELECT ip FROM InventarioPersonaje ip WHERE ip.personaje.personaje_id = :personajeId")
     List<InventarioPersonaje> getByPersonajeId(@Param("personajeId") Long personajeId);
 }

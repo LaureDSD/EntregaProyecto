@@ -31,12 +31,12 @@ public class InventarioController {
         return conversorListaInventarioDTO(inventarioPersonajeService.getByPersonajeId(personajeId));
     }
 
-    @GetMapping("/inventario/{personajeId}/{itemId}")
+    @GetMapping("/{personajeId}/inventario/{itemId}")
     public InventarioDTO obtenerInventarioPersonaje(@PathVariable Long personajeId, @PathVariable Long itemId) {
         return conversorInventarioDTO(inventarioPersonajeService.getByID(new InventarioPersonajeId(personajeId, itemId)));
     }
 
-    @PutMapping("/inventario/{personajeId}/{itemId}")
+    @PutMapping("/{personajeId}/inventario/{itemId}")
     public ResponseEntity<Object> actualizarInventarioPersonaje(@PathVariable Long personajeId, @PathVariable Long itemId, @RequestBody InventarioPersonaje inventarioActualizar) {
         if (inventarioActualizar.getId().equals(new InventarioPersonajeId(personajeId, itemId))) {
             return ResponseEntity.ok(conversorInventarioDTO(inventarioPersonajeService.setItem(inventarioActualizar)));
@@ -50,7 +50,7 @@ public class InventarioController {
         return conversorInventarioDTO(inventarioPersonajeService.setItem(inventarioGuardar));
     }
 
-    @DeleteMapping("/inventario/{personajeId}/{itemId}")
+    @DeleteMapping("/{personajeId}/inventario/{itemId}")
     public void borrarInventarioPersonaje(@PathVariable Long personajeId, @PathVariable Long itemId) {
         inventarioPersonajeService.deleteByID(new InventarioPersonajeId(personajeId, itemId));
     }

@@ -35,7 +35,7 @@ public class Monstruo {
 
     //Tipo de omonstruo
     @ManyToOne
-    @JoinColumn(name = "tipo_monstruo_id", nullable = false)
+    @JoinColumn(name = "tipoMonstruoId", nullable = false)
     @Schema(description = "Tipo de monstruo asociado")
     @JsonIgnore // Excluir esta relación en la serialización JSON
     private TipoMonstruo tipo_monstruo;

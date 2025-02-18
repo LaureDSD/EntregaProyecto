@@ -23,17 +23,17 @@ public class LogPersonajeMonstruo {
     //ID  del registro
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "registro_id")
+    @Column(name = "registroId")
     private Long registroId;
 
     //Persoanojae registrado
     @ManyToOne
-    @JoinColumn(name = "personaje_id", nullable = false)
+    @JoinColumn(name = "personajeId", nullable = false)
     private Personaje personaje;
 
     //Monstruo registrado
     @ManyToOne
-    @JoinColumn(name = "monstruo_id", nullable = false)
+    @JoinColumn(name = "monstruoId", nullable = false)
     private Monstruo monstruo;
 
     //Fecha de caza

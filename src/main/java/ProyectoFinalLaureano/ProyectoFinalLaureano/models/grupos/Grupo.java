@@ -43,17 +43,10 @@ public class Grupo {
 
     // Relación Many-to-One con TipoGrupo
     @ManyToOne()
-    @JoinColumn(name = "tipo_grupo_id", nullable = false)
+    @JoinColumn(name = "tipoGrupoId", nullable = false)
     @Schema(description = "Tipo de grupo al que pertenece este grupo.")
     @JsonIgnore // Excluir esta relación en la serialización JSON
     private TipoGrupo tipoGrupo;
-
-    // Relación Many-to-One con Personaje (Líder del grupo)
-    @ManyToOne()
-    @JoinColumn(name = "lider_grupo_id", nullable = false)
-    @Schema(description = "Personaje que es el líder del grupo.")
-    @JsonIgnore // Excluir esta relación en la serialización JSON
-    private Personaje lider;
 
     // Relación One-to-Many con Personaje (Miembros del grupo)
     @OneToMany(mappedBy = "grupo")

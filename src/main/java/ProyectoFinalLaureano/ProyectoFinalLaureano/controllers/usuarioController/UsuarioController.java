@@ -24,11 +24,11 @@ public class UsuarioController {
     // CRUD Usuario
     @GetMapping
     public List<UsuarioDTO> obtenerLista(@RequestParam(required = false) Long id){
-        if(id==null){
+       if(id==null){
             return  conversorListaUsuarioDTO(usuarioService.getAll());
         }else{
             TipoUsuario  tu = new TipoUsuario();
-            tu.setTipo_usuario_id(id);
+            tu.setTipoUsuarioId(id);
             return conversorListaUsuarioDTO(usuarioService.getByTipoUsuarioID(tu));
         }
     }
@@ -40,7 +40,7 @@ public class UsuarioController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Object> actualizar(@PathVariable Long id, @RequestBody Usuario usuarioActualizar){
-        if (usuarioActualizar.getUsuario_id().equals(id)) {
+        if (usuarioActualizar.getUsuarioId().equals(id)) {
             return ResponseEntity.ok(conversorUsuarioDTO(usuarioService.setItem(usuarioActualizar)));
         } else {
             return ResponseEntity.badRequest().body("El ID proporcionado no coincide con el ID del usuario.");
@@ -68,7 +68,7 @@ public class UsuarioController {
     //Conversor Unico DTO
     public static UsuarioDTO conversorUsuarioDTO( Usuario u){
         UsuarioDTO usuarioDTO = new UsuarioDTO();
-        usuarioDTO.setId(u.getUsuario_id());
+        usuarioDTO.setId(u.getUsuarioId());
         usuarioDTO.setImagen(u.getImagen_perfil());
         usuarioDTO.setNombrePublico(u.getNombre_usuario_pub());
         usuarioDTO.setNombrePrivado(ControladorSeguridad.ocultarNumero(u.getNombre_usuario_priv(),2));
@@ -79,6 +79,7 @@ public class UsuarioController {
         usuarioDTO.setTipoUsuario(u.getTipoUsuario());
         usuarioDTO.setFecha_creacion(u.getFecha_creacion());
         usuarioDTO.setTipoUsuario(u.getTipoUsuario());
+        usuarioDTO.setEstado(u.isEstado_cuenta());
         return  usuarioDTO;
     }
 }

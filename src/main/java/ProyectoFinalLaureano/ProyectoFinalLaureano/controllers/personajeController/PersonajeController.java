@@ -33,7 +33,7 @@ public class PersonajeController {
 
     @PutMapping("/{id}")
     public  PersonajeDTO actualizar(@PathVariable Long id, @RequestBody Personaje personajeActualizar){
-        personajeActualizar.setPersonajeId(id);
+        personajeActualizar.setPersonaje_id(id);
         return  conversorPersonajeDTO(persoanjeService.setItem(personajeActualizar));
     }
 
@@ -57,7 +57,7 @@ public class PersonajeController {
     //Conversor Unico DTO
     public static PersonajeDTO conversorPersonajeDTO( Personaje p){
         PersonajeDTO personajeDTO = new PersonajeDTO();
-        personajeDTO.setId(p.getPersonajeId());
+        personajeDTO.setId(p.getPersonaje_id());
         personajeDTO.setImagen(p.getImagen_modelo());
         personajeDTO.setNombre(p.getNombre());
         personajeDTO.setCreacion(p.getFecha_creacion());
@@ -69,7 +69,7 @@ public class PersonajeController {
         personajeDTO.setCapacidad_inventario(p.getCapacidad_inventario());
         personajeDTO.setInventario(InventarioController.conversorListaInventarioDTO(p.getInventario()));
         personajeDTO.setEstadisticas(p.getEstadisticas());
-        return  personajeDTO;
+        return personajeDTO;
     }
 
 

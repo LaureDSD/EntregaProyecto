@@ -22,7 +22,7 @@ public class TipoNPC {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Schema(description = "ID único del tipo de NPC", example = "1")
-    private Long tipo_npc_id;
+    private Long tipoNpcId;
 
     //Nombre del tipo de npc
     @Column(name = "nombre", nullable = false, length = 100)

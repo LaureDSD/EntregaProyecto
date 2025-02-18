@@ -1,7 +1,7 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.services.objetoService;
 
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.objeto.TipoItem;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.repositories.objetoRepository.TipoItemReposiory;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.repositories.itemRepository.TipoItemReposiory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

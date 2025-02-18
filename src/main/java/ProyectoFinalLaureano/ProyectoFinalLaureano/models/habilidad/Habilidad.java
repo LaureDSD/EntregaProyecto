@@ -26,7 +26,7 @@ public class Habilidad {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Schema(description = "ID único de la habilidad", example = "1")
-    private Long habilidad_id;
+    private Long habilidadId;
 
     //Imagen de la habilidad
     @Column(name = "imagen", length = 255)
@@ -77,7 +77,7 @@ public class Habilidad {
 
     //RelacionCon Estadisticas
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "estadisticas_id", referencedColumnName = "estadisticasId")
+    @JoinColumn(name = "estadisticasId", referencedColumnName = "estadisticasId")
     @JsonIgnore // Excluir esta relación en la serialización JSON
     private EstadisticasGenerales estadisticas;
 

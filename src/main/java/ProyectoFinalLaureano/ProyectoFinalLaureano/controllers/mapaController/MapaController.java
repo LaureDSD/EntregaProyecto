@@ -28,7 +28,7 @@ public class MapaController {
             return  mapaService.getAll();
         }else{
             TipoMapa tipoMapa = new TipoMapa();
-            tipoMapa.setTipo_mapa_id(id);
+            tipoMapa.setTipoMapaId(id);
             return mapaService.getBytipoMapa(tipoMapa);
         }
     }
@@ -40,7 +40,7 @@ public class MapaController {
 
     @PutMapping("/{id}")
     public  ResponseEntity<Object> actualizarMapa(@PathVariable Long id, @RequestBody Mapa mapaActualizar){
-        if(mapaActualizar.getMapa_id().equals(id)) {
+        if(mapaActualizar.getMapaId().equals(id)) {
             return ResponseEntity.ok( mapaService.setItem(mapaActualizar));
         }else{
             return ResponseEntity.badRequest().body("El ID proporcionado no coincide con el ID del mapa.");

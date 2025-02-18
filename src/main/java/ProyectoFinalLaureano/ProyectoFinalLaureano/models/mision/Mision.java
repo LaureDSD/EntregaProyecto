@@ -24,7 +24,7 @@ public class Mision {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Schema(description = "ID único de la misión", example = "1")
-    private Long mision_id;
+    private Long misionId;
 
     //Nombre de la mision
     @Column(name = "nombre", nullable = false, length = 100)
@@ -73,8 +73,8 @@ public class Mision {
     @ManyToMany
     @JoinTable(
             name = "npc_mision",
-            joinColumns = @JoinColumn(name = "mision_id"),
-            inverseJoinColumns = @JoinColumn(name = "npc_id")
+            joinColumns = @JoinColumn(name = "misionId"),
+            inverseJoinColumns = @JoinColumn(name = "npcId")
     )
     @JsonIgnore // Excluir esta relación en la serialización JSON
     @Schema(description = "Misiones  que da cada npc")

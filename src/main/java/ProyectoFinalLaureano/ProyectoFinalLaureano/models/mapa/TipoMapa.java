@@ -21,7 +21,7 @@ public class TipoMapa {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Schema(description = "ID único del tipo de mapa", example = "1")
-    private Long tipo_mapa_id;
+    private Long tipoMapaId;
 
     //Nombre del tipo mapa
     @Column(name = "nombre", nullable = false, length = 100)

@@ -22,7 +22,7 @@ public class Mapa {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Schema(description = "ID único del mapa", example = "1")
-    private Long mapa_id;
+    private Long mapaId;
 
     //Nombre del mapa
     @Column(name = "nombre", nullable = false, length = 100)
@@ -41,7 +41,7 @@ public class Mapa {
 
     //Relacion con tipo de mapa
     @ManyToOne
-    @JoinColumn(name = "tipo_mapa_id", nullable = false)
+    @JoinColumn(name = "tipoMapaId", nullable = false)
     @Schema(description = "Tipo de mapa asociado")
     @JsonIgnore // Excluir esta relación en la serialización JSON
     private TipoMapa tipoMapa;

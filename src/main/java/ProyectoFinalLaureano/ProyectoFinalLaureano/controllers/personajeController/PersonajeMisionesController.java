@@ -27,12 +27,12 @@ public class PersonajeMisionesController {
         return conversorPersonajeMisiondDTO(personajeMisionService.getByPersoanjeId(personajeId));
     }
 
-    @GetMapping("/misiones/{personajeId}/{misionId}")
+    @GetMapping("{personajeId}/misiones//{misionId}")
     public PersonajeMision obtenerMisionPersonaje(@PathVariable Long personajeId, @PathVariable Long misionId) {
         return personajeMisionService.getByID(new PersonajeMisionId(personajeId, misionId));
     }
 
-    @PutMapping("/misiones/{personajeId}/{misionId}")
+    @PutMapping("{personajeId}/misiones/{misionId}")
     public ResponseEntity<Object> actualizarMisionPersonaje(@PathVariable Long personajeId, @PathVariable Long misionId, @RequestBody PersonajeMision misionActualizar) {
         if (misionActualizar.getId().equals(new PersonajeMisionId(personajeId, misionId))) {
             return ResponseEntity.ok(personajeMisionService.setItem(misionActualizar));
@@ -46,7 +46,7 @@ public class PersonajeMisionesController {
         return personajeMisionService.setItem(misionGuardar);
     }
 
-    @DeleteMapping("/misiones/{personajeId}/{misionId}")
+    @DeleteMapping("{personajeId}/misiones/{misionId}")
     public void borrarMisionPersonaje(@PathVariable Long personajeId, @PathVariable Long misionId) {
         personajeMisionService.deleteByID(new PersonajeMisionId(personajeId, misionId));
     }

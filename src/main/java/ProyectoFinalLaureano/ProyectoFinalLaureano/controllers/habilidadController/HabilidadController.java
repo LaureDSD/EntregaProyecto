@@ -42,7 +42,7 @@ public class HabilidadController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Object> actualizarHabilidad(@PathVariable Long id, @RequestBody Habilidad habilidadActualizar){
-        if(habilidadActualizar.getHabilidad_id().equals(id)) {
+        if(habilidadActualizar.getHabilidadId().equals(id)) {
             return ResponseEntity.ok( habilidadService.setItem(habilidadActualizar));
         }else{
             return ResponseEntity.badRequest().body("El ID proporcionado no coincide con el ID del mapa.");

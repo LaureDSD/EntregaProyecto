@@ -25,23 +25,23 @@ public class LogTransacciones {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Schema(description = "ID único de la transacción", example = "1")
-    private Long transaccion_id;
+    private Long transaccionId;
 
     //Persoanje de la realcion N:1
     @ManyToOne
-    @JoinColumn(name = "personaje_id", nullable = false)
+    @JoinColumn(name = "personajeId", nullable = false)
     @Schema(description = "Personaje asociado a la transacción")
     private Personaje personaje;
 
     //NPC de la relacion N:1
     @ManyToOne
-    @JoinColumn(name = "npc_id", nullable = false)
+    @JoinColumn(name = "npcId", nullable = false)
     @Schema(description = "NPC asociado a la transacción")
     private NPC npc;
 
     //Item dela realcion N:1
     @ManyToOne
-    @JoinColumn(name = "item_id", nullable = false)
+    @JoinColumn(name = "itemId", nullable = false)
     @Schema(description = "Ítem involucrado en la transacción")
     private Item item;
 

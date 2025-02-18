@@ -25,7 +25,7 @@ public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Schema(description = "ID único del ítem", example = "1")
-    private Long item_id;
+    private Long itemId;
 
     //Nombre de los items
     @Column(name = "nombre", nullable = false, length = 100)
@@ -39,7 +39,7 @@ public class Item {
 
     //Tipo del item (Material,Consumible,TipoEquipamiento(Pechera,Casco,Botas,Guantes,Pantalones,Zapatos,Accesorio1,Accesorio2))
     @ManyToOne
-    @JoinColumn(name = "tipo_item", nullable = false)
+    @JoinColumn(name = "tipoItemId", nullable = false)
     @Schema(description = "Tipo de ítem asociado")
     @JsonIgnore // Excluir esta relación en la serialización JSON
     private TipoItem tipoItem;
@@ -62,7 +62,7 @@ public class Item {
 
     //RelacionCon Estadisticas
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "estadisticas_id", referencedColumnName = "estadisticasId")
+    @JoinColumn(name = "estadisticasId", referencedColumnName = "estadisticasId")
     private EstadisticasGenerales estadisticas;
 
     // Relación Uno a Muchos con DropsObjetos

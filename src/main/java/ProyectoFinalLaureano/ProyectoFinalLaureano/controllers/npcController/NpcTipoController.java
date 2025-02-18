@@ -29,7 +29,7 @@ public class NpcTipoController {
 
     @PutMapping("/tipo/{id}")
     public ResponseEntity<Object> actualizarTipoNPC(@PathVariable Long id, @RequestBody TipoNPC tipoNPCActualizar) {
-        if (tipoNPCActualizar.getTipo_npc_id().equals(id)) {
+        if (tipoNPCActualizar.getTipoNpcId().equals(id)) {
             return ResponseEntity.ok(tipoNPCService.setItem(tipoNPCActualizar));
         } else {
             return ResponseEntity.badRequest().body("El ID proporcionado no coincide con el ID del tipo de NPC.");

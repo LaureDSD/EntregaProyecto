@@ -34,7 +34,7 @@ public class ObjetoTipoController {
 
     @PutMapping("/tipo/{id}")
     public ResponseEntity<Object> actualizarTipoItem(@PathVariable Long id, @RequestBody TipoItem tipoItemActualizar) {
-        if (tipoItemActualizar.getTipo_item_id().equals(id)) {
+        if (tipoItemActualizar.getTipoItemId().equals(id)) {
             return ResponseEntity.ok(tipoItemService.setItem(tipoItemActualizar));
         } else {
             return ResponseEntity.badRequest().body("El ID proporcionado no coincide con el ID del tipo de ítem.");

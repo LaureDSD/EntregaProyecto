@@ -40,7 +40,7 @@ public class LogTransaccionesController {
 
     @PutMapping("/transaccion/{id}")
     public ResponseEntity<Object> actualizarlogTransaccionesServiceLog(@PathVariable Long id, @RequestBody LogTransacciones logActualizar){
-        if(logActualizar.getTransaccion_id().equals(id)) {
+        if(logActualizar.getTransaccionId().equals(id)) {
             return ResponseEntity.ok( logTransaccionesService.setItem(logActualizar) );
         }else{
             return ResponseEntity.badRequest().body("El ID proporcionado no coincide con el ID de la transaction.");

@@ -27,7 +27,7 @@ public class ObjetoController {
             return itemService.getAll();
         }else{
             TipoItem tipoItem = new TipoItem();
-            tipoItem.setTipo_item_id(id);
+            tipoItem.setTipoItemId(id);
             return itemService.getBytipoItem(tipoItem);
         }
     }
@@ -39,7 +39,7 @@ public class ObjetoController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Object> actualizarItem(@PathVariable Long id, @RequestBody Item itemActualizar) {
-        if (itemActualizar.getItem_id().equals(id)) {
+        if (itemActualizar.getItemId().equals(id)) {
             return ResponseEntity.ok(itemService.setItem(itemActualizar));
         } else {
             return ResponseEntity.badRequest().body("El ID proporcionado no coincide con el ID del ítem.");

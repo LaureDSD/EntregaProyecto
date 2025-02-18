@@ -22,7 +22,7 @@ public class EfectoEstado {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Schema(description = "ID único del efecto", example = "1")
-    private Long efecto_id;
+    private Long efectoId;
 
     //Imagen del efecto
     @Column(name = "imagen_icono", length = 255)
@@ -68,7 +68,7 @@ public class EfectoEstado {
 
     //RelacionCon Estadisticas
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "estadisticas_id", referencedColumnName = "estadisticasId")
+    @JoinColumn(name = "estadisticasId", referencedColumnName = "estadisticasId")
     private EstadisticasGenerales estadisticas;
 
 }

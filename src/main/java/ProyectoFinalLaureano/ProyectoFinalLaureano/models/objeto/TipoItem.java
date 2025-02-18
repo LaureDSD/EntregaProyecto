@@ -22,7 +22,7 @@ public class TipoItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Schema(description = "ID único del tipo de ítem", example = "1")
-    private Long tipo_item_id;
+    private Long tipoItemId;
 
     //Noombre del tipo de item
     @Column(name = "nombre", nullable = false, length = 100)

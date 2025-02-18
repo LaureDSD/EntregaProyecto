@@ -31,7 +31,7 @@ public class Personaje {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Schema(description = "ID único del personaje", example = "1")
-    private Long personajeId;
+    private Long personaje_id;
 
     //Imagen/modelo de cada persoanje
     @Column(name = "imagen_modelo", length = 255)
@@ -70,13 +70,13 @@ public class Personaje {
 
     //RelacionCon Estadisticas
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "estadisticas_id", referencedColumnName = "estadisticasId")
+    @JoinColumn(name = "estadisticasId")
     @JsonIgnore // Excluir esta relación en la serialización JSON
     private EstadisticasGenerales estadisticas;
 
     // Relación Muchos a Uno con Usuario
     @ManyToOne
-    @JoinColumn(name = "usuario_id", nullable = false)
+    @JoinColumn(name = "usuarioId", nullable = false)
     @Schema(description = "Usuario al que pertenece el personaje")
     @JsonIgnore // Excluir esta relación en la serialización JSON
     private Usuario usuario;
@@ -89,14 +89,14 @@ public class Personaje {
 
     //Clase
     @ManyToOne
-    @JoinColumn(name = "clase_id")
+    @JoinColumn(name = "claseId")
     @Schema(description = "Clase del persoanje asociado")
     @JsonIgnore // Excluir esta relación en la serialización JSON
     private ClasePersonaje clase_persoanje;
 
     //Grupo
     @ManyToOne
-    @JoinColumn(name = "grupo_id")
+    @JoinColumn(name = "grupoId")
     @Schema(description = "Grupo del persoanje asociado")
     @JsonIgnore // Excluir esta relación en la serialización JSON
     private Grupo grupo;

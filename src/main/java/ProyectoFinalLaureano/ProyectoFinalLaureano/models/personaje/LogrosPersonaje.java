@@ -22,11 +22,11 @@ public class LogrosPersonaje {
     @Id
     @Column(name = "personaje_id")
     @Schema(description = "ID único del personaje (clave foránea)", example = "1")
-    private Long personaje_id;
+    private Long personajeId;
 
     //Persoaje relacionado con latabla de logros
     @OneToOne
-    @MapsId
+    @MapsId("persoanje_id")
     @JoinColumn(name = "personaje_id")
     @JsonIgnore
     @Schema(description = "Personaje asociado a estas estadísticas")

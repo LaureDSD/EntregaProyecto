@@ -44,7 +44,7 @@ public class NPC {
 
     // Relacion con el tipo npc N:1
     @ManyToOne
-    @JoinColumn(name = "tipo_npc", nullable = false)
+    @JoinColumn(name = "tipoNpcId", nullable = false)
     @Schema(description = "Tipo de NPC asociado")
     private TipoNPC tipoNPC;
 
@@ -64,8 +64,8 @@ public class NPC {
     @ManyToMany
     @JoinTable(
             name = "npc_mision",
-            joinColumns = @JoinColumn(name = "npc_id"),
-            inverseJoinColumns = @JoinColumn(name = "mision_id")
+            joinColumns = @JoinColumn(name = "npcId"),
+            inverseJoinColumns = @JoinColumn(name = "misionId")
     )
     @JsonIgnore // Excluir esta relación en la serialización JSON
     @Schema(description = "Misiones  que da cada npc")
