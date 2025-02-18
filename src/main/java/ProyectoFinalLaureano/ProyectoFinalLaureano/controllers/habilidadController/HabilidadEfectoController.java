@@ -1,5 +1,6 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.habilidadController;
 
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.efectosEstados.EfectoEstado;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.habilidad.Habilidad;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.habilidad.efectoEstado.HabilidadEfecto;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.habilidad.efectoEstado.HabilidadEfectoId;
@@ -22,16 +23,16 @@ public class HabilidadEfectoController {
 
     //CRUD basico HabilidadEfecto
 
-    @GetMapping("/{habilidadId}/efecto/")
+    @GetMapping("/efecto/")
     public List<HabilidadEfecto> obtenerEfectos() {
         return habilidadEfectoService.getAll();
     }
 
-    /*
+
     @GetMapping("/{habilidadId}/efecto/")
-    public List<HabilidadEfecto> obtenerEfectos(@PathVariable Long habilidadId) {
-        return habilidadEfectoService.getByHabilidadId();
-    }*/
+    public List<EfectoEstado> obtenerEfectos(@PathVariable Long habilidadId) {
+         return habilidadEfectoService.getByHabilidadId(habilidadId);
+    }
 
     @GetMapping("/{habilidadId}/efecto/{efectoId}")
     public HabilidadEfecto obtenerEfecto(@PathVariable Long habilidadId, @PathVariable Long efectoId) {

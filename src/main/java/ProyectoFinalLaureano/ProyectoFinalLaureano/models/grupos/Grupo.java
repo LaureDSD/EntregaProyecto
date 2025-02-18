@@ -54,4 +54,7 @@ public class Grupo {
     @JsonIgnore // Excluir esta relación en la serialización JSON
     private List<Personaje> miembros;
 
+    @OneToOne(mappedBy = "grupo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private LiderGrupo liderGrupo;
+
 }

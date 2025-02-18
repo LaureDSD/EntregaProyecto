@@ -28,4 +28,8 @@ public class MapaEfectoService {
     public  void deleteByID(MapaEfectoId id){
         mapaEfectoRepository.deleteById(id);
     }
+
+    public List<MapaEfecto> getByMapaId(Long idMapa) {
+        return mapaEfectoRepository.getByMapaId(idMapa);
+    }
 }

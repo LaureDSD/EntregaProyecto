@@ -31,4 +31,7 @@ public class MonstruoHabilidadService {
     }
 
 
+    public List<MonstruoHabilidad> getByMonstruoId(Long monstruoId) {
+        return monstruoHabilidadRepository.getByMonstruoId(monstruoId);
+    }
 }

@@ -31,4 +31,7 @@ public class MapaMonstruoService {
         monstruoRepository.deleteById(id);
     }
 
+    public List<MapaMonstruo> getByMapaId(Long idMapa) {
+        return monstruoRepository.getByMapaId(idMapa);
+    }
 }

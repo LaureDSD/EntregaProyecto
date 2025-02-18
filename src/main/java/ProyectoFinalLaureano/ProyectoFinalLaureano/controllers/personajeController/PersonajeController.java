@@ -1,76 +1,78 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.personajeController;
 
-import ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.estadisticasGeneralesController.EstadisticasController;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.habilidadController.HabilidadController;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.misionController.MisionController;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.Personaje;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.habilidades.PersonajeHabilidad;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.misiones.PersonajeMision;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.personajeDTO.PersonajeDTO;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.services.persoanjeService.*;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.services.persoanjeService.PersoanjeService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/pesonaje")
+@RequestMapping("/api/personaje")
+@Tag(name = "Personaje Controller", description = "Operaciones CRUD para la gestión de personajes")
 public class PersonajeController {
 
     @Autowired
-    private PersoanjeService persoanjeService;
+    private PersoanjeService personajeService;
 
     // CRUD PERSONAJE
+
     @GetMapping("/")
-    public List<PersonajeDTO> obtenerPersonaje(){
-        return  conversorListaPersonajeDTO(persoanjeService.getAll());
+    @Operation(summary = "Obtener todos los personajes", description = "Retorna una lista de todos los personajes")
+    public List<PersonajeDTO> obtenerPersonajes() {
+        return conversorListaPersonajeDTO(personajeService.getAll());
     }
 
     @GetMapping("/{id}")
-    public PersonajeDTO obtener(@PathVariable Long id){
-        return conversorPersonajeDTO(persoanjeService.getByID(id));
+    @Operation(summary = "Obtener un personaje por ID", description = "Retorna un personaje específico basado en su ID")
+    public PersonajeDTO obtenerPersonaje(@PathVariable Long id) {
+        return conversorPersonajeDTO(personajeService.getByID(id));
     }
 
     @PutMapping("/{id}")
-    public  PersonajeDTO actualizar(@PathVariable Long id, @RequestBody Personaje personajeActualizar){
+    @Operation(summary = "Actualizar un personaje", description = "Actualiza la información de un personaje existente")
+    public PersonajeDTO actualizarPersonaje(@PathVariable Long id, @RequestBody Personaje personajeActualizar) {
         personajeActualizar.setPersonaje_id(id);
-        return  conversorPersonajeDTO(persoanjeService.setItem(personajeActualizar));
+        return conversorPersonajeDTO(personajeService.setItem(personajeActualizar));
     }
 
-    @PostMapping
-    public PersonajeDTO guardar(@RequestBody Personaje usuarioGuardar){
-        return  conversorPersonajeDTO(persoanjeService.setItem(usuarioGuardar));
+    @PostMapping("/")
+    @Operation(summary = "Crear un nuevo personaje", description = "Crea un nuevo personaje con la información proporcionada")
+    public PersonajeDTO guardarPersonaje(@RequestBody Personaje personajeGuardar) {
+        return conversorPersonajeDTO(personajeService.setItem(personajeGuardar));
     }
 
     @DeleteMapping("/{id}")
-    public void borrar (@PathVariable Long id){
-        persoanjeService.deleteByID(id);
+    @Operation(summary = "Eliminar un personaje", description = "Elimina un personaje basado en su ID")
+    public void borrarPersonaje(@PathVariable Long id) {
+        personajeService.deleteByID(id);
     }
 
-
-    //Conversor Lista
-    public static List<PersonajeDTO> conversorListaPersonajeDTO(List<Personaje> l){
-        return l.stream().map(PersonajeController::conversorPersonajeDTO).toList();
+    // Conversor de lista de Personaje a lista de PersonajeDTO
+    public static List<PersonajeDTO> conversorListaPersonajeDTO(List<Personaje> listaPersonajes) {
+        return listaPersonajes.stream()
+                .map(PersonajeController::conversorPersonajeDTO)
+                .toList();
     }
 
-
-    //Conversor Unico DTO
-    public static PersonajeDTO conversorPersonajeDTO( Personaje p){
+    // Conversor de Personaje a PersonajeDTO
+    public static PersonajeDTO conversorPersonajeDTO(Personaje personaje) {
         PersonajeDTO personajeDTO = new PersonajeDTO();
-        personajeDTO.setId(p.getPersonaje_id());
-        personajeDTO.setImagen(p.getImagen_modelo());
-        personajeDTO.setNombre(p.getNombre());
-        personajeDTO.setCreacion(p.getFecha_creacion());
-        personajeDTO.setClase(p.getClase_persoanje());
-        personajeDTO.setNivel(p.getNivel());
-        personajeDTO.setXp_acumulada(p.getXp_acumulada());
-        personajeDTO.setAlmas(p.getAlmas());
-        personajeDTO.setLogros(p.getLogros());
-        personajeDTO.setCapacidad_inventario(p.getCapacidad_inventario());
-        personajeDTO.setInventario(InventarioController.conversorListaInventarioDTO(p.getInventario()));
-        personajeDTO.setEstadisticas(p.getEstadisticas());
+        personajeDTO.setId(personaje.getPersonaje_id());
+        personajeDTO.setImagen(personaje.getImagen_modelo());
+        personajeDTO.setNombre(personaje.getNombre());
+        personajeDTO.setCreacion(personaje.getFecha_creacion());
+        personajeDTO.setClase(personaje.getClase_persoanje());
+        personajeDTO.setNivel(personaje.getNivel());
+        personajeDTO.setXp_acumulada(personaje.getXp_acumulada());
+        personajeDTO.setAlmas(personaje.getAlmas());
+        personajeDTO.setLogros(personaje.getLogros());
+        personajeDTO.setCapacidad_inventario(personaje.getCapacidad_inventario());
+        personajeDTO.setInventario(InventarioController.conversorListaInventarioDTO(personaje.getInventario()));
+        personajeDTO.setEstadisticas(personaje.getEstadisticas());
         return personajeDTO;
     }
-
-
 }

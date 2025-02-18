@@ -1,45 +1,52 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.usuarioController;
 
-import ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.personajeController.PersonajeController;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.usuario.TipoUsuario;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.usuario.Usuario;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.usuarioDTO.UsuarioDTO;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.security.ControladorSeguridad;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.services.usuarioService.TipoUsuarioService;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.usuarioService.UsuarioService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/usuario")
+@Tag(name = "Usuario Controller", description = "Operaciones CRUD para la gestión de usuarios")
 public class UsuarioController {
 
     @Autowired
     private UsuarioService usuarioService;
 
     // CRUD Usuario
+
     @GetMapping
-    public List<UsuarioDTO> obtenerLista(@RequestParam(required = false) Long id){
-       if(id==null){
-            return  conversorListaUsuarioDTO(usuarioService.getAll());
-        }else{
-            TipoUsuario  tu = new TipoUsuario();
-            tu.setTipoUsuarioId(id);
-            return conversorListaUsuarioDTO(usuarioService.getByTipoUsuarioID(tu));
+    @Operation(summary = "Obtener lista de usuarios", description = "Retorna una lista de usuarios. Si se proporciona un ID de tipo de usuario, filtra por ese tipo.")
+    public List<UsuarioDTO> obtenerListaUsuarios(@RequestParam(required = false) Long id) {
+        if (id == null) {
+            return conversorListaUsuarioDTO(usuarioService.getAll());
+        } else {
+            TipoUsuario tipoUsuario = new TipoUsuario();
+            tipoUsuario.setTipoUsuarioId(id);
+            return conversorListaUsuarioDTO(usuarioService.getByTipoUsuarioID(tipoUsuario));
         }
     }
 
     @GetMapping("/{id}")
-    public UsuarioDTO obtener(@PathVariable Long id){
+    @Operation(summary = "Obtener un usuario por ID", description = "Retorna un usuario específico basado en su ID")
+    public UsuarioDTO obtenerUsuario(@PathVariable Long id) {
         return conversorUsuarioDTO(usuarioService.getByID(id));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Object> actualizar(@PathVariable Long id, @RequestBody Usuario usuarioActualizar){
+    @Operation(summary = "Actualizar un usuario", description = "Actualiza la información de un usuario existente")
+    public ResponseEntity<Object> actualizarUsuario(
+            @PathVariable Long id,
+            @RequestBody Usuario usuarioActualizar) {
         if (usuarioActualizar.getUsuarioId().equals(id)) {
             return ResponseEntity.ok(conversorUsuarioDTO(usuarioService.setItem(usuarioActualizar)));
         } else {
@@ -48,38 +55,38 @@ public class UsuarioController {
     }
 
     @PostMapping
-    public UsuarioDTO guardar(@RequestBody Usuario usuarioGuardar){
-        return  conversorUsuarioDTO(usuarioService.setItem(usuarioGuardar));
+    @Operation(summary = "Crear un nuevo usuario", description = "Crea un nuevo usuario con la información proporcionada")
+    public UsuarioDTO guardarUsuario(@RequestBody Usuario usuarioGuardar) {
+        return conversorUsuarioDTO(usuarioService.setItem(usuarioGuardar));
     }
 
     @DeleteMapping("/{id}")
-    public void borrar (@PathVariable Long id){
+    @Operation(summary = "Eliminar un usuario", description = "Elimina un usuario basado en su ID")
+    public void borrarUsuario(@PathVariable Long id) {
         usuarioService.deleteByID(id);
     }
 
-
-    //Conversor Lista
-    public static List<UsuarioDTO> conversorListaUsuarioDTO(List<Usuario> l){
-        List<UsuarioDTO> lus = new ArrayList<>();
-        l.forEach( e ->  lus.add(conversorUsuarioDTO(e)));
-        return lus;
+    // Conversor de lista de Usuario a lista de UsuarioDTO
+    public static List<UsuarioDTO> conversorListaUsuarioDTO(List<Usuario> listaUsuarios) {
+        return listaUsuarios.stream()
+                .map(UsuarioController::conversorUsuarioDTO)
+                .collect(Collectors.toList());
     }
 
-    //Conversor Unico DTO
-    public static UsuarioDTO conversorUsuarioDTO( Usuario u){
+    // Conversor de Usuario a UsuarioDTO
+    public static UsuarioDTO conversorUsuarioDTO(Usuario usuario) {
         UsuarioDTO usuarioDTO = new UsuarioDTO();
-        usuarioDTO.setId(u.getUsuarioId());
-        usuarioDTO.setImagen(u.getImagen_perfil());
-        usuarioDTO.setNombrePublico(u.getNombre_usuario_pub());
-        usuarioDTO.setNombrePrivado(ControladorSeguridad.ocultarNumero(u.getNombre_usuario_priv(),2));
-        usuarioDTO.setCorreo(ControladorSeguridad.ocultarEmail(u.getCorreo(),3));
-        usuarioDTO.setContrasena(ControladorSeguridad.ocultarNumero(u.getContraseña(),1));
-        usuarioDTO.setLimitePersoanjes(u.getLimite_personajes());
-        usuarioDTO.setConexion(u.getUltima_conexion());
-        usuarioDTO.setTipoUsuario(u.getTipoUsuario());
-        usuarioDTO.setFecha_creacion(u.getFecha_creacion());
-        usuarioDTO.setTipoUsuario(u.getTipoUsuario());
-        usuarioDTO.setEstado(u.isEstado_cuenta());
-        return  usuarioDTO;
+        usuarioDTO.setId(usuario.getUsuarioId());
+        usuarioDTO.setImagen(usuario.getImagen_perfil());
+        usuarioDTO.setNombrePublico(usuario.getNombre_usuario_pub());
+        usuarioDTO.setNombrePrivado(ControladorSeguridad.ocultarNumero(usuario.getNombre_usuario_priv(), 2));
+        usuarioDTO.setCorreo(ControladorSeguridad.ocultarEmail(usuario.getCorreo(), 3));
+        usuarioDTO.setContrasena(ControladorSeguridad.ocultarNumero(usuario.getContraseña(), 1));
+        usuarioDTO.setLimitePersoanjes(usuario.getLimite_personajes());
+        usuarioDTO.setConexion(usuario.getUltima_conexion());
+        usuarioDTO.setTipoUsuario(usuario.getTipoUsuario());
+        usuarioDTO.setFecha_creacion(usuario.getFecha_creacion());
+        usuarioDTO.setEstado(usuario.isEstado_cuenta());
+        return usuarioDTO;
     }
 }

@@ -2,6 +2,7 @@ package ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.habilidades
 
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.habilidad.Habilidad;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.Personaje;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -34,6 +35,7 @@ public class PersonajeHabilidad {
     // Relación con la tabla personaje
     @ManyToOne()
     @JoinColumn(name = "personaje_id", insertable = false, updatable = false)
+    @JsonIgnore // Excluir esta relación en la serialización JSON
     private Personaje personaje;
 
     // Relación con la tabla habilidad

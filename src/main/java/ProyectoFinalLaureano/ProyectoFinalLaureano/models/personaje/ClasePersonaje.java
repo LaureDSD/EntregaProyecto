@@ -18,7 +18,7 @@ import java.util.List;
 @Setter
 @Entity
 @Table(name = "clase_personaje")
-@Schema(description = "Entidad que representa ula clase de personaje")
+@Schema(description = "Entidad que representa una clase de personaje")
 public class ClasePersonaje {
 
     //ID de la clase

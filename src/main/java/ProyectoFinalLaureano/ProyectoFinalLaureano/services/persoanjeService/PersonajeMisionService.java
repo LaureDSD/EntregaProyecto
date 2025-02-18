@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class PersoanjeMisionService {
+public class PersonajeMisionService {
     @Autowired
     private PersonajeMisionRepository personajeMisionRepository;
 
@@ -29,7 +29,7 @@ public class PersoanjeMisionService {
         personajeMisionRepository.deleteById(id);
     }
 
-    public List<PersonajeMision> getByPersoanjeId(Long personajeId) {
+    public List<PersonajeMision> getByPersonajeId(Long personajeId) {
         return personajeMisionRepository.getByPersonajeId(personajeId);
     }
 }

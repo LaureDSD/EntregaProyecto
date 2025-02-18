@@ -21,18 +21,17 @@ public class MisionRecompensasController {
     //CRUD objetos de mision
 
     @GetMapping("/objeto/")
-    public List<MisionObjetos> obtenerListaObjetos(@RequestParam(required = false) Long id){
+    public List<MisionObjetos> obtenerListaObjetos(){
         return  misionObjetosService.getAll();
     }
 
-    /*
     @GetMapping("{misionId}/objeto/")
     public List<MisionObjetos> obtenerListaObjeto(@RequestParam(required = false) Long id){
-            return  misionObjetosService.getByMisionId();
-    }*/
+            return  misionObjetosService.getByMisionId(id);
+    }
 
     @GetMapping("{misionId}/objeto/{objetoId}")
-    public MisionObjetos obtenerObjetos(@PathVariable Long id_mision,@PathVariable Long id_objeto){
+    public MisionObjetos obtenerObjetos(@RequestParam Long id_mision,@RequestParam Long id_objeto){
         return misionObjetosService.getByID(new MisionObjetoId(id_mision,id_objeto));
     }
 
@@ -46,8 +45,12 @@ public class MisionRecompensasController {
     }
 
     @PostMapping("{misionId}/objeto/")
-    public MisionObjetos guardarObjetos(@RequestBody MisionObjetos objetoGuardar){
-        return  misionObjetosService.setItem(objetoGuardar);
+    public ResponseEntity<Object> guardarObjetos(@PathVariable Long id_mision,@RequestBody MisionObjetos objetoGuardar){
+        if(objetoGuardar.getId().getMision_id().equals(id_mision)) {
+            return ResponseEntity.ok( misionObjetosService.setItem(objetoGuardar));
+        }else{
+            return ResponseEntity.badRequest().body("El ID proporcionado no coincide con el ID del objeto.");
+        }
     }
 
     @DeleteMapping("{misionId}/objeto/{objetoId}")

@@ -13,10 +13,6 @@ public class ClasePersonajeService {
     @Autowired
     ClasePersoanjeRepository clasePersoanjeRepository;
 
-    public List<ClasePersonaje> getAll(){
-        return  clasePersoanjeRepository.findAll();
-    }
-
     public ClasePersonaje getByID(Long id){
         return clasePersoanjeRepository.findById(id).orElse(null);
     }
@@ -27,5 +23,9 @@ public class ClasePersonajeService {
 
     public  void deleteByID(Long id){
         clasePersoanjeRepository.deleteById(id);
+    }
+
+    public List<ClasePersonaje> getAll() {
+        return clasePersoanjeRepository.findAll();
     }
 }

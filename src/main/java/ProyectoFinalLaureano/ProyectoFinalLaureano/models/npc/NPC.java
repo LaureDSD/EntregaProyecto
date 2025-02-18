@@ -25,7 +25,7 @@ public class NPC {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Schema(description = "ID único del NPC", example = "1")
-    private Long id;
+    private Long npc_id;
 
     // Nombre del npc
     @Column(name = "nombre", nullable = false, length = 100)
@@ -44,7 +44,7 @@ public class NPC {
 
     // Relacion con el tipo npc N:1
     @ManyToOne
-    @JoinColumn(name = "tipoNpcId", nullable = false)
+    @JoinColumn(name = "tipo_npc_id", nullable = false)
     @Schema(description = "Tipo de NPC asociado")
     private TipoNPC tipoNPC;
 
@@ -64,8 +64,8 @@ public class NPC {
     @ManyToMany
     @JoinTable(
             name = "npc_mision",
-            joinColumns = @JoinColumn(name = "npcId"),
-            inverseJoinColumns = @JoinColumn(name = "misionId")
+            joinColumns = @JoinColumn(name = "npc_Id"),
+            inverseJoinColumns = @JoinColumn(name = "mision_id")
     )
     @JsonIgnore // Excluir esta relación en la serialización JSON
     @Schema(description = "Misiones  que da cada npc")

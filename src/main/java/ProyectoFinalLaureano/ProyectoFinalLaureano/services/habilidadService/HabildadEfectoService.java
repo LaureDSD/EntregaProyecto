@@ -1,5 +1,6 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.services.habilidadService;
 
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.efectosEstados.EfectoEstado;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.habilidad.efectoEstado.HabilidadEfecto;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.habilidad.efectoEstado.HabilidadEfectoId;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.repositories.habilidadRepository.HabilidadEfectoRepository;
@@ -27,5 +28,9 @@ public class HabildadEfectoService {
 
     public  void deleteByID(HabilidadEfectoId id){
         habilidadEfectoRepository.deleteById(id);
+    }
+
+    public List<EfectoEstado> getByHabilidadId(Long habilidadId) {
+        return habilidadEfectoRepository.findByHabilidadId(habilidadId);
     }
 }

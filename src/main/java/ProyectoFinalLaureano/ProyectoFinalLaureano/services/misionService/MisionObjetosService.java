@@ -28,4 +28,8 @@ public class MisionObjetosService {
     public  void deleteByID(MisionObjetoId id){
         misionObjetoRepository.deleteById(id);
     }
+
+    public List<MisionObjetos> getByMisionId(Long id) {
+        return misionObjetoRepository.getByMisionId(id);
+    }
 }

@@ -9,9 +9,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class RecompensaDTO {
-
     private Item item;
-
     private int cantidad;
-
 }

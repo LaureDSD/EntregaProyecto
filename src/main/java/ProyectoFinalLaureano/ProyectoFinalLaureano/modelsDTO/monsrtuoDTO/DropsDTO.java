@@ -9,9 +9,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class DropsDTO {
-
     private Item item;
-
     private int probabilidad;
-
 }

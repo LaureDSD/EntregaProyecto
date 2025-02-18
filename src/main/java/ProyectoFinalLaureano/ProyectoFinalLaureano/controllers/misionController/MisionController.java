@@ -32,7 +32,7 @@ public class MisionController {
 
     @PutMapping("/{id}")
     public  ResponseEntity<Object> actualizarMisones(@PathVariable Long id, @RequestBody Mision misionActualizar){
-        if(misionActualizar.getMisionId().equals(id)) {
+        if(misionActualizar.getMision_id().equals(id)) {
             return ResponseEntity.ok( conversorMisionDTO(misionService.setItem(misionActualizar)));
         }else{
             return ResponseEntity.badRequest().body("El ID proporcionado no coincide con el ID de la mision.");
@@ -57,7 +57,7 @@ public class MisionController {
     //Conversor Unico DTO
     public static MisionDTO conversorMisionDTO( Mision m){
         MisionDTO misionDTO = new MisionDTO();
-        misionDTO.setId(m.getMisionId());
+        misionDTO.setId(m.getMision_id());
         misionDTO.setNombre(m.getNombre());
         misionDTO.setDescripcion(m.getDescripcion());
         misionDTO.setNivel(m.getNivel_minimo());

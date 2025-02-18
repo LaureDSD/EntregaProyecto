@@ -12,9 +12,6 @@ import java.util.List;
 @Getter
 @Setter
 public class PersonajeMisionDTO {
-
-    private Personaje personaje;
-
+    private PersonajeDTO personaje;
     private List<Mision> misiones;
-
 }
