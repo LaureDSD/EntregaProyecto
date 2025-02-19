@@ -1,7 +1,7 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.repositories.itemRepository;
 
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.objeto.Item;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.objeto.TipoItem;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.item.Item;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.item.TipoItem;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

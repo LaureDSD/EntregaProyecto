@@ -33,7 +33,7 @@ public class ClaseController {
     @PutMapping("/clase/{id}")
     @Operation(summary = "Actualizar una clase de personaje por ID")
     public ResponseEntity<Object> actualizarClasePersonaje(@PathVariable Long id, @RequestBody ClasePersonaje clasePersonajeActualizar) {
-        if (clasePersonajeActualizar.getClaseId().equals(id)) {
+        if (clasePersonajeActualizar.getClase_id().equals(id)) {
             return ResponseEntity.ok(clasePersonajeService.setItem(clasePersonajeActualizar));
         } else {
             return ResponseEntity.badRequest().body("El ID proporcionado no coincide con el ID de la clase de personaje.");

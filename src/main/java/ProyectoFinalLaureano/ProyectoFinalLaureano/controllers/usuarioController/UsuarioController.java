@@ -1,9 +1,9 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.usuarioController;
 
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.usuario.TipoUsuario;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.usuario.Usuario;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.usuarioDTO.UsuarioDTO;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.security.ControladorSeguridad;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.securityController.CensorController;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.services.usuarioService.TipoUsuarioService;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.usuarioService.UsuarioService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -22,24 +22,33 @@ public class UsuarioController {
     @Autowired
     private UsuarioService usuarioService;
 
+    @Autowired
+    private TipoUsuarioService tipoUsuarioService;
+
     // CRUD Usuario
 
     @GetMapping
     @Operation(summary = "Obtener lista de usuarios", description = "Retorna una lista de usuarios. Si se proporciona un ID de tipo de usuario, filtra por ese tipo.")
-    public List<UsuarioDTO> obtenerListaUsuarios(@RequestParam(required = false) Long id) {
-        if (id == null) {
-            return conversorListaUsuarioDTO(usuarioService.getAll());
-        } else {
-            TipoUsuario tipoUsuario = new TipoUsuario();
-            tipoUsuario.setTipoUsuarioId(id);
-            return conversorListaUsuarioDTO(usuarioService.getByTipoUsuarioID(tipoUsuario));
+    public ResponseEntity<Object> obtenerListaUsuarios(@RequestParam(required = false) Long id) {
+        try {
+            if (id == null) {
+                return ResponseEntity.ok( conversorListaUsuarioDTO(usuarioService.getAll()) ) ;
+            } else {
+                return ResponseEntity.ok( conversorListaUsuarioDTO(usuarioService.getByTipoUsuarioID(id)));
+            }
+        }catch (Exception e){
+            return ResponseEntity.badRequest().body("Ups algo salio mal.");
         }
     }
 
     @GetMapping("/{id}")
     @Operation(summary = "Obtener un usuario por ID", description = "Retorna un usuario específico basado en su ID")
-    public UsuarioDTO obtenerUsuario(@PathVariable Long id) {
-        return conversorUsuarioDTO(usuarioService.getByID(id));
+    public ResponseEntity<Object> obtenerUsuario(@PathVariable Long id) {
+        try{
+            return ResponseEntity.ok( conversorUsuarioDTO(usuarioService.getByID(id)));
+        }catch (Exception e){
+            return ResponseEntity.badRequest().body("Ups algo salio mal.");
+        }
     }
 
     @PutMapping("/{id}")
@@ -47,8 +56,13 @@ public class UsuarioController {
     public ResponseEntity<Object> actualizarUsuario(
             @PathVariable Long id,
             @RequestBody Usuario usuarioActualizar) {
-        if (usuarioActualizar.getUsuarioId().equals(id)) {
-            return ResponseEntity.ok(conversorUsuarioDTO(usuarioService.setItem(usuarioActualizar)));
+        if (usuarioActualizar.getUsuario_id().equals(id)) {
+            try {
+                return ResponseEntity.ok(conversorUsuarioDTO(usuarioService.setItem(usuarioActualizar)));
+            }catch (Exception e){
+                return ResponseEntity.badRequest().body("No es posible actualizar revise campos.");
+            }
+
         } else {
             return ResponseEntity.badRequest().body("El ID proporcionado no coincide con el ID del usuario.");
         }
@@ -56,35 +70,45 @@ public class UsuarioController {
 
     @PostMapping
     @Operation(summary = "Crear un nuevo usuario", description = "Crea un nuevo usuario con la información proporcionada")
-    public UsuarioDTO guardarUsuario(@RequestBody Usuario usuarioGuardar) {
-        return conversorUsuarioDTO(usuarioService.setItem(usuarioGuardar));
+    public ResponseEntity<Object> guardarUsuario(@RequestBody Usuario usuarioGuardar) {
+        try {
+            return ResponseEntity.ok( usuarioService.setItem(usuarioGuardar) );
+        }catch (Exception e){
+            return ResponseEntity.badRequest().body("No es posible actualizar revise campos.");
+        }
     }
+
 
     @DeleteMapping("/{id}")
     @Operation(summary = "Eliminar un usuario", description = "Elimina un usuario basado en su ID")
-    public void borrarUsuario(@PathVariable Long id) {
-        usuarioService.deleteByID(id);
+    public ResponseEntity<Object> borrarUsuario(@PathVariable Long id) {
+        try{
+            usuarioService.deleteByID(id);
+            return ResponseEntity.ok( "Borardo corerctamente");
+        }catch (Exception e){
+            return ResponseEntity.badRequest().body("No es posible borrar si tiene campos enlazados.");
+        }
     }
 
     // Conversor de lista de Usuario a lista de UsuarioDTO
-    public static List<UsuarioDTO> conversorListaUsuarioDTO(List<Usuario> listaUsuarios) {
+    public  List<UsuarioDTO> conversorListaUsuarioDTO(List<Usuario> listaUsuarios) {
         return listaUsuarios.stream()
-                .map(UsuarioController::conversorUsuarioDTO)
+                .map(this::conversorUsuarioDTO)
                 .collect(Collectors.toList());
     }
 
     // Conversor de Usuario a UsuarioDTO
-    public static UsuarioDTO conversorUsuarioDTO(Usuario usuario) {
+    public  UsuarioDTO conversorUsuarioDTO(Usuario usuario) {
         UsuarioDTO usuarioDTO = new UsuarioDTO();
-        usuarioDTO.setId(usuario.getUsuarioId());
+        usuarioDTO.setId(usuario.getUsuario_id());
         usuarioDTO.setImagen(usuario.getImagen_perfil());
         usuarioDTO.setNombrePublico(usuario.getNombre_usuario_pub());
-        usuarioDTO.setNombrePrivado(ControladorSeguridad.ocultarNumero(usuario.getNombre_usuario_priv(), 2));
-        usuarioDTO.setCorreo(ControladorSeguridad.ocultarEmail(usuario.getCorreo(), 3));
-        usuarioDTO.setContrasena(ControladorSeguridad.ocultarNumero(usuario.getContraseña(), 1));
+        usuarioDTO.setNombrePrivado(CensorController.ocultarNumero(usuario.getNombre_usuario_priv(), 2));
+        usuarioDTO.setCorreo(CensorController.ocultarEmail(usuario.getCorreo(), 3));
+        usuarioDTO.setContrasena(CensorController.ocultarNumero(usuario.getContraseña(), 1));
         usuarioDTO.setLimitePersoanjes(usuario.getLimite_personajes());
         usuarioDTO.setConexion(usuario.getUltima_conexion());
-        usuarioDTO.setTipoUsuario(usuario.getTipoUsuario());
+        usuarioDTO.setTipoUsuario( tipoUsuarioService.getByID(usuario.getTipoUsuario()) );
         usuarioDTO.setFecha_creacion(usuario.getFecha_creacion());
         usuarioDTO.setEstado(usuario.isEstado_cuenta());
         return usuarioDTO;

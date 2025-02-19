@@ -1,4 +1,4 @@
-package ProyectoFinalLaureano.ProyectoFinalLaureano.models.objeto.efecto;
+package ProyectoFinalLaureano.ProyectoFinalLaureano.models.item.efecto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Embeddable;

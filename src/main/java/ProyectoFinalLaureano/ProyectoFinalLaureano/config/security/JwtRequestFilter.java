@@ -1,5 +1,7 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.config.security;
 
+
+
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebFilter;
@@ -9,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
-
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -43,8 +44,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
             if (username != null) {
                 // Autenticamos al usuario según el JWT
                 var userDetails = userDetailsService.loadUserByUsername(username);
-                SecurityContextHolder.getContext().setAuthentication
-                        (new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities()));
+                SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities()));
             }
         }
         filterChain.doFilter(request, response);

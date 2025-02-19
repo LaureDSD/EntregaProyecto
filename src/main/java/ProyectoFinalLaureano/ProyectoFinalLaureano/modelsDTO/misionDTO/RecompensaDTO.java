@@ -1,6 +1,6 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.misionDTO;
 
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.objeto.Item;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.item.Item;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

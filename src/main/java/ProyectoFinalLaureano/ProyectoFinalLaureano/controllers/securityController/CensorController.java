@@ -1,8 +1,6 @@
-package ProyectoFinalLaureano.ProyectoFinalLaureano.security;
+package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.securityController;
 
-import java.util.Random;
-
-public class ControladorSeguridad {
+public class CensorController {
     public static String ocultarNumero(String numero, int mostrar ) {
         if(numero==null){
             return numero;

@@ -27,7 +27,7 @@ public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Schema(description = "ID único del usuario", example = "1")
-    private Long usuarioId;
+    private Long usuario_id;
 
     //Imagen de perfil de cada usuario
     @Column(name = "imagen_perfil", length = 255)
@@ -74,11 +74,6 @@ public class Usuario {
     @Schema(description = "Fecha y hora de la última conexión del usuario", example = "2023-10-01T12:00:00")
     private LocalDateTime ultima_conexion;
 
-    //Token de seguridad del usuario
-    @Column(name = "token_conexion")
-    @Schema(description = "Token de seguridad", example = "wy55gby34ynytwrrtgt4")
-    private String token_conexion;
-
     //Fecha en la que se crea el usuario
     @NotNull
     @Column(name = "fecha_creacion", nullable = false)
@@ -92,17 +87,14 @@ public class Usuario {
     private boolean estado_cuenta;
 
 
-    // Relación con TipoUsuario N:1
-    @ManyToOne
     @NotNull
-    @JoinColumn(name = "tipoUsuarioId", nullable = false)
     @Schema(description = "Tipo de usuario asociado")
-    @JsonIgnore // Excluir esta relación en la serialización JSON
-    private TipoUsuario tipoUsuario;
+    @Column(name = "tipo_usuario_id", nullable = false)
+    private Long tipoUsuario;
 
 
     // Relación con Personaje 1:N
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
     @Schema(description = "Lista de personajes asociados al usuario")
     @JsonIgnore // Excluir esta relación en la serialización JSON
     private List<Personaje> personajes;

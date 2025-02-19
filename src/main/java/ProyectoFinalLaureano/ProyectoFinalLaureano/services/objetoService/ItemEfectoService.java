@@ -1,7 +1,7 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.services.objetoService;
 
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.objeto.efecto.ItemEfecto;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.objeto.efecto.ItemEfectoId;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.item.efecto.ItemEfecto;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.item.efecto.ItemEfectoId;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.repositories.itemRepository.ItemEfectoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -37,7 +37,7 @@ public class UsuarioTipoController {
     public ResponseEntity<Object> actualizarTipoUsuario(
             @PathVariable Long id,
             @RequestBody TipoUsuario tipoUsuarioActualizar) {
-        if (tipoUsuarioActualizar.getTipoUsuarioId().equals(id)) {
+        if (tipoUsuarioActualizar.getTipo_usuario_id().equals(id)) {
             return ResponseEntity.ok(tipoUsuarioService.setItem(tipoUsuarioActualizar));
         } else {
             return ResponseEntity.badRequest().body("El ID proporcionado no coincide con el ID del tipo de usuario.");

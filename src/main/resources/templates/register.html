@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Registro de Usuario</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h2 class="text-center mb-4">Registro de Usuario</h2>
+            <form th:action="@{/auth/register}" method="post">
+                <!-- Campo: Nombre Público -->
+                <div class="form-group">
+                    <label for="nombre_usuario_pub">Nombre Público</label>
+                    <input type="text" class="form-control" id="nombre_usuario_pub" name="nombre_usuario_pub" required>
+                    <small class="form-text text-muted">Este será el nombre visible para otros usuarios.</small>
+                </div>
+
+                <!-- Campo: Nombre Privado (para login) -->
+                <div class="form-group">
+                    <label for="nombre_usuario_priv">Nombre Privado (Nombre de Usuario)</label>
+                    <input type="text" class="form-control" id="nombre_usuario_priv" name="nombre_usuario_priv" required>
+                    <small class="form-text text-muted">Este será tu nombre de usuario para iniciar sesión.</small>
+                </div>
+
+                <!-- Campo: Correo Electrónico -->
+                <div class="form-group">
+                    <label for="correo">Correo Electrónico</label>
+                    <input type="email" class="form-control" id="correo" name="correo" required>
+                    <small class="form-text text-muted">Ejemplo: usuario@example.com</small>
+                </div>
+
+                <!-- Campo: Contraseña -->
+                <div class="form-group">
+                    <label for="contraseña">Contraseña</label>
+                    <input type="password" class="form-control" id="contraseña" name="contraseña" required>
+                    <small class="form-text text-muted">Mínimo 8 caracteres.</small>
+                </div>
+
+                <!-- Campo: Imagen de Perfil -->
+                <div class="form-group">
+                    <label for="imagen_perfil">URL de la Imagen de Perfil</label>
+                    <input type="text" class="form-control" id="imagen_perfil" name="imagen_perfil">
+                    <small class="form-text text-muted">Opcional. Ejemplo: https://ejemplo.com/imagen.jpg</small>
+                </div>
+
+                <!-- Campo: Límite de Personajes -->
+                <div class="form-group">
+                    <label for="limite_personajes">Límite de Personajes</label>
+                    <input type="number" class="form-control" id="limite_personajes" name="limite_personajes" value="3" readonly>
+                    <small class="form-text text-muted">Este valor es fijo por el momento.</small>
+                </div>
+
+                <!-- Campo: Tipo de Usuario -->
+                <div class="form-group">
+                    <label for="tipoUsuario">Tipo de Usuario</label>
+                     <select class="form-control" id="tipoUsuario" name="tipoUsuario" required>
+                         <option value="1">Usuario Normal</option>
+                         <option value="3">Administrador</option>
+                     </select>
+                    <small class="form-text text-muted">Selecciona el tipo de usuario.</small>
+                </div>
+
+                <!-- Botón de Envío -->
+                <button type="submit" class="btn btn-primary btn-block">Registrarse</button>
+            </form>
+
+            <!-- Enlace para ir al Login -->
+            <div class="text-center mt-3">
+                <a th:href="@{/auth/login}" class="btn btn-link">¿Ya tienes una cuenta? Inicia Sesión</a>
+            </div>
+
+            <!-- Mensaje de Error -->
+            <div th:if="${error}" class="alert alert-danger mt-3" th:text="${error}"></div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

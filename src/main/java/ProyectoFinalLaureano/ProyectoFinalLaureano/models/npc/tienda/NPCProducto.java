@@ -1,14 +1,12 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.models.npc.tienda;
 
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.npc.NPC;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.objeto.Item;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.item.Item;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
 import lombok.Setter;
 
 // (Correcto)

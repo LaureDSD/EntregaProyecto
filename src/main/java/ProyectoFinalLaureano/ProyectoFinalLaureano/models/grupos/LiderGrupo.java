@@ -15,10 +15,7 @@ import java.util.Date;
 @Getter
 @Setter
 @Entity
-@Table(name = "lidergrupo", uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"grupo_id"}),
-        @UniqueConstraint(columnNames = {"personaje_id"})
-})
+@Table(name = "lidergrupo")
 public class LiderGrupo {
 
     @Id
@@ -27,11 +24,11 @@ public class LiderGrupo {
     private Long liderGrupoId;
 
     @ManyToOne
-    @JoinColumn(name = "grupo_id", nullable = false)
+    @JoinColumn(name = "grupo_id", nullable = false, unique = true)
     private Grupo grupo;
 
     @ManyToOne
-    @JoinColumn(name = "personaje_id", nullable = false)
+    @JoinColumn(name = "personaje_id", nullable = false , unique = true)
     private Personaje personaje;
 
     @Column(name = "fecha_nombramiento", nullable = false)

@@ -25,7 +25,7 @@ public class ClasePersonaje {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Schema(description = "ID único del tipo de clase", example = "1")
-    private Long claseId;
+    private Long clase_id;
 
     //Nombre de la clase
     @NotNull
@@ -50,11 +50,5 @@ public class ClasePersonaje {
     @JoinColumn(name = "estadisticasId")
     @JsonIgnore // Excluir esta relación en la serialización JSON
     private EstadisticasGenerales estadisticas;
-
-    // Relación Uno a Muchos con persoanje
-    @OneToMany(mappedBy = "clase_persoanje", cascade = CascadeType.ALL)
-    @Schema(description = "Persoanjes asociados a este tipo")
-    @JsonIgnore // Excluir esta relación en la serialización JSON
-    private List<Personaje> persoanjes;
 
 }

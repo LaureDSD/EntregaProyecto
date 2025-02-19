@@ -1,6 +1,6 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.objetoController;
 
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.objeto.TipoItem;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.item.TipoItem;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.objetoService.TipoItemService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

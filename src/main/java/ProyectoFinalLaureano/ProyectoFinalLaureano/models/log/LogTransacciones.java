@@ -2,7 +2,7 @@ package ProyectoFinalLaureano.ProyectoFinalLaureano.models.log;
 
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.log.enums.TipoTransaccion;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.npc.NPC;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.objeto.Item;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.item.Item;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.Personaje;
 import jakarta.persistence.*;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -25,23 +25,23 @@ public class LogTransacciones {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Schema(description = "ID único de la transacción", example = "1")
-    private Long transaccionId;
+    private Long transaccion_id;
 
     //Persoanje de la realcion N:1
     @ManyToOne
-    @JoinColumn(name = "personajeId", nullable = false)
+    @JoinColumn(name = "personaje_id", nullable = false)
     @Schema(description = "Personaje asociado a la transacción")
     private Personaje personaje;
 
     //NPC de la relacion N:1
     @ManyToOne
-    @JoinColumn(name = "npcId", nullable = false)
+    @JoinColumn(name = "npc_id", nullable = false)
     @Schema(description = "NPC asociado a la transacción")
     private NPC npc;
 
     //Item dela realcion N:1
     @ManyToOne
-    @JoinColumn(name = "itemId", nullable = false)
+    @JoinColumn(name = "item_id", nullable = false)
     @Schema(description = "Ítem involucrado en la transacción")
     private Item item;
 

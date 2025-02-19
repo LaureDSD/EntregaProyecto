@@ -1,7 +1,7 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.objetoController;
 
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.objeto.efecto.ItemEfecto;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.objeto.efecto.ItemEfectoId;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.item.efecto.ItemEfecto;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.item.efecto.ItemEfectoId;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.objetoService.ItemEfectoService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

@@ -22,7 +22,7 @@ public class TipoUsuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Schema(description = "ID único del tipo de usuario", example = "1")
-    private Long tipoUsuarioId;
+    private Long tipo_usuario_id;
 
     //Nombre del tipo de usuario
     @NotNull
@@ -37,8 +37,7 @@ public class TipoUsuario {
     private String descripcion;
 
     // Relación Uno a Muchos con Usuario
-
-    @OneToMany(mappedBy = "tipoUsuario", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "usuario_id", cascade = CascadeType.ALL)
     @JsonIgnore // Excluir esta relación en la serialización JSON
     private List<Usuario> usuarios;
 

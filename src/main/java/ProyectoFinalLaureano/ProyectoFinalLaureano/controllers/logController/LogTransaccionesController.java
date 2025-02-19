@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/admin/api/Informacionlogs")
+@RequestMapping("/templates/admin/public/admin/api/Informacionlogs")
 @Tag(name = "LogTransacciones", description = "API para gestionar logs de transacciones")
 public class LogTransaccionesController {
 
@@ -38,7 +38,7 @@ public class LogTransaccionesController {
     @PutMapping("/transaccion/{id}")
     @Operation(summary = "Actualizar un log de transacción por ID")
     public ResponseEntity<Object> actualizarlogTransaccionesServiceLog(@PathVariable Long id, @RequestBody LogTransacciones logActualizar) {
-        if (logActualizar.getTransaccionId().equals(id)) {
+        if (logActualizar.getTransaccion_id().equals(id)) {
             return ResponseEntity.ok(logTransaccionesService.setItem(logActualizar));
         } else {
             return ResponseEntity.badRequest().body("El ID proporcionado no coincide con el ID de la transacción.");

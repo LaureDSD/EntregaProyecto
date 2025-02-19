@@ -7,18 +7,18 @@ INSERT INTO tipo_usuario (nombre, descripcion) VALUES
 ('ADM', 'Acceso total, puede gestionar todo el sistema.');
 
 
-INSERT INTO usuarios (imagen_perfil, nombre_usuario_pub, limite_personajes, nombre_usuario_priv, correo, contraseña, ultima_conexion, token_conexion, fecha_creacion, estado_cuenta, tipo_usuario_id)
+INSERT INTO usuarios (imagen_perfil, nombre_usuario_pub, limite_personajes, nombre_usuario_priv, correo, contraseña, ultima_conexion, fecha_creacion, estado_cuenta, tipo_usuario_id)
 VALUES
-    ('perfil1.jpg', 'Aragorn23', 3, 'aragorn_priv', 'aragorn@example.com', 'contraseña123', '2023-10-01 12:00:00', 'token123', '2023-10-01 12:00:00', 1, 1),
-    ('perfil2.jpg', 'GandalfTheWise', 3, 'gandalf_priv', 'gandalf@example.com', 'contraseña456', '2023-10-02 13:00:00', 'token456', '2023-10-02 13:00:00', 1, 1),
-    ('perfil3.jpg', 'LegolasGreenleaf', 3, 'legolas_priv', 'legolas@example.com', 'contraseña789', '2023-10-03 14:00:00', 'token789', '2023-10-03 14:00:00', 1, 1),
-    ('perfil4.jpg', 'FrodoBaggins', 3, 'frodo_priv', 'frodo@example.com', 'contraseña101', '2023-10-04 15:00:00', 'token101', '2023-10-04 15:00:00', 1, 1),
-    ('perfil5.jpg', 'GimliSonOfGloin', 3, 'gimli_priv', 'gimli@example.com', 'contraseña112', '2023-10-05 16:00:00', 'token112', '2023-10-05 16:00:00', 1, 1),
-    ('perfil6.jpg', 'BoromirOfGondor', 3, 'boromir_priv', 'boromir@example.com', 'contraseña131', '2023-10-06 17:00:00', 'token131', '2023-10-06 17:00:00', 1, 1),
-    ('perfil7.jpg', 'GaladrielLadyOfLight', 3, 'galadriel_priv', 'galadriel@example.com', 'contraseña415', '2023-10-07 18:00:00', 'token415', '2023-10-07 18:00:00', 1, 1),
-    ('perfil8.jpg', 'SarumanTheWhite', 3, 'saruman_priv', 'saruman@example.com', 'contraseña161', '2023-10-08 19:00:00', 'token161', '2023-10-08 19:00:00', 1, 1),
-    ('perfil9.jpg', 'ArwenUndomiel', 3, 'arwen_priv', 'arwen@example.com', 'contraseña718', '2023-10-09 20:00:00', 'token718', '2023-10-09 20:00:00', 1, 1),
-    ('perfil10.jpg', 'SauronTheDarkLord', 3, 'sauron_priv', 'sauron@example.com', 'contraseña192', '2023-10-10 21:00:00', 'token192', '2023-10-10 21:00:00', 1, 1);
+('perfil1.jpg', 'Aragorn23', 3, 'aragorn_priv', 'aragorn@example.com', 'contraseña123', '2023-10-01 12:00:00',  '2023-10-01 12:00:00', 1, 1),
+('perfil2.jpg', 'GandalfTheWise', 3, 'gandalf_priv', 'gandalf@example.com', 'contraseña456', '2023-10-02 13:00:00', '2023-10-02 13:00:00', 1, 1),
+('perfil3.jpg', 'LegolasGreenleaf', 3, 'legolas_priv', 'legolas@example.com', 'contraseña789', '2023-10-03 14:00:00','2023-10-03 14:00:00', 1, 1),
+('perfil4.jpg', 'FrodoBaggins', 3, 'frodo_priv', 'frodo@example.com', 'contraseña101', '2023-10-04 15:00:00',  '2023-10-04 15:00:00', 1, 1),
+('perfil5.jpg', 'GimliSonOfGloin', 3, 'gimli_priv', 'gimli@example.com', 'contraseña112', '2023-10-05 16:00:00',  '2023-10-05 16:00:00', 1, 1),
+('perfil6.jpg', 'BoromirOfGondor', 3, 'boromir_priv', 'boromir@example.com', 'contraseña131', '2023-10-06 17:00:00',  '2023-10-06 17:00:00', 1, 1),
+('perfil7.jpg', 'GaladrielLadyOfLight', 3, 'galadriel_priv', 'galadriel@example.com', 'contraseña415', '2023-10-07 18:00:00', '2023-10-07 18:00:00', 1, 1),
+('perfil8.jpg', 'SarumanTheWhite', 3, 'saruman_priv', 'saruman@example.com', 'contraseña161', '2023-10-08 19:00:00',  '2023-10-08 19:00:00', 1, 1),
+('perfil9.jpg', 'ArwenUndomiel', 3, 'arwen_priv', 'arwen@example.com', 'contraseña718', '2023-10-09 20:00:00', '2023-10-09 20:00:00', 1, 1),
+('perfil10.jpg', 'SauronTheDarkLord', 3, 'sauron_priv', 'sauron@example.com', 'contraseña192', '2023-10-10 21:00:00', '2023-10-10 21:00:00', 1, 1);
 
 
 -- Insertar logs
@@ -33,72 +33,65 @@ INSERT INTO logs (usuario_id, tipo_log, mensaje, fecha_log) VALUES
 -- Insertar estadísticas generales
 INSERT INTO estadisticas_generales (vida,regeneracion_vida, escudo, energia,regeneracion_energia, mana,regeneracion_mana, ataque_fisico, ataque_magico, defensa_fisica, defensa_magica)
 VALUES
-    -- Habilidades Ofensivas
-    (0, 20, 0, 50, 0, 0, 0, 0,0,0,0), -- Golpe Crítico
-    (0, 0, 30, 0, 0, 40, 0, 0,0,0,0), -- Bola de Fuego
-    (0, 0, 25, 0, 35, 0, 0, 0,0,0,0), -- Rayo Helado
-    (50, 0, 20, 0, 0, 0, 0, 0,0,0,0), -- Escudo de Protección
-    (30, 0, 15, 0, 0, 0, 0, 0,0,0,0), -- Cura Menor
-    (0, 0, 20, 0, 0, 10, 0, 10,0,0,0), -- Fortalecer
-    (0, 0, 40, 10, 10, 10, 0, 10,0,0,0), -- Bendición
-    (0, 0, 50, 0, 0, 0, 0, 0,0,0,0), -- Invisibilidad
-    (20, 0, 30, 0, 0, 0, 0, 0,0,0,0), -- Regeneración
-    (0, 25, 0, 40, 0, 0, 0, 0,0,0,0), -- Corte Sombrío
-    (0, 0, 50, 0, 60, 0, 0, 0,0,0,0), -- Tormenta Eléctrica
-    (0, 30, 0, 35, 0, 0, 0, 0,0,0,0), -- Lanzamiento Dual
-    (100, 0, 40, 0, 0, 0, 0, 0,0,0,0), -- Escudo Divino
-    (50, 0, 25, 0, 0, 0, 0, 0,0,0,0), -- Regeneración Rápida
-    (0, 0, 35, 0, 0, 15, 0, 15,0,0,0), -- Aura de Protección
-    (0, 0, 50, 15, 15, 0, 0, 20,0,0,0), -- Bendición Sagrada
-    (0, 0, 60, 0, 0, 0, 0, 0,0,0,0), -- Teletransportación
-    (40, 0, 45, 0, 0, 0, 0, 0,0,0,0), -- Lluvia de Curación 18
 
-    -- Consumibles
-    (50, 0, 0, 0, 0, 0, 0, 0,0,0,0),   -- Poción de Vida
-    (0, 0, 0, 30, 0, 0, 0, 0,0,0,0),   -- Poción de Maná
-    (0, 0, 40, 0, 0, 0, 0, 0,0,0,0),   -- Poción de Energía
-    (100, 0, 0, 0, 0, 0, 0, 0,0,0,0),  -- Elixir de Vida
-    (0, 0, 0, 80, 0, 0, 0, 0,0,0,0),   -- Elixir de Maná
-    (0, 0, 0, 0, 10, 0, 0, 0,0,0,0),   -- Poción de Fuerza
-    (0, 0, 0, 0, 0, 0, 10, 0,0,0,0),   -- Poción de Defensa
-    (0, 0, 0, 0, 0, 0, 0, 0,0,0,0),    -- Poción de Invisibilidad
-
-    -- Equipo
-    (0, 0, 0, 0, 20, 0, 0, 0,0,0,0),   -- Espada de Acero
-    (0, 10, 0, 0, 0, 0, 0, 0,0,0,0),   -- Escudo de Madera
-    (0, 0, 0, 0, 15, 0, 0, 0,0,0,0),   -- Daga Afilada
-    (0, 0, 0, 0, 0, 0, 50, 0,0,0,0),   -- Armadura de Platino
-    (0, 0, 0, 15, 0, 0, 0, 0,0,0,0),   -- Anillo de Poder
-    (0, 0, 0, 0, 30, 0, 0, 0,0,0,0),   -- Martillo de Guerra
-    (0, 0, 0, 0, 0, 0, 0, 20,0,0,0),   -- Capa del Mago
-    (0, 0, 0, 25, 0, 0, 0, 0,0,0,0),   -- Báculo Arcano
-    (0, 0, 20, 0, 0, 0, 0, 0,0,0,0),   -- Botas de Velocidad
-    (0, 0, 0, 0, 0, 0, 10, 0,0,0,0),   -- Cinturón de Resistencia
-    (0, 0, 0, 0, 18, 0, 0, 0,0,0,0),   -- Guantes de Acero
-    (0, 0, 0, 0, 0, 0, 20, 20,0,0,0),  -- Amuleto de Protección 38
-    
-    -- Fuerza Mejorada
-    (0, 0, 0, 0, 20, 0, 0, 0,0,0,0),-- Veneno
-    (-10, 0, 0, 0, 0, 0, 0, 0,0,0,0),-- Escudo de Protección
-    (0, 50, 0, 0, 0, 0, 0, 0,0,0,0),-- Congelación
-    (0, 0, -20, 0, 0, 0, 0, 0,0,0,0),-- Regeneración
-    (10, 0, 0, 0, 0, 0, 0, 0,0,0,0),-- Maldición Oscura
-    (0, 0, 0, -30, 0, 0, 0, 0,0,0,0),-- Ira del Guerrero
-    (0, 0, 0, 0, 30, 0, 0, 0,0,0,0),-- Ceguera
-    (0, 0, 0, 0, -15, 0, 0, 0,0,0,0),-- Bendición Divina
-    (50, 0, 0, 50, 0, 0, 0, 0,0,0,0),-- Quemadura
-    (-15, 0, 0, 0, 0, 0, 0, 0,0,0,0),-- Invisibilidad
-    (0, 0, 0, 0, 0, 0, 0, 0,0,0,0),-- Miedo
-    (0, 0, 0, 0, 0, -20, 0, 0,0,0,0),-- Furia del Dragón
-    (0, 0, 0, 0, 40, 0, 0, 0,0,0,0),-- Parálisis
-    (0, 0, -30, 0, 0, 0, 0, 0,0,0,0),-- Aura Sagrada
-    (0, 0, 0, 0, 0, 0, 10, 10,0,0,0),-- Corrupción
-    (-20, 0, 0, 0, 0, 0, 0, 0,0,0,0),-- Velocidad Mejorada
-    (0, 0, 20, 0, 0, 0, 0, 0,0,0,0),-- Silenciamiento
-    (0, 0, 0, -50, 0, 0, 0, 0,0,0,0),-- Invulnerabilidad
-    (0, 100, 0, 0, 0, 0, 0, 0,0,0,0),-- Envenenamiento Grave
-    (-25, 0, 0, 0, 0, 0, 0, 0,0,0,0), -- 59
-
+(0, 20, 0, 50, 0, 0, 0, 0,0,0,0), -- Golpe Crítico
+(0, 0, 30, 0, 0, 40, 0, 0,0,0,0), -- Bola de Fuego
+(0, 0, 25, 0, 35, 0, 0, 0,0,0,0), -- Rayo Helado
+(50, 0, 20, 0, 0, 0, 0, 0,0,0,0), -- Escudo de Protección
+(30, 0, 15, 0, 0, 0, 0, 0,0,0,0), -- Cura Menor
+(0, 0, 20, 0, 0, 10, 0, 10,0,0,0), -- Fortalecer
+(0, 0, 40, 10, 10, 10, 0, 10,0,0,0), -- Bendición
+(0, 0, 50, 0, 0, 0, 0, 0,0,0,0), -- Invisibilidad
+(20, 0, 30, 0, 0, 0, 0, 0,0,0,0), -- Regeneración
+(0, 25, 0, 40, 0, 0, 0, 0,0,0,0), -- Corte Sombrío
+(0, 0, 50, 0, 60, 0, 0, 0,0,0,0), -- Tormenta Eléctrica
+(0, 30, 0, 35, 0, 0, 0, 0,0,0,0), -- Lanzamiento Dual
+(100, 0, 40, 0, 0, 0, 0, 0,0,0,0), -- Escudo Divino
+(50, 0, 25, 0, 0, 0, 0, 0,0,0,0), -- Regeneración Rápida
+(0, 0, 35, 0, 0, 15, 0, 15,0,0,0), -- Aura de Protección
+(0, 0, 50, 15, 15, 0, 0, 20,0,0,0), -- Bendición Sagrada
+(0, 0, 60, 0, 0, 0, 0, 0,0,0,0), -- Teletransportación
+(40, 0, 45, 0, 0, 0, 0, 0,0,0,0), -- Lluvia de Curación 18
+(50, 0, 0, 0, 0, 0, 0, 0,0,0,0),   -- Poción de Vida
+(0, 0, 0, 30, 0, 0, 0, 0,0,0,0),   -- Poción de Maná
+(0, 0, 40, 0, 0, 0, 0, 0,0,0,0),   -- Poción de Energía
+(100, 0, 0, 0, 0, 0, 0, 0,0,0,0),  -- Elixir de Vida
+(0, 0, 0, 80, 0, 0, 0, 0,0,0,0),   -- Elixir de Maná
+(0, 0, 0, 0, 10, 0, 0, 0,0,0,0),   -- Poción de Fuerza
+(0, 0, 0, 0, 0, 0, 10, 0,0,0,0),   -- Poción de Defensa
+(0, 0, 0, 0, 0, 0, 0, 0,0,0,0),    -- Poción de Invisibilidad
+(0, 0, 0, 0, 20, 0, 0, 0,0,0,0),   -- Espada de Acero
+(0, 10, 0, 0, 0, 0, 0, 0,0,0,0),   -- Escudo de Madera
+(0, 0, 0, 0, 15, 0, 0, 0,0,0,0),   -- Daga Afilada
+(0, 0, 0, 0, 0, 0, 50, 0,0,0,0),   -- Armadura de Platino
+(0, 0, 0, 15, 0, 0, 0, 0,0,0,0),   -- Anillo de Poder
+(0, 0, 0, 0, 30, 0, 0, 0,0,0,0),   -- Martillo de Guerra
+(0, 0, 0, 0, 0, 0, 0, 20,0,0,0),   -- Capa del Mago
+(0, 0, 0, 25, 0, 0, 0, 0,0,0,0),   -- Báculo Arcano
+(0, 0, 20, 0, 0, 0, 0, 0,0,0,0),   -- Botas de Velocidad
+(0, 0, 0, 0, 0, 0, 10, 0,0,0,0),   -- Cinturón de Resistencia
+(0, 0, 0, 0, 18, 0, 0, 0,0,0,0),   -- Guantes de Acero
+(0, 0, 0, 0, 0, 0, 20, 20,0,0,0),  -- Amuleto de Protección 38
+(0, 0, 0, 0, 20, 0, 0, 0,0,0,0),-- Veneno
+(-10, 0, 0, 0, 0, 0, 0, 0,0,0,0),-- Escudo de Protección
+(0, 50, 0, 0, 0, 0, 0, 0,0,0,0),-- Congelación
+(0, 0, -20, 0, 0, 0, 0, 0,0,0,0),-- Regeneración
+(10, 0, 0, 0, 0, 0, 0, 0,0,0,0),-- Maldición Oscura
+(0, 0, 0, -30, 0, 0, 0, 0,0,0,0),-- Ira del Guerrero
+(0, 0, 0, 0, 30, 0, 0, 0,0,0,0),-- Ceguera
+(0, 0, 0, 0, -15, 0, 0, 0,0,0,0),-- Bendición Divina
+(50, 0, 0, 50, 0, 0, 0, 0,0,0,0),-- Quemadura
+(-15, 0, 0, 0, 0, 0, 0, 0,0,0,0),-- Invisibilidad
+(0, 0, 0, 0, 0, 0, 0, 0,0,0,0),-- Miedo
+(0, 0, 0, 0, 0, -20, 0, 0,0,0,0),-- Furia del Dragón
+(0, 0, 0, 0, 40, 0, 0, 0,0,0,0),-- Parálisis
+(0, 0, -30, 0, 0, 0, 0, 0,0,0,0),-- Aura Sagrada
+(0, 0, 0, 0, 0, 0, 10, 10,0,0,0),-- Corrupción
+(-20, 0, 0, 0, 0, 0, 0, 0,0,0,0),-- Velocidad Mejorada
+(0, 0, 20, 0, 0, 0, 0, 0,0,0,0),-- Silenciamiento
+(0, 0, 0, -50, 0, 0, 0, 0,0,0,0),-- Invulnerabilidad
+(0, 100, 0, 0, 0, 0, 0, 0,0,0,0),-- Envenenamiento Grave
+(-25, 0, 0, 0, 0, 0, 0, 0,0,0,0), -- 59
 (50, 0, 20, 5, 10, 5, 2, 1,0,0,0),
 (200, 0, 50, 20, 50, 20, 10, 5,0,0,0),
 (1000, 100, 200, 50, 200, 100, 30, 20,0,0,0),
@@ -125,7 +118,6 @@ VALUES
 (400, 50, 100, 40, 120, 30, 20, 15,0,0,0),
 (2000, 300, 400, 200, 350, 250, 60, 50,0,0,0),
 (2500, 500, 500, 300, 500, 400, 80, 60,0,0,0),  -- 71
-
 (150, 5, 20, 60, 10, 20, 5, 20, 5, 15, 5),  -- Aragorn
 (80, 3, 5, 30, 5, 100, 20, 5, 25, 5, 20),  -- Gandalf
 (100, 4, 10, 70, 8, 30, 7, 15, 10, 10, 10), -- Legolas
@@ -136,32 +128,17 @@ VALUES
 (85, 2, 5, 35, 7, 90, 12, 6, 22, 6, 18),   -- Saruman
 (95, 3, 10, 50, 8, 60, 15, 10, 15, 8, 12),  -- Arwen
 (160, 8, 10, 90, 15, 10, 5, 22, 3, 12, 3),   -- Sauron 81
+(150, 20, 60, 20, 20, 5, 15, 5,0,0,0),  -- Guerrero
+(80, 5, 30, 100, 5, 25, 5, 20,0,0,0),  -- Mago
+(100, 10, 70, 30, 15, 10, 10, 10,0,0,0),  -- Arquero
+(90, 15, 40, 80, 8, 15, 8, 15,0,0,0),   -- Sacerdote
+(110, 5, 80, 20, 25, 5, 5, 5,0,0,0),    -- Asesino
+(140, 30, 50, 30, 18, 8, 20, 10,0,0,0), -- Caballero
+(160, 10, 90, 10, 22, 3, 12, 3,0,0,0),  -- Bárbaro
+(120, 15, 60, 70, 10, 18, 10, 15,0,0,0), -- Druida
+(85, 5, 35, 90, 6, 22, 6, 18,0,0,0),    -- Nigromante
+(95, 10, 50, 60, 10, 15, 8, 12,0,0,0);  -- Bardo
 
-    (150, 20, 60, 20, 20, 5, 15, 5,0,0,0),  -- Guerrero
-    (80, 5, 30, 100, 5, 25, 5, 20,0,0,0),  -- Mago
-    (100, 10, 70, 30, 15, 10, 10, 10,0,0,0),  -- Arquero
-    (90, 15, 40, 80, 8, 15, 8, 15,0,0,0),   -- Sacerdote
-    (110, 5, 80, 20, 25, 5, 5, 5,0,0,0),    -- Asesino
-    (140, 30, 50, 30, 18, 8, 20, 10,0,0,0), -- Caballero
-    (160, 10, 90, 10, 22, 3, 12, 3,0,0,0),  -- Bárbaro
-    (120, 15, 60, 70, 10, 18, 10, 15,0,0,0), -- Druida
-    (85, 5, 35, 90, 6, 22, 6, 18,0,0,0),    -- Nigromante
-    (95, 10, 50, 60, 10, 15, 8, 12,0,0,0);  -- Bardo
-
-
-
-INSERT INTO clase_personaje (nombre, descripcion, estadisticas_id)
-VALUES
-    ('Guerrero', 'Un luchador fuerte y resistente, especializado en combate cuerpo a cuerpo.', 82),
-    ('Mago', 'Un maestro de las artes arcanas, capaz de lanzar hechizos devastadores.', 83),
-    ('Arquero', 'Un tirador experto que ataca desde la distancia con precisión letal.', 84),
-    ('Sacerdote', 'Un sanador divino que protege y cura a sus aliados.', 85),
-    ('Asesino', 'Un combatiente sigiloso que ataca por sorpresa con golpes críticos.', 86),
-    ('Caballero', 'Un defensor acorazado que protege a sus aliados en el frente de batalla.', 87),
-    ('Bárbaro', 'Un guerrero salvaje que se enfurece en combate, aumentando su fuerza y resistencia.', 88),
-    ('Druida', 'Un guardián de la naturaleza que combina magia y habilidades de transformación.', 89),
-    ('Nigromante', 'Un hechicero oscuro que invoca y controla a los muertos.', 90),
-    ('Bardo', 'Un artista versátil que usa música y magia para apoyar a sus aliados.', 91);
 
 
 INSERT INTO clase_personaje (nombre, descripcion, estadisticas_id)
@@ -282,7 +259,7 @@ VALUES
 ('Leviatán', 3, 30, 'Una criatura marina legendaria que devora barcos enteros.', 'leviatan.jpg', 2500, 500, 71);
 
  
-INSERT INTO registro_jugador_monstruo (personaje_id, monstruo_id, fecha, almas_obtenidas, experiencia_obtenida, dano_realizado, dano_recivido)
+INSERT INTO registro_jugador_monstruo (personaje_id, monstruo_id, fecha, almas_obtenidas, experiencia_obtenida, dano_realizado, dano_recibido)
 VALUES
     (1, 1, '2023-10-01 12:00:00', 50, 20, 0, 0),   -- Aragorn cazó un Goblin
     (2, 3, '2023-10-02 13:00:00', 1000, 200, 0, 0), -- Gandalf cazó un Dragón
@@ -407,7 +384,6 @@ INSERT INTO tipo_item (nombre,imagen, descripcion) VALUES
 -- Insertar ítems
 INSERT INTO items (imagen,nombre, tipo_item_id, descripcion, acumulaciones_max, estadisticas_id, equipable)
 VALUES
-    -- Consumibles
     ("img1.jpg",'Poción de Vida', 2, 'Restaura 50 puntos de vida.', 99, 19, FALSE),
     ("img1.jpg",'Poción de Maná', 2, 'Restaura 30 puntos de maná.', 99, 20, FALSE),
     ("img1.jpg",'Poción de Energía', 2, 'Restaura 40 puntos de energía.', 99, 21, FALSE),
@@ -416,8 +392,6 @@ VALUES
     ("img1.jpg",'Poción de Fuerza', 2, 'Aumenta el ataque físico en 10 puntos durante 5 minutos.', 99, 24, FALSE),
     ("img1.jpg",'Poción de Defensa', 2, 'Aumenta la defensa física en 10 puntos durante 5 minutos.', 99, 25, FALSE),
     ("img1.jpg",'Poción de Invisibilidad', 2, 'Otorga invisibilidad durante 1 minuto.', 99, 26, FALSE),
-
-    -- Equipo
     ("img1.jpg",'Espada de Acero', 3, 'Una espada resistente hecha de acero.', 1, 27, TRUE),
     ("img1.jpg",'Escudo de Madera', 4, 'Un escudo ligero hecho de madera.', 1, 28, TRUE),
     ("img1.jpg",'Daga Afilada', 3, 'Una daga ligera y rápida.', 1, 29, TRUE),
@@ -430,8 +404,6 @@ VALUES
     ("img1.jpg",'Cinturón de Resistencia', 8, 'Aumenta la resistencia física.', 1, 36, TRUE),
     ("img1.jpg",'Guantes de Acero', 6, 'Mejoran la destreza y el ataque.', 1, 37, TRUE),
     ("img1.jpg",'Amuleto de Protección', 9, 'Otorga protección mágica.', 1, 38, TRUE),
-
-    -- Materiales
     ("img1.jpg",'Hierro', 1, 'Material de crafteo común.', 99, NULL, FALSE),
     ("img1.jpg",'Piedra Mágica', 1, 'Material raro usado en crafteo avanzado.', 99, NULL, FALSE),
     ("img1.jpg",'Piedra de Fuego', 1, 'Material usado para crear armas de fuego.', 99, NULL, FALSE),
@@ -446,7 +418,7 @@ VALUES
 
 INSERT INTO item_efecto (item_id, efecto_id)
 VALUES
-    -- Consumibles
+
     (1, 5),   -- Poción de Vida: Regeneración
     (2, 9),   -- Poción de Maná: Bendición Divina
     (3, 17),  -- Poción de Energía: Velocidad Mejorada
@@ -455,8 +427,6 @@ VALUES
     (6, 1),   -- Poción de Fuerza: Fuerza Mejorada
     (7, 15),  -- Poción de Defensa: Aura Sagrada
     (8, 11),  -- Poción de Invisibilidad: Invisibilidad
-
-    -- Equipo
     (9, 1),   -- Espada de Acero: Fuerza Mejorada
     (10, 3),  -- Escudo de Madera: Escudo de Protección
     (11, 1),  -- Daga Afilada: Fuerza Mejorada
@@ -470,55 +440,35 @@ VALUES
     (19, 1),  -- Guantes de Acero: Fuerza Mejorada
     (20, 15); -- Amuleto de Protección: Aura Sagrada
 
-
 -- Insertar drops de monstruos
 INSERT INTO drops_objetos (monstruo_id, item_id, probabilidad)
 VALUES
-    -- Goblin (monstruo_id = 1)
     (1, 1, 50),   -- Goblin puede soltar Poción de Vida con 50% de probabilidad
     (1, 21, 30),  -- Goblin puede soltar Hierro con 30% de probabilidad
     (1, 24, 10),  -- Goblin puede soltar Cuero con 10% de probabilidad
-
-    -- Ogro (monstruo_id = 2)
     (2, 2, 40),   -- Ogro puede soltar Poción de Maná con 40% de probabilidad
     (2, 21, 50),  -- Ogro puede soltar Hierro con 50% de probabilidad
     (2, 22, 20),  -- Ogro puede soltar Piedra Mágica con 20% de probabilidad
-
-    -- Dragón (monstruo_id = 3)
     (3, 4, 30),   -- Dragón puede soltar Elixir de Vida con 30% de probabilidad
     (3, 5, 30),   -- Dragón puede soltar Elixir de Maná con 30% de probabilidad
     (3, 27, 10),  -- Dragón puede soltar Hueso de Dragón con 10% de probabilidad
     (3, 26, 20),  -- Dragón puede soltar Madera de Roble con 20% de probabilidad
-
-    -- Bandido (monstruo_id = 4)
     (4, 1, 60),   -- Bandido puede soltar Poción de Vida con 60% de probabilidad
     (4, 21, 40),  -- Bandido puede soltar Hierro con 40% de probabilidad
     (4, 24, 20),  -- Bandido puede soltar Cuero con 20% de probabilidad
-
-    -- Lobo Salvaje (monstruo_id = 5)
     (5, 24, 70),  -- Lobo Salvaje puede soltar Cuero con 70% de probabilidad
     (5, 21, 30),  -- Lobo Salvaje puede soltar Hierro con 30% de probabilidad
-
-    -- Esqueleto Guerrero (monstruo_id = 6)
     (6, 2, 40),   -- Esqueleto Guerrero puede soltar Poción de Maná con 40% de probabilidad
     (6, 22, 30),  -- Esqueleto Guerrero puede soltar Piedra Mágica con 30% de probabilidad
     (6, 25, 10),  -- Esqueleto Guerrero puede soltar Cristal Mágico con 10% de probabilidad
-
-    -- Araña Gigante (monstruo_id = 7)
     (7, 24, 80),  -- Araña Gigante puede soltar Cuero con 80% de probabilidad
     (7, 22, 20),  -- Araña Gigante puede soltar Piedra Mágica con 20% de probabilidad
-
-    -- Bandido Líder (monstruo_id = 8)
     (8, 4, 50),   -- Bandido Líder puede soltar Elixir de Vida con 50% de probabilidad
     (8, 5, 50),   -- Bandido Líder puede soltar Elixir de Maná con 50% de probabilidad
     (8, 28, 10),  -- Bandido Líder puede soltar Plata con 10% de probabilidad
-
-    -- Nigromante (monstruo_id = 9)
     (9, 5, 60),   -- Nigromante puede soltar Elixir de Maná con 60% de probabilidad
     (9, 25, 30),  -- Nigromante puede soltar Cristal Mágico con 30% de probabilidad
     (9, 22, 20),  -- Nigromante puede soltar Piedra Mágica con 20% de probabilidad
-
-    -- Araña (monstruo_id = 10)
     (10, 24, 90), -- Araña puede soltar Cuero con 90% de probabilidad
     (10, 21, 10); -- Araña puede soltar Hierro con 10% de probabilidad
 
@@ -526,31 +476,22 @@ VALUES
 -- Insertar inventario de personajes
 INSERT INTO inventario_personaje (personaje_Id, item_id, cantidad, equipado, fecha_obtencion)
 VALUES
-    -- Aragorn (personaje_id = 1)
     (1, 9, 1, 1, '2023-10-01 12:00:00'),  -- Espada de Acero (equipada)
     (1, 10, 1, 1, '2023-10-01 12:05:00'), -- Escudo de Madera (equipado)
     (1, 1, 5, 0, '2023-10-01 12:10:00'),  -- Poción de Vida (5 unidades, no equipada)
     (1, 21, 10, 0, '2023-10-01 12:15:00'), -- Hierro (10 unidades, no equipado)
-
-    -- Gandalf (personaje_id = 2)
     (2, 16, 1, 1, '2023-10-02 13:00:00'), -- Báculo Arcano (equipado)
     (2, 15, 1, 1, '2023-10-02 13:05:00'), -- Capa del Mago (equipada)
     (2, 2, 3, 0, '2023-10-02 13:10:00'),  -- Poción de Maná (3 unidades, no equipada)
     (2, 22, 5, 0, '2023-10-02 13:15:00'), -- Piedra Mágica (5 unidades, no equipada)
-
-    -- Legolas (personaje_id = 3)
     (3, 11, 1, 1, '2023-10-03 14:00:00'), -- Daga Afilada (equipada)
     (3, 17, 1, 1, '2023-10-03 14:05:00'), -- Botas de Velocidad (equipadas)
     (3, 3, 2, 0, '2023-10-03 14:10:00'),  -- Poción de Energía (2 unidades, no equipada)
     (3, 24, 8, 0, '2023-10-03 14:15:00'), -- Cuero (8 unidades, no equipado)
-
-    -- Frodo (personaje_id = 4)
     (4, 12, 1, 1, '2023-10-04 15:00:00'), -- Armadura de Platino (equipada)
     (4, 18, 1, 1, '2023-10-04 15:05:00'), -- Cinturón de Resistencia (equipado)
     (4, 4, 1, 0, '2023-10-04 15:10:00'),  -- Elixir de Vida (1 unidad, no equipada)
     (4, 25, 3, 0, '2023-10-04 15:15:00'), -- Cristal Mágico (3 unidades, no equipado)
-
-    -- Gimli (personaje_id = 5)
     (5, 14, 1, 1, '2023-10-05 16:00:00'), -- Martillo de Guerra (equipado)
     (5, 10, 1, 1, '2023-10-05 16:05:00'), -- Escudo de Madera (equipado)
     (5, 5, 2, 0, '2023-10-05 16:10:00'),  -- Elixir de Maná (2 unidades, no equipado)
@@ -560,167 +501,87 @@ VALUES
 -- Insertar habilidades
 INSERT INTO habilidades (imagen, nombre, descripcion, nivel_maximo, requisito_nivel, tipo_habilidad, objetivo_habilidad, area_efecto, unidades_afectadas, enfriamiento, estadisticas_id)
 VALUES
-    -- Habilidades Ofensivas
     ('golpe_critico.jpg', 'Golpe Crítico', 'Un ataque poderoso que inflige daño crítico.', 5, 1, 'OFENSIVA', 'ENEMIGO', 1, 1, 10, 1),
     ('bola_fuego.jpg', 'Bola de Fuego', 'Lanza una bola de fuego que quema a los enemigos.', 3, 3, 'OFENSIVA', 'ENEMIGO', 3, 3, 15, 2),
     ('rayo_helado.jpg', 'Rayo Helado', 'Un rayo de hielo que congela a los enemigos.', 4, 5, 'OFENSIVA', 'ENEMIGO', 2, 2, 12, 3),
-
-    -- Habilidades Defensivas
     ('escudo_proteccion.jpg', 'Escudo de Protección', 'Crea un escudo que absorbe daño.', 3, 2, 'DEFENSIVA', 'JUGADOR', 1, 1, 20, 4),
     ('cura_menor.jpg', 'Cura Menor', 'Cura una pequeña cantidad de vida.', 4, 2, 'DEFENSIVA', 'ALIADO', 1, 1, 10, 5),
     ('fortalecer.jpg', 'Fortalecer', 'Aumenta la defensa física y mágica.', 2, 4, 'DEFENSIVA', 'JUGADOR', 1, 1, 15, 6),
-
-    -- Habilidades de Apoyo
     ('bendicion.jpg', 'Bendición', 'Aumenta el ataque y la defensa de los aliados.', 3, 5, 'APOYO', 'ALIADO', 5, 5, 30, 7),
     ('invisibilidad.jpg', 'Invisibilidad', 'Hace al jugador invisible por un tiempo.', 2, 6, 'APOYO', 'JUGADOR', 1, 1, 60, 8),
     ('regeneracion.jpg', 'Regeneración', 'Regenera la vida y el maná de los aliados.', 4, 7, 'APOYO', 'ALIADO', 4, 4, 25, 9),
-
-    -- Habilidades Ofensivas
     ('corte_sombrio.jpg', 'Corte Sombrío', 'Un ataque rápido que inflige daño oscuro.', 4, 4, 'OFENSIVA', 'ENEMIGO', 1, 1, 8, 10),
     ('tormenta_electrica.jpg', 'Tormenta Eléctrica', 'Invoca una tormenta eléctrica que daña a múltiples enemigos.', 3, 6, 'OFENSIVA', 'ENEMIGO', 4, 4, 20, 11),
     ('lanzamiento_dual.jpg', 'Lanzamiento Dual', 'Ataca dos veces con armas arrojadizas.', 5, 3, 'OFENSIVA', 'ENEMIGO', 1, 1, 12, 12),
-
-    -- Habilidades Defensivas
     ('escudo_divino.jpg', 'Escudo Divino', 'Protege al jugador con un escudo mágico.', 3, 5, 'DEFENSIVA', 'JUGADOR', 1, 1, 30, 13),
     ('regeneracion_rapida.jpg', 'Regeneración Rápida', 'Cura una cantidad moderada de vida rápidamente.', 4, 4, 'DEFENSIVA', 'ALIADO', 1, 1, 15, 14),
     ('aura_proteccion.jpg', 'Aura de Protección', 'Aumenta la defensa de todos los aliados en un área.', 3, 7, 'DEFENSIVA', 'ALIADO', 5, 5, 25, 15),
-
-    -- Habilidades de Apoyo
     ('bendicion_sagrada.jpg', 'Bendición Sagrada', 'Aumenta el ataque y la defensa mágica de los aliados.', 4, 8, 'APOYO', 'ALIADO', 5, 5, 40, 16),
     ('teletransportacion.jpg', 'Teletransportación', 'Teletransporta al jugador a un lugar seguro.', 2, 9, 'APOYO', 'JUGADOR', 1, 1, 90, 17),
     ('lluvia_curacion.jpg', 'Lluvia de Curación', 'Cura a todos los aliados en un área amplia.', 5, 10, 'APOYO', 'ALIADO', 6, 6, 35, 18);
 
-
 -- Insertar efectos de habilidades
 INSERT INTO habilidad_efecto (habilidad_id, efecto_id)
 VALUES
-    -- Golpe Crítico (habilidad_id = 1)
     (1, 1),  -- Golpe Crítico: Fuerza Mejorada
-
-    -- Bola de Fuego (habilidad_id = 2)
     (2, 10), -- Bola de Fuego: Quemadura
-
-    -- Rayo Helado (habilidad_id = 3)
     (3, 4),  -- Rayo Helado: Congelación
-
-    -- Escudo de Protección (habilidad_id = 4)
     (4, 3),  -- Escudo de Protección: Escudo de Protección
-
-    -- Cura Menor (habilidad_id = 5)
     (5, 5),  -- Cura Menor: Regeneración
-
-    -- Fortalecer (habilidad_id = 6)
     (6, 15), -- Fortalecer: Aura Sagrada
-
-    -- Bendición (habilidad_id = 7)
     (7, 9),  -- Bendición: Bendición Divina
-
-    -- Invisibilidad (habilidad_id = 8)
     (8, 11), -- Invisibilidad: Invisibilidad
-
-    -- Regeneración (habilidad_id = 9)
     (9, 5),  -- Regeneración: Regeneración
-
-    -- Corte Sombrío (habilidad_id = 10)
     (10, 1), -- Corte Sombrío: Fuerza Mejorada
-
-    -- Tormenta Eléctrica (habilidad_id = 11)
     (11, 12),-- Tormenta Eléctrica: Parálisis
-
-    -- Lanzamiento Dual (habilidad_id = 12)
     (12, 1), -- Lanzamiento Dual: Fuerza Mejorada
-
-    -- Escudo Divino (habilidad_id = 13)
     (13, 3), -- Escudo Divino: Escudo de Protección
-
-    -- Regeneración Rápida (habilidad_id = 14)
     (14, 5), -- Regeneración Rápida: Regeneración
-
-    -- Aura de Protección (habilidad_id = 15)
     (15, 15),-- Aura de Protección: Aura Sagrada
-
-    -- Bendición Sagrada (habilidad_id = 16)
     (16, 9), -- Bendición Sagrada: Bendición Divina
-
-    -- Teletransportación (habilidad_id = 17)
     (17, 11),-- Teletransportación: Invisibilidad
-
-    -- Lluvia de Curación (habilidad_id = 18)
     (18, 5); -- Lluvia de Curación: Regeneración
-
 
 -- Insertar habilidades de personajes
 INSERT INTO personaje_habilidad (personaje_id, habilidad_id, nivel_habilidad, ultimo_uso,probabilidad_fallo)
 VALUES
-    -- Aragorn (personaje_id = 1)
     (1, 1, 3, '2023-10-01 12:30:00',50),  -- Golpe Crítico (nivel 3)
     (1, 4, 2, '2023-10-01 12:35:00',50),  -- Escudo de Protección (nivel 2)
     (1, 7, 1, '2023-10-01 12:40:00',50),  -- Bendición (nivel 1)
-
-    -- Gandalf (personaje_id = 2)
     (2, 2, 4, '2023-10-02 13:30:00',50),  -- Bola de Fuego (nivel 4)
     (2, 5, 3, '2023-10-02 13:35:00',50),  -- Cura Menor (nivel 3)
     (2, 8, 2, '2023-10-02 13:40:00',50),  -- Invisibilidad (nivel 2)
-
-    -- Legolas (personaje_id = 3)
     (3, 3, 2, '2023-10-03 14:30:00',50),  -- Rayo Helado (nivel 2)
     (3, 6, 1, '2023-10-03 14:35:00',50),  -- Fortalecer (nivel 1)
     (3, 9, 3, '2023-10-03 14:40:00',50),  -- Regeneración (nivel 3)
-
-    -- Frodo (personaje_id = 4)
     (4, 4, 1, '2023-10-04 15:30:00',50),  -- Escudo de Protección (nivel 1)
     (4, 7, 2, '2023-10-04 15:35:00',50),  -- Bendición (nivel 2)
     (4, 10, 1, '2023-10-04 15:40:00',50), -- Corte Sombrío (nivel 1)
-
-    -- Gimli (personaje_id = 5)
     (5, 1, 5, '2023-10-05 16:30:00',50),  -- Golpe Crítico (nivel 5)
     (5, 12, 2, '2023-10-05 16:35:00',50), -- Lanzamiento Dual (nivel 2)
     (5, 15, 1, '2023-10-05 16:40:00',50); -- Aura de Protección (nivel 1)
-
-
-
 -- Insertar habilidades de monstruos
 INSERT INTO monstruo_habilidad (monstruo_id, habilidad_id, nivel_habilidad, probabilidad_uso,probabilidad_fallo)
 VALUES
-    -- Goblin (monstruo_id = 1)
     (1, 1, 2, 50, 50),  -- Goblin usa Golpe Crítico (nivel 2) con 50% de probabilidad
     (1, 10, 1, 30, 50), -- Goblin usa Corte Sombrío (nivel 1) con 30% de probabilidad
-
-    -- Ogro (monstruo_id = 2)
     (2, 1, 3, 70, 50),  -- Ogro usa Golpe Crítico (nivel 3) con 70% de probabilidad
     (2, 12, 2, 40, 50), -- Ogro usa Lanzamiento Dual (nivel 2) con 40% de probabilidad
-
-    -- Dragón (monstruo_id = 3)
     (3, 2, 4, 80, 50),  -- Dragón usa Bola de Fuego (nivel 4) con 80% de probabilidad
     (3, 3, 3, 60, 50),  -- Dragón usa Rayo Helado (nivel 3) con 60% de probabilidad
     (3, 11, 2, 50, 50), -- Dragón usa Tormenta Eléctrica (nivel 2) con 50% de probabilidad
-
-    -- Bandido (monstruo_id = 4)
     (4, 1, 2, 60, 50),  -- Bandido usa Golpe Crítico (nivel 2) con 60% de probabilidad
     (4, 10, 1, 40, 50), -- Bandido usa Corte Sombrío (nivel 1) con 40% de probabilidad
-
-    -- Lobo Salvaje (monstruo_id = 5)
     (5, 1, 1, 70, 50),  -- Lobo Salvaje usa Golpe Crítico (nivel 1) con 70% de probabilidad
-
-    -- Esqueleto Guerrero (monstruo_id = 6)
     (6, 1, 2, 50, 50),  -- Esqueleto Guerrero usa Golpe Crítico (nivel 2) con 50% de probabilidad
     (6, 12, 1, 30, 50), -- Esqueleto Guerrero usa Lanzamiento Dual (nivel 1) con 30% de probabilidad
-
-    -- Araña Gigante (monstruo_id = 7)
     (7, 10, 2, 60, 50), -- Araña Gigante usa Corte Sombrío (nivel 2) con 60% de probabilidad
     (7, 11, 1, 40, 50), -- Araña Gigante usa Tormenta Eléctrica (nivel 1) con 40% de probabilidad
-
-    -- Bandido Líder (monstruo_id = 8)
     (8, 1, 3, 80, 50),  -- Bandido Líder usa Golpe Crítico (nivel 3) con 80% de probabilidad
     (8, 12, 2, 50, 50), -- Bandido Líder usa Lanzamiento Dual (nivel 2) con 50% de probabilidad
-
-    -- Nigromante (monstruo_id = 9)
     (9, 2, 3, 70, 50),  -- Nigromante usa Bola de Fuego (nivel 3) con 70% de probabilidad
     (9, 3, 2, 50, 50),  -- Nigromante usa Rayo Helado (nivel 2) con 50% de probabilidad
-
-    -- Araña (monstruo_id = 10)
     (10, 10, 1, 60, 50); -- Araña usa Corte Sombrío (nivel 1) con 60% de probabilidad
-
 
 -- Insertar tipos de NPC
 INSERT INTO tipo_npc (nombre, descripcion)
@@ -735,52 +596,30 @@ VALUES
     ('Sacerdote', 'Un sacerdote que cura y bendice a los aventureros.'),
     ('Bardo', 'Un bardo que cuenta historias y ofrece entretenimiento.'),
     ('Cazador', 'Un cazador que ofrece misiones de cacería.');
-
-
-
+    
 -- Insertar NPCs
 INSERT INTO npc (nombre, descripcion, imagen, tipo_npc_id)
 VALUES
-    -- Aldeanos
     ('Juan el Granjero', 'Un granjero amable que necesita ayuda con sus cultivos.', 'juan_granjero.jpg', 1),
     ('María la Tejedora', 'Una tejedora que busca materiales para sus telares.', 'maria_tejedora.jpg', 1),
-
-    -- Mercaderes
     ('Luis el Mercader', 'Un mercader que vende objetos útiles para aventureros.', 'luis_mercader.jpg', 2),
     ('Ana la Comerciante', 'Una comerciante que ofrece productos exóticos.', 'ana_comerciante.jpg', 2),
-
-    -- Guardias
     ('Carlos el Guardia', 'Un guardia que protege la entrada de la ciudad.', 'carlos_guardia.jpg', 3),
     ('Sofía la Capitana', 'La capitana de la guardia, conocida por su valentía.', 'sofia_capitana.jpg', 3),
-
-    -- Magos
     ('Merlín el Sabio', 'Un mago anciano que conoce los secretos del mundo.', 'merlin_sabio.jpg', 4),
     ('Elena la Hechicera', 'Una hechicera poderosa que ofrece misiones mágicas.', 'elena_hechicera.jpg', 4),
-
-    -- Herreros
     ('Pedro el Herrero', 'Un herrero experto en forjar armas y armaduras.', 'pedro_herrero.jpg', 5),
     ('Lucía la Forjadora', 'Una forjadora que crea equipo de alta calidad.', 'lucia_forjadora.jpg', 5),
-
-    -- Brujas
     ('Morgana la Bruja', 'Una bruja que vive en el bosque y ofrece pociones.', 'morgana_bruja.jpg', 6),
     ('Helga la Alquimista', 'Una alquimista que busca ingredientes raros.', 'helga_alquimista.jpg', 6),
-
-    -- Exploradores
     ('Lucas el Explorador', 'Un explorador que conoce los rincones más oscuros del mundo.', 'lucas_explorador.jpg', 7),
     ('Isabel la Cartógrafa', 'Una cartógrafa que dibuja mapas detallados.', 'isabel_cartografa.jpg', 7),
-
-    -- Sacerdotes
     ('Padre Miguel', 'Un sacerdote que bendice a los aventureros.', 'padre_miguel.jpg', 8),
     ('Hermana Clara', 'Una monja que cura a los heridos.', 'hermana_clara.jpg', 8),
-
-    -- Bardos
     ('Roberto el Bardo', 'Un bardo que canta historias de héroes antiguos.', 'roberto_bardo.jpg', 9),
     ('Laura la Juglaresa', 'Una juglaresa que entretiene con sus trucos.', 'laura_juglaresa.jpg', 9),
-
-    -- Cazadores
     ('Diego el Cazador', 'Un cazador que rastrea bestias peligrosas.', 'diego_cazador.jpg', 10),
     ('Carmen la Rastreadora', 'Una rastreadora que conoce los hábitos de las criaturas.', 'carmen_rastreadora.jpg', 10);
-
 
 -- Insertar datos en la tabla misiones
 INSERT INTO misiones (nombre, descripcion, nivel_minimo, recompensa_almas, recompensa_experiencia, tiempo_limite)
@@ -806,208 +645,118 @@ VALUES
     ('Encuentra la lira dorada', 'Busca la lira perdida para el bardo Roberto.', 8, 360, 720, 250),
     ('Caza mayor', 'Caza una bestia peligrosa en el bosque.', 9, 420, 840, 270);
 
-
-
 -- Insertar recompensas de misiones
 INSERT INTO mision_objetos (mision_id, item_id, cantidad)
 VALUES
     -- Cosecha en peligro (mision_id = 1)
     (1, 21, 10),  -- Recolectar 10 unidades de Hierro
     (1, 24, 5),   -- Recolectar 5 unidades de Cuero
-
-    -- El mercader desaparecido (mision_id = 2)
     (2, 22, 3),   -- Recolectar 3 unidades de Piedra Mágica
     (2, 25, 2),   -- Recolectar 2 unidades de Cristal Mágico
-
-    -- Protege la ciudad (mision_id = 3)
     (3, 26, 8),   -- Recolectar 8 unidades de Madera de Roble
     (3, 27, 1),   -- Recolectar 1 unidad de Hueso de Dragón
-
-    -- El secreto del mago (mision_id = 4)
     (4, 22, 5),   -- Recolectar 5 unidades de Piedra Mágica
     (4, 25, 3),   -- Recolectar 3 unidades de Cristal Mágico
-
-    -- Forja legendaria (mision_id = 5)
     (5, 21, 20),  -- Recolectar 20 unidades de Hierro
     (5, 28, 5),   -- Recolectar 5 unidades de Plata
     (5, 29, 2),   -- Recolectar 2 unidades de Oro
-
-    -- La poción perdida (mision_id = 6)
     (6, 22, 4),   -- Recolectar 4 unidades de Piedra Mágica
     (6, 24, 6),   -- Recolectar 6 unidades de Cuero
-
-    -- Mapa del tesoro (mision_id = 7)
     (7, 25, 3),   -- Recolectar 3 unidades de Cristal Mágico
     (7, 26, 10),  -- Recolectar 10 unidades de Madera de Roble
-
-    -- Bendición divina (mision_id = 8)
     (8, 22, 2),   -- Recolectar 2 unidades de Piedra Mágica
     (8, 25, 1),   -- Recolectar 1 unidad de Cristal Mágico
-
-    -- Canción del héroe (mision_id = 9)
     (9, 24, 7),   -- Recolectar 7 unidades de Cuero
     (9, 26, 5),   -- Recolectar 5 unidades de Madera de Roble
-
-    -- Caza mayor (mision_id = 10)
     (10, 27, 3),  -- Recolectar 3 unidades de Hueso de Dragón
     (10, 28, 2);  -- Recolectar 2 unidades de Plata
-
-
+    
 -- Insertar misiones de personajes
 INSERT INTO personaje_mision (personaje_id, mision_id, fecha_inicio, fecha_fin, estado)
 VALUES
-    -- Aragorn (personaje_id = 1)
     (1, 1, '2023-10-01 12:00:00', '2023-10-01 13:00:00', 'COMPLETADA'),  -- Cosecha en peligro
     (1, 2, '2023-10-02 14:00:00', NULL, 'EN_PROGRESO'),                 -- El mercader desaparecido
-
-    -- Gandalf (personaje_id = 2)
     (2, 3, '2023-10-03 15:00:00', '2023-10-03 17:00:00', 'COMPLETADA'),  -- Protege la ciudad
     (2, 4, '2023-10-04 18:00:00', NULL, 'EN_PROGRESO'),                 -- El secreto del mago
-
-    -- Legolas (personaje_id = 3)
     (3, 5, '2023-10-05 19:00:00', NULL, 'EN_PROGRESO'),                 -- Forja legendaria
     (3, 6, '2023-10-06 20:00:00', '2023-10-06 21:00:00', 'COMPLETADA'),  -- La poción perdida
-
-    -- Frodo (personaje_id = 4)
     (4, 7, '2023-10-07 22:00:00', NULL, 'EN_PROGRESO'),                 -- Mapa del tesoro
     (4, 8, '2023-10-08 23:00:00', '2023-10-09 00:00:00', 'COMPLETADA'),  -- Bendición divina
-
-    -- Gimli (personaje_id = 5)
     (5, 9, '2023-10-09 10:00:00', NULL, 'EN_PROGRESO'),                 -- Canción del héroe
     (5, 10, '2023-10-10 11:00:00', '2023-10-10 12:00:00', 'FALLIDA');   -- Caza mayor
-
-
-
 -- Insertar misiones de NPCs
 INSERT INTO npc_mision (npc_id, mision_id)
 VALUES
-    -- Juan el Granjero (npc_id = 1)
     (1, 1),  -- Cosecha en peligro
     (1, 11), -- Misión adicional: Protege los cultivos
-
-    -- Luis el Mercader (npc_id = 2)
     (2, 2),  -- El mercader desaparecido
     (2, 12), -- Misión adicional: Recupera la mercancía perdida
-
-    -- Sofía la Capitana (npc_id = 3)
     (3, 3),  -- Protege la ciudad
     (3, 13), -- Misión adicional: Entrena a los reclutas
-
-    -- Merlín el Sabio (npc_id = 4)
     (4, 4),  -- El secreto del mago
     (4, 14), -- Misión adicional: Recupera el grimorio perdido
-
-    -- Pedro el Herrero (npc_id = 5)
     (5, 5),  -- Forja legendaria
     (5, 15), -- Misión adicional: Consigue minerales raros
-
-    -- Morgana la Bruja (npc_id = 6)
     (6, 6),  -- La poción perdida
     (6, 16), -- Misión adicional: Encuentra la flor mágica
-
-    -- Lucas el Explorador (npc_id = 7)
     (7, 7),  -- Mapa del tesoro
     (7, 17), -- Misión adicional: Explora las ruinas antiguas
-
-    -- Padre Miguel (npc_id = 8)
     (8, 8),  -- Bendición divina
     (8, 18), -- Misión adicional: Protege el templo
-
-    -- Roberto el Bardo (npc_id = 9)
     (9, 9),  -- Canción del héroe
     (9, 19), -- Misión adicional: Encuentra la lira dorada
-
-    -- Diego el Cazador (npc_id = 10)
     (10, 10), -- Caza mayor
     (10, 20); -- Misión adicional: Caza mayor
-
-
 -- Insertar monstruos en mapas
 INSERT INTO mapa_monstruos (mapa_id, monstruo_id, probabilidad_aparicion)
 VALUES
-    -- Bosque Oscuro (mapa_id = 1)
     (1, 1, 70),  -- Goblin (70% de probabilidad)
     (1, 5, 50),  -- Lobo Salvaje (50% de probabilidad)
     (1, 7, 30),  -- Araña Gigante (30% de probabilidad)
-
-    -- Montañas del Dragón (mapa_id = 2)
     (2, 2, 60),  -- Ogro (60% de probabilidad)
     (2, 3, 40),  -- Dragón (40% de probabilidad)
     (2, 6, 20),  -- Esqueleto Guerrero (20% de probabilidad)
-
-    -- Mazmorra de las Sombras (mapa_id = 3)
     (3, 6, 80),  -- Esqueleto Guerrero (80% de probabilidad)
     (3, 9, 50),  -- Nigromante (50% de probabilidad)
     (3, 10, 30), -- Araña (30% de probabilidad)
-
-    -- Desierto Ardiente (mapa_id = 4)
     (4, 4, 70),  -- Bandido (70% de probabilidad)
     (4, 8, 40),  -- Bandido Líder (40% de probabilidad)
     (4, 11, 20), -- Lobo Gigante (20% de probabilidad)
-
-    -- Ciudad de los Mercaderes (mapa_id = 5)
     (5, 4, 50),  -- Bandido (50% de probabilidad)
     (5, 8, 30),  -- Bandido Líder (30% de probabilidad)
-
-    -- Pantano Venenoso (mapa_id = 6)
     (6, 5, 60),  -- Lobo Salvaje (60% de probabilidad)
     (6, 7, 40),  -- Araña Gigante (40% de probabilidad)
     (6, 10, 20), -- Araña (20% de probabilidad)
-
-    -- Llanuras del Viento (mapa_id = 7)
     (7, 1, 50),  -- Goblin (50% de probabilidad)
     (7, 5, 30),  -- Lobo Salvaje (30% de probabilidad)
-
-    -- Cueva de Cristal (mapa_id = 8)
     (8, 6, 70),  -- Esqueleto Guerrero (70% de probabilidad)
     (8, 9, 50),  -- Nigromante (50% de probabilidad)
     (8, 12, 20), -- Lobo Sagrado (20% de probabilidad)
-
-    -- Ruinas Antiguas (mapa_id = 9)
     (9, 3, 60),  -- Dragón (60% de probabilidad)
     (9, 6, 40),  -- Esqueleto Guerrero (40% de probabilidad)
     (9, 13, 20), -- Janeiro (20% de probabilidad)
-
-    -- Isla del Misterio (mapa_id = 10)
     (10, 3, 50),  -- Dragón (50% de probabilidad)
     (10, 12, 30), -- Lobo Sagrado (30% de probabilidad)
     (10, 14, 20); -- Troll de Montaña (20% de probabilidad)
-
-
 INSERT INTO npc_producto (npc_id, item_id, precio_compra, precio_venta, cantidad_venta)
 VALUES
-    -- Aldeanos
     (1, 4, 10, 20, 5),  -- Juan el Granjero vende Poción de Vida
     (1, 2, 15, 30, 3),  -- Juan el Granjero vende Poción de Maná
     (2, 3, 20, 40, 4),  -- María la Tejedora vende Poción de Energía
     (2, 4, 25, 50, 2),  -- María la Tejedora vende Elixir de Vida
-    
-    -- Mercaderes
     (3, 5, 50, 100, 10), -- Luis el Mercader vende Elixir de Maná
     (3, 6, 60, 120, 8),  -- Luis el Mercader vende Poción de Fuerza
     (4, 7, 70, 140, 6),  -- Ana la Comerciante vende Poción de Defensa
     (4, 8, 80, 160, 4),  -- Ana la Comerciante vende Poción de Invisibilidad
-    
-    -- Guardias
     (5, 9, 30, 60, 7),   -- Carlos el Guardia vende Espada de Acero
     (5, 10, 40, 80, 5),  -- Carlos el Guardia vende Escudo de Madera
     (6, 11, 50, 100, 6), -- Sofía la Capitana vende Daga Afilada
     (6, 12, 60, 120, 4), -- Sofía la Capitana vende Armadura de Platino
-    
-    -- Magos
     (7, 13, 100, 200, 3), -- Merlín el Sabio vende Anillo de Poder
     (7, 14, 120, 240, 2), -- Merlín el Sabio vende Martillo de Guerra
     (8, 15, 150, 300, 1), -- Elena la Hechicera vende Capa del Mago
     (8, 16, 200, 400, 1), -- Elena la Hechicera vende Báculo Arcano
-    
-    -- Herreros
     (9, 17, 80, 160, 5),  -- Pedro el Herrero vende Botas de Velocidad
     (9, 18, 90, 180, 4),  -- Pedro el Herrero vende Cinturón de Resistencia
     (10, 19, 100, 200, 3), -- Lucía la Forjadora vende Guantes de Acero
     (10, 20, 110, 220, 2); -- Lucía la Forjadora vende Cinturón de Resistencia
-
-
-
-
-
-

@@ -1,10 +1,10 @@
-package ProyectoFinalLaureano.ProyectoFinalLaureano.models.objeto;
+package ProyectoFinalLaureano.ProyectoFinalLaureano.models.item;
 
 
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.estadisticasGenerales.EstadisticasGenerales;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.monstruo.drops.DropsObjetos;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.npc.tienda.NPCProducto;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.objeto.efecto.ItemEfecto;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.item.efecto.ItemEfecto;
 import jakarta.persistence.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
@@ -33,7 +33,7 @@ public class Item {
     private String nombre;
 
     //Nombre de los items
-    @Column(name = "imagen", nullable = false, length = 100)
+    @Column(name = "imagen", nullable = false)
     @Schema(description = "Imagen del ítem", example = "Poción_de_Vida.jpg")
     private String imagen;
 

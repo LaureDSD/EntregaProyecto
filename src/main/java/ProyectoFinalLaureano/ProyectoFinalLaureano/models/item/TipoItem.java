@@ -1,4 +1,4 @@
-package ProyectoFinalLaureano.ProyectoFinalLaureano.models.objeto;
+package ProyectoFinalLaureano.ProyectoFinalLaureano.models.item;
 
 import jakarta.persistence.*;
 import io.swagger.v3.oas.annotations.media.Schema;

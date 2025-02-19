@@ -51,8 +51,11 @@ public class SpringSecurity {
                                 "/swagger-resources/**",
                                 "/webjars/**").permitAll()
                         .requestMatchers("/auth/**").permitAll()
-                        .requestMatchers("/admin/**").hasAuthority("ADM")
-                        .requestMatchers("/api/**").hasAnyAuthority("USR", "ADM")
+                        .requestMatchers("/api/**").permitAll()
+                        //Indica la referecia de autoridad del tipo usuario, en este caso el id de la tabla.
+                        .requestMatchers("/api/**").hasAnyAuthority("1", "2","3")
+                        .requestMatchers("/mod/**").hasAnyAuthority("2", "3")
+                        .requestMatchers("/admin/**").hasAuthority("3")
                         .anyRequest().authenticated()
                 )
                 .authenticationProvider(authenticationProvider())
