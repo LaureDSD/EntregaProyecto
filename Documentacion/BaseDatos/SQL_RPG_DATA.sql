@@ -3,7 +3,7 @@ USE api_rpg_bd;
 -- Insertar tipos de usuarios
 INSERT INTO tipo_usuario (nombre, descripcion) VALUES
 ('USR', 'Acceso básico al juego, puede crear personajes y jugar.'),
-('SAD', 'Acceso medio, puede moderar contenido y usuarios.'),
+('SAD', 'Acceso medio, puede moderar contenido y usuarios.(ADMIN)'),
 ('ADM', 'Acceso total, puede gestionar todo el sistema.');
 
 

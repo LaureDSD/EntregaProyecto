@@ -4,6 +4,7 @@ import ProyectoFinalLaureano.ProyectoFinalLaureano.models.usuario.TipoUsuario;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.usuario.Usuario;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.repositories.usuarioRepository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,6 +24,7 @@ public class UsuarioService {
     }
 
     public Usuario setItem(Usuario o){
+        o.setContraseña(new BCryptPasswordEncoder().encode(o.getContraseña()));
         return  usuarioRepository.save(o);
     }
 

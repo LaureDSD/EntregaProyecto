@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/Informacionlogs")
+@RequestMapping("/admin/api/Informacionlogs")
 @Tag(name = "LogTransacciones", description = "API para gestionar logs de transacciones")
 public class LogTransaccionesController {
 
