@@ -33,7 +33,7 @@ public class EfectoEstadoController {
     @PutMapping("/{id}")
     @Operation(summary = "Actualizar un efecto de estado por ID")
     public ResponseEntity<Object> actualizar(@PathVariable Long id, @RequestBody EfectoEstado efectoEstadoActualizar){
-        if(efectoEstadoActualizar.getEfectoId().equals(id)) {
+        if(efectoEstadoActualizar.getEfecto_id().equals(id)) {
             return ResponseEntity.ok(efectoEstadoService.setItem(efectoEstadoActualizar));
         }else{
             return ResponseEntity.badRequest().body("El ID proporcionado no coincide con el ID del efecto.");

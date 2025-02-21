@@ -4,13 +4,9 @@ import ProyectoFinalLaureano.ProyectoFinalLaureano.models.estadisticasGenerales.
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.grupos.Grupo;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.grupos.LiderGrupo;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.log.LogPersonajeMonstruo;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.habilidades.PersonajeHabilidad;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.inventario.InventarioPersonaje;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.misiones.PersonajeMision;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.usuario.Usuario;
 import jakarta.persistence.*;
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -71,7 +67,7 @@ public class Personaje {
 
     //RelacionCon Estadisticas
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "estadisticasId")
+    @JoinColumn(name = "estadistica_id")
     @JsonIgnore // Excluir esta relación en la serialización JSON
     private EstadisticasGenerales estadisticas;
 
@@ -89,15 +85,13 @@ public class Personaje {
     private LogrosPersonaje logros;
 
     //Clase
-    @ManyToOne
-    @JoinColumn(name = "claseId")
+    @Column(name = "clase_id", nullable = false)
     @Schema(description = "Clase del persoanje asociado")
-    @JsonIgnore // Excluir esta relación en la serialización JSON
-    private ClasePersonaje clase_persoanje;
+    private Long clase_personaje;
 
     //Grupo
     @ManyToOne
-    @JoinColumn(name = "grupoId")
+    @JoinColumn(name = "grupo_id")
     @Schema(description = "Grupo del persoanje asociado")
     @JsonIgnore // Excluir esta relación en la serialización JSON
     private Grupo grupo;

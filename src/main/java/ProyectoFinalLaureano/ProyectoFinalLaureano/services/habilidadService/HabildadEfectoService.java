@@ -1,8 +1,7 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.services.habilidadService;
 
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.efectosEstados.EfectoEstado;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.habilidad.efectoEstado.HabilidadEfecto;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.habilidad.efectoEstado.HabilidadEfectoId;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.habilidad.HabilidadEfecto;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.repositories.habilidadRepository.HabilidadEfectoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,7 +17,7 @@ public class HabildadEfectoService {
         return  habilidadEfectoRepository.findAll();
     }
 
-    public HabilidadEfecto getByID(HabilidadEfectoId id){
+    public HabilidadEfecto getByID(Long id){
         return habilidadEfectoRepository.findById(id).orElse(null);
     }
 
@@ -26,11 +25,8 @@ public class HabildadEfectoService {
         return  habilidadEfectoRepository.save(o);
     }
 
-    public  void deleteByID(HabilidadEfectoId id){
+    public  void deleteByID(Long id){
         habilidadEfectoRepository.deleteById(id);
     }
 
-    public List<EfectoEstado> getByHabilidadId(Long habilidadId) {
-        return habilidadEfectoRepository.findByHabilidadId(habilidadId);
-    }
 }

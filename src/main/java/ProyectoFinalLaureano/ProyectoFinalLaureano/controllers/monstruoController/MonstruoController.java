@@ -1,9 +1,11 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.monstruoController;
 
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.monstruo.Monstruo;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.monstruo.drops.DropsObjetos;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.monstruo.DropsObjetos;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.monsrtuoDTO.DropsDTO;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.monsrtuoDTO.MonstruoDTO;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.services.estadisticasService.EstadisticasService;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.services.itemService.ItemService;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.monstruoService.MonstruosService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -21,6 +23,12 @@ public class MonstruoController {
     @Autowired
     private MonstruosService monstruosService;
 
+    @Autowired
+    private EstadisticasService estadisticasService;
+
+    @Autowired
+    private ItemService itemService;
+
     @GetMapping("/")
     @Operation(summary = "Obtener todos los monstruos")
     public List<MonstruoDTO> obtenerListaMonstruos() {
@@ -36,7 +44,7 @@ public class MonstruoController {
     @PutMapping("/{id}")
     @Operation(summary = "Actualizar un monstruo por ID")
     public ResponseEntity<Object> actualizarMonstruo(@PathVariable Long id, @RequestBody Monstruo monstruoActualizar) {
-        if (monstruoActualizar.getMonstruoId().equals(id)) {
+        if (monstruoActualizar.getMonstruo_id().equals(id)) {
             return ResponseEntity.ok(conversorMonstruoDTO(monstruosService.setItem(monstruoActualizar)));
         } else {
             return ResponseEntity.badRequest().body("El ID proporcionado no coincide con el ID del monstruo.");
@@ -56,34 +64,34 @@ public class MonstruoController {
     }
 
     // Conversor Lista
-    public static List<MonstruoDTO> conversorListaMonstruoDTO(List<Monstruo> l) {
-        return l.stream().map(MonstruoController::conversorMonstruoDTO).toList();
+    public  List<MonstruoDTO> conversorListaMonstruoDTO(List<Monstruo> l) {
+        return l.stream().map(this::conversorMonstruoDTO).toList();
     }
 
     // Conversor Unico DTO
-    public static MonstruoDTO conversorMonstruoDTO(Monstruo m) {
+    public  MonstruoDTO conversorMonstruoDTO(Monstruo m) {
         MonstruoDTO monstruoDTO = new MonstruoDTO();
-        monstruoDTO.setId(m.getMonstruoId());
+        monstruoDTO.setId(m.getMonstruo_id());
         monstruoDTO.setImagen(m.getImagen());
         monstruoDTO.setNombre(m.getNombre());
         monstruoDTO.setDescripcion(m.getDescripcion());
         monstruoDTO.setAlmas(m.getAlmasOtrogadas());
         monstruoDTO.setExperiencia(m.getExperienciaOtorgada());
-        monstruoDTO.setEstadisticas(m.getEstadisticas());
+        monstruoDTO.setEstadisticas( m.getEstadisticas());
         monstruoDTO.setDrops(conversorListaDropsDTO(m.getDrops()));
         return monstruoDTO;
     }
 
     // Conversor Lista Drops
-    public static List<DropsDTO> conversorListaDropsDTO(List<DropsObjetos> l) {
-        return l.stream().map(MonstruoController::conversorDropsDTO).toList();
+    public  List<DropsDTO> conversorListaDropsDTO(List<DropsObjetos> l) {
+        return l.stream().map(this::conversorDropsDTO).toList();
     }
 
     // Conversor Unico Drops
-    private static DropsDTO conversorDropsDTO(DropsObjetos dropsObjetos) {
+    private  DropsDTO conversorDropsDTO(DropsObjetos dropsObjetos) {
         DropsDTO dropsDTO = new DropsDTO();
-        dropsDTO.setItem(dropsObjetos.getItem());
-        dropsDTO.setProbabilidad(dropsObjetos.getProbabilidad());
+        dropsDTO.setItem( itemService.getByID(dropsObjetos.getItem()));
+        dropsDTO.setProbabilidad( dropsObjetos.getProbabilidad());
         return dropsDTO;
     }
 }

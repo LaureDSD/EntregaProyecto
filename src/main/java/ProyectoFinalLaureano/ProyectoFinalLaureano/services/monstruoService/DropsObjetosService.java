@@ -1,7 +1,6 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.services.monstruoService;
 
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.monstruo.drops.DropsObjetos;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.monstruo.drops.DropsObjetosId;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.monstruo.DropsObjetos;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.repositories.monstruoRepository.DropsObjetosRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,7 +16,7 @@ public class DropsObjetosService {
         return  dropsObjetosRepository.findAll();
     }
 
-    public DropsObjetos getByID(DropsObjetosId id){
+    public DropsObjetos getByID(Long id){
         return dropsObjetosRepository.findById(id).orElse(null);
     }
 
@@ -25,7 +24,7 @@ public class DropsObjetosService {
         return  dropsObjetosRepository.save(o);
     }
 
-    public  void deleteByID(DropsObjetosId id){
+    public  void deleteByID(Long id){
         dropsObjetosRepository.deleteById(id);
     }
 }

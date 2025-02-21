@@ -1,7 +1,7 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.objetoController;
 
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.item.TipoItem;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.services.objetoService.TipoItemService;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.services.itemService.TipoItemService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;

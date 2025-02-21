@@ -2,7 +2,6 @@ package ProyectoFinalLaureano.ProyectoFinalLaureano.models.npc;
 
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.log.LogTransacciones;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.mision.Mision;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.npc.tienda.NPCProducto;
 import jakarta.persistence.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;

@@ -1,7 +1,6 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.services.persoanjeService;
 
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.misiones.PersonajeMision;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.misiones.PersonajeMisionId;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.PersonajeMision;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.repositories.personajeRepository.PersonajeMisionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,7 +16,7 @@ public class PersonajeMisionService {
         return  personajeMisionRepository.findAll();
     }
 
-    public PersonajeMision getByID(PersonajeMisionId id){
+    public PersonajeMision getByID(Long id){
         return personajeMisionRepository.findById(id).orElse(null);
     }
 
@@ -25,11 +24,8 @@ public class PersonajeMisionService {
         return  personajeMisionRepository.save(o);
     }
 
-    public  void deleteByID(PersonajeMisionId id){
+    public  void deleteByID(Long id){
         personajeMisionRepository.deleteById(id);
     }
 
-    public List<PersonajeMision> getByPersonajeId(Long personajeId) {
-        return personajeMisionRepository.getByPersonajeId(personajeId);
-    }
 }

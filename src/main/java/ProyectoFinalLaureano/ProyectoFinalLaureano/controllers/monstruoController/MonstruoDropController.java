@@ -1,7 +1,6 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.monstruoController;
 
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.monstruo.drops.DropsObjetos;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.monstruo.drops.DropsObjetosId;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.monstruo.DropsObjetos;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.monstruoService.DropsObjetosService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -27,14 +26,14 @@ public class MonstruoDropController {
 
     @GetMapping("/{monstruoId}/drop/{dropId}")
     @Operation(summary = "Obtener un drop de objeto específico por ID de monstruo y ID de drop")
-    public DropsObjetos obtenerDropObjeto(@PathVariable Long monstruoId, @PathVariable Long dropId) {
-        return dropsObjetosService.getByID(new DropsObjetosId(monstruoId, dropId));
+    public DropsObjetos obtenerDropObjeto( @PathVariable Long id) {
+        return dropsObjetosService.getByID(id);
     }
 
     @PutMapping("/{monstruoId}/drop/{dropId}")
     @Operation(summary = "Actualizar un drop de objeto por ID de monstruo y ID de drop")
-    public ResponseEntity<Object> actualizarDropObjeto(@PathVariable Long monstruoId, @PathVariable Long dropId, @RequestBody DropsObjetos dropActualizar) {
-        if (dropActualizar.getId().equals(new DropsObjetosId(monstruoId, dropId))) {
+    public ResponseEntity<Object> actualizarDropObjeto(@PathVariable Long id,@RequestBody DropsObjetos dropActualizar) {
+        if (dropActualizar.getMonstruo_item_id().equals(id)) {
             return ResponseEntity.ok(dropsObjetosService.setItem(dropActualizar));
         } else {
             return ResponseEntity.badRequest().body("El ID proporcionado no coincide con el ID del drop.");
@@ -49,7 +48,7 @@ public class MonstruoDropController {
 
     @DeleteMapping("/{monstruoId}/drop/{dropId}")
     @Operation(summary = "Eliminar un drop de objeto por ID de monstruo y ID de drop")
-    public void borrarDropObjeto(@PathVariable Long monstruoId, @PathVariable Long dropId) {
-        dropsObjetosService.deleteByID(new DropsObjetosId(monstruoId, dropId));
+    public void borrarDropObjeto(@PathVariable Long id) {
+        dropsObjetosService.deleteByID(id);
     }
 }

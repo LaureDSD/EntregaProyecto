@@ -33,7 +33,7 @@ public class EstadisticasController {
     @PutMapping("/{id}")
     @Operation(summary = "Actualizar una estadística general por ID")
     public ResponseEntity<Object> actualizar(@PathVariable Long id, @RequestBody EstadisticasGenerales estadisticaActualizar){
-        if(estadisticaActualizar.getEstadisticasId().equals(id)) {
+        if(estadisticaActualizar.getEstadistica_id().equals(id)) {
             return ResponseEntity.ok(estadisticasService.setItem(estadisticaActualizar));
         }else{
             return ResponseEntity.badRequest().body("El ID proporcionado no coincide con el ID de las estadísticas.");

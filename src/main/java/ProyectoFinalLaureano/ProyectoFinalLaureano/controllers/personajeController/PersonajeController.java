@@ -1,13 +1,20 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.personajeController;
 
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.item.Item;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.InventarioPersonaje;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.Personaje;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.personajeDTO.InventarioDTO;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.personajeDTO.PersonajeDTO;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.services.itemService.ItemService;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.services.persoanjeService.ClasePersonajeService;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.services.persoanjeService.InventarioPersonajeService;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.persoanjeService.PersoanjeService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -17,6 +24,15 @@ public class PersonajeController {
 
     @Autowired
     private PersoanjeService personajeService;
+
+    @Autowired
+    private ClasePersonajeService clasePersonajeService;
+
+    @Autowired
+    private InventarioPersonajeService inventarioPersonajeService;
+
+    @Autowired
+    private ItemService itemService;
 
     // CRUD PERSONAJE
 
@@ -52,27 +68,42 @@ public class PersonajeController {
     }
 
     // Conversor de lista de Personaje a lista de PersonajeDTO
-    public static List<PersonajeDTO> conversorListaPersonajeDTO(List<Personaje> listaPersonajes) {
+    public List<PersonajeDTO> conversorListaPersonajeDTO(List<Personaje> listaPersonajes) {
         return listaPersonajes.stream()
-                .map(PersonajeController::conversorPersonajeDTO)
+                .map(this::conversorPersonajeDTO)
                 .toList();
     }
 
     // Conversor de Personaje a PersonajeDTO
-    public static PersonajeDTO conversorPersonajeDTO(Personaje personaje) {
+    public  PersonajeDTO conversorPersonajeDTO(Personaje personaje) {
         PersonajeDTO personajeDTO = new PersonajeDTO();
         personajeDTO.setId(personaje.getPersonaje_id());
         personajeDTO.setImagen(personaje.getImagen_modelo());
         personajeDTO.setNombre(personaje.getNombre());
         personajeDTO.setCreacion(personaje.getFecha_creacion());
-        personajeDTO.setClase(personaje.getClase_persoanje());
+        personajeDTO.setClase( clasePersonajeService.getByID(personaje.getClase_personaje()));
         personajeDTO.setNivel(personaje.getNivel());
         personajeDTO.setXp_acumulada(personaje.getXp_acumulada());
         personajeDTO.setAlmas(personaje.getAlmas());
         personajeDTO.setLogros(personaje.getLogros());
         personajeDTO.setCapacidad_inventario(personaje.getCapacidad_inventario());
-        personajeDTO.setInventario(InventarioController.conversorListaInventarioDTO(personaje.getInventario()));
+        personajeDTO.setInventario( inventarioDTO( personaje.getInventario()) );
         personajeDTO.setEstadisticas(personaje.getEstadisticas());
         return personajeDTO;
     }
+
+    public List<InventarioDTO> inventarioDTO(List<InventarioPersonaje> ip){
+        List<InventarioDTO> lsdto  = new ArrayList<>();
+        InventarioDTO i = new InventarioDTO();
+        ip.forEach( e -> {
+                i.setItem( itemService.getByID(e.getItem()));
+                i.setCantidad(e.getCantidad());
+                i.setCantidad(e.getCantidad());
+                i.setEquipado(e.isEquipado());
+                lsdto.add(i);
+            }
+        );
+        return lsdto;
+    }
+
 }

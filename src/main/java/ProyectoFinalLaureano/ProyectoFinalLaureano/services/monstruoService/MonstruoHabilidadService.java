@@ -1,7 +1,6 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.services.monstruoService;
 
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.monstruo.habilidades.MonstruoHabilidad;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.monstruo.habilidades.MonstruoHabilidadId;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.monstruo.MonstruoHabilidad;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.repositories.monstruoRepository.MonstruoHabilidadRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,7 +17,7 @@ public class MonstruoHabilidadService {
         return  monstruoHabilidadRepository.findAll();
     }
 
-    public MonstruoHabilidad getByID(MonstruoHabilidadId id){
+    public MonstruoHabilidad getByID(Long id){
         return monstruoHabilidadRepository.findById(id).orElse(null);
     }
 
@@ -26,12 +25,8 @@ public class MonstruoHabilidadService {
         return  monstruoHabilidadRepository.save(o);
     }
 
-    public  void deleteByID(MonstruoHabilidadId id){
+    public  void deleteByID(Long id){
         monstruoHabilidadRepository.deleteById(id);
     }
 
-
-    public List<MonstruoHabilidad> getByMonstruoId(Long monstruoId) {
-        return monstruoHabilidadRepository.getByMonstruoId(monstruoId);
-    }
 }

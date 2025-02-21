@@ -1,7 +1,6 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.services.mapaService;
 
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.mapa.efectosEstados.MapaEfecto;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.mapa.efectosEstados.MapaEfectoId;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.mapa.MapaEfecto;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.repositories.mapaRepository.MapaEfectoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,7 +16,7 @@ public class MapaEfectoService {
         return  mapaEfectoRepository.findAll();
     }
 
-    public MapaEfecto getByID(MapaEfectoId id){
+    public MapaEfecto getByID(Long id){
         return mapaEfectoRepository.findById(id).orElse(null);
     }
 
@@ -25,11 +24,8 @@ public class MapaEfectoService {
         return  mapaEfectoRepository.save(o);
     }
 
-    public  void deleteByID(MapaEfectoId id){
+    public  void deleteByID(Long id){
         mapaEfectoRepository.deleteById(id);
     }
 
-    public List<MapaEfecto> getByMapaId(Long idMapa) {
-        return mapaEfectoRepository.getByMapaId(idMapa);
-    }
 }

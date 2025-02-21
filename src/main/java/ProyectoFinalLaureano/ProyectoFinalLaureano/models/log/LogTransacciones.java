@@ -28,22 +28,25 @@ public class LogTransacciones {
     private Long transaccion_id;
 
     //Persoanje de la realcion N:1
-    @ManyToOne
-    @JoinColumn(name = "personaje_id", nullable = false)
+    //@ManyToOne
+    //@JoinColumn(name = "personaje_id", nullable = false)
+    @Column(name = "personaje_id", nullable = false)
     @Schema(description = "Personaje asociado a la transacción")
-    private Personaje personaje;
+    private Long personaje;
 
     //NPC de la relacion N:1
-    @ManyToOne
-    @JoinColumn(name = "npc_id", nullable = false)
+    //@ManyToOne
+    //@JoinColumn(name = "npc_id", nullable = false)
+    @Column(name = "npc_id", nullable = false)
     @Schema(description = "NPC asociado a la transacción")
-    private NPC npc;
+    private Long npc;
 
     //Item dela realcion N:1
-    @ManyToOne
-    @JoinColumn(name = "item_id", nullable = false)
+    //@ManyToOne
+    //@JoinColumn(name = "item_id", nullable = false)
+    @Column(name = "item_id", nullable = false)
     @Schema(description = "Ítem involucrado en la transacción")
-    private Item item;
+    private Long item;
 
     //Tipo de la transacion
     @Enumerated(EnumType.STRING)

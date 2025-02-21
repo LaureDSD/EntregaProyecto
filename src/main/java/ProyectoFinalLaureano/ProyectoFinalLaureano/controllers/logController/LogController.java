@@ -12,14 +12,14 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/templates/admin/public/admin/api/Informacionlogs")
+@RequestMapping("/admin/Informacionlogs")
 @Tag(name = "LogUsuario", description = "API para gestionar logs de usuarios")
 public class LogController {
 
     @Autowired
     private LogUsuarioService logService;
 
-    @GetMapping("/usuario/")
+    @GetMapping("/logusuario/")
     @Operation(summary = "Obtener todos los logs de usuarios o filtrar por tipo de log")
     public List<LogUsuario> obtenerLista(@RequestParam(required = false) TipoLog tipoLog) {
         if (tipoLog == null) {

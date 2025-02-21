@@ -1,6 +1,5 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.models.log;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.log.enums.TipoLog;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.usuario.Usuario;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -25,10 +24,11 @@ public class LogUsuario {
     private Long logId;
 
     // Usuario relacionado
-    @ManyToOne
-    @JoinColumn(name = "usuarioId")
+    //@ManyToOne
+    //@JoinColumn(name = "usuarioId")
+    @Column(name = "usuario_id", nullable = false)
     @Schema(description = "Usuario relacionado con el log", example = "123")
-    private Usuario usuario;
+    private Long usuario;
 
     //Tipo de log
     @Enumerated(EnumType.STRING)

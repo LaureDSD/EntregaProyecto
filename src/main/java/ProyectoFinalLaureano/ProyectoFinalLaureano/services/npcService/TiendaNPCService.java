@@ -1,7 +1,6 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.services.npcService;
 
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.npc.tienda.NPCProducto;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.npc.tienda.NPCProductoId;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.npc.NPCProducto;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.repositories.npcRepository.TiendaNPCRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,7 +16,7 @@ public class TiendaNPCService {
         return  tiendaNPCRepository.findAll();
     }
 
-    public NPCProducto getByID(NPCProductoId id){
+    public NPCProducto getByID(Long id){
         return tiendaNPCRepository.findById(id).orElse(null);
     }
 
@@ -25,11 +24,8 @@ public class TiendaNPCService {
         return  tiendaNPCRepository.save(o);
     }
 
-    public  void deleteByID(NPCProductoId id){
+    public  void deleteByID(Long id){
         tiendaNPCRepository.deleteById(id);
     }
 
-    public List<NPCProducto> getByNpcId(Long npcId) {
-        return  tiendaNPCRepository.findByNpcId(npcId);
-    }
 }

@@ -33,7 +33,7 @@ public class MonstruoTipoController {
     @PutMapping("/tipo/{id}")
     @Operation(summary = "Actualizar un tipo de monstruo por ID")
     public ResponseEntity<Object> actualizarTipoMonstruo(@PathVariable Long id, @RequestBody TipoMonstruo tipoMonstruoActualizar) {
-        if (tipoMonstruoActualizar.getTipoMonstruoId().equals(id)) {
+        if (tipoMonstruoActualizar.getTipo_monstruo_id().equals(id)) {
             return ResponseEntity.ok(tipoMonstruoService.setItem(tipoMonstruoActualizar));
         } else {
             return ResponseEntity.badRequest().body("El ID proporcionado no coincide con el ID del tipo de monstruo.");

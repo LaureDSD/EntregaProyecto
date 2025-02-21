@@ -1,7 +1,6 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.services.persoanjeService;
 
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.inventario.InventarioPersonaje;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.inventario.InventarioPersonajeId;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.InventarioPersonaje;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.repositories.personajeRepository.InventarioPersonajeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,7 +17,7 @@ public class InventarioPersonajeService {
         return  inventarioPersonajeRepository.findAll();
     }
 
-    public InventarioPersonaje getByID(InventarioPersonajeId id){
+    public InventarioPersonaje getByID(Long id){
         return inventarioPersonajeRepository.findById(id).orElse(null);
     }
 
@@ -26,11 +25,8 @@ public class InventarioPersonajeService {
         return  inventarioPersonajeRepository.save(o);
     }
 
-    public  void deleteByID(InventarioPersonajeId id){
+    public  void deleteByID(Long id){
         inventarioPersonajeRepository.deleteById(id);
     }
 
-    public List<InventarioPersonaje> getByPersonajeId(Long personajeId) {
-        return inventarioPersonajeRepository.getByPersonajeId(personajeId);
-    }
 }

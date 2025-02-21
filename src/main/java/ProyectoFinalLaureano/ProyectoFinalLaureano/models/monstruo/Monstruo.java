@@ -1,9 +1,7 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.models.monstruo;
 
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.estadisticasGenerales.EstadisticasGenerales;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.mapa.monstruos.MapaMonstruo;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.monstruo.drops.DropsObjetos;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.monstruo.habilidades.MonstruoHabilidad;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.mapa.MapaMonstruo;
 import jakarta.persistence.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
@@ -26,7 +24,7 @@ public class Monstruo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Schema(description = "ID único del monstruo", example = "1")
-    private Long monstruoId;
+    private Long monstruo_id;
 
     //Nombre del monstruo
     @Column(name = "nombre", nullable = false, length = 100)
@@ -34,11 +32,12 @@ public class Monstruo {
     private String nombre;
 
     //Tipo de omonstruo
-    @ManyToOne
-    @JoinColumn(name = "tipoMonstruoId", nullable = false)
-    @Schema(description = "Tipo de monstruo asociado")
-    @JsonIgnore // Excluir esta relación en la serialización JSON
-    private TipoMonstruo tipo_monstruo;
+    //@ManyToOne
+    //@JoinColumn(name = "tipo_monstruo_id", nullable = false)
+    //@JsonIgnore // Excluir esta relación en la serialización JSON
+    @Column(name = "tipo _monstruo_id")
+    @Schema(description = "Tipo del monstruo", example = "1")
+    private Long tipo_monstruo;
 
     //Nivel del mosntruo
     @Column(name = "nivel")
@@ -57,8 +56,10 @@ public class Monstruo {
 
     //RelacionCon Estadisticas
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "estadisticas_id", referencedColumnName = "estadisticasId")
+    @JoinColumn(name = "estadistica_id", referencedColumnName = "estadistica_id")
     @JsonIgnore // Excluir esta relación en la serialización JSON
+   // @Column(name = "estadistica_id", length = 255)
+    @Schema(description = "Id de las estadisticas del mosntruo", example = "2")
     private EstadisticasGenerales estadisticas;
 
     //Almas que otorga

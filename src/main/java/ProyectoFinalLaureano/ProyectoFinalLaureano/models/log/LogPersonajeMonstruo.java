@@ -27,14 +27,16 @@ public class LogPersonajeMonstruo {
     private Long registroId;
 
     //Persoanojae registrado
-    @ManyToOne
-    @JoinColumn(name = "personaje_id", nullable = false)
-    private Personaje personaje;
+    //@ManyToOne
+    //@JoinColumn(name = "personaje_id", nullable = false)
+    @Column(name = "personaje_id", nullable = false)
+    private Long personaje;
 
     //Monstruo registrado
-    @ManyToOne
-    @JoinColumn(name = "monstruo_id", nullable = false)
-    private Monstruo monstruo;
+    //@ManyToOne
+    //@JoinColumn(name = "monstruo_id", nullable = false)
+    @Column(name = "monstruo_id", nullable = false)
+    private Long monstruo;
 
     //Fecha de caza
     @Column(name = "fecha", nullable = false)
@@ -49,7 +51,7 @@ public class LogPersonajeMonstruo {
     private Integer danoRealizado;
 
     //Dano max recivido
-    @Column(name = "dano_recivido", nullable = false)
+    @Column(name = "dano_recibido", nullable = false)
     private Integer danoRecivido;
 
     //Experiencia recivida

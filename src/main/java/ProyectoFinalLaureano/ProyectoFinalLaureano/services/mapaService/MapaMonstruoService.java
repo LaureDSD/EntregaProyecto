@@ -1,8 +1,6 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.services.mapaService;
 
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.mapa.monstruos.MapaMonstruo;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.mapa.monstruos.MapaMonstruoId;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.monstruo.TipoMonstruo;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.mapa.MapaMonstruo;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.repositories.mapaRepository.MapaMonstruoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +17,7 @@ public class MapaMonstruoService {
         return  monstruoRepository.findAll();
     }
 
-    public MapaMonstruo getByID(MapaMonstruoId id){
+    public MapaMonstruo getByID(Long id){
         return monstruoRepository.findById(id).orElse(null);
     }
 
@@ -27,11 +25,8 @@ public class MapaMonstruoService {
         return  monstruoRepository.save(o);
     }
 
-    public  void deleteByID(MapaMonstruoId id){
+    public  void deleteByID(Long id){
         monstruoRepository.deleteById(id);
     }
 
-    public List<MapaMonstruo> getByMapaId(Long idMapa) {
-        return monstruoRepository.getByMapaId(idMapa);
-    }
 }

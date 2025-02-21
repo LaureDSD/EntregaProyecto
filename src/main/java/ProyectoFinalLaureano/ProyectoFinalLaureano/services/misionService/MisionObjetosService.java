@@ -1,7 +1,6 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.services.misionService;
 
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.mision.recompensas.MisionObjetos;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.mision.recompensas.MisionObjetoId;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.mision.MisionObjetos;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.repositories.misionRepository.MisionObjetoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,7 +16,7 @@ public class MisionObjetosService {
         return  misionObjetoRepository.findAll();
     }
 
-    public MisionObjetos getByID(MisionObjetoId id){
+    public MisionObjetos getByID(Long id){
         return misionObjetoRepository.findById(id).orElse(null);
     }
 
@@ -25,11 +24,8 @@ public class MisionObjetosService {
         return  misionObjetoRepository.save(o);
     }
 
-    public  void deleteByID(MisionObjetoId id){
+    public  void deleteByID(Long id){
         misionObjetoRepository.deleteById(id);
     }
 
-    public List<MisionObjetos> getByMisionId(Long id) {
-        return misionObjetoRepository.getByMisionId(id);
-    }
 }

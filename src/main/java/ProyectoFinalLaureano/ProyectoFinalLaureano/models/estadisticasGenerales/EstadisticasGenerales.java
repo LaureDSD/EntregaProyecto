@@ -30,9 +30,9 @@ public class EstadisticasGenerales {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Schema(description = "ID único de las estadísticas generales.", example = "1")
-    private Long estadisticasId;
+    private Long estadistica_id;
 
-    //Vida base de todo
+
     @Schema(description = "Vida base de la entidad.", example = "100")
     private Integer vida;
 

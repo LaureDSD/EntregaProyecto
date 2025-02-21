@@ -1,8 +1,8 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.personajeController;
 
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.inventario.InventarioPersonaje;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.inventario.InventarioPersonajeId;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.InventarioPersonaje;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.personajeDTO.InventarioDTO;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.services.itemService.ItemService;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.persoanjeService.InventarioPersonajeService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -20,28 +20,26 @@ public class InventarioController {
     @Autowired
     private InventarioPersonajeService inventarioPersonajeService;
 
+    @Autowired
+    private ItemService itemService;
+
     @GetMapping("/inventario/")
     @Operation(summary = "Obtener todos los inventarios de personajes")
     public List<InventarioDTO> obtenerListaInventarioPersonajes() {
         return conversorListaInventarioDTO(inventarioPersonajeService.getAll());
     }
 
-    @GetMapping("/inventario/{personajeId}")
-    @Operation(summary = "Obtener el inventario de un personaje específico")
-    public List<InventarioDTO> obtenerListaInventarioPersonaje(@PathVariable Long personajeId) {
-        return conversorListaInventarioDTO(inventarioPersonajeService.getByPersonajeId(personajeId));
-    }
 
     @GetMapping("/{personajeId}/inventario/{itemId}")
     @Operation(summary = "Obtener un ítem específico del inventario de un personaje")
-    public InventarioDTO obtenerInventarioPersonaje(@PathVariable Long personajeId, @PathVariable Long itemId) {
-        return conversorInventarioDTO(inventarioPersonajeService.getByID(new InventarioPersonajeId(personajeId, itemId)));
+    public InventarioDTO obtenerInventarioPersonaje(@PathVariable Long id) {
+        return conversorInventarioDTO(inventarioPersonajeService.getByID(id));
     }
 
     @PutMapping("/{personajeId}/inventario/{itemId}")
     @Operation(summary = "Actualizar un ítem en el inventario de un personaje")
-    public ResponseEntity<Object> actualizarInventarioPersonaje(@PathVariable Long personajeId, @PathVariable Long itemId, @RequestBody InventarioPersonaje inventarioActualizar) {
-        if (inventarioActualizar.getId().equals(new InventarioPersonajeId(personajeId, itemId))) {
+    public ResponseEntity<Object> actualizarInventarioPersonaje(@PathVariable Long id, @RequestBody InventarioPersonaje inventarioActualizar) {
+        if (inventarioActualizar.getPersonaje_inventario_id().equals(id)) {
             return ResponseEntity.ok(conversorInventarioDTO(inventarioPersonajeService.setItem(inventarioActualizar)));
         } else {
             return ResponseEntity.badRequest().body("El ID proporcionado no coincide con el ID del inventario.");
@@ -56,19 +54,19 @@ public class InventarioController {
 
     @DeleteMapping("/{personajeId}/inventario/{itemId}")
     @Operation(summary = "Eliminar un ítem del inventario de un personaje")
-    public void borrarInventarioPersonaje(@PathVariable Long personajeId, @PathVariable Long itemId) {
-        inventarioPersonajeService.deleteByID(new InventarioPersonajeId(personajeId, itemId));
+    public void borrarInventarioPersonaje(@PathVariable Long id) {
+        inventarioPersonajeService.deleteByID(id);
     }
 
     // Conversor Lista
-    public static List<InventarioDTO> conversorListaInventarioDTO(List<InventarioPersonaje> l) {
-        return l.stream().map(InventarioController::conversorInventarioDTO).toList();
+    public  List<InventarioDTO> conversorListaInventarioDTO(List<InventarioPersonaje> l) {
+        return l.stream().map(this::conversorInventarioDTO).toList();
     }
 
     // Conversor Unico
-    private static InventarioDTO conversorInventarioDTO(InventarioPersonaje inventarioPersonaje) {
+    private  InventarioDTO conversorInventarioDTO(InventarioPersonaje inventarioPersonaje) {
         InventarioDTO inventarioDTO = new InventarioDTO();
-        inventarioDTO.setItem(inventarioPersonaje.getItem());
+        inventarioDTO.setItem( itemService.getByID(inventarioPersonaje.getItem()));
         inventarioDTO.setCantidad(inventarioPersonaje.getCantidad());
         inventarioDTO.setFecha_obtencion(inventarioPersonaje.getFecha_obtencion());
         return inventarioDTO;

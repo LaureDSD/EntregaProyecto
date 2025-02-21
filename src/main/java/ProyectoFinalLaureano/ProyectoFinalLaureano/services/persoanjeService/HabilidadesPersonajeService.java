@@ -1,7 +1,6 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.services.persoanjeService;
 
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.habilidades.PersonajeHabilidad;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.habilidades.PersonajeHabilidadId;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.PersonajeHabilidad;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.repositories.personajeRepository.HabilidadesPersonajeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,7 +16,7 @@ public class HabilidadesPersonajeService {
         return  habilidadesPersonajeRepository.findAll();
     }
 
-    public PersonajeHabilidad getByID(PersonajeHabilidadId id){
+    public PersonajeHabilidad getByID(Long id){
         return habilidadesPersonajeRepository.findById(id).orElse(null);
     }
 
@@ -25,11 +24,9 @@ public class HabilidadesPersonajeService {
         return  habilidadesPersonajeRepository.save(o);
     }
 
-    public  void deleteByID(PersonajeHabilidadId id){
+    public  void deleteByID(Long id){
         habilidadesPersonajeRepository.deleteById(id);
     }
 
-    public List<PersonajeHabilidad> getByPersonajeId(Long id) {
-        return  habilidadesPersonajeRepository.getByPersonajeId(id);
-    }
+
 }

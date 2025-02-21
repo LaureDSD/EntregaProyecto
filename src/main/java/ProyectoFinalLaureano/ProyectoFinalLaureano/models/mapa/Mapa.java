@@ -1,7 +1,5 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.models.mapa;
 
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.mapa.efectosEstados.MapaEfecto;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.mapa.monstruos.MapaMonstruo;
 import jakarta.persistence.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
@@ -51,6 +49,7 @@ public class Mapa {
     @Schema(description = "Nivel recomendado para el mapa", example = "1")
     private int nivel_recomendado;
 
+    /*
     // Relación con MapaEfecto 1:N
     @OneToMany(mappedBy = "mapa", cascade = CascadeType.ALL)
     @JsonIgnore // Excluir esta relación en la serialización JSON
@@ -61,5 +60,5 @@ public class Mapa {
     @OneToMany(mappedBy = "mapa", cascade = CascadeType.ALL)
     @Schema(description = "Monstruos que pueden aparecer en este mapa")
     @JsonIgnore // Excluir esta relación en la serialización JSON
-    private List<MapaMonstruo> mapaMonstruos;
+    private List<MapaMonstruo> mapaMonstruos;*/
 }

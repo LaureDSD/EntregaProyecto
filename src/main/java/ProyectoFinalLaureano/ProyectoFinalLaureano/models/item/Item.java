@@ -2,9 +2,8 @@ package ProyectoFinalLaureano.ProyectoFinalLaureano.models.item;
 
 
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.estadisticasGenerales.EstadisticasGenerales;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.monstruo.drops.DropsObjetos;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.npc.tienda.NPCProducto;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.item.efecto.ItemEfecto;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.monstruo.DropsObjetos;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.npc.NPCProducto;
 import jakarta.persistence.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
@@ -54,15 +53,16 @@ public class Item {
     @Schema(description = "Cantidad máxima de acumulaciones del ítem", example = "99")
     private int acumulaciones_max;
 
+    /*
     // Relación Uno a Muchos con ItemEfecto
     @OneToMany(mappedBy = "item", cascade = CascadeType.ALL)
     @JsonIgnore // Excluir esta relación en la serialización JSON
     @Schema(description = "Efectos asociados al ítem")
-    private List<ItemEfecto> efectos;
+    private List<ItemEfecto> efectos;*/
 
     //RelacionCon Estadisticas
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "estadisticasId", referencedColumnName = "estadisticasId")
+    @JoinColumn(name = "estadistica_id", referencedColumnName = "estadistica_id")
     private EstadisticasGenerales estadisticas;
 
     // Relación Uno a Muchos con DropsObjetos

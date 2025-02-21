@@ -47,7 +47,7 @@ public class ClasePersonaje {
     //RelacionCon Estadisticas
     @NotNull
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "estadisticasId")
+    @JoinColumn(name = "estadistica_id")
     @JsonIgnore // Excluir esta relación en la serialización JSON
     private EstadisticasGenerales estadisticas;
 

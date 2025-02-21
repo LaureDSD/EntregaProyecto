@@ -12,8 +12,8 @@ import lombok.Setter;
 // (Correcto)
 @NoArgsConstructor
 @Entity
-@Table(name = "efectos_estados")
 @Schema(description = "Entidad que representa un efecto o estado en el sistema")
+@Table(name = "efectos_estados")
 @Getter
 @Setter
 public class EfectoEstado {
@@ -22,8 +22,13 @@ public class EfectoEstado {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Schema(description = "ID único del efecto", example = "1")
-    private Long efectoId;
+    private Long efecto_id;
 
+    @Enumerated(EnumType.STRING) // If it's an enum
+    private TipoEfecto tipoEfecto;
+
+
+/*
     //Imagen del efecto
     @Column(name = "imagen_icono", length = 255)
     @Schema(description = "URL del icono del efecto", example = "potenciacion.png")
@@ -65,10 +70,15 @@ public class EfectoEstado {
     @Column(name = "acumulaciones", nullable = false)
     @Schema(description = "Número de acumulaciones del efecto", example = "0")
     private int acumulaciones;
-
+*/
     //RelacionCon Estadisticas
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "estadisticasId", referencedColumnName = "estadisticasId")
+    //@OneToOne(cascade = CascadeType.ALL)
+    //@Join
+    /*@Column(name = "estadistica_id")
+    private Long estadisticas;*/
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "estadistica_id", referencedColumnName = "estadistica_id")
     private EstadisticasGenerales estadisticas;
 
 }

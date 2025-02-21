@@ -2,9 +2,10 @@ package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.npcController;
 
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.npc.NPC;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.npc.TipoNPC;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.npc.tienda.NPCProducto;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.npc.NPCProducto;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.npcDTO.NpcDTO;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.npcDTO.TiendaDTO;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.services.itemService.ItemService;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.npcService.NPCService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -21,6 +22,9 @@ public class NPCController {
 
     @Autowired
     private NPCService npcService;
+
+    @Autowired
+    private ItemService itemService;
 
     @GetMapping("/")
     @Operation(summary = "Obtener todos los NPCs o filtrar por tipo de NPC")
@@ -61,31 +65,31 @@ public class NPCController {
     }
 
     // Conversor Lista
-    public static List<NpcDTO> conversorListaNPCDTO(List<NPC> l) {
-        return l.stream().map(NPCController::conversorNPCDTO).toList();
+    public  List<NpcDTO> conversorListaNPCDTO(List<NPC> l) {
+        return l.stream().map(this::conversorNPCDTO).toList();
     }
 
     // Conversor Unico DTO
-    public static NpcDTO conversorNPCDTO(NPC n) {
+    public  NpcDTO conversorNPCDTO(NPC n) {
         NpcDTO npcDTO = new NpcDTO();
         npcDTO.setId(n.getNpc_id());
         npcDTO.setImagen(n.getImagen());
         npcDTO.setNombre(n.getNombre());
         npcDTO.setDescripcion(n.getDescripcion());
         npcDTO.setTipoNPC(n.getTipoNPC());
-        npcDTO.setTienda(NPCController.conversorListaTiendaDTO(n.getNpcProductos()));
+        npcDTO.setTienda(conversorListaTiendaDTO(n.getNpcProductos()));
         return npcDTO;
     }
 
     // Conversor Lista Tienda
-    public static List<TiendaDTO> conversorListaTiendaDTO(List<NPCProducto> l) {
-        return l.stream().map(NPCController::conversorTiendaDTO).toList();
+    public  List<TiendaDTO> conversorListaTiendaDTO(List<NPCProducto> l) {
+        return l.stream().map(this::conversorTiendaDTO).toList();
     }
 
     // Conversor Unico Tienda
-    private static TiendaDTO conversorTiendaDTO(NPCProducto npcProducto) {
+    private  TiendaDTO conversorTiendaDTO(NPCProducto npcProducto) {
         TiendaDTO tiendaDTO = new TiendaDTO();
-        tiendaDTO.setItem(npcProducto.getItem());
+        tiendaDTO.setItem( itemService.getByID(npcProducto.getItem()));
         tiendaDTO.setCantidadVenta(npcProducto.getCantidadVenta());
         tiendaDTO.setPrecioCompra(npcProducto.getPrecioCompra());
         tiendaDTO.setCantidadVenta(npcProducto.getCantidadVenta());

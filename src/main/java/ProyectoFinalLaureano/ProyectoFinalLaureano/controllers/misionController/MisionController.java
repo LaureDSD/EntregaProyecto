@@ -1,10 +1,10 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.misionController;
 
-import ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.npcController.NPCController;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.mision.Mision;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.mision.recompensas.MisionObjetos;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.mision.MisionObjetos;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.misionDTO.MisionDTO;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.misionDTO.RecompensaDTO;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.services.itemService.ItemService;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.misionService.MisionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +18,9 @@ public class MisionController {
 
     @Autowired
     private MisionService misionService;
+
+    @Autowired
+    private ItemService itemService;
 
     //CRUD MSISIONES
     @GetMapping("/")
@@ -50,12 +53,12 @@ public class MisionController {
     }
 
     //Conversor Lista
-    public static List<MisionDTO> conversorListaMisionDTO(List<Mision> l){
-        return l.stream().map(MisionController::conversorMisionDTO).toList();
+    public  List<MisionDTO> conversorListaMisionDTO(List<Mision> l){
+        return l.stream().map(this::conversorMisionDTO).toList();
     }
 
     //Conversor Unico DTO
-    public static MisionDTO conversorMisionDTO( Mision m){
+    public  MisionDTO conversorMisionDTO( Mision m){
         MisionDTO misionDTO = new MisionDTO();
         misionDTO.setId(m.getMision_id());
         misionDTO.setNombre(m.getNombre());
@@ -65,20 +68,20 @@ public class MisionController {
         misionDTO.setAlmas(m.getRecompensa_almas());
         misionDTO.setExperiencia(m.getRecompensa_experiencia());
         misionDTO.setRecompensas(
-                m.getRecompensas().stream().map(MisionController::conversorRecompensaDTO).toList());
+                m.getRecompensas().stream().map(this::conversorRecompensaDTO).toList());
         return misionDTO;
     }
 
 
     //Conversro lista
-    public static List<RecompensaDTO> converosrListaRecompensaDTO(List<MisionObjetos> ms){
-        return ms.stream().map(MisionController::conversorRecompensaDTO).toList();
+    public  List<RecompensaDTO> converosrListaRecompensaDTO(List<MisionObjetos> ms){
+        return ms.stream().map(this::conversorRecompensaDTO).toList();
     }
 
     //Coversor Unico
-    public static RecompensaDTO conversorRecompensaDTO(MisionObjetos mo){
+    public  RecompensaDTO conversorRecompensaDTO(MisionObjetos mo){
         RecompensaDTO recompensaDTO = new RecompensaDTO();
-        recompensaDTO.setItem(mo.getItem());
+        recompensaDTO.setItem( itemService.getByID(mo.getItem()));
         recompensaDTO.setCantidad(mo.getCantidad());
         return recompensaDTO;
     }

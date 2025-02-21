@@ -1,8 +1,7 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.models.mision;
 
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.mision.recompensas.MisionObjetos;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.npc.NPC;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.misiones.PersonajeMision;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.PersonajeMision;
 import jakarta.persistence.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;

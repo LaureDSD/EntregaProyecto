@@ -1,13 +1,8 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.habilidadController;
 
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.efectosEstados.EfectoEstado;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.habilidad.Habilidad;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.habilidad.efectoEstado.HabilidadEfecto;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.habilidad.efectoEstado.HabilidadEfectoId;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.habilidad.enums.ObjetivoHabilidad;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.habilidad.enums.TipoHabilidad;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.habilidad.HabilidadEfecto;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.habilidadService.HabildadEfectoService;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.services.habilidadService.HabilidadService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/habilidad")
+@RequestMapping("/api/habilidadEfecto")
 public class HabilidadEfectoController {
 
     @Autowired
@@ -23,39 +18,35 @@ public class HabilidadEfectoController {
 
     //CRUD basico HabilidadEfecto
 
-    @GetMapping("/efecto/")
+    @GetMapping("")
     public List<HabilidadEfecto> obtenerEfectos() {
         return habilidadEfectoService.getAll();
     }
 
 
-    @GetMapping("/{habilidadId}/efecto/")
-    public List<EfectoEstado> obtenerEfectos(@PathVariable Long habilidadId) {
-         return habilidadEfectoService.getByHabilidadId(habilidadId);
+    @GetMapping("/{habilidad_efecto_id}")
+    public HabilidadEfecto obtenerEfectos(@PathVariable Long id) {
+         return habilidadEfectoService.getByID(id);
     }
 
-    @GetMapping("/{habilidadId}/efecto/{efectoId}")
-    public HabilidadEfecto obtenerEfecto(@PathVariable Long habilidadId, @PathVariable Long efectoId) {
-        return habilidadEfectoService.getByID(new HabilidadEfectoId(habilidadId, efectoId));
-    }
 
-    @PutMapping("/{habilidadId}/efecto/{efectoId}")
-    public ResponseEntity<Object> actualizarEfecto(@PathVariable Long habilidadId, @PathVariable Long efectoId, @RequestBody HabilidadEfecto efectoActualizar) {
-        if(efectoActualizar.getId().equals(new HabilidadEfectoId(habilidadId,efectoId))) {
+    @PutMapping("/{habilidad_efecto_id}")
+    public ResponseEntity<Object> actualizarEfecto(@PathVariable Long id,  @RequestBody HabilidadEfecto efectoActualizar) {
+        if(efectoActualizar.getHabilidad_efecto_id().equals(id)) {
             return ResponseEntity.ok( habilidadEfectoService.setItem(efectoActualizar) );
         }else{
             return ResponseEntity.badRequest().body("El ID proporcionado no coincide con el ID del mapa.");
         }
     }
 
-    @PostMapping("/{habilidadId}/efecto/")
+    @PostMapping("")
     public HabilidadEfecto guardarEfecto(@RequestBody HabilidadEfecto efectoGuardar) {
         return habilidadEfectoService.setItem(efectoGuardar);
     }
 
-    @DeleteMapping("/{habilidadId}/efecto/{efectoId}")
-    public void borrarEfecto(@PathVariable Long habilidadId, @PathVariable Long efectoId) {
-        habilidadEfectoService.deleteByID(new HabilidadEfectoId(habilidadId, efectoId));
+    @DeleteMapping("/{habilidad_efecto_id}")
+    public void borrarEfecto( @PathVariable Long id) {
+        habilidadEfectoService.deleteByID(id);
     }
 
 }
