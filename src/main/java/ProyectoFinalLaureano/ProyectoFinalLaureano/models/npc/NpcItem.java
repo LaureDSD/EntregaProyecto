@@ -1,6 +1,5 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.models.npc;
 
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.item.Item;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -15,7 +14,7 @@ import lombok.Setter;
 @Schema(description = "Entidad que representa los productos que un NPC puede vender o comprar")
 @Getter
 @Setter
-public class NPCProducto {
+public class NpcItem {
 
     //ID de la relacion
     @Id

@@ -1,5 +1,4 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.models.monstruo;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.item.Item;
 import jakarta.persistence.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
@@ -11,7 +10,7 @@ import lombok.Setter;
 @Schema(description = "Entidad que representa los objetos que un monstruo puede soltar")
 @Getter
 @Setter
-public class DropsObjetos {
+public class MonstruoItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

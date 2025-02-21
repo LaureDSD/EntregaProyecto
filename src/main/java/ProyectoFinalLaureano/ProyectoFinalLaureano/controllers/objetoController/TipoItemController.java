@@ -13,7 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/objeto")
 @Tag(name = "TipoItem", description = "API para gestionar tipos de ítems")
-public class ObjetoTipoController {
+public class TipoItemController {
 
     @Autowired
     private TipoItemService tipoItemService;

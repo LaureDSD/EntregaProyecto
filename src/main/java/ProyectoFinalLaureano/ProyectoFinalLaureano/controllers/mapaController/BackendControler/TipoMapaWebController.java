@@ -17,6 +17,7 @@ public class TipoMapaWebController {
     @Autowired
     private TipoMapaService service;
 
+    // Listado de Tipos de Mapa
     @GetMapping
     public String listar(Model model) {
         try {
@@ -29,6 +30,7 @@ public class TipoMapaWebController {
         }
     }
 
+    // Formulario para crear o editar un Tipo de Mapa
     @GetMapping("/edit/{id}")
     public String editar(@PathVariable("id") Long id, Model model) {
         try {
@@ -41,6 +43,7 @@ public class TipoMapaWebController {
         }
     }
 
+    // Guardar un Tipo de Mapa (creación o actualización)
     @PostMapping("/save")
     public String guardar(@ModelAttribute("tipoMapa") TipoMapa tipoMapa, Model model) throws IOException {
         try {
@@ -52,6 +55,7 @@ public class TipoMapaWebController {
         }
     }
 
+    // Eliminar un Tipo de Mapa
     @GetMapping("/delete/{id}")
     public String eliminar(@PathVariable("id") Long id, Model model) {
         try {

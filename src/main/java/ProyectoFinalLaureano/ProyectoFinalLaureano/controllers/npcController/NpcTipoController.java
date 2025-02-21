@@ -1,7 +1,7 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.npcController;
 
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.npc.TipoNPC;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.services.npcService.TipoNPCService;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.services.npcService.TipoNpcService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,7 @@ import java.util.List;
 public class NpcTipoController {
 
     @Autowired
-    private TipoNPCService tipoNPCService;
+    private TipoNpcService tipoNPCService;
 
     @GetMapping("/tipo/")
     @Operation(summary = "Obtener todos los tipos de NPCs")

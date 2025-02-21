@@ -14,7 +14,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/objeto")
 @Tag(name = "Objeto", description = "API para gestionar objetos (ítems)")
-public class ObjetoController {
+public class ItemController {
 
     @Autowired
     private ItemService itemService;

@@ -1,6 +1,6 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.npcDTO;
 
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.npc.NPC;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.npc.Npc;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.item.Item;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,7 +13,7 @@ public class TiendaDTO {
 
     private Item item;
 
-    private NPC npc;
+    private Npc npc;
 
     private int precioCompra;
 

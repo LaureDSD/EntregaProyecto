@@ -1,7 +1,7 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.misionController;
 
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.mision.MisionObjetos;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.services.misionService.MisionObjetosService;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.mision.MisionItem;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.services.misionService.MisionItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,23 +13,23 @@ import java.util.List;
 public class MisionRecompensasController {
 
     @Autowired
-    private MisionObjetosService misionObjetosService;
+    private MisionItemService misionObjetosService;
 
     //CRUD objetos de mision
 
     @GetMapping("/objeto/")
-    public List<MisionObjetos> obtenerListaObjetos(){
+    public List<MisionItem> obtenerListaObjetos(){
         return  misionObjetosService.getAll();
     }
 
 
     @GetMapping("{misionId}/objeto/{objetoId}")
-    public MisionObjetos obtenerObjetos(@RequestParam Long id){
+    public MisionItem obtenerObjetos(@RequestParam Long id){
         return misionObjetosService.getByID(id);
     }
 
     @PutMapping("{misionId}/objeto/{objetoId}")
-    public ResponseEntity<Object> actualizarObjetos(@PathVariable Long id, @RequestBody MisionObjetos objetoActualizar){
+    public ResponseEntity<Object> actualizarObjetos(@PathVariable Long id, @RequestBody MisionItem objetoActualizar){
         if(objetoActualizar.getMision_item_id().equals(id)) {
             return ResponseEntity.ok( misionObjetosService.setItem(objetoActualizar));
         }else{
@@ -38,7 +38,7 @@ public class MisionRecompensasController {
     }
 
     @PostMapping("{misionId}/objeto/")
-    public ResponseEntity<Object> guardarObjetos(@PathVariable Long id,@RequestBody MisionObjetos objetoGuardar){
+    public ResponseEntity<Object> guardarObjetos(@PathVariable Long id,@RequestBody MisionItem objetoGuardar){
         if(objetoGuardar.getMision_item_id().equals(id)) {
             return ResponseEntity.ok( misionObjetosService.setItem(objetoGuardar));
         }else{

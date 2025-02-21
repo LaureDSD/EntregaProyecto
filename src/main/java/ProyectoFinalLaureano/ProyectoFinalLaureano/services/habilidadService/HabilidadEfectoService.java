@@ -1,6 +1,5 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.services.habilidadService;
 
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.efectosEstados.EfectoEstado;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.habilidad.HabilidadEfecto;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.repositories.habilidadRepository.HabilidadEfectoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class HabildadEfectoService {
+public class HabilidadEfectoService {
     @Autowired
     private HabilidadEfectoRepository habilidadEfectoRepository;
 

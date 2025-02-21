@@ -1,7 +1,7 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.npcController;
 
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.npc.NPCProducto;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.services.npcService.TiendaNPCService;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.npc.NpcItem;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.services.npcService.NpcItemService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,23 +16,23 @@ import java.util.List;
 public class NpcProductoController {
 
     @Autowired
-    private TiendaNPCService tiendaNPCService;
+    private NpcItemService tiendaNPCService;
 
     @GetMapping("/tienda/")
     @Operation(summary = "Obtener todos los productos de las tiendas de NPCs")
-    public List<NPCProducto> obtenerListaTiendaNPCs() {
+    public List<NpcItem> obtenerListaTiendaNPCs() {
         return tiendaNPCService.getAll();
     }
 
     @GetMapping("/tienda/{productoId}")
     @Operation(summary = "Obtener un producto específico de la tienda de un NPC")
-    public NPCProducto obtenerProductoTiendaNPC(@PathVariable Long id) {
+    public NpcItem obtenerProductoTiendaNPC(@PathVariable Long id) {
         return tiendaNPCService.getByID(id);
     }
 
     @PutMapping("/tienda/{Id}")
     @Operation(summary = "Actualizar un producto en la tienda de un NPC")
-    public ResponseEntity<Object> actualizarProductoTiendaNPC(@PathVariable Long id,  @RequestBody NPCProducto tiendaActualizar) {
+    public ResponseEntity<Object> actualizarProductoTiendaNPC(@PathVariable Long id,  @RequestBody NpcItem tiendaActualizar) {
         if (tiendaActualizar.getNpc_producto_id().equals(id)) {
             return ResponseEntity.ok(tiendaNPCService.setItem(tiendaActualizar));
         } else {
@@ -42,7 +42,7 @@ public class NpcProductoController {
 
     @PostMapping("/tienda/")
     @Operation(summary = "Crear un nuevo producto en la tienda de un NPC")
-    public NPCProducto guardarProductoTiendaNPC(@RequestBody NPCProducto tiendaGuardar) {
+    public NpcItem guardarProductoTiendaNPC(@RequestBody NpcItem tiendaGuardar) {
         return tiendaNPCService.setItem(tiendaGuardar);
     }
 

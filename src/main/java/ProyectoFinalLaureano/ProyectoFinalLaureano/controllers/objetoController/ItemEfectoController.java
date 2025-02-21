@@ -13,7 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/objetoEfecto")
 @Tag(name = "ObjetoEfecto", description = "API para gestionar efectos de objetos (ítems)")
-public class ObjetoEfectoController {
+public class ItemEfectoController {
 
     @Autowired
     private ItemEfectoService itemEfectoService;

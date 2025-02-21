@@ -17,7 +17,7 @@ public class TipoMonstruoWebController {
     @Autowired
     private TipoMonstruoService tipoMonstruoService;
 
-    // Listado de  de Personaje
+    // Listado de Tipos de Monstruo
     @GetMapping
     public String listar(Model model) {
         List<TipoMonstruo> o = tipoMonstruoService.getAll();
@@ -25,7 +25,7 @@ public class TipoMonstruoWebController {
         return "admin/tipoMonstruo";
     }
 
-    // Formulario para crear o editar  de Personaje
+    // Formulario para crear o editar Tipo de Monstruo
     @GetMapping("/edit/{id}")
     public String editar(@PathVariable("id") Long id, Model model) {
         TipoMonstruo o = (id != null) ? tipoMonstruoService.getByID(id) : new TipoMonstruo();
@@ -33,23 +33,21 @@ public class TipoMonstruoWebController {
         return "admin/tipoMonstruo";
     }
 
-    // Guardar  de Personaje (creación o actualización)
+    // Guardar Tipo de Monstruo (creación o actualización)
     @PostMapping("/save")
     public String guardar(@ModelAttribute("tipoMonstruo") TipoMonstruo o) throws IOException {
         tipoMonstruoService.setItem(o);
         return "admin/tipoMonstruo";
     }
 
-    // Eliminar  de Personaje
+    // Eliminar Tipo de Monstruo
     @GetMapping("/delete/{id}")
     public String eliminar(@PathVariable("id") Long id) {
         try {
             tipoMonstruoService.deleteByID(id);
             return "redirect:/admin/tipoMonstruo";
-        }catch (Exception e){
+        } catch (Exception e) {
             return "redirect:/admin/tipoMonstruo";
         }
     }
-
-
 }

@@ -17,39 +17,38 @@ public class ItemWebController {
     @Autowired
     private ItemService itemService;
 
-    // Listado de  de Personaje
+    // Listado de Items
     @GetMapping
-    public String listarPersonaje(Model model) {
+    public String listarItem(Model model) {
         List<Item> o = itemService.getAll();
         model.addAttribute("items", o);
         return "admin/item";
     }
 
-    // Formulario para crear o editar  de Personaje
+    // Formulario para crear o editar Item
     @GetMapping("/edit/{id}")
-    public String editarPersonaje(@PathVariable("id") Long id, Model model) {
+    public String editarItem(@PathVariable("id") Long id, Model model) {
         Item o = (id != null) ? itemService.getByID(id) : new Item();
         model.addAttribute("item", o);
         return "admin/item";
     }
 
-    // Guardar  de Personaje (creación o actualización)
+    // Guardar Item (creación o actualización)
     @PostMapping("/save")
-    public String guardarPersonaje(@ModelAttribute("item") Item o) throws IOException {
+    public String guardarItem(@ModelAttribute("item") Item o) throws IOException {
         itemService.setItem(o);
         return "admin/item";
     }
 
-    // Eliminar  de Personaje
+    // Eliminar Item
     @GetMapping("/delete/{id}")
-    public String eliminarPersonaje(@PathVariable("id") Long id) {
+    public String eliminarItem(@PathVariable("id") Long id) {
         try {
             itemService.deleteByID(id);
             return "redirect:/admin/item";
-        }catch (Exception e){
+        } catch (Exception e) {
             return "redirect:/admin/item";
         }
-
     }
 
 }

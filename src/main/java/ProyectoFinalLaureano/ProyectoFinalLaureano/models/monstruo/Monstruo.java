@@ -76,7 +76,7 @@ public class Monstruo {
     @OneToMany(mappedBy = "monstruo", cascade = CascadeType.ALL)
     @JsonIgnore // Excluir esta relación en la serialización JSON
     @Schema(description = "Drops asociados a este monstruo")
-    private List<DropsObjetos> drops;
+    private List<MonstruoItem> drops;
 
     //Nuevo
     @OneToMany(mappedBy = "monstruo", cascade = CascadeType.ALL)

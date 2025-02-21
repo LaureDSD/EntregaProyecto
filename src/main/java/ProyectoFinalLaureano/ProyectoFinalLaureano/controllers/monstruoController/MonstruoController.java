@@ -1,7 +1,7 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.monstruoController;
 
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.monstruo.Monstruo;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.monstruo.DropsObjetos;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.monstruo.MonstruoItem;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.monsrtuoDTO.DropsDTO;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.monsrtuoDTO.MonstruoDTO;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.estadisticasService.EstadisticasService;
@@ -83,12 +83,12 @@ public class MonstruoController {
     }
 
     // Conversor Lista Drops
-    public  List<DropsDTO> conversorListaDropsDTO(List<DropsObjetos> l) {
+    public  List<DropsDTO> conversorListaDropsDTO(List<MonstruoItem> l) {
         return l.stream().map(this::conversorDropsDTO).toList();
     }
 
     // Conversor Unico Drops
-    private  DropsDTO conversorDropsDTO(DropsObjetos dropsObjetos) {
+    private  DropsDTO conversorDropsDTO(MonstruoItem dropsObjetos) {
         DropsDTO dropsDTO = new DropsDTO();
         dropsDTO.setItem( itemService.getByID(dropsObjetos.getItem()));
         dropsDTO.setProbabilidad( dropsObjetos.getProbabilidad());

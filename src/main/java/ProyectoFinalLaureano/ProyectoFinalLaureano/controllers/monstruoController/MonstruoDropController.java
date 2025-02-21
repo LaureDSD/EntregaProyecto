@@ -1,7 +1,7 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.monstruoController;
 
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.monstruo.DropsObjetos;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.services.monstruoService.DropsObjetosService;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.monstruo.MonstruoItem;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.services.monstruoService.MonstruoItemService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,23 +16,23 @@ import java.util.List;
 public class MonstruoDropController {
 
     @Autowired
-    private DropsObjetosService dropsObjetosService;
+    private MonstruoItemService dropsObjetosService;
 
     @GetMapping("/drop/")
     @Operation(summary = "Obtener todos los drops de objetos")
-    public List<DropsObjetos> obtenerListaDropsObjetos() {
+    public List<MonstruoItem> obtenerListaDropsObjetos() {
         return dropsObjetosService.getAll();
     }
 
     @GetMapping("/{monstruoId}/drop/{dropId}")
     @Operation(summary = "Obtener un drop de objeto específico por ID de monstruo y ID de drop")
-    public DropsObjetos obtenerDropObjeto( @PathVariable Long id) {
+    public MonstruoItem obtenerDropObjeto(@PathVariable Long id) {
         return dropsObjetosService.getByID(id);
     }
 
     @PutMapping("/{monstruoId}/drop/{dropId}")
     @Operation(summary = "Actualizar un drop de objeto por ID de monstruo y ID de drop")
-    public ResponseEntity<Object> actualizarDropObjeto(@PathVariable Long id,@RequestBody DropsObjetos dropActualizar) {
+    public ResponseEntity<Object> actualizarDropObjeto(@PathVariable Long id,@RequestBody MonstruoItem dropActualizar) {
         if (dropActualizar.getMonstruo_item_id().equals(id)) {
             return ResponseEntity.ok(dropsObjetosService.setItem(dropActualizar));
         } else {
@@ -42,7 +42,7 @@ public class MonstruoDropController {
 
     @PostMapping("/{monstruoId}/drop/")
     @Operation(summary = "Crear un nuevo drop de objeto para un monstruo")
-    public DropsObjetos guardarDropObjeto(@RequestBody DropsObjetos dropGuardar) {
+    public MonstruoItem guardarDropObjeto(@RequestBody MonstruoItem dropGuardar) {
         return dropsObjetosService.setItem(dropGuardar);
     }
 

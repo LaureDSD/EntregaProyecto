@@ -1,4 +1,4 @@
-package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.personajeController;
+package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.misionController;
 
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.InventarioPersonaje;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.Personaje;
@@ -21,7 +21,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/personajeMision")
 @Tag(name = "Personaje Misiones Controller", description = "Operaciones CRUD para la gestión de misiones de personajes")
-public class PersonajeMisionesController {
+public class MisionesPersonajeController {
 
 
     @Autowired

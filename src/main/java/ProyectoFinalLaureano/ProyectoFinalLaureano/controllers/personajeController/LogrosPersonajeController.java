@@ -13,7 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/personaje")
 @Tag(name = "Personaje Logros Controller", description = "Operaciones CRUD para la gestión de logros de personajes")
-public class PersonajeLogrosController {
+public class LogrosPersonajeController {
 
     @Autowired
     private LogrosPersonajeService logrosPersonajeService;

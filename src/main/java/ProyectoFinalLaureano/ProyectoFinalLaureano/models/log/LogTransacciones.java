@@ -1,9 +1,6 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.models.log;
 
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.log.enums.TipoTransaccion;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.npc.NPC;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.item.Item;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.Personaje;
 import jakarta.persistence.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;

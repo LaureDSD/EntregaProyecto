@@ -12,11 +12,12 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/admin/mapasMonstruo")
-public class MontruoMapaWebController {
+public class MapaMonstruoWebController {
 
     @Autowired
     private MapaMonstruoService service;
 
+    // Listado de Mapas de Monstruo
     @GetMapping
     public String listar(Model model) {
         try {
@@ -28,7 +29,8 @@ public class MontruoMapaWebController {
             return "admin/mapasMonstruo";
         }
     }
-/*
+
+    // Formulario para crear o editar un Mapa de Monstruo
     @GetMapping("/edit/{id}")
     public String editar(@PathVariable("id") Long id, Model model) {
         try {
@@ -39,8 +41,9 @@ public class MontruoMapaWebController {
             model.addAttribute("error", "Error al cargar el mapa de monstruo para editar: " + e.getMessage());
             return "admin/mapasMonstruo";
         }
-    }*/
+    }
 
+    // Guardar un Mapa de Monstruo (creación o actualización)
     @PostMapping("/save")
     public String guardar(@ModelAttribute("mapaMonstruo") MapaMonstruo mapaMonstruo, Model model) throws IOException {
         try {
@@ -51,7 +54,8 @@ public class MontruoMapaWebController {
             return "admin/mapasMonstruo";
         }
     }
-/*
+
+    // Eliminar un Mapa de Monstruo
     @GetMapping("/delete/{id}")
     public String eliminar(@PathVariable("id") Long id, Model model) {
         try {
@@ -61,5 +65,5 @@ public class MontruoMapaWebController {
             model.addAttribute("error", "Error al eliminar el mapa de monstruo: " + e.getMessage());
             return "admin/mapasMonstruo";
         }
-    }*/
+    }
 }

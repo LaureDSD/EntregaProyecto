@@ -18,7 +18,7 @@ import java.util.List;
 @Schema(description = "Entidad que representa un NPC en el sistema")
 @Getter
 @Setter
-public class NPC {
+public class Npc {
 
     // ID del npc
     @Id
@@ -57,7 +57,7 @@ public class NPC {
     @OneToMany(mappedBy = "npc", cascade = CascadeType.ALL)
     @Schema(description = "Productos asociados a este NPC")
     @JsonIgnore // Excluir esta relación en la serialización JSON
-    private List<NPCProducto> npcProductos;
+    private List<NpcItem> npcProductos;
 
     //Relacion muchos a muchos con mision
     @ManyToMany

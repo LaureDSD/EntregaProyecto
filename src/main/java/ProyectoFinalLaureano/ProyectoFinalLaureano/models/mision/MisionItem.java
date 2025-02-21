@@ -1,7 +1,6 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.models.mision;
 
 
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.item.Item;
 import jakarta.persistence.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
@@ -15,7 +14,7 @@ import lombok.Setter;
 @Entity
 @Table(name = "mision_objetos")
 @Schema(description = "Entidad que representa los objetos de recompensa de una misión")
-public class MisionObjetos {
+public class MisionItem {
 
     //ID relacion
     @Id

@@ -17,12 +17,12 @@ public class MapaWebController {
     @Autowired
     private MapaService service;
 
+    // Listado de Mapas
     @GetMapping
     public String listar(Model model) {
         try {
             List<Mapa> mapas = service.getAll();
             model.addAttribute("mapas", mapas);
-            model.addAttribute("mapa", new Mapa());
             return "admin/mapas";
         } catch (Exception e) {
             model.addAttribute("error", "Error al cargar los mapas: " + e.getMessage());
@@ -30,6 +30,7 @@ public class MapaWebController {
         }
     }
 
+    // Formulario para crear o editar un Mapa
     @GetMapping("/edit/{id}")
     public String editar(@PathVariable("id") Long id, Model model) {
         try {
@@ -42,6 +43,7 @@ public class MapaWebController {
         }
     }
 
+    // Guardar un Mapa (creación o actualización)
     @PostMapping("/save")
     public String guardar(@ModelAttribute("mapa") Mapa mapa, Model model) throws IOException {
         try {
@@ -53,6 +55,7 @@ public class MapaWebController {
         }
     }
 
+    // Eliminar un Mapa
     @GetMapping("/delete/{id}")
     public String eliminar(@PathVariable("id") Long id, Model model) {
         try {

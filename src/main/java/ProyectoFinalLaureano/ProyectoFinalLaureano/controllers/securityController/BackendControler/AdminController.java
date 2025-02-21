@@ -1,4 +1,4 @@
-package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.securityController;
+package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.securityController.BackendControler;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

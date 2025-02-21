@@ -1,4 +1,4 @@
-package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.securityController;
+package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.securityController.BackendControler;
 
 import ProyectoFinalLaureano.ProyectoFinalLaureano.config.security.JwtService;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.config.security.UserDetailsServiceImpl;

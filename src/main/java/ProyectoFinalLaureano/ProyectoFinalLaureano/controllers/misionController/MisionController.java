@@ -1,7 +1,7 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.misionController;
 
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.mision.Mision;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.mision.MisionObjetos;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.mision.MisionItem;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.misionDTO.MisionDTO;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.misionDTO.RecompensaDTO;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.itemService.ItemService;
@@ -74,12 +74,12 @@ public class MisionController {
 
 
     //Conversro lista
-    public  List<RecompensaDTO> converosrListaRecompensaDTO(List<MisionObjetos> ms){
+    public  List<RecompensaDTO> converosrListaRecompensaDTO(List<MisionItem> ms){
         return ms.stream().map(this::conversorRecompensaDTO).toList();
     }
 
     //Coversor Unico
-    public  RecompensaDTO conversorRecompensaDTO(MisionObjetos mo){
+    public  RecompensaDTO conversorRecompensaDTO(MisionItem mo){
         RecompensaDTO recompensaDTO = new RecompensaDTO();
         recompensaDTO.setItem( itemService.getByID(mo.getItem()));
         recompensaDTO.setCantidad(mo.getCantidad());

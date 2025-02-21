@@ -1,16 +1,16 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.services.npcService;
 
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.npc.TipoNPC;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.repositories.npcRepository.TipoNPCRepository;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.repositories.npcRepository.TipoNpcRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class TipoNPCService {
+public class TipoNpcService {
     @Autowired
-    private TipoNPCRepository tipoNPCRepository;
+    private TipoNpcRepository tipoNPCRepository;
 
     public List<TipoNPC> getAll(){
         return  tipoNPCRepository.findAll();

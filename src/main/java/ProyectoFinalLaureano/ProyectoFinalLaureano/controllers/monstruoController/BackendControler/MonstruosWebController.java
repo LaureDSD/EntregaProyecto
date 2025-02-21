@@ -17,7 +17,7 @@ public class MonstruosWebController {
     @Autowired
     private MonstruosService monstruosService;
 
-    // Endpoint para mostrar la lista de usuarios
+    // Listado de Monstruos
     @GetMapping
     public String List(Model model) {
         List<Monstruo> monstruos = monstruosService.getAll();
@@ -25,7 +25,7 @@ public class MonstruosWebController {
         return "admin/monstruos";
     }
 
-    // Formulario para crear o editar  de Personaje
+    // Formulario para crear o editar Monstruo
     @GetMapping("/edit/{id}")
     public String editar(@PathVariable("id") Long id, Model model) {
         Monstruo monstruos = (id != null) ? monstruosService.getByID(id) : new Monstruo();
@@ -33,21 +33,20 @@ public class MonstruosWebController {
         return "admin/monstruos";
     }
 
-
-    // Guardar  de Personaje (creación o actualización)
+    // Guardar Monstruo (creación o actualización)
     @PostMapping("/save")
     public String guardar(@ModelAttribute("monstruos") Monstruo u) throws IOException {
         monstruosService.setItem(u);
         return "admin/monstruos";
     }
 
-    // Endpoint para eliminar un usuario
+    // Eliminar Monstruo
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable("id") Long id) {
         try {
             monstruosService.deleteByID(id);
             return "admin/monstruos";
-        }catch (Exception e){
+        } catch (Exception e) {
             return "admin/monstruos";
         }
     }

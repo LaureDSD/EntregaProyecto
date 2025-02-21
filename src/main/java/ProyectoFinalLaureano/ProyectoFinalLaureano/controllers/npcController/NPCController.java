@@ -1,12 +1,12 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.npcController;
 
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.npc.NPC;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.npc.Npc;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.npc.TipoNPC;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.npc.NPCProducto;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.npc.NpcItem;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.npcDTO.NpcDTO;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.npcDTO.TiendaDTO;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.itemService.ItemService;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.services.npcService.NPCService;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.services.npcService.NpcService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ import java.util.List;
 public class NPCController {
 
     @Autowired
-    private NPCService npcService;
+    private NpcService npcService;
 
     @Autowired
     private ItemService itemService;
@@ -44,7 +44,7 @@ public class NPCController {
 
     @PutMapping("/{id}")
     @Operation(summary = "Actualizar un NPC por ID")
-    public ResponseEntity<Object> actualizarNPC(@PathVariable Long id, @RequestBody NPC npcActualizar) {
+    public ResponseEntity<Object> actualizarNPC(@PathVariable Long id, @RequestBody Npc npcActualizar) {
         if (npcActualizar.getNpc_id().equals(id)) {
             return ResponseEntity.ok(conversorNPCDTO(npcService.setItem(npcActualizar)));
         } else {
@@ -54,7 +54,7 @@ public class NPCController {
 
     @PostMapping
     @Operation(summary = "Crear un nuevo NPC")
-    public NpcDTO guardarNPC(@RequestBody NPC npcGuardar) {
+    public NpcDTO guardarNPC(@RequestBody Npc npcGuardar) {
         return conversorNPCDTO(npcService.setItem(npcGuardar));
     }
 
@@ -65,12 +65,12 @@ public class NPCController {
     }
 
     // Conversor Lista
-    public  List<NpcDTO> conversorListaNPCDTO(List<NPC> l) {
+    public  List<NpcDTO> conversorListaNPCDTO(List<Npc> l) {
         return l.stream().map(this::conversorNPCDTO).toList();
     }
 
     // Conversor Unico DTO
-    public  NpcDTO conversorNPCDTO(NPC n) {
+    public  NpcDTO conversorNPCDTO(Npc n) {
         NpcDTO npcDTO = new NpcDTO();
         npcDTO.setId(n.getNpc_id());
         npcDTO.setImagen(n.getImagen());
@@ -82,12 +82,12 @@ public class NPCController {
     }
 
     // Conversor Lista Tienda
-    public  List<TiendaDTO> conversorListaTiendaDTO(List<NPCProducto> l) {
+    public  List<TiendaDTO> conversorListaTiendaDTO(List<NpcItem> l) {
         return l.stream().map(this::conversorTiendaDTO).toList();
     }
 
     // Conversor Unico Tienda
-    private  TiendaDTO conversorTiendaDTO(NPCProducto npcProducto) {
+    private  TiendaDTO conversorTiendaDTO(NpcItem npcProducto) {
         TiendaDTO tiendaDTO = new TiendaDTO();
         tiendaDTO.setItem( itemService.getByID(npcProducto.getItem()));
         tiendaDTO.setCantidadVenta(npcProducto.getCantidadVenta());

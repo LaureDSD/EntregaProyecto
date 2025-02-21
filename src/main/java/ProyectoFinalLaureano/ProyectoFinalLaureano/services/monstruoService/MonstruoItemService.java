@@ -1,26 +1,26 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.services.monstruoService;
 
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.monstruo.DropsObjetos;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.repositories.monstruoRepository.DropsObjetosRepository;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.monstruo.MonstruoItem;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.repositories.monstruoRepository.MonstruoItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class DropsObjetosService {
+public class MonstruoItemService {
     @Autowired
-    private DropsObjetosRepository dropsObjetosRepository;
+    private MonstruoItemRepository dropsObjetosRepository;
 
-    public List<DropsObjetos> getAll(){
+    public List<MonstruoItem> getAll(){
         return  dropsObjetosRepository.findAll();
     }
 
-    public DropsObjetos getByID(Long id){
+    public MonstruoItem getByID(Long id){
         return dropsObjetosRepository.findById(id).orElse(null);
     }
 
-    public DropsObjetos setItem(DropsObjetos o){
+    public MonstruoItem setItem(MonstruoItem o){
         return  dropsObjetosRepository.save(o);
     }
 

@@ -1,6 +1,6 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.models.mision;
 
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.npc.NPC;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.npc.Npc;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.PersonajeMision;
 import jakarta.persistence.*;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -65,7 +65,7 @@ public class Mision {
     @OneToMany(mappedBy = "mision", cascade = CascadeType.ALL)
     @JsonIgnore // Excluir esta relación en la serialización JSON
     @Schema(description = "Objetos de recompensa asociados a esta misión")
-    private List<MisionObjetos> recompensas;
+    private List<MisionItem> recompensas;
 
 
     //Relacion muchos a muchos con npc
@@ -77,6 +77,6 @@ public class Mision {
     )
     @JsonIgnore // Excluir esta relación en la serialización JSON
     @Schema(description = "Misiones  que da cada npc")
-    private List<NPC> npcs;
+    private List<Npc> npcs;
 
 }

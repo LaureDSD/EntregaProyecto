@@ -1,27 +1,27 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.services.npcService;
 
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.npc.NPC;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.npc.Npc;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.npc.TipoNPC;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.repositories.npcRepository.NPCRepository;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.repositories.npcRepository.NpcRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class NPCService {
+public class NpcService {
     @Autowired
-    private NPCRepository npcRepository;
+    private NpcRepository npcRepository;
 
-    public List<NPC> getAll(){
+    public List<Npc> getAll(){
         return  npcRepository.findAll();
     }
 
-    public NPC getByID(Long id){
+    public Npc getByID(Long id){
         return npcRepository.findById(id).orElse(null);
     }
 
-    public NPC setItem(NPC o){
+    public Npc setItem(Npc o){
         return  npcRepository.save(o);
     }
 
@@ -29,7 +29,7 @@ public class NPCService {
         npcRepository.deleteById(id);
     }
 
-    public List<NPC> getBytipoNPC(TipoNPC tipoNPC) {
+    public List<Npc> getBytipoNPC(TipoNPC tipoNPC) {
         return npcRepository.getBytipoNPC(tipoNPC);
     }
 }
