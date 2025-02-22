@@ -1,5 +1,6 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.npcController.BackendControler;
 
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.estadisticasGenerales.EstadisticasGenerales;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.npc.TipoNPC;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.npcService.TipoNpcService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ public class TipoNpcWebController {
         try {
             List<TipoNPC> tiposNpc = tipoNpcService.getAll();
             model.addAttribute("tiposNpc", tiposNpc);
+            model.addAttribute("tipoNpc", new TipoNPC());
             return "admin/tiposNpc";
         } catch (Exception e) {
             model.addAttribute("error", "Error al cargar los tipos de NPC: " + e.getMessage());

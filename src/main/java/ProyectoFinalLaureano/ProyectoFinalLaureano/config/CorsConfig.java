@@ -12,10 +12,12 @@ public class CorsConfig implements WebMvcConfigurer {
         // Configuración global para todas las rutas
         registry.addMapping("/**")
                 // Permite todos los orígenes, o puedes restringirlo: .allowedOrigins("http://example.com")
-                .allowedOrigins("*")
+                //.allowedOrigins("*")
+                .allowedOrigins("http://localhost:8080")
                 // Métodos HTTP permitidos
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                 // Permitir credenciales, encabezados, etc.
-                .allowedHeaders("*");
+                .allowedHeaders("*")
+                .allowCredentials(true);
     }
 }

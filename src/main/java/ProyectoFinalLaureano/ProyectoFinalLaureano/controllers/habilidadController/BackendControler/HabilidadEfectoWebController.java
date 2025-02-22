@@ -1,5 +1,6 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.habilidadController.BackendControler;
 
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.grupos.Grupo;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.habilidad.HabilidadEfecto;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.habilidadService.HabilidadEfectoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,7 @@ public class HabilidadEfectoWebController {
         try {
             List<HabilidadEfecto> habilidades = service.getAll();
             model.addAttribute("habilidadesEfectos", habilidades);
+            model.addAttribute("habilidadEfecto", new HabilidadEfecto());
             return "admin/habilidadesEfectos";
         } catch (Exception e) {
             model.addAttribute("error", "Error al cargar las habilidades: " + e.getMessage());

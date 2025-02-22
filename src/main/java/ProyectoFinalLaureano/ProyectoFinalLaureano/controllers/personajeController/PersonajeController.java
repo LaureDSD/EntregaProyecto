@@ -69,41 +69,40 @@ public class PersonajeController {
 
     // Conversor de lista de Personaje a lista de PersonajeDTO
     public List<PersonajeDTO> conversorListaPersonajeDTO(List<Personaje> listaPersonajes) {
-        return listaPersonajes.stream()
-                .map(this::conversorPersonajeDTO)
-                .toList();
+        List<PersonajeDTO> listaDTO = new ArrayList<>();
+        for (Personaje personaje : listaPersonajes) {
+            listaDTO.add(conversorPersonajeDTO(personaje));
+        }
+        return listaDTO;
     }
 
     // Conversor de Personaje a PersonajeDTO
-    public  PersonajeDTO conversorPersonajeDTO(Personaje personaje) {
+    public PersonajeDTO conversorPersonajeDTO(Personaje personaje) {
         PersonajeDTO personajeDTO = new PersonajeDTO();
         personajeDTO.setId(personaje.getPersonaje_id());
         personajeDTO.setImagen(personaje.getImagen_modelo());
         personajeDTO.setNombre(personaje.getNombre());
         personajeDTO.setCreacion(personaje.getFecha_creacion());
-        personajeDTO.setClase( clasePersonajeService.getByID(personaje.getClase_personaje()));
+        personajeDTO.setClase(clasePersonajeService.getByID(personaje.getClase_personaje()));
         personajeDTO.setNivel(personaje.getNivel());
         personajeDTO.setXp_acumulada(personaje.getXp_acumulada());
         personajeDTO.setAlmas(personaje.getAlmas());
         personajeDTO.setLogros(personaje.getLogros());
         personajeDTO.setCapacidad_inventario(personaje.getCapacidad_inventario());
-        personajeDTO.setInventario( inventarioDTO( personaje.getInventario()) );
+        personajeDTO.setInventario(inventarioDTO(personaje.getInventario())); // Llamada al método que obtiene el inventario.
         personajeDTO.setEstadisticas(personaje.getEstadisticas());
         return personajeDTO;
     }
 
-    public List<InventarioDTO> inventarioDTO(List<InventarioPersonaje> ip){
-        List<InventarioDTO> lsdto  = new ArrayList<>();
-        InventarioDTO i = new InventarioDTO();
-        ip.forEach( e -> {
-                i.setItem( itemService.getByID(e.getItem()));
-                i.setCantidad(e.getCantidad());
-                i.setCantidad(e.getCantidad());
-                i.setEquipado(e.isEquipado());
-                lsdto.add(i);
-            }
-        );
-        return lsdto;
+    public List<InventarioDTO> inventarioDTO(List<InventarioPersonaje> inventarioPersonajes) {
+        List<InventarioDTO> inventariosDTO = new ArrayList<>();
+        for (InventarioPersonaje inventario : inventarioPersonajes) {
+            InventarioDTO inventarioDTO = new InventarioDTO();
+            inventarioDTO.setItem(itemService.getByID(inventario.getItem())); // Obtener el item.
+            inventarioDTO.setCantidad(inventario.getCantidad());
+            inventarioDTO.setEquipado(inventario.isEquipado());
+            inventariosDTO.add(inventarioDTO);
+        }
+        return inventariosDTO;
     }
-
 }

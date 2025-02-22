@@ -1,4 +1,4 @@
-package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers;
+package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.logController.BackendControler;
 
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.log.LogTransacciones;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.logService.LogTransaccionesService;

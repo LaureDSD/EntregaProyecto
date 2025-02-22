@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Dashboard - Backend</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -19,6 +21,7 @@
 </head>
 <body>
 <!-- Header con el menú dropdown -->
+
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
@@ -129,46 +132,90 @@
     </div>
 </nav>
 
+
 <!-- Contenido principal -->
 <div class="container mt-4">
-    <h1 class="mb-4">Gestión de Logs Transacciones</h1>
-    <!-- Lista de  Personaje -->
-    <section class="mt-5">
-        <h2>Lista de Logs de Transacciones</h2>
-        <table class="table table-striped table-hover">
-            <thead class="table-dark">
+    <!-- Mensaje de Error si ocurre algún problema -->
+    <div th:if="${error}" class="alert alert-danger">
+        <p th:text="${error}"></p>
+    </div>
+
+    <h2 class="text-center mb-4">Gestión de Items de NPC</h2>
+
+    <!-- Formulario para crear o editar un item de NPC -->
+    <div class="form-container">
+        <h3 th:text="${npcItem.npc_producto_id != null ? 'Editar Item de NPC' : 'Crear Nuevo Item de NPC'}"></h3>
+        <form th:action="@{/admin/npcsItems/save}" th:object="${npcItem}" method="post">
+            <input type="hidden" th:field="*{npc_producto_id}" />
+
+            <!-- Precio de Compra -->
+            <div class="form-group mb-3">
+                <label for="precioCompra" class="form-label">Precio de Compra</label>
+                <input type="number" id="precioCompra" th:field="*{precioCompra}" class="form-control" placeholder="Precio de compra" required />
+            </div>
+
+            <!-- Precio de Venta -->
+            <div class="form-group mb-3">
+                <label for="precioVenta" class="form-label">Precio de Venta</label>
+                <input type="number" id="precioVenta" th:field="*{precioVenta}" class="form-control" placeholder="Precio de venta" required />
+            </div>
+
+            <!-- Cantidad de Venta -->
+            <div class="form-group mb-3">
+                <label for="cantidadVenta" class="form-label">Cantidad Disponible</label>
+                <input type="number" id="cantidadVenta" th:field="*{cantidadVenta}" class="form-control" placeholder="Cantidad disponible para venta" required />
+            </div>
+
+            <!-- Relación con NPC y Item (esto debe ser manejado de alguna forma en el backend) -->
+            <div class="form-group mb-3">
+                <label for="npc" class="form-label">NPC</label>
+                <input type="text" id="npc" th:field="*{npc}" class="form-control" placeholder="ID del NPC" readonly />
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="item" class="form-label">Item</label>
+                <input type="text" id="item" th:field="*{item}" class="form-control" placeholder="ID del item" readonly />
+            </div>
+
+            <button type="submit" class="btn btn-primary">
+                <span th:text="${npcItem.npc_producto_id != null ? 'Actualizar' : 'Crear'}"></span>
+            </button>
+        </form>
+    </div>
+
+    <!-- Listado de Items de NPC -->
+    <div th:unless="${npcItem.npc_producto_id != null}" class="table-container">
+        <h3 class="mb-4">Listado de Items de NPC</h3>
+        <table class="table table-bordered">
+            <thead class="thead-dark">
             <tr>
                 <th>ID</th>
-                <th>Personaje</th>
-                <th>Npc</th>
-                <th>Item</th>
-                <th>Cantidad</th>
-                <th>Precio</th>
-                <th>Fecha</th>
+                <th>ID npc</th>
+                <th>ID item</th>
+                <th>Precio de Compra</th>
+                <th>Precio de Venta</th>
+                <th>Cantidad Disponible</th>
+                <th>Acciones</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="o : ${logTransaccion}">
-
-                <td th:text="${o.transaccion_id}"></td>
-                <td th:text="${o.personaje}"></td>
-                <td th:text="${o.npc}"></td>
-                <td th:text="${o.item}"></td>
-                <td th:text="${o.cantidad}"></td>
-                <td th:text="${o.precio_almas}"></td>
-                <td th:text="${o.fecha_transaccion}"></td>
-
-
+            <tr th:each="npcItem : ${npcsItems}">
+                <td th:text="${npcItem.npc_producto_id}"></td>
+                <td th:text="${npcItem.npc}"></td>
+                <td th:text="${npcItem.item}"></td>
+                <td th:text="${npcItem.precioCompra}"></td>
+                <td th:text="${npcItem.precioVenta}"></td>
+                <td th:text="${npcItem.cantidadVenta}"></td>
                 <td>
-                    <a th:href="@{'/admin/logTransacciones/edit/' + ${o.transaccion_id}}" class="btn btn-sm btn-primary">Editar</a> |
-                    <a th:href="@{'/admin/logTransacciones/delete/' + ${o.transaccion_id}}"
-                       class="btn btn-sm btn-danger" onclick="return confirm('¿Estás seguro de eliminar esta ?');">Eliminar</a>
+                    <a href="#" th:href="@{/admin/npcsItems/edit/{id}(id=${npcItem.npc_producto_id})}" class="btn btn-warning btn-sm">Editar</a>
+                    <a href="#" th:href="@{/admin/npcsItems/delete/{id}(id=${npcItem.npc_producto_id})}" class="btn btn-danger btn-sm">Eliminar</a>
                 </td>
             </tr>
             </tbody>
         </table>
-    </section>
+    </div>
 </div>
+
 
 <!-- Footer -->
 <footer class="mt-5 py-3">
@@ -177,7 +224,11 @@
     </div>
 </footer>
 
+
 <!-- Agregar Bootstrap JS para que los dropdowns funcionen -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
 </body>
 </html>
