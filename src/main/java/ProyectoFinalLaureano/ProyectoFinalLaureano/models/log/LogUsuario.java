@@ -7,8 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.sql.Date;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 
 // (Correcto)
@@ -24,7 +23,7 @@ public class LogUsuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Schema(description = "ID único del log", example = "1")
-    private Long logId;
+    private Long log_id;
 
     // Usuario relacionado
     @ManyToOne
@@ -47,6 +46,6 @@ public class LogUsuario {
     //Fecha de emision
     @Column(name = "fecha_log", nullable = false)
     @Schema(description = "Fecha y hora del log", example = "2023-10-01T12:00:00")
-    private LocalDateTime fechaLog;
+    private Date fechaLog = new Date();
 }
 

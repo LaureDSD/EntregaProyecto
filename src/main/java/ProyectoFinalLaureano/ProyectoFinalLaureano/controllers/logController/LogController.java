@@ -72,7 +72,7 @@ public class LogController {
     @Operation(summary = "Actualizar un log de usuario por ID")
     public ResponseEntity<?> actualizarUsuarioLog(@PathVariable Long id, @RequestBody LogUsuario logActualizar) {
         try {
-            if (logActualizar.getLogId().equals(id)) {
+            if (logActualizar.getLog_id().equals(id)) {
                 return ResponseEntity.ok(logService.setItem(logActualizar)); // Actualiza el log y devuelve la respuesta
             } else {
                 return ResponseEntity.badRequest().body("El ID proporcionado no coincide con el ID del log.");

@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 // (Correcto)
@@ -72,13 +73,13 @@ public class Usuario {
     @NotNull
     @Column(name = "ultima_conexion")
     @Schema(description = "Fecha y hora de la última conexión del usuario", example = "2023-10-01T12:00:00")
-    private LocalDateTime ultima_conexion;
+    private Date ultima_conexion;
 
     //Fecha en la que se crea el usuario
     @NotNull
     @Column(name = "fecha_creacion", nullable = false)
     @Schema(description = "Fecha y hora de creación del usuario", example = "2023-10-01T12:00:00")
-    private LocalDateTime fecha_creacion = LocalDateTime.now();
+    private Date fecha_creacion = new Date();
 
     //Estado de la cuenta sin ser borrada, activa o inactiva
     @NotNull

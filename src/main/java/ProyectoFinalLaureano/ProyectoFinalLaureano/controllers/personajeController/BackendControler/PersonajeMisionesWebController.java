@@ -21,6 +21,8 @@ public class PersonajeMisionesWebController {
     @GetMapping
     public String listarMisiones(Model model) {
         try {
+            try{}catch (Exception e){throw  e;}
+            try{}catch (Exception e){throw  e;}
             List<PersonajeMision> misiones = personajeMisionService.getAll();
             model.addAttribute("personajesMisiones", misiones);
             model.addAttribute("personajeMisione", new Mision());

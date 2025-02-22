@@ -18,6 +18,7 @@
     </style>
 </head>
 <body>
+
 <!-- Header con el menú dropdown -->
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -130,49 +131,80 @@
 </nav>
 
 <!-- Contenido principal -->
-<div class="container mt-4">
-    <!-- Mensaje de Error si ocurre algún problema -->
+<div class="container">
+    <h2 class="mt-4">Administrar Logs de Usuarios</h2>
+
+    <!-- Error Message -->
     <div th:if="${error}" class="alert alert-danger">
-        <p th:text="${error}"></p>
+        <span th:text="${error}"></span>
     </div>
-    <h1 class="mb-4">Gestión de Logs Personaje</h1>
-    <!-- Lista de  Personaje -->
-    <section class="mt-5">
-        <h2>Lista de Logs de Personaje</h2>
-        <table class="table table-striped table-hover">
-            <thead class="table-dark">
+
+    <!-- Logs Table -->
+    <div class="mt-4">
+        <h3>Lista de Logs de Usuarios</h3>
+        <table class="table">
+            <thead>
             <tr>
-                <th>ID</th>
-                <th>Persoanje</th>
-                <th>Monstruo</th>
-                <th>Fecha</th>
-                <th>Almas rcividas</th>
-                <th>Dano realizado</th>
-                <th>Dano recivido</th>
-                <th>Exp recivido</th>
+                <th>Usuario Correo</th>
+                <th>Usuario </th>
+                <th>Tipo de Log</th>
+                <th>Mensaje</th>
+                <th>Fecha de Log</th>
+                <th>Acciones</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="o : ${logJugador}">
-
-                <td th:text="${o.registroId}"></td>
-                <td th:text="${o.personaje}"></td>
-                <td th:text="${o.monstruo}"></td>
-                <td th:text="${o.fechaCaza}"></td>
-                <td th:text="${o.almasObtenidas}"></td>
-                <td th:text="${o.danoRealizado}"></td>
-                <td th:text="${o.danoRecivido}"></td>
-                <td th:text="${o.experienciaObtenida}"></td>
-
+            <tr th:each="log : ${logUsuarios}">
+                <td th:text="${log.usuario.correo}"></td>
+                <td th:text="${log.usuario.nombre_usuario_priv}"></td>
+                <td th:text="${log.tipoLog}"></td>
+                <td th:text="${log.mensaje}"></td>
+                <td th:text="${log.fechaLog}"></td>
                 <td>
-                    <a th:href="@{'/admin/logJugador/edit/' + ${o.registroId}}" class="btn btn-sm btn-primary">Editar</a> |
-                    <a th:href="@{'/admin/logJugador/delete/' + ${o.registroId}}"
-                       class="btn btn-sm btn-danger" onclick="return confirm('¿Estás seguro de eliminar esta ?');">Eliminar</a>
+                    <!-- Edit Button -->
+                    <a th:href="@{/admin/logUsuarios/edit/{id}(id=${log.log_id})}" class="btn btn-warning btn-sm">Editar</a>
+
+                    <!-- Delete Button -->
+                    <a th:href="@{/admin/logUsuarios/delete/{id}(id=${log.log_id})}"
+                       class="btn btn-danger btn-sm"
+                       th:onclick="|return confirm('¿Estás seguro de eliminar este log?')|">Eliminar</a>
                 </td>
             </tr>
             </tbody>
         </table>
-    </section>
+    </div>
+
+    <!-- Form for Adding or Editing Log -->
+    <div class="mt-4">
+        <h3 th:text="${logUsuario.log_id != null ? 'Editar Log de Usuario' : 'Agregar Log de Usuario'}"></h3>
+        <form th:action="@{/admin/logUsuarios/save}" th:object="${logUsuario}" method="post">
+            <div class="form-group">
+                <label for="usuario">Usuario</label>
+                <select class="form-control" id="usuario" th:field="*{usuario.usuario_id}">
+                    <option th:each="usuario : ${usuarioList}"
+                            th:value="${usuario.usuario_id}"
+                            th:text="${usuario.correo}">
+                    </option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="tipoLog">Tipo de Log</label>
+                <select class="form-control" id="tipoLog" th:field="*{tipoLog}">
+                    <option value="INFORMACION">Información</option>
+                    <option value="ADVERTENCIA">Advertencia</option>
+                    <option value="FALLO">Error</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="mensaje">Mensaje</label>
+                <textarea class="form-control" id="mensaje" th:field="*{mensaje}" required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Guardar</button>
+        </form>
+    </div>
 </div>
 
 <!-- Footer -->

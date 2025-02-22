@@ -21,6 +21,7 @@ public class PersonajeWebController {
     @GetMapping
     public String listarPersonaje(Model model) {
         try {
+            try{}catch (Exception e){throw  e;}
             List<Personaje> personaje = personajeService.getAll();
             model.addAttribute("personajes", personaje);
             model.addAttribute("personaje", personaje);

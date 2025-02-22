@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @NoArgsConstructor
 @Getter
@@ -18,8 +19,8 @@ public class UsuarioDTO {
     private String nombrePrivado;
     private String correo;
     private String contrasena;
-    private LocalDateTime conexion;
-    private LocalDateTime fecha_creacion;
+    private Date conexion;
+    private Date fecha_creacion;
     private boolean estado;
     private TipoUsuario tipoUsuario;
 }

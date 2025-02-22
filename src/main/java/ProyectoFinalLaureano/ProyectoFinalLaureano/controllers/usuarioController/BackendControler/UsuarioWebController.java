@@ -1,6 +1,7 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.usuarioController.BackendControler;
 
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.usuario.Usuario;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.services.usuarioService.TipoUsuarioService;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.usuarioService.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,10 +18,17 @@ public class UsuarioWebController {
     @Autowired
     private UsuarioService usuarioService;
 
+    @Autowired
+    private TipoUsuarioService tipoUsuarioService;
+
+
+
     // Endpoint para mostrar la lista de usuarios
     @GetMapping
     public String showUsuariosList(Model model) {
         try {
+            try{}catch (Exception e){throw  e;}
+
             List<Usuario> usuarios = usuarioService.getAll();
             model.addAttribute("usuarios", usuarios);
             return "admin/usuarios";

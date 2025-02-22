@@ -10,8 +10,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.sql.Date;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 
 // (Correcto)
@@ -69,5 +69,5 @@ public class LogTransacciones {
     //Fecha de transacion
     @Column(name = "fecha_transaccion", nullable = false)
     @Schema(description = "Fecha y hora de la transacción", example = "2023-10-01T12:00:00")
-    private LocalDateTime fecha_transaccion;
+    private Date fecha_transaccion = new Date();
 }

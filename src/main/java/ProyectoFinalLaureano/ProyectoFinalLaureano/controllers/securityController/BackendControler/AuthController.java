@@ -16,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.Map;
 
 @Controller
@@ -52,8 +53,8 @@ public class AuthController {
         try {
             usuario.setUsuario_id(null); // Asegúrate de que el ID sea nulo para crear un nuevo usuario
             usuario.setLimite_personajes(3); // Establece el límite de personajes
-            usuario.setFecha_creacion(LocalDateTime.now()); // Establece la fecha de creación
-            usuario.setUltima_conexion(LocalDateTime.now()); // Establece la fecha de inicio de sesión
+            usuario.setFecha_creacion(new Date()); // Establece la fecha de creación
+            usuario.setUltima_conexion(new Date()); // Establece la fecha de inicio de sesión
             usuario.setEstado_cuenta(true); // Establece el estado de la cuenta como activa
 
 

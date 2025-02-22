@@ -65,7 +65,7 @@ public class LogPersonajeController {
     @Operation(summary = "Actualizar un log de personaje o monstruo por ID")
     public ResponseEntity<?> actualizarPersonajeLog(@PathVariable Long id, @RequestBody LogPersonajeMonstruo logActualizar) {
         try {
-            if (logActualizar.getRegistroId().equals(id)) {
+            if (logActualizar.getRegistro_id().equals(id)) {
                 return ResponseEntity.ok(logPersonajeService.setItem(logActualizar)); // Actualiza el log y devuelve la respuesta
             } else {
                 return ResponseEntity.badRequest().body("El ID proporcionado no coincide con el ID del personaje o monstruo.");

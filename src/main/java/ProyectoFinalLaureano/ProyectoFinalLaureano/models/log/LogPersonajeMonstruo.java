@@ -26,7 +26,7 @@ public class LogPersonajeMonstruo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "registro_id")
-    private Long registroId;
+    private Long registro_id;
 
     //Persoanojae registrado
     @ManyToOne
@@ -42,7 +42,7 @@ public class LogPersonajeMonstruo {
 
     //Fecha de caza
     @Column(name = "fecha", nullable = false)
-    private LocalDateTime fechaCaza = LocalDateTime.now();
+    private Date fechaCaza = new Date();
 
     //Almas recividas
     @Column(name = "almas_obtenidas", nullable = false)

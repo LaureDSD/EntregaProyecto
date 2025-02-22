@@ -20,6 +20,8 @@ public class InventarioWebController {
     @GetMapping
     public String listar(Model model) {
         try {
+            try{}catch (Exception e){throw  e;}
+            try{}catch (Exception e){throw  e;}
             List<InventarioPersonaje> inventarios = inventarioService.getAll();
             model.addAttribute("persoanjesItems", inventarios);
             model.addAttribute("persoanjeItem", new InventarioPersonaje());

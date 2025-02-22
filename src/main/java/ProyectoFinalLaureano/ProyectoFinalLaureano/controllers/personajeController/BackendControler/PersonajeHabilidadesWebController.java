@@ -21,6 +21,8 @@ public class PersonajeHabilidadesWebController {
     @GetMapping
     public String listar(Model model) {
         try {
+            try{}catch (Exception e){throw  e;}
+            try{}catch (Exception e){throw  e;}
             List<PersonajeHabilidad> habilidades = habilidadesPersonajeService.getAll();
             model.addAttribute("persoanjesHabilidades", habilidades);
             model.addAttribute("persoanjeHabilidad", new MonstruoHabilidad());
