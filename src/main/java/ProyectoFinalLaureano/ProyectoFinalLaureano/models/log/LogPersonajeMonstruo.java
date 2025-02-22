@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.Date;
+
 
 // (Correcto)
 
@@ -27,16 +29,16 @@ public class LogPersonajeMonstruo {
     private Long registroId;
 
     //Persoanojae registrado
-    //@ManyToOne
-    //@JoinColumn(name = "personaje_id", nullable = false)
-    @Column(name = "personaje_id", nullable = false)
-    private Long personaje;
+    @ManyToOne
+    @JoinColumn(name = "personaje_id", nullable = false)
+    //@Column(name = "personaje_id", nullable = false)
+    private Personaje personaje;
 
     //Monstruo registrado
-    //@ManyToOne
-    //@JoinColumn(name = "monstruo_id", nullable = false)
-    @Column(name = "monstruo_id", nullable = false)
-    private Long monstruo;
+    @ManyToOne
+    @JoinColumn(name = "monstruo_id", nullable = false)
+    //@Column(name = "monstruo_id", nullable = false)
+    private Monstruo monstruo;
 
     //Fecha de caza
     @Column(name = "fecha", nullable = false)

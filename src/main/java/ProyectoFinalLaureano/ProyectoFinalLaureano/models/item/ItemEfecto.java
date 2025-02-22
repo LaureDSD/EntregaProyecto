@@ -21,18 +21,16 @@ public class ItemEfecto {
     private Long item_efecto_id;
 
     //Item con el efecto
-    //@ManyToOne
+    @ManyToOne
     //@MapsId("item_id")
-    //@Join
-    @Column(name = "item_id", nullable = false)
+    @JoinColumn(name = "item_id", nullable = false)
     @Schema(description = "Ítem asociado al efecto")
-    private Long item;
+    private Item item;
 
     //Efecto del item
-    //@ManyToOne
+    @ManyToOne
     //@MapsId("efecto_id")
-    //@Join
-    @Column(name = "efecto_id", nullable = false)
+    @JoinColumn(name = "efecto_id", nullable = false)
     @Schema(description = "Efecto aplicado por el ítem")
-    private Long efecto;
+    private EfectoEstado efecto;
 }

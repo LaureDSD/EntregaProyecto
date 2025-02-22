@@ -131,7 +131,6 @@
         </div>
     </div>
 </nav>
-
 <!-- Contenido principal -->
 <div class="container mt-4">
     <!-- Mensaje de Error si ocurre algún problema -->
@@ -139,61 +138,57 @@
         <p th:text="${error}"></p>
     </div>
 
-    <h1 class="mb-4">Gestión de Items de Monstruos</h1>
+    <h2 class="text-center mb-4">Gestión de Tipos de Ítem</h2>
 
-    <!-- Listado de Items que un Monstruo puede soltar -->
-    <section class="mt-5">
-        <h2>Lista de Items de Monstruos</h2>
-        <table class="table table-striped table-hover">
-            <thead class="table-dark">
+    <!-- Formulario para crear o editar un tipo de ítem -->
+    <div class="form-container">
+        <h3 th:text="${tipoItem.tipoItemId != null ? 'Editar Tipo de Ítem' : 'Crear Nuevo Tipo de Ítem'}"></h3>
+        <form th:action="@{/admin/tipoItem/save}" th:object="${tipoItem}" method="post">
+            <input type="hidden" th:field="*{tipoItemId}" />
+
+            <!-- Nombre del Tipo de Ítem -->
+            <div class="form-group mb-3">
+                <label for="nombre" class="form-label">Nombre</label>
+                <input type="text" id="nombre" th:field="*{nombre}" class="form-control" placeholder="Nombre del tipo de ítem" required />
+            </div>
+
+            <!-- Descripción del Tipo de Ítem -->
+            <div class="form-group mb-3">
+                <label for="descripcion" class="form-label">Descripción</label>
+                <textarea id="descripcion" th:field="*{descripcion}" class="form-control" placeholder="Descripción del tipo de ítem" required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary">
+                <span th:text="${tipoItem.tipoItemId != null ? 'Actualizar' : 'Crear'}"></span>
+            </button>
+        </form>
+    </div>
+
+    <!-- Listado de Tipos de Ítem -->
+    <div th:unless="${tipoItem.tipoItemId != null}" class="table-container">
+        <h3 class="mb-4">Listado de Tipos de Ítem</h3>
+        <table class="table table-bordered">
+            <thead class="thead-dark">
             <tr>
                 <th>ID</th>
-                <th>Monstruo</th>
-                <th>Ítem</th>
-                <th>Probabilidad (%)</th>
+                <th>Nombre</th>
+                <th>Descripción</th>
                 <th>Acciones</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="monstruoItem : ${monstruosItems}">
-                <td th:text="${monstruoItem.monstruo_item_id}"></td>
-                <td th:text="${monstruoItem.monstruo}"></td>
-                <td th:text="${monstruoItem.item}"></td>
-                <td th:text="${monstruoItem.probabilidad}"></td>
+            <tr th:each="tipoItem : ${tiposItem}">
+                <td th:text="${tipoItem.tipoItemId}"></td>
+                <td th:text="${tipoItem.nombre}"></td>
+                <td th:text="${tipoItem.descripcion}"></td>
                 <td>
-                    <!-- Enlace de edición -->
-                    <a th:href="@{'/admin/monstruosItems/edit/' + ${monstruoItem.monstruo_item_id}}" class="btn btn-sm btn-primary">Editar</a>
-                    |
-                    <!-- Enlace de eliminación -->
-                    <a th:href="@{'/admin/monstruosItems/delete/' + ${monstruoItem.monstruo_item_id}}"
-                       class="btn btn-sm btn-danger" onclick="return confirm('¿Estás seguro de eliminar este ítem de monstruo?');">Eliminar</a>
+                    <a href="#" th:href="@{/admin/tipoItem/edit/{id}(id=${tipoItem.tipoItemId})}" class="btn btn-warning btn-sm">Editar</a>
+                    <a href="#" th:href="@{/admin/tipoItem/delete/{id}(id=${tipoItem.tipoItemId})}" class="btn btn-danger btn-sm">Eliminar</a>
                 </td>
             </tr>
             </tbody>
         </table>
-    </section>
-
-    <!-- Formulario para crear/editar Items de Monstruos -->
-    <section class="mt-5">
-        <h2 th:text="${monstruoItem.monstruo_item_id != null ? 'Editar Item de Monstruo' : 'Nuevo Item de Monstruo'}"></h2>
-        <form th:action="@{/admin/monstruosItems/save}" th:object="${monstruoItem}" method="post">
-            <div class="form-group">
-                <label for="monstruo">Monstruo</label>
-                <input type="number" id="monstruo" th:field="*{monstruo}" class="form-control" placeholder="ID del monstruo" required>
-            </div>
-            <div class="form-group">
-                <label for="item">Ítem</label>
-                <input type="number" id="item" th:field="*{item}" class="form-control" placeholder="ID del ítem" required>
-            </div>
-            <div class="form-group">
-                <label for="probabilidad">Probabilidad</label>
-                <input type="number" id="probabilidad" th:field="*{probabilidad}" class="form-control" placeholder="Probabilidad de drop (%)" required>
-            </div>
-            <button type="submit" class="btn btn-success mt-3">
-                <span th:text="${monstruoItem.monstruo_item_id != null ? 'Guardar Cambios' : 'Crear Item de Monstruo'}"></span>
-            </button>
-        </form>
-    </section>
+    </div>
 </div>
 
 

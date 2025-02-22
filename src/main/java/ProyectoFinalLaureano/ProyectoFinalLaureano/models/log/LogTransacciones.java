@@ -1,13 +1,18 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.models.log;
 
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.item.Item;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.log.enums.TipoTransaccion;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.npc.Npc;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.Personaje;
 import jakarta.persistence.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.sql.Date;
 import java.time.LocalDateTime;
+
 
 // (Correcto)
 @NoArgsConstructor
@@ -25,25 +30,25 @@ public class LogTransacciones {
     private Long transaccion_id;
 
     //Persoanje de la realcion N:1
-    //@ManyToOne
-    //@JoinColumn(name = "personaje_id", nullable = false)
-    @Column(name = "personaje_id", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "personaje_id", nullable = false)
+    //@Column(name = "personaje_id", nullable = false)
     @Schema(description = "Personaje asociado a la transacción")
-    private Long personaje;
+    private Personaje personaje;
 
     //NPC de la relacion N:1
-    //@ManyToOne
-    //@JoinColumn(name = "npc_id", nullable = false)
-    @Column(name = "npc_id", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "npc_id", nullable = false)
+    //@Column(name = "npc_id", nullable = false)
     @Schema(description = "NPC asociado a la transacción")
-    private Long npc;
+    private Npc npc;
 
     //Item dela realcion N:1
-    //@ManyToOne
-    //@JoinColumn(name = "item_id", nullable = false)
-    @Column(name = "item_id", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "item_id", nullable = false)
+    //@Column(name = "item_id", nullable = false)
     @Schema(description = "Ítem involucrado en la transacción")
-    private Long item;
+    private Item item;
 
     //Tipo de la transacion
     @Enumerated(EnumType.STRING)

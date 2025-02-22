@@ -35,10 +35,4 @@ public class TipoMonstruo {
     @Schema(description = "Descripción del tipo de monstruo", example = "Monstruos comunes que se encuentran en cualquier zona")
     private String descripcion;
 
-    /*
-    // Relación Uno a Muchos con Monstruo
-    @OneToMany(mappedBy = "TipoMonstruo", cascade = CascadeType.ALL)
-    @JsonIgnore // Excluir esta relación en la serialización JSON
-    @Schema(description = "Monstruos asociados a este tipo")
-    private List<Monstruo> monstruos;*/
 }

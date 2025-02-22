@@ -37,14 +37,12 @@ public class MonstruoHabilidad {
     private double probabilidadFallo;
 
     // Relación con la tabla monstruo N:1
-    //@ManyToOne()
-    //@Join
-    @Column(name = "monstruo_id", insertable = false, updatable = false)
-    private Long monstruo;
+    @ManyToOne()
+    @JoinColumn(name = "monstruo_id", insertable = false, updatable = false)
+    private Monstruo monstruo;
 
     // Relación con la tabla habilidad N:1
-    //@ManyToOne()
-    //@Join
-    @Column(name = "habilidad_id", insertable = false, updatable = false)
-    private Long habilidad;
+    @ManyToOne()
+    @JoinColumn(name = "habilidad_id", insertable = false, updatable = false)
+    private Habilidad habilidad;
 }

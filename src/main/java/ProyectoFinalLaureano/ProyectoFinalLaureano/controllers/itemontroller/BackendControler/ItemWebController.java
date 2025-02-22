@@ -22,14 +22,17 @@ public class ItemWebController {
     @Autowired
     private TipoItemService tipoItemService;
 
+    private List<TipoItem> til;
+
     // Endpoint para mostrar la lista de items
     @GetMapping
     public String listarItem(Model model) {
         try {
+            try{ til = tipoItemService.getAll(); }catch (Exception e ){throw e;}
             List<Item> items = itemService.getAll();
             model.addAttribute("items", items);
             model.addAttribute("item", new Item());
-            model.addAttribute("tiposItem", tipoItemService.getAll());
+            model.addAttribute("tiposItem", til );
             return "admin/items";
         } catch (Exception e) {
             model.addAttribute("error", "Error al cargar los items: " + e.getMessage());
@@ -43,6 +46,7 @@ public class ItemWebController {
         try {
             Item item = (id != null) ? itemService.getByID(id) : new Item();
             model.addAttribute("item", item);
+            model.addAttribute("tiposItem", til );
             return "admin/items";
         } catch (Exception e) {
             model.addAttribute("error", "Error al cargar el item para editar: " + e.getMessage());

@@ -133,38 +133,54 @@
 </nav>
 
 
-<!-- Contenido principal -->
 <div class="container mt-4">
-    <!-- Mensaje de Error si ocurre algún problema -->
+    <!-- Mensaje de Error -->
     <div th:if="${error}" class="alert alert-danger">
         <p th:text="${error}"></p>
     </div>
 
     <h2 class="text-center mb-4">Gestión de Habilidades de Monstruos</h2>
 
-    <!-- Formulario de MonstruoHabilidad (Crear o Editar) -->
+    <!-- Formulario para crear o editar relación entre monstruo y habilidad -->
     <div class="form-container">
-        <h3 th:text="${monstruoHabilidad.monstruo_habilidad_id != null ? 'Editar Habilidad de Monstruo' : 'Crear Nueva Habilidad de Monstruo'}"></h3>
+        <h3 th:text="${monstruoHabilidad.monstruo_habilidad_id != null ? 'Editar Relación' : 'Crear Nueva Relación'}"></h3>
         <form th:action="@{/admin/monstruosHabilidades/save}" th:object="${monstruoHabilidad}" method="post">
             <input type="hidden" th:field="*{monstruo_habilidad_id}" />
 
+            <!-- Selección de Monstruo -->
             <div class="form-group mb-3">
                 <label for="monstruo" class="form-label">Monstruo</label>
-                <select id="monstruo" th:field="*{monstruo}" class="form-control" required>
-                    <option th:each="monstruo : ${monstruos}" th:value="${monstruo.monstruo_id}" th:text="${monstruo.nombre}"></option>
+                <select th:field="*{monstruo.monstruo_id}" class="form-control" required>
+                    <option value="" disabled selected>Seleccione un monstruo</option>
+                    <option th:each="monstruo : ${monstruoList}" th:value="${monstruo.monstruo_id}" th:text="${monstruo.nombre}"></option>
                 </select>
             </div>
 
+            <!-- Selección de Habilidad -->
             <div class="form-group mb-3">
                 <label for="habilidad" class="form-label">Habilidad</label>
-                <select id="habilidad" th:field="*{habilidad}" class="form-control" required>
-                    <option th:each="habilidad : ${habilidades}" th:value="${habilidad.id}" th:text="${habilidad.nombre}"></option>
+                <select th:field="*{habilidad.habilidad_id}" class="form-control" required>
+                    <option value="" disabled selected>Seleccione una habilidad</option>
+                    <option th:each="habilidad : ${habilidadList}" th:value="${habilidad.habilidad_id}" th:text="${habilidad.nombre}"></option>
                 </select>
             </div>
 
+            <!-- Nivel de la habilidad -->
             <div class="form-group mb-3">
-                <label for="nivel" class="form-label">Nivel</label>
-                <input type="number" id="nivel" th:field="*{nivel}" class="form-control" placeholder="Nivel de la habilidad" required />
+                <label for="nivelHabilidad" class="form-label">Nivel de la Habilidad</label>
+                <input type="number" th:field="*{nivelHabilidad}" class="form-control" min="1" required />
+            </div>
+
+            <!-- Probabilidad de uso -->
+            <div class="form-group mb-3">
+                <label for="probabilidadUso" class="form-label">Probabilidad de Uso (%)</label>
+                <input type="number" th:field="*{probabilidadUso}" class="form-control" min="0" max="100" required />
+            </div>
+
+            <!-- Probabilidad de fallo -->
+            <div class="form-group mb-3">
+                <label for="probabilidadFallo" class="form-label">Probabilidad de Fallo (%)</label>
+                <input type="number" th:field="*{probabilidadFallo}" class="form-control" min="0" max="100" required />
             </div>
 
             <button type="submit" class="btn btn-primary">
@@ -173,28 +189,30 @@
         </form>
     </div>
 
-    <!-- Tabla de Habilidades de Monstruos -->
-    <div th:unless="${monstruoHabilidad.monstruo_habilidad_id != null}" class="table-container">
-        <h3 class="mb-4">Listado de Habilidades de Monstruos</h3>
+    <!-- Listado de Relaciones entre Monstruos y Habilidades -->
+    <div th:unless="${monstruoHabilidad.monstruo_habilidad_id != null}" class="table-container mt-4">
+        <h3 class="mb-4">Listado de Relaciones</h3>
         <table class="table table-bordered">
             <thead class="thead-dark">
             <tr>
-                <th>ID</th>
                 <th>Monstruo</th>
                 <th>Habilidad</th>
                 <th>Nivel</th>
+                <th>Probabilidad de Uso</th>
+                <th>Probabilidad de Fallo</th>
                 <th>Acciones</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="monstruoHabilidad : ${monstruosHabilidades}">
-                <td th:text="${monstruoHabilidad.monstruo_habilidad_id}"></td>
-                <td th:text="${monstruoHabilidad.monstruo.nombre}"></td>
-                <td th:text="${monstruoHabilidad.habilidad.nombre}"></td>
-                <td th:text="${monstruoHabilidad.nivel}"></td>
+            <tr th:each="relacion : ${monstruosHabilidades}">
+                <td th:text="${relacion.monstruo.nombre}"></td>
+                <td th:text="${relacion.habilidad.nombre}"></td>
+                <td th:text="${relacion.nivelHabilidad}"></td>
+                <td th:text="${relacion.probabilidadUso}"></td>
+                <td th:text="${relacion.probabilidadFallo}"></td>
                 <td>
-                    <a href="#" th:href="@{/admin/monstruosHabilidades/edit/{id}(id=${monstruoHabilidad.monstruo_habilidad_id})}" class="btn btn-warning btn-sm">Editar</a>
-                    <a href="#" th:href="@{/admin/monstruosHabilidades/delete/{id}(id=${monstruoHabilidad.monstruo_habilidad_id})}" class="btn btn-danger btn-sm">Eliminar</a>
+                    <a href="#" th:href="@{/admin/monstruosHabilidades/edit/{id}(id=${relacion.monstruo_habilidad_id})}" class="btn btn-warning btn-sm">Editar</a>
+                    <a href="#" th:href="@{/admin/monstruosHabilidades/delete/{id}(id=${relacion.monstruo_habilidad_id})}" class="btn btn-danger btn-sm">Eliminar</a>
                 </td>
             </tr>
             </tbody>

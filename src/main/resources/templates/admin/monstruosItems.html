@@ -132,54 +132,62 @@
     </div>
 </nav>
 
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Monstruos Items</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h2 class="mt-4">Administrar Items de Monstruos</h2>
 
-<!-- Contenido principal -->
-<div class="container mt-4">
-    <!-- Mensaje de Error si ocurre algún problema -->
+    <!-- Error Message -->
     <div th:if="${error}" class="alert alert-danger">
-        <p th:text="${error}"></p>
+        <span th:text="${error}"></span>
     </div>
 
-    <h2 class="text-center mb-4">Gestión de Items de Monstruos</h2>
 
-    <!-- Formulario de MonstruoItem (Crear o Editar) -->
-    <div class="form-container">
-        <h3 th:text="${monstruoItem.monstruo_item_id != null ? 'Editar Item de Monstruo' : 'Crear Nuevo Item de Monstruo'}"></h3>
+    <!-- Form to Add or Edit a Monstruo Item -->
+    <div class="mt-4">
+        <h3 th:text="${monstruoItem.monstruo_item_id != null ? 'Editar Monstruo Item' : 'Agregar Monstruo Item'}"></h3>
         <form th:action="@{/admin/monstruosItems/save}" th:object="${monstruoItem}" method="post">
-            <input type="hidden" th:field="*{monstruo_item_id}" />
-
-            <div class="form-group mb-3">
-                <label for="monstruo" class="form-label">Monstruo</label>
-                <select id="monstruo" th:field="*{monstruo}" class="form-control" required>
-                    <option th:each="monstruo : ${monstruos}" th:value="${monstruo.monstruo_Id}" th:text="${monstruo.nombre}"></option>
+            <div class="form-group">
+                <label for="monstruo">Monstruo</label>
+                <select class="form-control" id="monstruo" th:field="*{monstruo.monstruo_id}">
+                    <option th:each="monstruo : ${monstruoList}"
+                            th:value="${monstruo.monstruo_id}"
+                            th:text="${monstruo.nombre}">
+                    </option>
                 </select>
             </div>
 
-            <div class="form-group mb-3">
-                <label for="item" class="form-label">Ítem</label>
-                <select id="item" th:field="*{item}" class="form-control" required>
-                    <option th:each="item : ${items}" th:value="${item.itemId}" th:text="${item.nombre}"></option>
+            <div class="form-group">
+                <label for="item">Ítem</label>
+                <select class="form-control" id="item" th:field="*{item.item_id}">
+                    <option th:each="item : ${itemList}"
+                            th:value="${item.item_id}"
+                            th:text="${item.nombre}">
+                    </option>
                 </select>
             </div>
 
-            <div class="form-group mb-3">
-                <label for="probabilidad" class="form-label">Probabilidad</label>
-                <input type="number" id="probabilidad" th:field="*{probabilidad}" class="form-control" placeholder="Probabilidad del drop" required />
+            <div class="form-group">
+                <label for="probabilidad">Probabilidad</label>
+                <input type="number" class="form-control" id="probabilidad" th:field="*{probabilidad}" min="0" max="100" step="1" required>
             </div>
 
-            <button type="submit" class="btn btn-primary">
-                <span th:text="${monstruoItem.monstruo_item_id != null ? 'Actualizar' : 'Crear'}"></span>
-            </button>
+            <button type="submit" class="btn btn-primary">Guardar</button>
         </form>
     </div>
 
-    <!-- Tabla de Items de Monstruos -->
-    <div th:unless="${monstruoItem.monstruo_item_id != null}" class="table-container">
-        <h3 class="mb-4">Listado de Items de Monstruos</h3>
-        <table class="table table-bordered">
-            <thead class="thead-dark">
+    <!-- List of Monstruos Items -->
+    <div class="mt-4">
+        <h3>Lista de Monstruos Items</h3>
+        <table class="table">
+            <thead>
             <tr>
-                <th>ID</th>
                 <th>Monstruo</th>
                 <th>Ítem</th>
                 <th>Probabilidad</th>
@@ -188,19 +196,30 @@
             </thead>
             <tbody>
             <tr th:each="monstruoItem : ${monstruosItems}">
-                <td th:text="${monstruoItem.monstruo_item_id}"></td>
                 <td th:text="${monstruoItem.monstruo.nombre}"></td>
                 <td th:text="${monstruoItem.item.nombre}"></td>
                 <td th:text="${monstruoItem.probabilidad}"></td>
                 <td>
-                    <a href="#" th:href="@{/admin/monstruosItems/edit/{id}(id=${monstruoItem.monstruo_item_id})}" class="btn btn-warning btn-sm">Editar</a>
-                    <a href="#" th:href="@{/admin/monstruosItems/delete/{id}(id=${monstruoItem.monstruo_item_id})}" class="btn btn-danger btn-sm">Eliminar</a>
+                    <!-- Edit Button -->
+                    <a th:href="@{/admin/monstruosItems/edit/{id}(id=${monstruoItem.monstruo_item_id})}" class="btn btn-warning btn-sm">Editar</a>
+
+                    <!-- Delete Button -->
+                    <a th:href="@{/admin/monstruosItems/delete/{id}(id=${monstruoItem.monstruo_item_id})}"
+                       class="btn btn-danger btn-sm"
+                       th:onclick="|return confirm('¿Estás seguro de eliminar este item de monstruo?')|">Eliminar</a>
                 </td>
             </tr>
             </tbody>
         </table>
     </div>
+
 </div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
 
 
 <!-- Footer -->

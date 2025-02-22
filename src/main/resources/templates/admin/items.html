@@ -131,6 +131,13 @@
         </div>
     </div>
 </nav>
+
+
+
+
+
+
+
 <!-- Contenido principal -->
 <div class="container mt-4">
     <!-- Mensaje de Error si ocurre algún problema -->
@@ -142,75 +149,81 @@
 
     <!-- Formulario para crear o editar un ítem -->
     <div class="form-container">
-        <h3 th:text="${item.itemId != null ? 'Editar Ítem' : 'Crear Nuevo Ítem'}"></h3>
+        <h3 th:text="${item.item_id != null ? 'Editar Ítem' : 'Crear Nuevo Ítem'}"></h3>
         <form th:action="@{/admin/items/save}" th:object="${item}" method="post">
-            <input type="hidden" th:field="*{itemId}" />
+            <input type="hidden" th:field="*{item_id}" />
 
-            <!-- Nombre del ítem -->
+            <!-- Nombre del Ítem -->
             <div class="form-group mb-3">
                 <label for="nombre" class="form-label">Nombre</label>
                 <input type="text" id="nombre" th:field="*{nombre}" class="form-control" placeholder="Nombre del ítem" required />
             </div>
 
-            <!-- Descripción del ítem -->
+            <!-- Imagen del Ítem -->
+            <div class="form-group mb-3">
+                <label for="imagen" class="form-label">Imagen</label>
+                <input type="text" id="imagen" th:field="*{imagen}" class="form-control" placeholder="Imagen del ítem" required />
+            </div>
+
+            <!-- Descripción del Ítem -->
             <div class="form-group mb-3">
                 <label for="descripcion" class="form-label">Descripción</label>
                 <textarea id="descripcion" th:field="*{descripcion}" class="form-control" placeholder="Descripción del ítem" required></textarea>
             </div>
 
-            <!-- Imagen del ítem -->
-            <div class="form-group mb-3">
-                <label for="imagen" class="form-label">Imagen</label>
-                <input type="text" id="imagen" th:field="*{imagen}" class="form-control" placeholder="URL de la imagen" />
-            </div>
-
-            <!-- Tipo de ítem -->
+            <!-- Tipo de Ítem -->
             <div class="form-group mb-3">
                 <label for="tipoItem" class="form-label">Tipo de Ítem</label>
-                <select id="tipoItem" th:field="*{tipoItem.tipoItemId}" class="form-control">
-                    <option value="" disabled selected>Seleccione un tipo</option>
+                <select id="tipoItem" th:field="*{tipoItem}" class="form-control" required>
                     <option th:each="tipo : ${tiposItem}" th:value="${tipo.tipoItemId}" th:text="${tipo.nombre}"></option>
                 </select>
             </div>
 
-            <!-- Acumulaciones máximas -->
+            <!-- Acumulaciones Máximas -->
             <div class="form-group mb-3">
                 <label for="acumulaciones_max" class="form-label">Acumulaciones Máximas</label>
-                <input type="number" id="acumulaciones_max" th:field="*{acumulaciones_max}" class="form-control" min="1" required />
+                <input type="number" id="acumulaciones_max" th:field="*{acumulaciones_max}" class="form-control" placeholder="Acumulaciones máximas" required />
             </div>
 
             <button type="submit" class="btn btn-primary">
-                <span th:text="${item.itemId != null ? 'Actualizar' : 'Crear'}"></span>
+                <span th:text="${item.item_id != null ? 'Actualizar' : 'Crear'}"></span>
             </button>
         </form>
     </div>
 
     <!-- Listado de Ítems -->
-    <div th:unless="${item.itemId != null}" class="table-container mt-5">
+    <div th:unless="${item.item_id != null}" class="table-container">
         <h3 class="mb-4">Listado de Ítems</h3>
         <table class="table table-bordered">
             <thead class="thead-dark">
             <tr>
                 <th>ID</th>
                 <th>Nombre</th>
+                <th>Imagen</th>
+                <th>Tipo de Ítem</th>
                 <th>Descripción</th>
+                <th>Acumulaciones Máximas</th>
                 <th>Acciones</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="item : ${items}">
-                <td th:text="${item.itemId}"></td>
+                <td th:text="${item.item_id}"></td>
                 <td th:text="${item.nombre}"></td>
+                <td th:text="${item.imagen}"></td>
+                <td th:text="${item.tipoItem.nombre}"></td>
                 <td th:text="${item.descripcion}"></td>
+                <td th:text="${item.acumulaciones_max}"></td>
                 <td>
-                    <a href="#" th:href="@{/admin/items/edit/{id}(id=${item.itemId})}" class="btn btn-warning btn-sm">Editar</a>
-                    <a href="#" th:href="@{/admin/items/delete/{id}(id=${item.itemId})}" class="btn btn-danger btn-sm">Eliminar</a>
+                    <a href="#" th:href="@{/admin/items/edit/{id}(id=${item.item_id})}" class="btn btn-warning btn-sm">Editar</a>
+                    <a href="#" th:href="@{/admin/items/delete/{id}(id=${item.item_id})}" class="btn btn-danger btn-sm">Eliminar</a>
                 </td>
             </tr>
             </tbody>
         </table>
     </div>
 </div>
+
 
 <!-- Footer -->
 <footer class="mt-5 py-3">

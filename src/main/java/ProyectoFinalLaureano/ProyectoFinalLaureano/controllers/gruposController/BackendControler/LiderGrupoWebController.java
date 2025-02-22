@@ -68,7 +68,7 @@ public class LiderGrupoWebController {
     @PostMapping("/save")
     public String guardar(@ModelAttribute("liderGrupo") LiderGrupo liderGrupo, Model model) throws IOException {
         try {
-            liderGrupo.setFechaNombramiento(new Date());
+            liderGrupo.setFechaNombramiento( new Date());
             service.save(liderGrupo);
             return "redirect:/admin/lideresGrupos";
         } catch (Exception e) {

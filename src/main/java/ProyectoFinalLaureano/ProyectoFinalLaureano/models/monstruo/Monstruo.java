@@ -32,12 +32,12 @@ public class Monstruo {
     private String nombre;
 
     //Tipo de omonstruo
-    //@ManyToOne
-    //@JoinColumn(name = "tipo_monstruo_id", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "tipo_monstruo_id", nullable = false)
     //@JsonIgnore // Excluir esta relación en la serialización JSON
-    @Column(name = "tipo _monstruo_id")
+    //@Column(name = "tipo _monstruo_id")
     @Schema(description = "Tipo del monstruo", example = "1")
-    private Long tipo_monstruo;
+    private TipoMonstruo tipo_monstruo;
 
     //Nivel del mosntruo
     @Column(name = "nivel")
