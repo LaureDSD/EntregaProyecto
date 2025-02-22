@@ -133,83 +133,89 @@
 </nav>
 
 
-<!-- Contenido principal -->
 <div class="container mt-4">
     <!-- Mensaje de Error si ocurre algún problema -->
     <div th:if="${error}" class="alert alert-danger">
         <p th:text="${error}"></p>
     </div>
 
-    <h2 class="text-center mb-4">Gestión de NPCs</h2>
+    <h2 class="text-center mb-4">Gestión de Grupos</h2>
 
-    <!-- Formulario para crear o editar un NPC -->
+    <!-- Formulario de Estado (Crear o Editar) -->
     <div class="form-container">
-        <h3 th:text="${npc.npc_id != null ? 'Editar NPC' : 'Crear Nuevo NPC'}"></h3>
-        <form th:action="@{/admin/npcs/save}" th:object="${npc}" method="post">
-            <input type="hidden" th:field="*{npc_id}" />
+        <h3 th:text="${grupo.grupo_id != null ? 'Editar Grupo' : 'Crear Nuevo Grupo'}"></h3>
+        <form th:action="@{/admin/grupos/save}" th:object="${grupo}" method="post">
+            <input type="hidden" th:field="*{grupo_id}" />
 
-            <!-- Nombre del NPC -->
+            <!-- Campo para el nombre del grupo -->
             <div class="form-group mb-3">
-                <label for="nombre" class="form-label">Nombre</label>
-                <input type="text" id="nombre" th:field="*{nombre}" class="form-control" placeholder="Nombre del NPC" required />
+                <label for="nombre" class="form-label">Nombre del Grupo</label>
+                <input type="text" id="nombre" th:field="*{nombre}" class="form-control" placeholder="Nombre del grupo" required />
             </div>
 
-            <!-- Descripción del NPC -->
+            <!-- Campo para la URL del logo -->
+            <div class="form-group mb-3">
+                <label for="imagenLogo" class="form-label">Imagen del Logo</label>
+                <input type="text" id="imagenLogo" th:field="*{imagenLogo}" class="form-control" placeholder="URL del logo" required />
+            </div>
+
+            <!-- Campo para la descripción del grupo -->
             <div class="form-group mb-3">
                 <label for="descripcion" class="form-label">Descripción</label>
-                <textarea id="descripcion" th:field="*{descripcion}" class="form-control" placeholder="Descripción del NPC" required></textarea>
+                <textarea id="descripcion" th:field="*{descripcion}" class="form-control" placeholder="Descripción del grupo" required></textarea>
             </div>
 
-            <!-- Imagen del NPC -->
+            <!--
             <div class="form-group mb-3">
-                <label for="imagen" class="form-label">Imagen (URL)</label>
-                <input type="text" id="imagen" th:field="*{imagen}" class="form-control" placeholder="URL de la imagen del NPC" required />
-            </div>
+                <label for="descripcion" class="form-label">Descripción</label>
+                <input type="number" id="tipoGrupo" th:field="*{tipoGrupo}" class="form-control" placeholder="Tipo de grupo" required />
+            </div>-->
 
-            <!-- Tipo de NPC -->
+
+
+             Campo para seleccionar el tipo de grupo
             <div class="form-group mb-3">
-                <label for="tipoNPC" class="form-label">Tipo de NPC</label>
-                <select id="tipoNPC" th:field="*{tipoNPC}" class="form-control" required>
-                    <option th:each="tipo : ${tiposNpc}" th:value="${tipo.tipo_npc_id}" th:text="${tipo.nombre}"></option>
+                <label for="tipoGrupo" class="form-label">Tipo de Grupo</label>
+                <select id="tipoGrupo" th:field="*{tipoGrupo}" class="form-control" required>
+                    <option th:each="tipo : ${tiposGrupo}" th:value="${tipo.tipo_grupo_id}" th:text="${tipo.nombre}"></option>
                 </select>
             </div>
 
             <button type="submit" class="btn btn-primary">
-                <span th:text="${npc.npc_id != null ? 'Actualizar' : 'Crear'}"></span>
+                <span th:text="${grupo.grupo_id != null ? 'Actualizar' : 'Crear'}"></span>
             </button>
         </form>
     </div>
 
-    <!-- Listado de NPCs -->
-    <div th:unless="${npc.npc_id != null}" class="table-container mt-5">
-        <h3 class="mb-4">Listado de NPCs</h3>
+    <!-- Listado de Grupos -->
+    <div th:unless="${grupo.grupo_id != null}" class="table-container">
+        <h3 class="mb-4">Listado de Grupos</h3>
         <table class="table table-bordered">
             <thead class="thead-dark">
             <tr>
                 <th>ID</th>
                 <th>Nombre</th>
                 <th>Descripción</th>
-                <th>Tipo de NPC</th>
-                <th>Imagen</th>
+                <th>Tipo de Grupo</th>
                 <th>Acciones</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="npc : ${npcs}">
-                <td th:text="${npc.npc_id}"></td>
-                <td th:text="${npc.nombre}"></td>
-                <td th:text="${npc.descripcion}"></td>
-                <td th:text="${npc.tipoNPC.nombre}"></td>
-                <td><img th:src="@{${npc.imagen}}" alt="Imagen de NPC" width="50" height="50"/></td>
+            <tr th:each="grupo : ${grupos}">
+                <td th:text="${grupo.grupo_id}"></td>
+                <td th:text="${grupo.nombre}"></td>
+                <td th:text="${grupo.descripcion}"></td>
+                <td th:text="${grupo.tipoGrupo.nombre}"></td>
                 <td>
-                    <a href="#" th:href="@{/admin/npcs/edit/{id}(id=${npc.npc_id})}" class="btn btn-warning btn-sm">Editar</a>
-                    <a href="#" th:href="@{/admin/npcs/delete/{id}(id=${npc.npc_id})}" class="btn btn-danger btn-sm">Eliminar</a>
+                    <a href="#" th:href="@{/admin/grupos/edit/{id}(id=${grupo.grupo_id})}" class="btn btn-warning btn-sm">Editar</a>
+                    <a href="#" th:href="@{/admin/grupos/delete/{id}(id=${grupo.grupo_id})}" class="btn btn-danger btn-sm">Eliminar</a>
                 </td>
             </tr>
             </tbody>
         </table>
     </div>
 </div>
+
 
 
 <!-- Footer -->

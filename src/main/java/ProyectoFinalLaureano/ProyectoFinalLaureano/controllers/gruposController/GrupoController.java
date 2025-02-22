@@ -33,7 +33,7 @@ public class GrupoController {
                 return ResponseEntity.ok(grupoService.getAll());
             } else {
                 TipoGrupo tg = new TipoGrupo();
-                tg.setTipoGrupoId(tipoGrupoId);
+                tg.setTipo_grupo_id(tipoGrupoId);
                 List<Grupo> grupos = grupoService.getBytipoGrupo(tg);
                 if (grupos.isEmpty()) {
                     return ResponseEntity.status(404).body("No se encontraron grupos para el tipo de grupo con ID: " + tipoGrupoId);
@@ -76,7 +76,7 @@ public class GrupoController {
     @Operation(summary = "Actualizar un grupo por ID")
     public ResponseEntity<?> actualizarGrupo(@PathVariable Long id, @RequestBody Grupo grupoActualizar) {
         try {
-            if (!grupoActualizar.getGrupoId().equals(id)) {
+            if (!grupoActualizar.getGrupo_id().equals(id)) {
                 return ResponseEntity.status(400).body("El ID proporcionado no coincide con el ID del grupo.");
             }
             Grupo grupoActualizado = grupoService.setItem(grupoActualizar);

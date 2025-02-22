@@ -132,85 +132,83 @@
     </div>
 </nav>
 
-
-<!-- Contenido principal -->
 <div class="container mt-4">
-    <!-- Mensaje de Error si ocurre algún problema -->
+    <!-- Mensaje de error en caso de que ocurra un problema -->
     <div th:if="${error}" class="alert alert-danger">
         <p th:text="${error}"></p>
     </div>
 
-    <h2 class="text-center mb-4">Gestión de NPCs</h2>
+    <h2 class="text-center mb-4">Gestión de Tipos de Grupo</h2>
 
-    <!-- Formulario para crear o editar un NPC -->
+    <!-- Formulario de Creación o Edición de Tipo de Grupo -->
     <div class="form-container">
-        <h3 th:text="${npc.npc_id != null ? 'Editar NPC' : 'Crear Nuevo NPC'}"></h3>
-        <form th:action="@{/admin/npcs/save}" th:object="${npc}" method="post">
-            <input type="hidden" th:field="*{npc_id}" />
+        <h3 th:text="${tipoGrupo.tipo_grupo_id != null ? 'Editar Tipo de Grupo' : 'Crear Nuevo Tipo de Grupo'}"></h3>
+        <form th:action="@{/admin/tiposGrupo/save}" th:object="${tipoGrupo}" method="post">
+            <input type="hidden" th:field="*{tipo_grupo_id}" />
 
-            <!-- Nombre del NPC -->
+            <!-- Campo para el nombre del tipo de grupo -->
             <div class="form-group mb-3">
-                <label for="nombre" class="form-label">Nombre</label>
-                <input type="text" id="nombre" th:field="*{nombre}" class="form-control" placeholder="Nombre del NPC" required />
+                <label for="nombre" class="form-label">Nombre del Tipo de Grupo</label>
+                <input type="text" id="nombre" th:field="*{nombre}" class="form-control" placeholder="Nombre del tipo de grupo" required />
             </div>
 
-            <!-- Descripción del NPC -->
+            <!-- Campo para el número máximo de integrantes -->
             <div class="form-group mb-3">
-                <label for="descripcion" class="form-label">Descripción</label>
-                <textarea id="descripcion" th:field="*{descripcion}" class="form-control" placeholder="Descripción del NPC" required></textarea>
+                <label for="numeroIntegrantesMax" class="form-label">Número Máximo de Integrantes</label>
+                <input type="number" id="numeroIntegrantesMax" th:field="*{numeroIntegrantesMax}" class="form-control" placeholder="Número máximo de integrantes" required />
             </div>
 
-            <!-- Imagen del NPC -->
+            <!-- Campo para indicar si comparten experiencia y drops -->
             <div class="form-group mb-3">
-                <label for="imagen" class="form-label">Imagen (URL)</label>
-                <input type="text" id="imagen" th:field="*{imagen}" class="form-control" placeholder="URL de la imagen del NPC" required />
-            </div>
-
-            <!-- Tipo de NPC -->
-            <div class="form-group mb-3">
-                <label for="tipoNPC" class="form-label">Tipo de NPC</label>
-                <select id="tipoNPC" th:field="*{tipoNPC}" class="form-control" required>
-                    <option th:each="tipo : ${tiposNpc}" th:value="${tipo.tipo_npc_id}" th:text="${tipo.nombre}"></option>
+                <label for="compartenExpDrops" class="form-label">Comparten Experiencia y Drops</label>
+                <select id="compartenExpDrops" th:field="*{compartenExpDrops}" class="form-control" required>
+                    <option value="true">Sí</option>
+                    <option value="false">No</option>
                 </select>
             </div>
 
+            <!-- Campo para la descripción del tipo de grupo -->
+            <div class="form-group mb-3">
+                <label for="descripcion" class="form-label">Descripción</label>
+                <textarea id="descripcion" th:field="*{descripcion}" class="form-control" placeholder="Descripción del tipo de grupo" required></textarea>
+            </div>
+
             <button type="submit" class="btn btn-primary">
-                <span th:text="${npc.npc_id != null ? 'Actualizar' : 'Crear'}"></span>
+                <span th:text="${tipoGrupo.tipo_grupo_id != null ? 'Actualizar' : 'Crear'}"></span>
             </button>
         </form>
     </div>
 
-    <!-- Listado de NPCs -->
-    <div th:unless="${npc.npc_id != null}" class="table-container mt-5">
-        <h3 class="mb-4">Listado de NPCs</h3>
+    <!-- Listado de Tipos de Grupo -->
+    <div th:unless="${tipoGrupo.tipo_grupo_id != null}" class="table-container">
+        <h3 class="mb-4">Listado de Tipos de Grupo</h3>
         <table class="table table-bordered">
             <thead class="thead-dark">
             <tr>
                 <th>ID</th>
                 <th>Nombre</th>
+                <th>Máximo de Integrantes</th>
+                <th>Comparte Exp. y Drops</th>
                 <th>Descripción</th>
-                <th>Tipo de NPC</th>
-                <th>Imagen</th>
                 <th>Acciones</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="npc : ${npcs}">
-                <td th:text="${npc.npc_id}"></td>
-                <td th:text="${npc.nombre}"></td>
-                <td th:text="${npc.descripcion}"></td>
-                <td th:text="${npc.tipoNPC.nombre}"></td>
-                <td><img th:src="@{${npc.imagen}}" alt="Imagen de NPC" width="50" height="50"/></td>
+            <tr th:each="tipoGrupo : ${tiposGrupo}">
+                <td th:text="${tipoGrupo.tipo_grupo_id}"></td>
+                <td th:text="${tipoGrupo.nombre}"></td>
+                <td th:text="${tipoGrupo.numeroIntegrantesMax}"></td>
+                <td th:text="${tipoGrupo.compartenExpDrops ? 'Sí' : 'No'}"></td>
+                <td th:text="${tipoGrupo.descripcion}"></td>
                 <td>
-                    <a href="#" th:href="@{/admin/npcs/edit/{id}(id=${npc.npc_id})}" class="btn btn-warning btn-sm">Editar</a>
-                    <a href="#" th:href="@{/admin/npcs/delete/{id}(id=${npc.npc_id})}" class="btn btn-danger btn-sm">Eliminar</a>
+                    <a href="#" th:href="@{/admin/tiposGrupo/edit/{id}(id=${tipoGrupo.tipo_grupo_id})}" class="btn btn-warning btn-sm">Editar</a>
+                    <a href="#" th:href="@{/admin/tiposGrupo/delete/{id}(id=${tipoGrupo.tipo_grupo_id})}" class="btn btn-danger btn-sm">Eliminar</a>
                 </td>
             </tr>
             </tbody>
         </table>
     </div>
 </div>
-
 
 <!-- Footer -->
 <footer class="mt-5 py-3">

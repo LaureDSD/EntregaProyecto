@@ -24,7 +24,7 @@ public class Grupo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Schema(description = "ID único del grupo.", example = "1")
-    private Long grupoId;
+    private Long grupo_id;
 
     //Imagen del; grupo
     @Column(length = 255)
@@ -43,7 +43,7 @@ public class Grupo {
 
     // Relación Many-to-One con TipoGrupo
     @ManyToOne()
-    @JoinColumn(name = "tipoGrupoId", nullable = false)
+    @JoinColumn(name = "tipo_grupo_id", nullable = false)
     @Schema(description = "Tipo de grupo al que pertenece este grupo.")
     @JsonIgnore // Excluir esta relación en la serialización JSON
     private TipoGrupo tipoGrupo;

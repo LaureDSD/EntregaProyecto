@@ -6,6 +6,7 @@ import ProyectoFinalLaureano.ProyectoFinalLaureano.models.mapa.MapaEfecto;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.mapa.MapaMonstruo;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.mapaService.MapaEfectoService;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.mapaService.MapaMonstruoService;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.services.mapaService.TipoMapaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,12 +22,16 @@ public class MapaEfectoWebController {
     @Autowired
     private MapaEfectoService service;
 
+
+
     @GetMapping
     public String listar(Model model) {
         try {
             List<MapaEfecto> mapasMonstruo = service.getAll();
             model.addAttribute("mapasEfecto", mapasMonstruo);
             model.addAttribute("mapaEfecto", new MapaEfecto());
+
+
             return "admin/mapasEfecto";
         } catch (Exception e) {
             model.addAttribute("error", "Error al cargar los efectos de mapa: " + e.getMessage());

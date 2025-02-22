@@ -23,7 +23,7 @@ public class TipoGrupo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Schema(description = "ID único del tipo de grupo.", example = "1")
-    private Long tipoGrupoId;
+    private Long tipo_grupo_id;
 
     //Nombre del tippo de grupo
     @Column(nullable = false, length = 100)

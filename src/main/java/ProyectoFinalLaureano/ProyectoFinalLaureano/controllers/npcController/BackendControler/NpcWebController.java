@@ -2,7 +2,9 @@ package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.npcController.Ba
 
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.estadisticasGenerales.EstadisticasGenerales;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.npc.Npc;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.npc.TipoNPC;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.npcService.NpcService;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.services.npcService.TipoNpcService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,12 +20,16 @@ public class NpcWebController {
     @Autowired
     private NpcService npcService;
 
+    @Autowired
+    private TipoNpcService tipoNPC;
+
     @GetMapping
     public String listar(Model model) {
         try {
             List<Npc> npcs = npcService.getAll();
             model.addAttribute("npcs", npcs);
             model.addAttribute("npc", new Npc());
+            model.addAttribute("tiposNpc", tipoNPC.getAll());
             return "admin/npcs";
         } catch (Exception e) {
             model.addAttribute("error", "Error al cargar los NPCs: " + e.getMessage());

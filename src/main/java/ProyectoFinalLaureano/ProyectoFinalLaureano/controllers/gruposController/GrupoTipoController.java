@@ -65,7 +65,7 @@ public class GrupoTipoController {
     @Operation(summary = "Actualizar un tipo de grupo por ID")
     public ResponseEntity<?> actualizar(@PathVariable Long id, @RequestBody TipoGrupo tipoGrupoActualizar) {
         try {
-            if (tipoGrupoActualizar.getTipoGrupoId().equals(id)) {
+            if (tipoGrupoActualizar.getTipo_grupo_id().equals(id)) {
                 TipoGrupo tipoGrupoActualizado = tipoGrupoService.setItem(tipoGrupoActualizar);
                 return ResponseEntity.ok(tipoGrupoActualizado);
             } else {

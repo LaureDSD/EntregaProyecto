@@ -170,7 +170,7 @@
             <div class="form-group mb-3">
                 <label for="tipoMapa" class="form-label">Tipo de Mapa</label>
                 <select id="tipoMapa" th:field="*{tipoMapa}" class="form-control">
-                    <option th:each="tipo : ${tiposMapa}" th:value="${tipo.id}" th:text="${tipo.nombre}"></option>
+                    <option th:each="tipo : ${tiposMapa}" th:value="${tipo.tipoMapaId}" th:text="${tipo.nombre}"></option>
                 </select>
             </div>
 

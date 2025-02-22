@@ -3,6 +3,7 @@ package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.mapaController.B
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.mapa.Mapa;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.mapa.MapaEfecto;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.mapaService.MapaService;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.services.mapaService.TipoMapaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +19,9 @@ public class MapaWebController {
     @Autowired
     private MapaService service;
 
+    @Autowired
+    private TipoMapaService tipoMapaService;
+
     // Listado de Mapas
     @GetMapping
     public String listar(Model model) {
@@ -25,6 +29,7 @@ public class MapaWebController {
             List<Mapa> mapas = service.getAll();
             model.addAttribute("mapas", mapas);
             model.addAttribute("mapa", new Mapa());
+            model.addAttribute("tiposMapa", tipoMapaService.getAll() );
             return "admin/mapas";
         } catch (Exception e) {
             model.addAttribute("error", "Error al cargar los mapas: " + e.getMessage());
