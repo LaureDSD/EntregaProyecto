@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -59,6 +60,7 @@ public class UsuarioWebController {
     @PostMapping("/save")
     public String guardarUsuario(@ModelAttribute("usuario") Usuario usuario, Model model) throws IOException {
         try {
+            usuario.setUltima_conexion(new Date());
             usuarioService.setItem(usuario);
             return "redirect:"+rutaHTML;
         } catch (Exception e) {

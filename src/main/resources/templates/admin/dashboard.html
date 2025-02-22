@@ -38,7 +38,7 @@
                     <ul class="dropdown-menu" aria-labelledby="usuariosDropdown">
                         <li><a class="dropdown-item"  th:href="@{/admin/usuario/tipoUsuario}">Tipo de Usuario</a></li>
                         <li><a class="dropdown-item"  th:href="@{/admin/usuario/usuarios}">Usuarios</a></li>
-                        <li><a class="dropdown-item"  th:href="@{/admin/usuario/logUsuarios}">Logs de Usuario</a></li>
+                        <li><a class="dropdown-item"  th:href="@{/admin/log/logUsuarios}">Logs de Usuario</a></li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
@@ -49,7 +49,7 @@
                         <li><a class="dropdown-item"  th:href="@{/admin/personaje/personajes}">Personajes</a></li>
                         <li><a class="dropdown-item" th:href="@{/admin/personaje/tipoPersonaje}">Clases</a></li>
                         <li><a class="dropdown-item" th:href="@{/admin/personaje/personajesItems}">Inventarios</a></li>
-                        <li><a class="dropdown-item" th:href="@{/admin/personaje/persoanjesHabilidades}">Habilidades</a></li>
+                        <li><a class="dropdown-item" th:href="@{/admin/personaje/personajesHabilidades}">Habilidades</a></li>
                         <li><a class="dropdown-item" th:href="@{/admin/personaje/personajesLogros}">Logros</a></li>
                         <li><a class="dropdown-item" th:href="@{/admin/personaje/personajesMisiones}">Misiones</a></li>
                     </ul>
@@ -63,7 +63,7 @@
                         <li><a class="dropdown-item" th:href="@{/admin/monstruo/monstruos}">Monstruos</a></li>
                         <li><a class="dropdown-item" th:href="@{/admin/monstruo/monstruosItems}">Monstruos y Drops</a></li>
                         <li><a class="dropdown-item" th:href="@{/admin/monstruo/monstruosHabilidades}">Monstruos y Habilidades</a></li>
-                        <li><a class="dropdown-item" th:href="@{/admin/monstruo/logJugadores}">Registro de Jugador y Monstruo</a></li>
+                        <li><a class="dropdown-item" th:href="@{/admin/log/logJugadores}">Registro de Jugador y Monstruo</a></li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
@@ -74,7 +74,7 @@
                         <li><a class="dropdown-item" th:href="@{/admin/item/tipoItem}">Tipo de Item</a></li>
                         <li><a class="dropdown-item" th:href="@{/admin/item/items}">Items</a></li>
                         <li><a class="dropdown-item" th:href="@{/admin/item/itemsEfectos}">Items y efectos</a></li>
-                        <li><a class="dropdown-item" th:href="@{/admin/item/logTransacciones}">Transacciones NPC-Jugador</a></li>
+                        <li><a class="dropdown-item" th:href="@{/admin/log/logTransacciones}">Transacciones NPC-Jugador</a></li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
@@ -92,8 +92,8 @@
                         Misiones
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="misionDropdown">
-                        <li><a class="dropdown-item" th:href="@{/admin/misiones/misiones}">Misiones</a></li>
-                        <li><a class="dropdown-item" th:href="@{/admin/misiones/misionesItems}">Misiones recompensas</a></li>
+                        <li><a class="dropdown-item" th:href="@{/admin/mision/misiones}">Misiones</a></li>
+                        <li><a class="dropdown-item" th:href="@{/admin/mision/misionesItems}">Misiones recompensas</a></li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
@@ -101,7 +101,7 @@
                         Mapas
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="mapasDropdown">
-                        <li><a class="dropdown-item" th:href="@{/admin/mapa/tiposMapa}">Tipo de Mapa</a></li>
+                        <li><a class="dropdown-item" th:href="@{/admin/mapa/tipoMapa}">Tipo de Mapa</a></li>
                         <li><a class="dropdown-item" th:href="@{/admin/mapa/mapas}">Mapas</a></li>
                         <li><a class="dropdown-item" th:href="@{/admin/mapa/mapasEfecto}">Mapas y Efectos</a></li>
                         <li><a class="dropdown-item" th:href="@{/admin/mapa/mapasMonstruo}">Mapas y Monstruos</a></li>

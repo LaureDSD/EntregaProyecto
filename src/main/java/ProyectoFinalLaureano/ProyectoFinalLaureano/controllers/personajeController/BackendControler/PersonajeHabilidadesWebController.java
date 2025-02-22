@@ -19,7 +19,7 @@ import java.util.List;
 @RequestMapping("/admin/personaje/personajesHabilidades")
 public class PersonajeHabilidadesWebController {
 
-    private final String rutaHTML = "/admin/personajesHabilidades";
+    private final String rutaHTML = "/admin/personajes/personajesHabilidades";
 
     @Autowired
     private HabilidadesPersonajeService habilidadesPersonajeService;

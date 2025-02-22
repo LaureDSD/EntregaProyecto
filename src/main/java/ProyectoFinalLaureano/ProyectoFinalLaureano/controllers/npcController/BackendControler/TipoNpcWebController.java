@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/admin/npc/tiposNpc")
+@RequestMapping("/admin/npc/tipoNpc")
 public class TipoNpcWebController {
 
-    private final String rutaHTML = "/admin/npc/tiposNpc";
+    private final String rutaHTML = "/admin/npc/tipoNpc";
 
     @Autowired
     private TipoNpcService tipoNpcService;

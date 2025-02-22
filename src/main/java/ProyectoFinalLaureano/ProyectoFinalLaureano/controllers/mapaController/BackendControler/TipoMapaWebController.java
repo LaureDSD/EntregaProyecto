@@ -12,10 +12,10 @@ import java.io.IOException;
 import java.util.List;
 
 @Controller
-@RequestMapping("/admin/mapa/tiposMapa")
+@RequestMapping("/admin/mapa/tipoMapa")
 public class TipoMapaWebController {
 
-    private final String rutaHTML ="/admin/mapa/tiposMapa";
+    private final String rutaHTML ="/admin/mapa/tipoMapa";
 
     @Autowired
     private TipoMapaService service;
