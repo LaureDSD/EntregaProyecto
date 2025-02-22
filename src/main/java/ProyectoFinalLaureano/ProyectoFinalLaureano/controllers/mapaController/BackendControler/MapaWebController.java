@@ -1,6 +1,7 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.mapaController.BackendControler;
 
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.mapa.Mapa;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.mapa.MapaEfecto;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.mapaService.MapaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,6 +24,7 @@ public class MapaWebController {
         try {
             List<Mapa> mapas = service.getAll();
             model.addAttribute("mapas", mapas);
+            model.addAttribute("mapa", new Mapa());
             return "admin/mapas";
         } catch (Exception e) {
             model.addAttribute("error", "Error al cargar los mapas: " + e.getMessage());

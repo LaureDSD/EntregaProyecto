@@ -1,5 +1,6 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.mapaController.BackendControler;
 
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.mapa.MapaEfecto;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.mapa.TipoMapa;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.mapaService.TipoMapaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,7 @@ public class TipoMapaWebController {
         try {
             List<TipoMapa> tiposMapa = service.getAll();
             model.addAttribute("tiposMapa", tiposMapa);
+            model.addAttribute("tipoMapa", new TipoMapa());
             return "admin/tiposMapa";
         } catch (Exception e) {
             model.addAttribute("error", "Error al cargar los tipos de mapa: " + e.getMessage());

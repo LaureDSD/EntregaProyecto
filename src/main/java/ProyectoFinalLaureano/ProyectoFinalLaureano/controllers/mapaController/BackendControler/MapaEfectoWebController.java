@@ -1,5 +1,7 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.mapaController.BackendControler;
 
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.log.LogPersonajeMonstruo;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.mapa.Mapa;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.mapa.MapaEfecto;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.mapa.MapaMonstruo;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.mapaService.MapaEfectoService;
@@ -24,6 +26,7 @@ public class MapaEfectoWebController {
         try {
             List<MapaEfecto> mapasMonstruo = service.getAll();
             model.addAttribute("mapasEfecto", mapasMonstruo);
+            model.addAttribute("mapaEfecto", new MapaEfecto());
             return "admin/mapasEfecto";
         } catch (Exception e) {
             model.addAttribute("error", "Error al cargar los efectos de mapa: " + e.getMessage());

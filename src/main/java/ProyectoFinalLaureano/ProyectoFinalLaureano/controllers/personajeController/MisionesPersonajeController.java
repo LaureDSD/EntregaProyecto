@@ -1,4 +1,4 @@
-package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.misionController;
+package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.personajeController;
 
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.InventarioPersonaje;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.Personaje;

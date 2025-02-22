@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Dashboard - Backend</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -19,6 +21,7 @@
 </head>
 <body>
 <!-- Header con el menú dropdown -->
+
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
@@ -129,44 +132,73 @@
     </div>
 </nav>
 
-<!-- Contenido principal -->
 <div class="container mt-4">
     <!-- Mensaje de Error si ocurre algún problema -->
     <div th:if="${error}" class="alert alert-danger">
         <p th:text="${error}"></p>
     </div>
-    <h1 class="mb-4">Gestión de Tipo Usario</h1>
-    <!-- Lista de  Personaje -->
-    <section class="mt-5">
-        <h2>Lista de tipos de Usuario</h2>
-        <table class="table table-striped table-hover">
-            <thead class="table-dark">
+
+    <h2 class="text-center mb-4">Gestión de Ítems de Misión</h2>
+
+    <!-- Formulario para crear o editar un ítem de misión -->
+    <div class="form-container">
+        <h3 th:text="${misionItem.mision_item_id != null ? 'Editar Ítem de Misión' : 'Crear Nuevo Ítem de Misión'}"></h3>
+        <form th:action="@{/admin/misionesItems/save}" th:object="${misionItem}" method="post">
+            <input type="hidden" th:field="*{mision_item_id}" />
+
+            <!-- Misión Relacionada -->
+            <div class="form-group mb-3">
+                <label for="mision" class="form-label">Misión</label>
+                <input type="number" id="mision" th:field="*{mision}" class="form-control" required />
+            </div>
+
+            <!-- Ítem de Recompensa -->
+            <div class="form-group mb-3">
+                <label for="item" class="form-label">Ítem</label>
+                <input type="number" id="item" th:field="*{item}" class="form-control" required />
+            </div>
+
+            <!-- Cantidad de Ítems -->
+            <div class="form-group mb-3">
+                <label for="cantidad" class="form-label">Cantidad</label>
+                <input type="number" id="cantidad" th:field="*{cantidad}" class="form-control" required />
+            </div>
+
+            <button type="submit" class="btn btn-primary">
+                <span th:text="${misionItem.mision_item_id != null ? 'Actualizar' : 'Crear'}"></span>
+            </button>
+        </form>
+    </div>
+
+    <!-- Listado de Ítems de Misión -->
+    <div th:unless="${misionItem.mision_item_id != null}" class="table-container mt-5">
+        <h3 class="mb-4">Listado de Ítems de Misión</h3>
+        <table class="table table-bordered">
+            <thead class="thead-dark">
             <tr>
                 <th>ID</th>
-                <th>Nombre</th>
-                <th>Descripción</th>
+                <th>Misión ID</th>
+                <th>Ítem ID</th>
+                <th>Cantidad</th>
                 <th>Acciones</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="o : ${tiposUsuario}">
-
-                <td th:text="${o.tipo_usuario_id}"></td>
-
-                <td th:text="${o.nombre}"></td>
-
-                <td th:text="${o.descripcion}"></td>
-
+            <tr th:each="misionItem : ${misionesItems}">
+                <td th:text="${misionItem.mision_item_id}"></td>
+                <td th:text="${misionItem.mision}"></td>
+                <td th:text="${misionItem.item}"></td>
+                <td th:text="${misionItem.cantidad}"></td>
                 <td>
-                    <a th:href="@{'/admin/tipoUsuario/edit/' + ${o.tipo_usuario_id}}" class="btn btn-sm btn-primary">Editar</a> |
-                    <a th:href="@{'/admin/tipoUsuario/delete/' + ${o.tipo_usuario_id}}"
-                       class="btn btn-sm btn-danger" onclick="return confirm('¿Estás seguro de eliminar esta ?');">Eliminar</a>
+                    <a href="#" th:href="@{/admin/misionesItems/edit/{id}(id=${misionItem.mision_item_id})}" class="btn btn-warning btn-sm">Editar</a>
+                    <a href="#" th:href="@{/admin/misionesItems/delete/{id}(id=${misionItem.mision_item_id})}" class="btn btn-danger btn-sm">Eliminar</a>
                 </td>
             </tr>
             </tbody>
         </table>
-    </section>
+    </div>
 </div>
+
 
 <!-- Footer -->
 <footer class="mt-5 py-3">
@@ -175,7 +207,11 @@
     </div>
 </footer>
 
+
 <!-- Agregar Bootstrap JS para que los dropdowns funcionen -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
 </body>
 </html>

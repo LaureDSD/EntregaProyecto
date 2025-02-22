@@ -132,6 +132,10 @@
 <!-- Contenido principal -->
 <div class="container mt-4">
     <h1 class="mb-4">Gestión de Logs Usario</h1>
+    <!-- Mensaje de Error si ocurre algún problema -->
+    <div th:if="${error}" class="alert alert-danger">
+        <p th:text="${error}"></p>
+    </div>
     <!-- Lista de  Personaje -->
     <section class="mt-5">
         <h2>Lista de Logs de Usuario</h2>

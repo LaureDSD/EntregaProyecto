@@ -132,6 +132,11 @@
     </div>
 </nav>
 
+<!-- Mensaje de Error si ocurre algún problema -->
+<div th:if="${error}" class="alert alert-danger">
+    <p th:text="${error}"></p>
+</div>
+
 
 <!-- Contenido principal -->
 <div class="container mt-4">

@@ -1,5 +1,6 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.misionController.BackendControler;
 
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.estadisticasGenerales.EstadisticasGenerales;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.mision.Mision;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.misionService.MisionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,7 @@ public class MisionWebController {
         try {
             List<Mision> misiones = service.getAll();
             model.addAttribute("misiones", misiones);
+            model.addAttribute("mision", new Mision());
             return "admin/misiones";
         } catch (Exception e) {
             model.addAttribute("error", "Error al cargar las misiones: " + e.getMessage());
