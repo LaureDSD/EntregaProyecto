@@ -17,39 +17,54 @@ public class TipoUsuarioWebController {
     @Autowired
     private TipoUsuarioService tipoUsuarioService;
 
-    // Listado de  de Personaje
+    // Listado de Tipos de Usuario
     @GetMapping
-    public String listarPersonaje(Model model) {
-        List<TipoUsuario> o = tipoUsuarioService.getAll();
-        model.addAttribute("tiposUsuario", o);
-        return "admin/tipoUsuario";
-    }
-
-    // Formulario para crear o editar  de Personaje
-    @GetMapping("/edit/{id}")
-    public String editarPersonaje(@PathVariable("id") Long id, Model model) {
-        TipoUsuario o = (id != null) ? tipoUsuarioService.getByID(id) : new TipoUsuario();
-        model.addAttribute("tiposUsuario", o);
-        return "admin/tipoUsuario";
-    }
-
-    // Guardar  de Personaje (creación o actualización)
-    @PostMapping("/save")
-    public String guardarPersonaje(@ModelAttribute("tipoUsuario") TipoUsuario o) throws IOException {
-        tipoUsuarioService.setItem(o);
-        return "admin/tipoUsuario";
-    }
-
-    // Eliminar  de Personaje
-    @GetMapping("/delete/{id}")
-    public String eliminarPersonaje(@PathVariable("id") Long id) {
+    public String listar(Model model) {
         try {
-            tipoUsuarioService.deleteByID(id);
-            return "redirect:/admin/tipoUsuario";
-        }catch (Exception e){
-            return "redirect:/admin/tipoUsuario";
+            List<TipoUsuario> tiposUsuario = tipoUsuarioService.getAll();
+            model.addAttribute("tiposUsuario", tiposUsuario);
+            model.addAttribute("tipoUsuario", new TipoUsuario());
+            return "admin/tipoUsuario";
+        } catch (Exception e) {
+            model.addAttribute("error", "Error al cargar los tipos de usuario: " + e.getMessage());
+            return "admin/tipoUsuario";
         }
     }
 
+    // Formulario para crear o editar Tipo de Usuario
+    @GetMapping("/edit/{id}")
+    public String editar(@PathVariable("id") Long id, Model model) {
+        try {
+            TipoUsuario tipoUsuario = (id != null) ? tipoUsuarioService.getByID(id) : new TipoUsuario();
+            model.addAttribute("tipoUsuario", tipoUsuario);
+            return "admin/tipoUsuario";
+        } catch (Exception e) {
+            model.addAttribute("error", "Error al cargar el tipo de usuario para editar: " + e.getMessage());
+            return "admin/tipoUsuario";
+        }
+    }
 
+    // Guardar Tipo de Usuario (creación o actualización)
+    @PostMapping("/save")
+    public String guardar(@ModelAttribute("tipoUsuario") TipoUsuario tipoUsuario, Model model) throws IOException {
+        try {
+            tipoUsuarioService.setItem(tipoUsuario);
+            return "redirect:/admin/tipoUsuario";
+        } catch (Exception e) {
+            model.addAttribute("error", "Error al guardar el tipo de usuario: " + e.getMessage());
+            return "admin/tipoUsuario";
+        }
+    }
+
+    // Eliminar Tipo de Usuario
+    @GetMapping("/delete/{id}")
+    public String eliminar(@PathVariable("id") Long id, Model model) {
+        try {
+            tipoUsuarioService.deleteByID(id);
+            return "redirect:/admin/tipoUsuario";
+        } catch (Exception e) {
+            model.addAttribute("error", "Error al eliminar el tipo de usuario: " + e.getMessage());
+            return "admin/tipoUsuario";
+        }
+    }
 }

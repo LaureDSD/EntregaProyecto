@@ -1,5 +1,6 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.models.npc;
 
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.item.Item;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -40,18 +41,16 @@ public class NpcItem {
     private int cantidadVenta;
 
     // Relación con la tabla npc N:1
-    //@ManyToOne()
+    @ManyToOne()
     //@MapsId("npc_id")
-    //@Join
-    @Column(name = "npc_id", insertable = false, updatable = false)
+    @JoinColumn(name = "npc_id", insertable = false, updatable = false)
     //@JsonIgnore // Excluir esta relación en la serialización JSON
-    private Long npc;
+    private Npc npc;
 
     // Relación con la tabla items N:1
-    //@ManyToOne()
+    @ManyToOne()
     //@MapsId("item_id")
-    //@Join
-    @Column(name = "item_id", insertable = false, updatable = false)
+    @JoinColumn(name = "item_id", insertable = false, updatable = false)
     //@JsonIgnore // Excluir esta relación en la serialización JSON
-    private Long item;
+    private Item item;
 }

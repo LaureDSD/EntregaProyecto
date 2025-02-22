@@ -23,18 +23,16 @@ public class MapaEfecto {
     private Long  mapa_efecto_id;
 
     //Mapa relacionado N:1
-    //@ManyToOne
+    @ManyToOne
     //@MapsId("mapa_id")
-    //@Join
-    @Column(name = "mapa_id", nullable = false)
+    @JoinColumn(name = "mapa_id", nullable = false)
     @Schema(description = "Mapa asociado al efecto")
-    private Long mapa;
+    private Mapa mapa;
 
     //Efecto relacionado N:1
-    //@ManyToOne
+    @ManyToOne
     //@MapsId("efecto_id")
-    //@Join
-    @Column(name = "efecto_id", nullable = false)
+    @JoinColumn(name = "efecto_id", nullable = false)
     @Schema(description = "Efecto aplicado en el mapa")
-    private Long efecto;
+    private EfectoEstado efecto;
 }

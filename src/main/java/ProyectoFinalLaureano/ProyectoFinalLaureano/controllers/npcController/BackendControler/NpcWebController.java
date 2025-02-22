@@ -42,6 +42,7 @@ public class NpcWebController {
         try {
             Npc npc = (id != null) ? npcService.getByID(id) : new Npc();
             model.addAttribute("npc", npc);
+            model.addAttribute("tiposNpc", tipoNPC.getAll());
             return "admin/npcs";
         } catch (Exception e) {
             model.addAttribute("error", "Error al cargar el NPC para editar: " + e.getMessage());

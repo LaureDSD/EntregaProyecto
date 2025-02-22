@@ -20,7 +20,7 @@ public class Mapa {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Schema(description = "ID único del mapa", example = "1")
-    private Long mapaId;
+    private Long mapa_id;
 
     //Nombre del mapa
     @Column(name = "nombre", nullable = false, length = 100)

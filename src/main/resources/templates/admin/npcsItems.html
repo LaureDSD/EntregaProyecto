@@ -166,7 +166,7 @@
                 <input type="number" id="cantidadVenta" th:field="*{cantidadVenta}" class="form-control" placeholder="Cantidad disponible para venta" required />
             </div>
 
-            <!-- Relación con NPC y Item (esto debe ser manejado de alguna forma en el backend) -->
+            <!-- Relación con NPC y Item (esto debe ser manejado de alguna forma en el backend)
             <div class="form-group mb-3">
                 <label for="npc" class="form-label">NPC</label>
                 <input type="text" id="npc" th:field="*{npc}" class="form-control" placeholder="ID del NPC" readonly />
@@ -175,7 +175,24 @@
             <div class="form-group mb-3">
                 <label for="item" class="form-label">Item</label>
                 <input type="text" id="item" th:field="*{item}" class="form-control" placeholder="ID del item" readonly />
+            </div>-->
+
+
+            <div class="form-group mb-3">
+                <label for="npc" class="form-label">Habilidad</label>
+                <select id="npc" th:field="*{npc}" class="form-control" required>
+                    <option th:each="tipo : ${npcList}" th:value="${tipo.npc_id}" th:text="${tipo.nombre}"></option>
+                </select>
             </div>
+
+            <div class="form-group mb-3">
+                <label for="item" class="form-label">Habilidad</label>
+                <select id="item" th:field="*{item}" class="form-control" required>
+                    <option th:each="tipo : ${itemList}" th:value="${tipo.item_id}" th:text="${tipo.nombre}"></option>
+                </select>
+            </div>
+
+
 
             <button type="submit" class="btn btn-primary">
                 <span th:text="${npcItem.npc_producto_id != null ? 'Actualizar' : 'Crear'}"></span>
@@ -190,8 +207,8 @@
             <thead class="thead-dark">
             <tr>
                 <th>ID</th>
-                <th>ID npc</th>
-                <th>ID item</th>
+                <th>npc</th>
+                <th>item</th>
                 <th>Precio de Compra</th>
                 <th>Precio de Venta</th>
                 <th>Cantidad Disponible</th>
@@ -201,8 +218,8 @@
             <tbody>
             <tr th:each="npcItem : ${npcsItems}">
                 <td th:text="${npcItem.npc_producto_id}"></td>
-                <td th:text="${npcItem.npc}"></td>
-                <td th:text="${npcItem.item}"></td>
+                <td th:text="${npcItem.npc.nombre}"></td>
+                <td th:text="${npcItem.item.nombre}"></td>
                 <td th:text="${npcItem.precioCompra}"></td>
                 <td th:text="${npcItem.precioVenta}"></td>
                 <td th:text="${npcItem.cantidadVenta}"></td>

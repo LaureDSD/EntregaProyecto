@@ -21,18 +21,16 @@ public class HabilidadEfecto {
     private Long habilidad_efecto_id;
 
     //Relacion habilidad N:1
-    //@ManyToOne
+    @ManyToOne
     //@MapsId("habilidad_id")
-    //@Join
-    @Column(name = "habilidad_id", nullable = false)
+    @JoinColumn(name = "habilidad_id", nullable = false)
     @Schema(description = "Habilidad asociada al efecto")
-    private Long habilidad;
+    private Habilidad habilidad;
 
     // Relacion efecto N:1
-    //@ManyToOne
+    @ManyToOne
     //@MapsId("efecto_id")
-    //@Join
-    @Column(name = "efecto_id", nullable = false)
+    @JoinColumn(name = "efecto_id", nullable = false)
     @Schema(description = "Efecto aplicado por la habilidad")
-    private Long efecto;
+    private EfectoEstado efecto;
 }

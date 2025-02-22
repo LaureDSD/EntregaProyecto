@@ -24,7 +24,7 @@ public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Schema(description = "ID único del ítem", example = "1")
-    private Long itemId;
+    private Long item_id;
 
     //Nombre de los items
     @Column(name = "nombre", nullable = false, length = 100)

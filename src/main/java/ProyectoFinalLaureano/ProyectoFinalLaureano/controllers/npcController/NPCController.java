@@ -89,7 +89,7 @@ public class NPCController {
     // Conversor Unico Tienda
     private  TiendaDTO conversorTiendaDTO(NpcItem npcProducto) {
         TiendaDTO tiendaDTO = new TiendaDTO();
-        tiendaDTO.setItem( itemService.getByID(npcProducto.getItem()));
+        tiendaDTO.setItem( npcProducto.getItem());
         tiendaDTO.setCantidadVenta(npcProducto.getCantidadVenta());
         tiendaDTO.setPrecioCompra(npcProducto.getPrecioCompra());
         tiendaDTO.setCantidadVenta(npcProducto.getCantidadVenta());

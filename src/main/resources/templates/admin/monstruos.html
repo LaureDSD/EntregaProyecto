@@ -135,46 +135,58 @@
     <div th:if="${error}" class="alert alert-danger">
         <p th:text="${error}"></p>
     </div>
+
     <h1 class="mb-4">Gestión de Monstruos</h1>
-    <!-- Lista de  Personaje -->
+
+    <!-- Listado de Monstruos -->
     <section class="mt-5">
         <h2>Lista de Monstruos</h2>
         <table class="table table-striped table-hover">
             <thead class="table-dark">
             <tr>
                 <th>ID</th>
-                <th>Tipo</th>
-                <th>Nivel</th>
-                <th>Descripcion</th>
-                <th>Almas</th>
-                <th>Experienca</th>
-                <th>Estadisticas</th>
-                <th>Imagen</th>
+                <th>Nombre</th>
+                <th>Descripción</th>
                 <th>Acciones</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="o : ${monstruos}">
-
-                <td th:text="${o.monstruo_id}"></td>
-                <td th:text="${o.tipo_monstruo}"></td>
-                <td th:text="${o.nivel}"></td>
-                <td th:text="${o.descripcion}"></td>
-                <td th:text="${o.almasOtrogadas}"></td>
-                <td th:text="${o.experienciaOtorgada}"></td>
-
-                <td th:text="${o.imagen}"></td>
-
+            <tr th:each="monstruo : ${monstruos}">
+                <td th:text="${monstruo.monstruo_id}"></td>
+                <td th:text="${monstruo.nombre}"></td>
+                <td th:text="${monstruo.descripcion}"></td>
                 <td>
-                    <a th:href="@{'/admin/monstruos/edit/' + ${o.monstruo_id}}" class="btn btn-sm btn-primary">Editar</a> |
-                    <a th:href="@{'/admin/monstruos/delete/' + ${o.monstruo_id}}"
-                       class="btn btn-sm btn-danger" onclick="return confirm('¿Estás seguro de eliminar esta ?');">Eliminar</a>
+                    <!-- Enlace de edición -->
+                    <a th:href="@{'/admin/monstruos/edit/' + ${monstruo.monstruo_id}}" class="btn btn-sm btn-primary">Editar</a>
+                    |
+                    <!-- Enlace de eliminación -->
+                    <a th:href="@{'/admin/monstruos/delete/' + ${monstruo.monstruo_id}}"
+                       class="btn btn-sm btn-danger" onclick="return confirm('¿Estás seguro de eliminar este monstruo?');">Eliminar</a>
                 </td>
             </tr>
             </tbody>
         </table>
     </section>
+
+    <!-- Formulario para crear/editar monstruos -->
+    <section class="mt-5">
+        <h2 th:text="${monstruo.monstruo_id != null ? 'Editar Monstruo' : 'Nuevo Monstruo'}"></h2>
+        <form th:action="@{/admin/monstruos/save}" th:object="${monstruo}" method="post">
+            <div class="form-group">
+                <label for="nombre">Nombre</label>
+                <input type="text" id="nombre" th:field="*{nombre}" class="form-control" placeholder="Nombre del monstruo" required>
+            </div>
+            <div class="form-group">
+                <label for="descripcion">Descripción</label>
+                <textarea id="descripcion" th:field="*{descripcion}" class="form-control" placeholder="Descripción del monstruo" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-success mt-3">
+                <span th:text="${monstruo.monstruo_id != null ? 'Guardar Cambios' : 'Crear Monstruo'}"></span>
+            </button>
+        </form>
+    </section>
 </div>
+
 
 <!-- Footer -->
 <footer class="mt-5 py-3">

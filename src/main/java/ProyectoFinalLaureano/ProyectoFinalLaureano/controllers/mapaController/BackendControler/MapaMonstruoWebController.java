@@ -1,8 +1,12 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.mapaController.BackendControler;
 
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.mapa.Mapa;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.mapa.MapaEfecto;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.mapa.MapaMonstruo;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.monstruo.Monstruo;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.mapaService.MapaMonstruoService;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.services.mapaService.MapaService;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.services.monstruoService.MonstruosService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,13 +22,26 @@ public class MapaMonstruoWebController {
     @Autowired
     private MapaMonstruoService service;
 
+    @Autowired
+    private MapaService mapaService;
+
+    @Autowired
+    private MonstruosService monstruosService;
+
+    private List<Mapa> mapl;
+    private List<Monstruo> monl;
+
     // Listado de Mapas de Monstruo
     @GetMapping
     public String listar(Model model) {
         try {
+            try{ mapl = mapaService.getAll(); } catch (Exception e){}
+            try{ monl = monstruosService.getAll(); } catch (Exception e){}
             List<MapaMonstruo> mapasMonstruo = service.getAll();
             model.addAttribute("mapasMonstruo", mapasMonstruo);
             model.addAttribute("mapaMonstruo", new MapaMonstruo());
+            model.addAttribute("monstruoList", monl);
+            model.addAttribute("mapaList", mapl);
             return "admin/mapasMonstruo";
         } catch (Exception e) {
             model.addAttribute("error", "Error al cargar los mapas de monstruo: " + e.getMessage());
@@ -38,6 +55,8 @@ public class MapaMonstruoWebController {
         try {
             MapaMonstruo mapaMonstruo = (id != null) ? service.getByID(id) : new MapaMonstruo();
             model.addAttribute("mapaMonstruo", mapaMonstruo);
+            model.addAttribute("monstruoList", monl);
+            model.addAttribute("mapaList", mapl);
             return "admin/mapasMonstruo";
         } catch (Exception e) {
             model.addAttribute("error", "Error al cargar el mapa de monstruo para editar: " + e.getMessage());

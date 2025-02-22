@@ -149,13 +149,20 @@
             <!-- Misión Relacionada -->
             <div class="form-group mb-3">
                 <label for="mision" class="form-label">Misión</label>
-                <input type="number" id="mision" th:field="*{mision}" class="form-control" required />
+                <select id="mision" th:field="*{mision}" class="form-control" required>
+                    <option th:each="tipo : ${misionList}" th:value="${tipo.mision_id}" th:text="${tipo.nombre}"></option>
+                </select>
+                <!--<input type="number" id="mision" th:field="*{mision}" class="form-control" required />-->
             </div>
 
             <!-- Ítem de Recompensa -->
             <div class="form-group mb-3">
                 <label for="item" class="form-label">Ítem</label>
-                <input type="number" id="item" th:field="*{item}" class="form-control" required />
+                <label for="item" class="form-label">Ítem</label>
+                <select id="item" th:field="*{item}" class="form-control" required>
+                    <option th:each="tipo : ${itemList}" th:value="${tipo.item_id}" th:text="${tipo.nombre}"></option>
+                </select>
+                <!-- <input type="number" id="item" th:field="*{item}" class="form-control" required /> -->
             </div>
 
             <!-- Cantidad de Ítems -->
@@ -186,8 +193,8 @@
             <tbody>
             <tr th:each="misionItem : ${misionesItems}">
                 <td th:text="${misionItem.mision_item_id}"></td>
-                <td th:text="${misionItem.mision}"></td>
-                <td th:text="${misionItem.item}"></td>
+                <td th:text="${misionItem.mision.nombre}"></td>
+                <td th:text="${misionItem.item.nombre}"></td>
                 <td th:text="${misionItem.cantidad}"></td>
                 <td>
                     <a href="#" th:href="@{/admin/misionesItems/edit/{id}(id=${misionItem.mision_item_id})}" class="btn btn-warning btn-sm">Editar</a>

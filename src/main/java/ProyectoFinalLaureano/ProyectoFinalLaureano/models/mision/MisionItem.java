@@ -1,6 +1,7 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.models.mision;
 
 
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.item.Item;
 import jakarta.persistence.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
@@ -22,20 +23,18 @@ public class MisionItem {
     private Long mision_item_id;
 
     //Mision relacionada N:1
-    //@ManyToOne
+    @ManyToOne
     //@MapsId("mision_id")
-    //@Join
-    @Column(name = "mision_id", nullable = false)
+    @JoinColumn(name = "mision_id", nullable = false)
     @Schema(description = "Misión asociada a la recompensa")
-    private Long mision;
+    private Mision mision;
 
     //Item ralcionado N:1
-    //@ManyToOne
+    @ManyToOne
     //@MapsId("item_id")
-    //@Join
-    @Column(name = "item_id", nullable = false)
+    @JoinColumn(name = "item_id", nullable = false)
     @Schema(description = "Ítem de recompensa")
-    private Long item;
+    private Item item;
 
     //Cantidad que se ofrece por mison del objeto
     @Column(name = "cantidad", nullable = false)

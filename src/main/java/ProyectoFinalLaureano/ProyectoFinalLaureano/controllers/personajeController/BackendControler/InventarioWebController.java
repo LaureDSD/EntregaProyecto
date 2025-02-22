@@ -22,6 +22,7 @@ public class InventarioWebController {
         try {
             List<InventarioPersonaje> inventarios = inventarioService.getAll();
             model.addAttribute("persoanjesItems", inventarios);
+            model.addAttribute("persoanjeItem", new InventarioPersonaje());
             return "admin/persoanjesItems";
         } catch (Exception e) {
             model.addAttribute("error", "Error al cargar los inventarios de personajes: " + e.getMessage());

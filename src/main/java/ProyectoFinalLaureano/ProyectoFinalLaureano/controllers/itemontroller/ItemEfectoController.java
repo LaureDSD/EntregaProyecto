@@ -1,4 +1,4 @@
-package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.objetoController;
+package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.itemontroller;
 
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.item.ItemEfecto;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.itemService.ItemEfectoService;

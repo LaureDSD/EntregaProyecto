@@ -144,9 +144,9 @@
 
     <!-- Formulario para crear o editar un mapa -->
     <div class="form-container">
-        <h3 th:text="${mapa.mapaId != null ? 'Editar Mapa' : 'Crear Nuevo Mapa'}"></h3>
+        <h3 th:text="${mapa.mapa_id != null ? 'Editar Mapa' : 'Crear Nuevo Mapa'}"></h3>
         <form th:action="@{/admin/mapas/save}" th:object="${mapa}" method="post">
-            <input type="hidden" th:field="*{mapaId}" />
+            <input type="hidden" th:field="*{mapa_id}" />
 
             <!-- Nombre del mapa -->
             <div class="form-group mb-3">
@@ -181,13 +181,13 @@
             </div>
 
             <button type="submit" class="btn btn-primary">
-                <span th:text="${mapa.mapaId != null ? 'Actualizar' : 'Crear'}"></span>
+                <span th:text="${mapa.mapa_id != null ? 'Actualizar' : 'Crear'}"></span>
             </button>
         </form>
     </div>
 
     <!-- Listado de Mapas -->
-    <div th:unless="${mapa.mapaId != null}" class="table-container mt-5">
+    <div th:unless="${mapa.mapa_id != null}" class="table-container mt-5">
         <h3 class="mb-4">Listado de Mapas</h3>
         <table class="table table-bordered">
             <thead class="thead-dark">
@@ -200,12 +200,12 @@
             </thead>
             <tbody>
             <tr th:each="mapa : ${mapas}">
-                <td th:text="${mapa.mapaId}"></td>
+                <td th:text="${mapa.mapa_id}"></td>
                 <td th:text="${mapa.nombre}"></td>
                 <td th:text="${mapa.descripcion}"></td>
                 <td>
-                    <a href="#" th:href="@{/admin/mapas/edit/{id}(id=${mapa.mapaId})}" class="btn btn-warning btn-sm">Editar</a>
-                    <a href="#" th:href="@{/admin/mapas/delete/{id}(id=${mapa.mapaId})}" class="btn btn-danger btn-sm">Eliminar</a>
+                    <a href="#" th:href="@{/admin/mapas/edit/{id}(id=${mapa.mapa_id})}" class="btn btn-warning btn-sm">Editar</a>
+                    <a href="#" th:href="@{/admin/mapas/delete/{id}(id=${mapa.mapa_id})}" class="btn btn-danger btn-sm">Eliminar</a>
                 </td>
             </tr>
             </tbody>

@@ -40,7 +40,7 @@ public class MapaController {
     @PutMapping("/{id}")
     @Operation(summary = "Actualizar un mapa por ID")
     public ResponseEntity<Object> actualizarMapa(@PathVariable Long id, @RequestBody Mapa mapaActualizar) {
-        if (mapaActualizar.getMapaId().equals(id)) {
+        if (mapaActualizar.getMapa_id().equals(id)) {
             return ResponseEntity.ok(mapaService.setItem(mapaActualizar));
         } else {
             return ResponseEntity.badRequest().body("El ID proporcionado no coincide con el ID del mapa.");

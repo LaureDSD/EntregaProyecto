@@ -132,72 +132,62 @@
     </div>
 </nav>
 
-
-<!-- Contenido principal -->
 <div class="container mt-4">
     <!-- Mensaje de Error si ocurre algún problema -->
     <div th:if="${error}" class="alert alert-danger">
         <p th:text="${error}"></p>
     </div>
 
-    <h2 class="text-center mb-4">Gestión de Efectos de Mapa</h2>
 
-    <!-- Formulario para crear o editar un efecto de mapa -->
-    <div class="form-container">
-        <h3 th:text="${mapaEfecto.mapa_efecto_id != null ? 'Editar Efecto' : 'Crear Nuevo Efecto'}"></h3>
-        <form th:action="@{/admin/mapasEfecto/save}" th:object="${mapaEfecto}" method="post">
-            <input type="hidden" th:field="*{mapa_efecto_id}" />
+        <!-- Lista de Ítems y Efectos -->
+        <section class="mt-5">
+            <h2>Lista de Efectos de Ítems</h2>
+            <table class="table table-striped table-hover">
+                <thead class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Ítem</th>
+                    <th>Efecto</th>
+                    <th>Acciones</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="itemEfecto : ${itemsEfectos}">
+                    <td th:text="${itemEfecto.item_efecto_id}"></td>
+                    <td th:text="${itemEfecto.item}"></td>
+                    <td th:text="${itemEfecto.efecto}"></td>
+                    <td>
+                        <!-- Enlace de edición -->
+                        <a th:href="@{'/admin/itemsEfectos/edit/' + ${itemEfecto.item_efecto_id}}" class="btn btn-sm btn-primary">Editar</a>
+                        |
+                        <!-- Enlace de eliminación -->
+                        <a th:href="@{'/admin/itemsEfectos/delete/' + ${itemEfecto.item_efecto_id}}"
+                           class="btn btn-sm btn-danger" onclick="return confirm('¿Estás seguro de eliminar este efecto?');">Eliminar</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </section>
 
-            <!-- Mapa relacionado -->
-            <div class="form-group mb-3">
-                <label for="mapa" class="form-label">Mapa</label>
-                <select id="mapa" th:field="*{mapa}" class="form-control" required>
-                    <option th:each="tipo : ${mapaList}" th:value="${tipo.mapa_id}" th:text="${tipo.nombre}"></option>
-                </select>
-                <!--<input type="text" id="mapa" th:field="*{mapa}" class="form-control" placeholder="ID del mapa" required />-->
-            </div>
-
-            <!-- Efecto relacionado -->
-            <div class="form-group mb-3">
-                <label for="efecto" class="form-label">Efecto</label>
-                <select id="efecto" th:field="*{efecto}" class="form-control" required>
-                    <option th:each="tipo : ${efectoList}" th:value="${tipo.efecto_id}" th:text="${tipo.nombre}"></option>
-                </select>
-                <!--<input type="text" id="efecto" th:field="*{efecto}" class="form-control" placeholder="ID del efecto" required />-->
-            </div>
-
-            <button type="submit" class="btn btn-primary">
-                <span th:text="${mapaEfecto.mapa_efecto_id != null ? 'Actualizar' : 'Crear'}"></span>
-            </button>
-        </form>
+        <!-- Formulario para crear/editar efectos de ítems -->
+        <section class="mt-5">
+            <h2 th:text="${itemEfecto.item_efecto_id != null ? 'Editar Efecto de Ítem' : 'Nuevo Efecto de Ítem'}"></h2>
+            <form th:action="@{/admin/itemsEfectos/save}" th:object="${itemEfecto}" method="post">
+                <div class="form-group">
+                    <label for="item">Ítem</label>
+                    <input type="text" id="item" th:field="*{item}" class="form-control" placeholder="ID del ítem" required>
+                </div>
+                <div class="form-group">
+                    <label for="efecto">Efecto</label>
+                    <input type="text" id="efecto" th:field="*{efecto}" class="form-control" placeholder="ID del efecto" required>
+                </div>
+                <button type="submit" class="btn btn-success mt-3">
+                    <span th:text="${itemEfecto.item_efecto_id != null ? 'Guardar Cambios' : 'Crear Efecto'}"></span>
+                </button>
+            </form>
+        </section>
     </div>
 
-    <!-- Listado de Efectos de Mapa -->
-    <div th:unless="${mapaEfecto.mapa_efecto_id != null}" class="table-container mt-5">
-        <h3 class="mb-4">Listado de Efectos de Mapa</h3>
-        <table class="table table-bordered">
-            <thead class="thead-dark">
-            <tr>
-                <th>ID</th>
-                <th>Mapa</th>
-                <th>Efecto</th>
-                <th>Acciones</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="mapaEfecto : ${mapasEfecto}">
-                <td th:text="${mapaEfecto.mapa_efecto_id}"></td>
-                <td th:text="${mapaEfecto.mapa.nombre}"></td>
-                <td th:text="${mapaEfecto.efecto.nombre}"></td>
-                <td>
-                    <a href="#" th:href="@{/admin/mapasEfecto/edit/{id}(id=${mapaEfecto.mapa_efecto_id})}" class="btn btn-warning btn-sm">Editar</a>
-                    <a href="#" th:href="@{/admin/mapasEfecto/delete/{id}(id=${mapaEfecto.mapa_efecto_id})}" class="btn btn-danger btn-sm">Eliminar</a>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
 
 
 <!-- Footer -->

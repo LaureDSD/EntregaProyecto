@@ -195,8 +195,15 @@
             </div>
             <div class="form-group mb-3">
                 <label for="enfriamiento" class="form-label">Enfriamiento</label>
+
                 <input type="number" id="enfriamiento" th:field="*{enfriamiento}" class="form-control" placeholder="Tiempo de enfriamiento" required />
             </div>
+
+            <div class="form-group mb-3">
+                <label for="estadisticas" class="form-label">Estadistica</label>
+                <input type="number" id="estadisticas" th:field="*{estadisticas.estadistica_id}" class="form-control" placeholder="estadistica" required />
+            </div>
+
             <button type="submit" class="btn btn-primary">
                 <span th:text="${habilidad.habilidad_id != null ? 'Actualizar' : 'Crear'}"></span>
             </button>
@@ -215,6 +222,7 @@
                 <th>Área de Efecto</th>
                 <th>Unidades Afectadas</th>
                 <th>Enfriamiento</th>
+                <th>Estadisticas</th>
                 <th>Acciones</th>
             </tr>
             </thead>
@@ -227,6 +235,7 @@
                 <td th:text="${habilidad.area_efecto}"></td>
                 <td th:text="${habilidad.unidades_afectadas}"></td>
                 <td th:text="${habilidad.enfriamiento}"></td>
+                <td th:text="${habilidad.estadisticas.estadistica_id}"></td>
                 <td>
                     <a href="#" th:href="@{/admin/habilidades/edit/{id}(id=${habilidad.habilidad_id})}" class="btn btn-warning btn-sm">Editar</a>
                     <a href="#" th:href="@{/admin/habilidades/delete/{id}(id=${habilidad.habilidad_id})}" class="btn btn-danger btn-sm">Eliminar</a>

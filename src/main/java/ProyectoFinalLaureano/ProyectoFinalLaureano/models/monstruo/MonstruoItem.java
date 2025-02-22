@@ -1,4 +1,5 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.models.monstruo;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.item.Item;
 import jakarta.persistence.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
@@ -16,19 +17,17 @@ public class MonstruoItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long monstruo_item_id;
 
-    //@ManyToOne
+    @ManyToOne
     //@MapsId("monstruo_id") /
-    //@Join
-    @Column(name = "monstruo_id", nullable = false)
+    @JoinColumn(name = "monstruo_id", nullable = false)
     @Schema(description = "Monstruo asociado al drop")
-    private Long monstruo;
+    private Monstruo monstruo;
 
-    //@ManyToOne
+    @ManyToOne
     //@MapsId("item_id")
-    //@Join
-    @Column(name = "item_id", nullable = false)
+    @JoinColumn(name = "item_id", nullable = false)
     @Schema(description = "Ítem que puede ser soltado")
-    private Long item;
+    private Item item;
 
     @Column(name = "probabilidad", nullable = false)
     @Schema(description = "Probabilidad de que el objeto sea soltado", example = "100")

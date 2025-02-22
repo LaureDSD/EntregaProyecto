@@ -155,13 +155,19 @@
             <!-- Mapa -->
             <div class="form-group mb-3">
                 <label for="mapa" class="form-label">Mapa</label>
-                <input type="number" id="mapa" th:field="*{mapa}" class="form-control" required />
+                <!--<input type="number" id="mapa" th:field="*{mapa}" class="form-control" required />-->
+                <select id="mapa" th:field="*{mapa}" class="form-control" required>
+                    <option th:each="tipo : ${mapaList}" th:value="${tipo.mapa_id}" th:text="${tipo.nombre}"></option>
+                </select>
             </div>
 
             <!-- Monstruo -->
             <div class="form-group mb-3">
                 <label for="monstruo" class="form-label">Monstruo</label>
-                <input type="number" id="monstruo" th:field="*{monstruo}" class="form-control" required />
+                <!--<input type="number" id="monstruo" th:field="*{monstruo}" class="form-control" required />-->
+                <select id="monstruo" th:field="*{monstruo}" class="form-control" required>
+                    <option th:each="tipo : ${monstruoList}" th:value="${tipo.monstruo_id}" th:text="${tipo.nombre}"></option>
+                </select>
             </div>
 
             <button type="submit" class="btn btn-primary">
@@ -186,8 +192,8 @@
             <tbody>
             <tr th:each="mapaMonstruo : ${mapasMonstruo}">
                 <td th:text="${mapaMonstruo.mapa_monstruo_id}"></td>
-                <td th:text="${mapaMonstruo.mapa}"></td>
-                <td th:text="${mapaMonstruo.monstruo}"></td>
+                <td th:text="${mapaMonstruo.mapa.nombre}"></td>
+                <td th:text="${mapaMonstruo.monstruo.nombre}"></td>
                 <td th:text="${mapaMonstruo.probabilidadAparicion}"></td>
                 <td>
                     <a href="#" th:href="@{/admin/mapasMonstruo/edit/{id}(id=${mapaMonstruo.mapa_monstruo_id})}" class="btn btn-warning btn-sm">Editar</a>

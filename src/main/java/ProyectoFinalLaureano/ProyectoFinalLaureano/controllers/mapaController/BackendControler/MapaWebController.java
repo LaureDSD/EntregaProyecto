@@ -2,6 +2,7 @@ package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.mapaController.B
 
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.mapa.Mapa;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.mapa.MapaEfecto;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.mapa.TipoMapa;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.mapaService.MapaService;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.mapaService.TipoMapaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,14 +23,17 @@ public class MapaWebController {
     @Autowired
     private TipoMapaService tipoMapaService;
 
+    private List<TipoMapa> tml;
+
     // Listado de Mapas
     @GetMapping
     public String listar(Model model) {
         try {
+            try{ tml =  tipoMapaService.getAll(); }catch (Exception e){}
             List<Mapa> mapas = service.getAll();
             model.addAttribute("mapas", mapas);
             model.addAttribute("mapa", new Mapa());
-            model.addAttribute("tiposMapa", tipoMapaService.getAll() );
+            model.addAttribute("tiposMapa",tml );
             return "admin/mapas";
         } catch (Exception e) {
             model.addAttribute("error", "Error al cargar los mapas: " + e.getMessage());
@@ -43,6 +47,7 @@ public class MapaWebController {
         try {
             Mapa mapa = (id != null) ? service.getByID(id) : new Mapa();
             model.addAttribute("mapa", mapa);
+            model.addAttribute("tiposMapa",tml );
             return "admin/mapas";
         } catch (Exception e) {
             model.addAttribute("error", "Error al cargar el mapa para editar: " + e.getMessage());

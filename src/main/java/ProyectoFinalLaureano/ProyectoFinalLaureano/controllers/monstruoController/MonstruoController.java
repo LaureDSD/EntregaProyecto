@@ -26,6 +26,8 @@ public class MonstruoController {
     @Autowired
     private EstadisticasService estadisticasService;
 
+
+
     @Autowired
     private ItemService itemService;
 
@@ -90,7 +92,7 @@ public class MonstruoController {
     // Conversor Unico Drops
     private  DropsDTO conversorDropsDTO(MonstruoItem dropsObjetos) {
         DropsDTO dropsDTO = new DropsDTO();
-        dropsDTO.setItem( itemService.getByID(dropsObjetos.getItem()));
+        dropsDTO.setItem(  dropsObjetos.getItem());
         dropsDTO.setProbabilidad( dropsObjetos.getProbabilidad());
         return dropsDTO;
     }

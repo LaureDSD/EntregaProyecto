@@ -140,58 +140,61 @@
         <p th:text="${error}"></p>
     </div>
 
-    <h2 class="text-center mb-4">Gestión de Efectos de Mapa</h2>
+    <h2 class="text-center mb-4">Gestión de Items de Monstruos</h2>
 
-    <!-- Formulario para crear o editar un efecto de mapa -->
+    <!-- Formulario de MonstruoItem (Crear o Editar) -->
     <div class="form-container">
-        <h3 th:text="${mapaEfecto.mapa_efecto_id != null ? 'Editar Efecto' : 'Crear Nuevo Efecto'}"></h3>
-        <form th:action="@{/admin/mapasEfecto/save}" th:object="${mapaEfecto}" method="post">
-            <input type="hidden" th:field="*{mapa_efecto_id}" />
+        <h3 th:text="${monstruoItem.monstruo_item_id != null ? 'Editar Item de Monstruo' : 'Crear Nuevo Item de Monstruo'}"></h3>
+        <form th:action="@{/admin/monstruosItems/save}" th:object="${monstruoItem}" method="post">
+            <input type="hidden" th:field="*{monstruo_item_id}" />
 
-            <!-- Mapa relacionado -->
             <div class="form-group mb-3">
-                <label for="mapa" class="form-label">Mapa</label>
-                <select id="mapa" th:field="*{mapa}" class="form-control" required>
-                    <option th:each="tipo : ${mapaList}" th:value="${tipo.mapa_id}" th:text="${tipo.nombre}"></option>
+                <label for="monstruo" class="form-label">Monstruo</label>
+                <select id="monstruo" th:field="*{monstruo}" class="form-control" required>
+                    <option th:each="monstruo : ${monstruos}" th:value="${monstruo.monstruo_Id}" th:text="${monstruo.nombre}"></option>
                 </select>
-                <!--<input type="text" id="mapa" th:field="*{mapa}" class="form-control" placeholder="ID del mapa" required />-->
             </div>
 
-            <!-- Efecto relacionado -->
             <div class="form-group mb-3">
-                <label for="efecto" class="form-label">Efecto</label>
-                <select id="efecto" th:field="*{efecto}" class="form-control" required>
-                    <option th:each="tipo : ${efectoList}" th:value="${tipo.efecto_id}" th:text="${tipo.nombre}"></option>
+                <label for="item" class="form-label">Ítem</label>
+                <select id="item" th:field="*{item}" class="form-control" required>
+                    <option th:each="item : ${items}" th:value="${item.itemId}" th:text="${item.nombre}"></option>
                 </select>
-                <!--<input type="text" id="efecto" th:field="*{efecto}" class="form-control" placeholder="ID del efecto" required />-->
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="probabilidad" class="form-label">Probabilidad</label>
+                <input type="number" id="probabilidad" th:field="*{probabilidad}" class="form-control" placeholder="Probabilidad del drop" required />
             </div>
 
             <button type="submit" class="btn btn-primary">
-                <span th:text="${mapaEfecto.mapa_efecto_id != null ? 'Actualizar' : 'Crear'}"></span>
+                <span th:text="${monstruoItem.monstruo_item_id != null ? 'Actualizar' : 'Crear'}"></span>
             </button>
         </form>
     </div>
 
-    <!-- Listado de Efectos de Mapa -->
-    <div th:unless="${mapaEfecto.mapa_efecto_id != null}" class="table-container mt-5">
-        <h3 class="mb-4">Listado de Efectos de Mapa</h3>
+    <!-- Tabla de Items de Monstruos -->
+    <div th:unless="${monstruoItem.monstruo_item_id != null}" class="table-container">
+        <h3 class="mb-4">Listado de Items de Monstruos</h3>
         <table class="table table-bordered">
             <thead class="thead-dark">
             <tr>
                 <th>ID</th>
-                <th>Mapa</th>
-                <th>Efecto</th>
+                <th>Monstruo</th>
+                <th>Ítem</th>
+                <th>Probabilidad</th>
                 <th>Acciones</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="mapaEfecto : ${mapasEfecto}">
-                <td th:text="${mapaEfecto.mapa_efecto_id}"></td>
-                <td th:text="${mapaEfecto.mapa.nombre}"></td>
-                <td th:text="${mapaEfecto.efecto.nombre}"></td>
+            <tr th:each="monstruoItem : ${monstruosItems}">
+                <td th:text="${monstruoItem.monstruo_item_id}"></td>
+                <td th:text="${monstruoItem.monstruo.nombre}"></td>
+                <td th:text="${monstruoItem.item.nombre}"></td>
+                <td th:text="${monstruoItem.probabilidad}"></td>
                 <td>
-                    <a href="#" th:href="@{/admin/mapasEfecto/edit/{id}(id=${mapaEfecto.mapa_efecto_id})}" class="btn btn-warning btn-sm">Editar</a>
-                    <a href="#" th:href="@{/admin/mapasEfecto/delete/{id}(id=${mapaEfecto.mapa_efecto_id})}" class="btn btn-danger btn-sm">Eliminar</a>
+                    <a href="#" th:href="@{/admin/monstruosItems/edit/{id}(id=${monstruoItem.monstruo_item_id})}" class="btn btn-warning btn-sm">Editar</a>
+                    <a href="#" th:href="@{/admin/monstruosItems/delete/{id}(id=${monstruoItem.monstruo_item_id})}" class="btn btn-danger btn-sm">Eliminar</a>
                 </td>
             </tr>
             </tbody>

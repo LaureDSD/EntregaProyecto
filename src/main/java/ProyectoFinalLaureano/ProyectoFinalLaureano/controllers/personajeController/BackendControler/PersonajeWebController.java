@@ -22,6 +22,7 @@ public class PersonajeWebController {
     public String listarPersonaje(Model model) {
         try {
             List<Personaje> personaje = personajeService.getAll();
+            model.addAttribute("personajes", personaje);
             model.addAttribute("personaje", personaje);
             return "admin/personajes";
         } catch (Exception e) {

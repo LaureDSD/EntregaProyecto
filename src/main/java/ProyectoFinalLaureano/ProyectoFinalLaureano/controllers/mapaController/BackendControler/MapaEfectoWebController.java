@@ -1,11 +1,14 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.mapaController.BackendControler;
 
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.efectosEstados.EfectoEstado;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.log.LogPersonajeMonstruo;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.mapa.Mapa;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.mapa.MapaEfecto;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.mapa.MapaMonstruo;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.services.efectoEstadoService.EfectoEstadoService;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.mapaService.MapaEfectoService;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.mapaService.MapaMonstruoService;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.services.mapaService.MapaService;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.mapaService.TipoMapaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,14 +25,27 @@ public class MapaEfectoWebController {
     @Autowired
     private MapaEfectoService service;
 
+    @Autowired
+    private MapaService mapaService;
+
+    @Autowired
+    private EfectoEstadoService efectoEstadoService;
+
+    private List<Mapa> ml;
+    private List<EfectoEstado> el;
+
 
 
     @GetMapping
     public String listar(Model model) {
         try {
+            try{ ml = mapaService.getAll();}catch (Exception e){}
+            try{ el = efectoEstadoService.getAll();}catch (Exception e){}
             List<MapaEfecto> mapasMonstruo = service.getAll();
             model.addAttribute("mapasEfecto", mapasMonstruo);
             model.addAttribute("mapaEfecto", new MapaEfecto());
+            model.addAttribute("mapaList", ml);
+            model.addAttribute("efectoList", el);
 
 
             return "admin/mapasEfecto";
@@ -44,6 +60,8 @@ public class MapaEfectoWebController {
         try {
             MapaEfecto mapaMonstruo = (id != null) ? service.getByID(id) : new MapaEfecto();
             model.addAttribute("mapaEfecto", mapaMonstruo);
+            model.addAttribute("mapaList", ml);
+            model.addAttribute("efectoList", el);
             return "admin/mapasEfecto";
         } catch (Exception e) {
             model.addAttribute("error", "Error al cargar el efecto de mapa para editar: " + e.getMessage());

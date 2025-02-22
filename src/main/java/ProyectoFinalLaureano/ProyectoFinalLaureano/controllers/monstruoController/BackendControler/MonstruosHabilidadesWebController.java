@@ -22,6 +22,7 @@ public class MonstruosHabilidadesWebController {
         try {
             List<MonstruoHabilidad> monstruosHabilidades = monstruosService.getAll();
             model.addAttribute("monstruosHabilidades", monstruosHabilidades);
+            model.addAttribute("monstruoHabilidad", new MonstruoHabilidad());
             return "admin/monstruosHabilidades";
         } catch (Exception e) {
             model.addAttribute("error", "Error al cargar las habilidades de monstruos: " + e.getMessage());

@@ -132,29 +132,27 @@
     </div>
 </nav>
 
-<!-- Mensaje de Error si ocurre algún problema -->
-<div th:if="${error}" class="alert alert-danger">
-    <p th:text="${error}"></p>
-</div>
-<div class="container mt-4">
-    <h2 class="text-center mb-4">Gestión de Líderes de Grupo</h2>
 
-    <!-- Mensaje de error si existe uno -->
+<!-- Contenido principal -->
+<div class="container mt-4">
+    <!-- Mensaje de Error si ocurre algún problema -->
     <div th:if="${error}" class="alert alert-danger">
         <p th:text="${error}"></p>
     </div>
 
+    <h2 class="text-center mb-4">Gestión de Líderes de Grupo</h2>
+
     <!-- Formulario para crear/editar un líder de grupo -->
     <div class="form-container">
-        <h3 th:text="${liderGrupo.liderGrupoId != null ? 'Editar Líder de Grupo' : 'Crear Nuevo Líder de Grupo'}"></h3>
+        <h3 th:text="${liderGrupo.lider_grupo_id != null ? 'Editar Líder de Grupo' : 'Crear Nuevo Líder de Grupo'}"></h3>
         <form th:action="@{/admin/lideresGrupos/save}" th:object="${liderGrupo}" method="post">
-            <input type="hidden" th:field="*{liderGrupoId}" />
+            <input type="hidden" th:field="*{lider_grupo_id}" />
 
             <!-- Campo para seleccionar el grupo -->
             <div class="form-group mb-3">
                 <label for="grupo" class="form-label">Grupo</label>
                 <select id="grupo" th:field="*{grupo}" class="form-control" required>
-                    <option th:each="grupo : ${grupos}" th:value="${grupo.grupo_id}" th:text="${grupo.nombre}"></option>
+                    <option th:each="grupo : ${grupoList}" th:value="${grupo.grupo_id}" th:text="${grupo.nombre}"></option>
                 </select>
             </div>
 
@@ -162,18 +160,12 @@
             <div class="form-group mb-3">
                 <label for="personaje" class="form-label">Personaje</label>
                 <select id="personaje" th:field="*{personaje}" class="form-control" required>
-                    <option th:each="personaje : ${personajes}" th:value="${personaje.personaje_id}" th:text="${personaje.nombre}"></option>
+                    <option th:each="personaje : ${personajeList}" th:value="${personaje.personaje_id}" th:text="${personaje.nombre}"></option>
                 </select>
             </div>
 
-            <!-- Campo para la fecha de nombramiento -->
-            <div class="form-group mb-3">
-                <label for="fechaNombramiento" class="form-label">Fecha de Nombramiento</label>
-                <input type="datetime-local" id="fechaNombramiento" th:field="*{fechaNombramiento}" class="form-control" required />
-            </div>
-
             <button type="submit" class="btn btn-primary">
-                <span th:text="${liderGrupo.liderGrupoId != null ? 'Actualizar' : 'Crear'}"></span>
+                <span th:text="${liderGrupo.lider_grupo_id != null ? 'Actualizar' : 'Crear'}"></span>
             </button>
         </form>
     </div>
@@ -192,13 +184,13 @@
         </thead>
         <tbody>
         <tr th:each="liderGrupo : ${lideresGrupos}">
-            <td th:text="${liderGrupo.liderGrupoId}"></td>
+            <td th:text="${liderGrupo.lider_grupo_id}"></td>
             <td th:text="${liderGrupo.grupo.nombre}"></td>
             <td th:text="${liderGrupo.personaje.nombre}"></td>
             <td th:text="${#dates.format(liderGrupo.fechaNombramiento, 'dd/MM/yyyy HH:mm')}"></td>
             <td>
-                <a href="#" th:href="@{/admin/lideresGrupos/edit/{id}(id=${liderGrupo.liderGrupoId})}" class="btn btn-warning btn-sm">Editar</a>
-                <a href="#" th:href="@{/admin/lideresGrupos/delete/{id}(id=${liderGrupo.liderGrupoId})}" class="btn btn-danger btn-sm">Eliminar</a>
+                <a href="#" th:href="@{/admin/lideresGrupos/edit/{id}(id=${liderGrupo.lider_grupo_id})}" class="btn btn-warning btn-sm">Editar</a>
+                <a href="#" th:href="@{/admin/lideresGrupos/delete/{id}(id=${liderGrupo.lider_grupo_id})}" class="btn btn-danger btn-sm">Eliminar</a>
             </td>
         </tr>
         </tbody>

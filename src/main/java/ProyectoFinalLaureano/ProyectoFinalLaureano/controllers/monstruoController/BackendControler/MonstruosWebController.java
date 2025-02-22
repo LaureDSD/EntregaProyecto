@@ -20,33 +20,50 @@ public class MonstruosWebController {
     // Listado de Monstruos
     @GetMapping
     public String List(Model model) {
-        List<Monstruo> monstruos = monstruosService.getAll();
-        model.addAttribute("monstruos", monstruos);
-        return "admin/monstruos";
+        try {
+            List<Monstruo> monstruos = monstruosService.getAll();
+            model.addAttribute("monstruos", monstruos);
+            model.addAttribute("monstruo", new Monstruo());
+            return "admin/monstruos";
+        } catch (Exception e) {
+            model.addAttribute("error", "Error al cargar los monstruos: " + e.getMessage());
+            return "admin/monstruos";
+        }
     }
 
     // Formulario para crear o editar Monstruo
     @GetMapping("/edit/{id}")
     public String editar(@PathVariable("id") Long id, Model model) {
-        Monstruo monstruos = (id != null) ? monstruosService.getByID(id) : new Monstruo();
-        model.addAttribute("monstruos", monstruos);
-        return "admin/monstruos";
+        try {
+            Monstruo monstruos = (id != null) ? monstruosService.getByID(id) : new Monstruo();
+            model.addAttribute("monstruos", monstruos);
+            return "admin/monstruos";
+        } catch (Exception e) {
+            model.addAttribute("error", "Error al cargar el monstruo para editar: " + e.getMessage());
+            return "admin/monstruos";
+        }
     }
 
     // Guardar Monstruo (creación o actualización)
     @PostMapping("/save")
-    public String guardar(@ModelAttribute("monstruos") Monstruo u) throws IOException {
-        monstruosService.setItem(u);
-        return "admin/monstruos";
+    public String guardar(@ModelAttribute("monstruos") Monstruo u, Model model) throws IOException {
+        try {
+            monstruosService.setItem(u);
+            return "redirect:/admin/monstruos";
+        } catch (Exception e) {
+            model.addAttribute("error", "Error al guardar el monstruo: " + e.getMessage());
+            return "admin/monstruos";
+        }
     }
 
     // Eliminar Monstruo
     @GetMapping("/delete/{id}")
-    public String delete(@PathVariable("id") Long id) {
+    public String delete(@PathVariable("id") Long id, Model model) {
         try {
             monstruosService.deleteByID(id);
-            return "admin/monstruos";
+            return "redirect:/admin/monstruos";
         } catch (Exception e) {
+            model.addAttribute("error", "Error al eliminar el monstruo: " + e.getMessage());
             return "admin/monstruos";
         }
     }

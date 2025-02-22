@@ -1,4 +1,4 @@
-package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.objetoController;
+package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.itemontroller;
 
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.item.Item;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.item.TipoItem;
@@ -40,7 +40,7 @@ public class ItemController {
     @PutMapping("/{id}")
     @Operation(summary = "Actualizar un ítem por ID")
     public ResponseEntity<Object> actualizarItem(@PathVariable Long id, @RequestBody Item itemActualizar) {
-        if (itemActualizar.getItemId().equals(id)) {
+        if (itemActualizar.getItem_id().equals(id)) {
             return ResponseEntity.ok(itemService.setItem(itemActualizar));
         } else {
             return ResponseEntity.badRequest().body("El ID proporcionado no coincide con el ID del ítem.");

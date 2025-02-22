@@ -22,6 +22,7 @@ public class PersonajeLogrosWebController {
         try {
             List<LogrosPersonaje> logros = logrosPersonajeService.getAll();
             model.addAttribute("personajesLogros", logros);
+            model.addAttribute("personajeLogro", new LogrosPersonaje());
             return "admin/personajesLogros";
         } catch (Exception e) {
             model.addAttribute("error", "Error al cargar los logros de personajes: " + e.getMessage());

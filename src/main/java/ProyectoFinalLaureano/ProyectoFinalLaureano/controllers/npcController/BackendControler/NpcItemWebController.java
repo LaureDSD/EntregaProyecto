@@ -2,7 +2,9 @@ package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.npcController.Ba
 
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.estadisticasGenerales.EstadisticasGenerales;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.npc.NpcItem;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.services.itemService.ItemService;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.npcService.NpcItemService;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.services.npcService.NpcService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,12 +20,20 @@ public class NpcItemWebController {
     @Autowired
     private NpcItemService npcItemService;
 
+    @Autowired
+    private NpcService npcService;
+
+    @Autowired
+    private ItemService itemService;
+
     @GetMapping
     public String listar(Model model) {
         try {
             List<NpcItem> npcItems = npcItemService.getAll();
             model.addAttribute("npcsItems", npcItems);
             model.addAttribute("npcItem", new NpcItem());
+            model.addAttribute("npcList", npcService.getAll());
+            model.addAttribute("itemList", itemService.getAll());
             return "admin/npcsItems";
         } catch (Exception e) {
             model.addAttribute("error", "Error al cargar los items de NPC: " + e.getMessage());
@@ -36,6 +46,8 @@ public class NpcItemWebController {
         try {
             NpcItem npcItem = (id != null) ? npcItemService.getByID(id) : new NpcItem();
             model.addAttribute("npcItem", npcItem);
+            model.addAttribute("npcList", npcService.getAll());
+            model.addAttribute("itemList", itemService.getAll());
             return "admin/npcsItems";
         } catch (Exception e) {
             model.addAttribute("error", "Error al cargar el item de NPC para editar: " + e.getMessage());

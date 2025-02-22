@@ -23,6 +23,7 @@ public class ClasePersoanjeWebController {
         try {
             List<ClasePersonaje> clasesPersonaje = clasePersonajeService.getAll();
             model.addAttribute("clasesPersonaje", clasesPersonaje);
+            model.addAttribute("clasePersonaje", new ClasePersonaje());
             return "admin/tipoPersonaje";
         } catch (Exception e) {
             model.addAttribute("error", "Error al cargar las clases de personajes: " + e.getMessage());

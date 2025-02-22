@@ -21,7 +21,7 @@ public class LiderGrupo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "lider_grupo_id")
-    private Long liderGrupoId;
+    private Long lider_grupo_id;
 
     @ManyToOne
     @JoinColumn(name = "grupo_id", nullable = false, unique = true)

@@ -1,6 +1,8 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.gruposController.BackendControler;
 
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.grupos.Grupo;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.grupos.LiderGrupo;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.Personaje;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.grupoService.LiderGrupoService;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.grupoService.GrupoService;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.persoanjeService.PersoanjeService;
@@ -10,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -25,15 +28,20 @@ public class LiderGrupoWebController {
     @Autowired
     private PersoanjeService personajeService;
 
+    private List<Grupo> gl;
+    private List<Personaje> pl;
+
     // Listar todos los líderes de grupo
     @GetMapping
     public String listar(Model model) {
         try {
+            try { gl = grupoService.getAll(); } catch (Exception e){throw  e;}
+            try { pl = personajeService.getAll(); } catch (Exception e){throw  e;}
             List<LiderGrupo> lideresGrupos = service.findAll();
             model.addAttribute("lideresGrupos", lideresGrupos);
             model.addAttribute("liderGrupo", new LiderGrupo());
-            model.addAttribute("grupos", grupoService.getAll());
-            model.addAttribute("personajes", personajeService.getAll());
+            model.addAttribute("grupoList", gl);
+            model.addAttribute("personajeList", pl);
             return "admin/lideresGrupos"; // Vista
         } catch (Exception e) {
             model.addAttribute("error", "Error al cargar los líderes de grupos: " + e.getMessage());
@@ -47,9 +55,9 @@ public class LiderGrupoWebController {
         try {
             Object liderGrupo = (id != null) ? service.findById(id) : new LiderGrupo();
             model.addAttribute("liderGrupo", liderGrupo);
-            model.addAttribute("grupos", grupoService.getAll());
-            model.addAttribute("personajes", personajeService.getAll());
-            return "admin/lideresGrupos"; // Vista
+            model.addAttribute("grupoList", gl);
+            model.addAttribute("personajeList", pl);
+            return "admin/lideresGrupos";
         } catch (Exception e) {
             model.addAttribute("error", "Error al cargar el líder del grupo para editar: " + e.getMessage());
             return "admin/lideresGrupos";
@@ -60,6 +68,7 @@ public class LiderGrupoWebController {
     @PostMapping("/save")
     public String guardar(@ModelAttribute("liderGrupo") LiderGrupo liderGrupo, Model model) throws IOException {
         try {
+            liderGrupo.setFechaNombramiento(new Date());
             service.save(liderGrupo);
             return "redirect:/admin/lideresGrupos";
         } catch (Exception e) {

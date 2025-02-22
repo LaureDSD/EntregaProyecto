@@ -81,7 +81,7 @@ public class MisionController {
     //Coversor Unico
     public  RecompensaDTO conversorRecompensaDTO(MisionItem mo){
         RecompensaDTO recompensaDTO = new RecompensaDTO();
-        recompensaDTO.setItem( itemService.getByID(mo.getItem()));
+        recompensaDTO.setItem(mo.getItem());
         recompensaDTO.setCantidad(mo.getCantidad());
         return recompensaDTO;
     }

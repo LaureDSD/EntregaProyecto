@@ -1,5 +1,6 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.models.mapa;
 
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.monstruo.Monstruo;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -26,16 +27,14 @@ public class MapaMonstruo {
     private Integer probabilidadAparicion;
 
     // Relación con la tabla mapa N:1
-    //@ManyToOne()
-    //@JoinColumn(name = "mapa_id", insertable = false, updatable = false)
-    @Column(name = "mapa_id", insertable = false, updatable = false)
+    @ManyToOne()
+    @JoinColumn(name = "mapa_id", insertable = false, updatable = false)
     @Schema(description = "Nombre del mapa", example = "2")
-    private Long mapa;
+    private Mapa mapa;
 
     // Relación con la tabla monstruo N:1
-    //@ManyToOne()
-    //@JoinColumn(name = "monstruo_id", insertable = false, updatable = false)
-    @Column(name = "monstruo_id", insertable = false, updatable = false)
+    @ManyToOne()
+    @JoinColumn(name = "monstruo_id", insertable = false, updatable = false)
     @Schema(description = "Nombre del monstruo", example = "1")
-    private Long monstruo;
+    private Monstruo monstruo;
 }

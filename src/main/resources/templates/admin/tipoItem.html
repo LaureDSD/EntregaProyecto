@@ -132,7 +132,6 @@
     </div>
 </nav>
 
-
 <!-- Contenido principal -->
 <div class="container mt-4">
     <!-- Mensaje de Error si ocurre algún problema -->
@@ -140,64 +139,63 @@
         <p th:text="${error}"></p>
     </div>
 
-    <h2 class="text-center mb-4">Gestión de Efectos de Mapa</h2>
+    <h1 class="mb-4">Gestión de Items de Monstruos</h1>
 
-    <!-- Formulario para crear o editar un efecto de mapa -->
-    <div class="form-container">
-        <h3 th:text="${mapaEfecto.mapa_efecto_id != null ? 'Editar Efecto' : 'Crear Nuevo Efecto'}"></h3>
-        <form th:action="@{/admin/mapasEfecto/save}" th:object="${mapaEfecto}" method="post">
-            <input type="hidden" th:field="*{mapa_efecto_id}" />
-
-            <!-- Mapa relacionado -->
-            <div class="form-group mb-3">
-                <label for="mapa" class="form-label">Mapa</label>
-                <select id="mapa" th:field="*{mapa}" class="form-control" required>
-                    <option th:each="tipo : ${mapaList}" th:value="${tipo.mapa_id}" th:text="${tipo.nombre}"></option>
-                </select>
-                <!--<input type="text" id="mapa" th:field="*{mapa}" class="form-control" placeholder="ID del mapa" required />-->
-            </div>
-
-            <!-- Efecto relacionado -->
-            <div class="form-group mb-3">
-                <label for="efecto" class="form-label">Efecto</label>
-                <select id="efecto" th:field="*{efecto}" class="form-control" required>
-                    <option th:each="tipo : ${efectoList}" th:value="${tipo.efecto_id}" th:text="${tipo.nombre}"></option>
-                </select>
-                <!--<input type="text" id="efecto" th:field="*{efecto}" class="form-control" placeholder="ID del efecto" required />-->
-            </div>
-
-            <button type="submit" class="btn btn-primary">
-                <span th:text="${mapaEfecto.mapa_efecto_id != null ? 'Actualizar' : 'Crear'}"></span>
-            </button>
-        </form>
-    </div>
-
-    <!-- Listado de Efectos de Mapa -->
-    <div th:unless="${mapaEfecto.mapa_efecto_id != null}" class="table-container mt-5">
-        <h3 class="mb-4">Listado de Efectos de Mapa</h3>
-        <table class="table table-bordered">
-            <thead class="thead-dark">
+    <!-- Listado de Items que un Monstruo puede soltar -->
+    <section class="mt-5">
+        <h2>Lista de Items de Monstruos</h2>
+        <table class="table table-striped table-hover">
+            <thead class="table-dark">
             <tr>
                 <th>ID</th>
-                <th>Mapa</th>
-                <th>Efecto</th>
+                <th>Monstruo</th>
+                <th>Ítem</th>
+                <th>Probabilidad (%)</th>
                 <th>Acciones</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="mapaEfecto : ${mapasEfecto}">
-                <td th:text="${mapaEfecto.mapa_efecto_id}"></td>
-                <td th:text="${mapaEfecto.mapa.nombre}"></td>
-                <td th:text="${mapaEfecto.efecto.nombre}"></td>
+            <tr th:each="monstruoItem : ${monstruosItems}">
+                <td th:text="${monstruoItem.monstruo_item_id}"></td>
+                <td th:text="${monstruoItem.monstruo}"></td>
+                <td th:text="${monstruoItem.item}"></td>
+                <td th:text="${monstruoItem.probabilidad}"></td>
                 <td>
-                    <a href="#" th:href="@{/admin/mapasEfecto/edit/{id}(id=${mapaEfecto.mapa_efecto_id})}" class="btn btn-warning btn-sm">Editar</a>
-                    <a href="#" th:href="@{/admin/mapasEfecto/delete/{id}(id=${mapaEfecto.mapa_efecto_id})}" class="btn btn-danger btn-sm">Eliminar</a>
+                    <!-- Enlace de edición -->
+                    <a th:href="@{'/admin/monstruosItems/edit/' + ${monstruoItem.monstruo_item_id}}" class="btn btn-sm btn-primary">Editar</a>
+                    |
+                    <!-- Enlace de eliminación -->
+                    <a th:href="@{'/admin/monstruosItems/delete/' + ${monstruoItem.monstruo_item_id}}"
+                       class="btn btn-sm btn-danger" onclick="return confirm('¿Estás seguro de eliminar este ítem de monstruo?');">Eliminar</a>
                 </td>
             </tr>
             </tbody>
         </table>
-    </div>
+    </section>
+
+    <!-- Formulario para crear/editar Items de Monstruos -->
+    <section class="mt-5">
+        <h2 th:text="${monstruoItem.monstruo_item_id != null ? 'Editar Item de Monstruo' : 'Nuevo Item de Monstruo'}"></h2>
+        <form th:action="@{/admin/monstruosItems/save}" th:object="${monstruoItem}" method="post">
+            <div class="form-group">
+                <label for="monstruo">Monstruo</label>
+                <input type="number" id="monstruo" th:field="*{monstruo}" class="form-control" placeholder="ID del monstruo" required>
+            </div>
+            <div class="form-group">
+                <label for="item">Ítem</label>
+                <input type="number" id="item" th:field="*{item}" class="form-control" placeholder="ID del ítem" required>
+            </div>
+            <div class="form-group">
+                <label for="probabilidad">Probabilidad</label>
+                <input type="number" id="probabilidad" th:field="*{probabilidad}" class="form-control" placeholder="Probabilidad de drop (%)" required>
+            </div>
+            <button type="submit" class="btn btn-success mt-3">
+                <span th:text="${monstruoItem.monstruo_item_id != null ? 'Guardar Cambios' : 'Crear Item de Monstruo'}"></span>
+            </button>
+        </form>
+    </section>
 </div>
+
 
 
 <!-- Footer -->

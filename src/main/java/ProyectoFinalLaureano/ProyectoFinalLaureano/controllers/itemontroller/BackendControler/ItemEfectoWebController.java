@@ -1,4 +1,4 @@
-package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.objetoController.BackendControler;
+package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.itemontroller.BackendControler;
 
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.item.ItemEfecto;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.itemService.ItemEfectoService;
@@ -22,6 +22,7 @@ public class ItemEfectoWebController {
         try {
             List<ItemEfecto> itemsEfectos = itemEfectoService.getAll();
             model.addAttribute("itemsEfectos", itemsEfectos);
+            model.addAttribute("itemEfecto", new ItemEfecto());
             return "admin/itemsEfectos";
         } catch (Exception e) {
             model.addAttribute("error", "Error al cargar los items de efectos: " + e.getMessage());

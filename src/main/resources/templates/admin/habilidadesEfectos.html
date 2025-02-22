@@ -144,21 +144,36 @@
 
     <!-- Formulario de Estado (Crear o Editar) -->
     <div class="form-container">
-        <h3 th:text="${habilidadEfecto.habilidad_efecto_id != null ? 'Editar Efecto' : 'Crear Nuevo Efecto'}"></h3>
+        <h3 th:text="${habilidadEfecto.habilidad_efecto_id != null ? 'Editar Relacion' : 'Crear Nueva Relacion'}"></h3>
         <form th:action="@{/admin/habilidadesEfectos/save}" th:object="${habilidadEfecto}" method="post">
             <input type="hidden" th:field="*{habilidad_efecto_id}" />
 
-            <!-- Selección de la habilidad -->
+            <!-- Selección de la habilidad
             <div class="form-group mb-3">
                 <label for="habilidad" class="form-label">Habilidad</label>
                 <input type="text" id="habilidad" th:field="*{habilidad}" class="form-control" placeholder="ID de la habilidad asociada" required />
+            </div>-->
+
+            <div class="form-group mb-3">
+                <label for="habilidad" class="form-label">Habilidad</label>
+                <select id="habilidad" th:field="*{habilidad}" class="form-control" required>
+                    <option th:each="tipo : ${habilidadLista}" th:value="${tipo.habilidad_id}" th:text="${tipo.nombre}"></option>
+                </select>
             </div>
 
-            <!-- Selección del efecto -->
+            <!-- Selección del efecto
             <div class="form-group mb-3">
                 <label for="efecto" class="form-label">Efecto</label>
                 <input type="text" id="efecto" th:field="*{efecto}" class="form-control" placeholder="ID del efecto asociado" required />
+            </div>-->
+
+            <div class="form-group mb-3">
+                <label for="efecto" class="form-label">Efecto</label>
+                <select id="efecto" th:field="*{efecto}" class="form-control" required>
+                    <option th:each="tipo : ${efectoLista}" th:value="${tipo.efecto_id}" th:text="${tipo.nombre}"></option>
+                </select>
             </div>
+
 
             <button type="submit" class="btn btn-primary">
                 <span th:text="${habilidadEfecto.habilidad_efecto_id != null ? 'Actualizar' : 'Crear'}"></span>
@@ -181,8 +196,8 @@
             <tbody>
             <tr th:each="habilidadEfecto : ${habilidadesEfectos}">
                 <td th:text="${habilidadEfecto.habilidad_efecto_id}"></td>
-                <td th:text="${habilidadEfecto.habilidad}"></td>
-                <td th:text="${habilidadEfecto.efecto}"></td>
+                <td th:text="${habilidadEfecto.habilidad.nombre}"></td>
+                <td th:text="${habilidadEfecto.efecto.nombre}"></td>
                 <td>
                     <a href="#" th:href="@{/admin/habilidadesEfectos/edit/{id}(id=${habilidadEfecto.habilidad_efecto_id})}" class="btn btn-warning btn-sm">Editar</a>
                     <a href="#" th:href="@{/admin/habilidadesEfectos/delete/{id}(id=${habilidadEfecto.habilidad_efecto_id})}" class="btn btn-danger btn-sm">Eliminar</a>

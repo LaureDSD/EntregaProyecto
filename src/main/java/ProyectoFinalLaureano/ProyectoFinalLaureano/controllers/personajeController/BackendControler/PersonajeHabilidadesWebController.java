@@ -1,5 +1,6 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.personajeController.BackendControler;
 
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.monstruo.MonstruoHabilidad;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.PersonajeHabilidad;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.persoanjeService.HabilidadesPersonajeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,7 @@ public class PersonajeHabilidadesWebController {
         try {
             List<PersonajeHabilidad> habilidades = habilidadesPersonajeService.getAll();
             model.addAttribute("persoanjesHabilidades", habilidades);
+            model.addAttribute("persoanjeHabilidad", new MonstruoHabilidad());
             return "admin/persoanjesHabilidades";
         } catch (Exception e) {
             model.addAttribute("error", "Error al cargar las habilidades de los personajes: " + e.getMessage());

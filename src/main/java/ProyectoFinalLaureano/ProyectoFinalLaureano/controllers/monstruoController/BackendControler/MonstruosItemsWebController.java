@@ -1,6 +1,7 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.monstruoController.BackendControler;
 
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.monstruo.MonstruoItem;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.services.itemService.ItemService;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.monstruoService.MonstruoItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,11 +18,17 @@ public class MonstruosItemsWebController {
     @Autowired
     private MonstruoItemService monstruosService;
 
+    @Autowired
+    private ItemService itemService;
+
     @GetMapping
     public String listar(Model model) {
         try {
             List<MonstruoItem> monstruosItems = monstruosService.getAll();
             model.addAttribute("monstruosItems", monstruosItems);
+            model.addAttribute("monstruoItem", new MonstruoItem());
+            //model.addAttribute("monstruos", monstruosService.getAll());
+            //model.addAttribute("items", itemService.getAll());
             return "admin/monstruosItems";
         } catch (Exception e) {
             model.addAttribute("error", "Error al cargar los items de monstruos: " + e.getMessage());
