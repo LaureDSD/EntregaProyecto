@@ -16,8 +16,10 @@ import java.util.Date;
 import java.util.List;
 
 @Controller
-@RequestMapping("/admin/logJugadores")
+@RequestMapping("/admin/log/logJugadores")
 public class LogPersonajeWebController {
+
+    private final String rutaHTML ="/admin/log/logJugadores";
 
     @Autowired
     private LogPersonajeMonstruoService service;
@@ -35,17 +37,17 @@ public class LogPersonajeWebController {
     @GetMapping
     public String listar(Model model) {
         try {
-            try{ pl = persoanjeService.getAll();}catch (Exception e){throw  e;}
-            try{ ml = monstruosService.getAll();}catch (Exception e){throw  e;}
+             pl = persoanjeService.getAll();
+            ml = monstruosService.getAll();
             List<LogPersonajeMonstruo> logJugador = service.getAll();
             model.addAttribute("logJugadores", logJugador);
             model.addAttribute("logJugador", new LogPersonajeMonstruo());
             model.addAttribute("personajeList", pl );
             model.addAttribute("monstruoList", ml );
-            return "admin/logJugadores";
+            return rutaHTML;
         } catch (Exception e) {
             model.addAttribute("error", "Error al cargar los logs: " + e.getMessage());
-            return "admin/logJugadores";
+            return rutaHTML;
         }
     }
 
@@ -56,10 +58,10 @@ public class LogPersonajeWebController {
             model.addAttribute("logJugador", logJugador);
             model.addAttribute("personajeList", pl );
             model.addAttribute("monstruoList", ml );
-            return "admin/logJugadores";
+            return rutaHTML;
         } catch (Exception e) {
             model.addAttribute("error", "Error al cargar el log para editar: " + e.getMessage());
-            return "admin/logJugadores";
+            return rutaHTML;
         }
     }
 
@@ -68,10 +70,10 @@ public class LogPersonajeWebController {
         try {
             logJugador.setFechaCaza(new Date());
             service.setItem(logJugador);
-            return "redirect:/admin/logJugadores";
+            return "redirect:"+rutaHTML;
         } catch (Exception e) {
             model.addAttribute("error", "Error al guardar el log: " + e.getMessage());
-            return "admin/logJugadores";
+            return rutaHTML;
         }
     }
 
@@ -79,10 +81,10 @@ public class LogPersonajeWebController {
     public String eliminar(@PathVariable("id") Long id, Model model) {
         try {
             service.deleteByID(id);
-            return "redirect:/admin/logJugadores";
+            return "redirect:"+rutaHTML;
         } catch (Exception e) {
             model.addAttribute("error", "Error al eliminar el log: " + e.getMessage());
-            return "admin/logJugadores";
+            return rutaHTML;
         }
     }
 }

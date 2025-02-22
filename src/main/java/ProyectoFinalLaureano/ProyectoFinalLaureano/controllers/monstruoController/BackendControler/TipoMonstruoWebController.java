@@ -11,8 +11,10 @@ import java.io.IOException;
 import java.util.List;
 
 @Controller
-@RequestMapping("/admin/tipoMonstruo")
+@RequestMapping("/admin/monstruo/tipoMonstruo")
 public class TipoMonstruoWebController {
+
+    private final String rutaHTML = "/admin/monstruo/tipoMonstruo";
 
     @Autowired
     private TipoMonstruoService tipoMonstruoService;
@@ -24,10 +26,10 @@ public class TipoMonstruoWebController {
             List<TipoMonstruo> tipoMonstruos = tipoMonstruoService.getAll();
             model.addAttribute("tipoMonstruos", tipoMonstruos);
             model.addAttribute("tipoMonstruo", new TipoMonstruo());
-            return "admin/tipoMonstruo";
+            return rutaHTML;
         } catch (Exception e) {
             model.addAttribute("error", "Error al cargar los tipos de monstruo: " + e.getMessage());
-            return "admin/tipoMonstruo";
+            return rutaHTML;
         }
     }
 
@@ -37,10 +39,10 @@ public class TipoMonstruoWebController {
         try {
             TipoMonstruo tipoMonstruo = (id != null) ? tipoMonstruoService.getByID(id) : new TipoMonstruo();
             model.addAttribute("tipoMonstruo", tipoMonstruo);
-            return "admin/tipoMonstruo";
+            return rutaHTML;
         } catch (Exception e) {
             model.addAttribute("error", "Error al cargar el tipo de monstruo para editar: " + e.getMessage());
-            return "admin/tipoMonstruo";
+            return rutaHTML;
         }
     }
 
@@ -49,10 +51,10 @@ public class TipoMonstruoWebController {
     public String guardar(@ModelAttribute("tipoMonstruo") TipoMonstruo tipoMonstruo, Model model) throws IOException {
         try {
             tipoMonstruoService.setItem(tipoMonstruo);
-            return "redirect:/admin/tipoMonstruo";
+            return "redirect:"+rutaHTML;
         } catch (Exception e) {
             model.addAttribute("error", "Error al guardar el tipo de monstruo: " + e.getMessage());
-            return "admin/tipoMonstruo";
+            return rutaHTML;
         }
     }
 
@@ -61,10 +63,10 @@ public class TipoMonstruoWebController {
     public String eliminar(@PathVariable("id") Long id, Model model) {
         try {
             tipoMonstruoService.deleteByID(id);
-            return "redirect:/admin/tipoMonstruo";
+            return "redirect:"+rutaHTML;
         } catch (Exception e) {
             model.addAttribute("error", "Error al eliminar el tipo de monstruo: " + e.getMessage());
-            return "admin/tipoMonstruo";
+            return rutaHTML;
         }
     }
 }

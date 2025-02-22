@@ -89,7 +89,9 @@ public class Usuario {
 
 
     @NotNull
+    //@ManyToOne
     @Schema(description = "Tipo de usuario asociado")
+    //@Join
     @Column(name = "tipo_usuario_id", nullable = false)
     private Long tipoUsuario;
 

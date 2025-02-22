@@ -130,7 +130,6 @@
 </nav>
 
 
-
 <!-- Contenido principal -->
 <div class="container mt-4">
     <!-- Mensaje de Error si ocurre algún problema -->
@@ -138,111 +137,81 @@
         <p th:text="${error}"></p>
     </div>
 
-    <h2 class="text-center mb-4">Gestión de Estadisticas</h2>
+    <h2 class="text-center mb-4">Gestión de Usuarios</h2>
 
     <!-- Formulario de Estado (Crear o Editar) -->
     <div class="form-container">
-        <h3 th:text="${estadistica.estadistica_id != null ? 'Editar Estadística' : 'Crear Nueva Estadística'}"></h3>
-        <form th:action="@{/admin/estadisticas/save}" th:object="${estadistica}" method="post">
-            <input type="hidden" th:field="*{estadistica_id}" />
+        <h3 th:text="${usuario.usuario_id != null ? 'Editar Usuario' : 'Crear Nuevo Usuario'}"></h3>
+        <form th:action="@{/admin/usuarios/save}" th:object="${usuario}" method="post">
+            <input type="hidden" th:field="*{usuario_id}" />
 
             <div class="form-group mb-3">
-                <label for="vida" class="form-label">Vida</label>
-                <input type="number" id="vida" th:field="*{vida}" class="form-control" placeholder="Vida base de la entidad" required />
+                <label for="nombre_usuario_pub" class="form-label">Nombre Público</label>
+                <input type="text" id="nombre_usuario_pub" th:field="*{nombre_usuario_pub}" class="form-control" placeholder="Nombre público del usuario" required />
             </div>
             <div class="form-group mb-3">
-                <label for="regeneracionVida" class="form-label">Regen. de Vida</label>
-                <input type="number" id="regeneracionVida" th:field="*{regeneracionVida}" class="form-control" placeholder="Regeneración de vida base" required />
+                <label for="nombre_usuario_priv" class="form-label">Nombre Privado</label>
+                <input type="text" id="nombre_usuario_priv" th:field="*{nombre_usuario_priv}" class="form-control" placeholder="Nombre privado del usuario" required />
             </div>
             <div class="form-group mb-3">
-                <label for="escudo" class="form-label">Escudo</label>
-                <input type="number" id="escudo" th:field="*{escudo}" class="form-control" placeholder="Escudo base de la entidad" required />
+                <label for="correo" class="form-label">Correo Electrónico</label>
+                <input type="email" id="correo" th:field="*{correo}" class="form-control" placeholder="Correo electrónico" required />
             </div>
             <div class="form-group mb-3">
-                <label for="energia" class="form-label">Energía</label>
-                <input type="number" id="energia" th:field="*{energia}" class="form-control" placeholder="Energía base de la entidad" required />
+                <label for="contraseña" class="form-label">Contraseña</label>
+                <input type="password" id="contraseña" th:field="*{contraseña}" class="form-control" placeholder="Contraseña del usuario" required />
             </div>
             <div class="form-group mb-3">
-                <label for="regeneracionEnergia" class="form-label">Regen. de Energía</label>
-                <input type="number" id="regeneracionEnergia" th:field="*{regeneracionEnergia}" class="form-control" placeholder="Regeneración de energía base" required />
+                <label for="estado_cuenta" class="form-label">Estado de la Cuenta</label>
+                <select id="estado_cuenta" th:field="*{estado_cuenta}" class="form-control" required>
+                    <option value="true">Activa</option>
+                    <option value="false">Inactiva</option>
+                </select>
             </div>
             <div class="form-group mb-3">
-                <label for="mana" class="form-label">Maná</label>
-                <input type="number" id="mana" th:field="*{mana}" class="form-control" placeholder="Maná base de la entidad" required />
-            </div>
-            <div class="form-group mb-3">
-                <label for="regeneracionMana" class="form-label">Regen. de Maná</label>
-                <input type="number" id="regeneracionMana" th:field="*{regeneracionMana}" class="form-control" placeholder="Regeneración de maná base" required />
-            </div>
-            <div class="form-group mb-3">
-                <label for="ataqueFisico" class="form-label">Ataque Físico</label>
-                <input type="number" id="ataqueFisico" th:field="*{ataqueFisico}" class="form-control" placeholder="Ataque físico base de la entidad" required />
-            </div>
-            <div class="form-group mb-3">
-                <label for="ataqueMagico" class="form-label">Ataque Mágico</label>
-                <input type="number" id="ataqueMagico" th:field="*{ataqueMagico}" class="form-control" placeholder="Ataque mágico base de la entidad" required />
-            </div>
-            <div class="form-group mb-3">
-                <label for="defensaFisica" class="form-label">Defensa Física</label>
-                <input type="number" id="defensaFisica" th:field="*{defensaFisica}" class="form-control" placeholder="Defensa física de la entidad" required />
-            </div>
-            <div class="form-group mb-3">
-                <label for="defensaMagica" class="form-label">Defensa Mágica</label>
-                <input type="number" id="defensaMagica" th:field="*{defensaMagica}" class="form-control" placeholder="Defensa mágica de la entidad" required />
+                <label for="tipoUsuario" class="form-label">Tipo de Usuario</label>
+                <select id="tipoUsuario" th:field="*{tipoUsuario}" class="form-control" required>
+                    <option th:each="tipoUsuario : ${tipoUsuarioList}" th:value="${tipoUsuario.tipo_usuario_id}" th:text="${tipoUsuario.nombre}"></option>
+                </select>
             </div>
             <button type="submit" class="btn btn-primary">
-                <span th:text="${estadistica.estadistica_id != null ? 'Actualizar' : 'Crear'}"></span>
+                <span th:text="${usuario.usuario_id != null ? 'Actualizar' : 'Crear'}"></span>
             </button>
         </form>
     </div>
 
-
-    <div th:unless="${estadistica.estadistica_id != null}" class="table-container">
-        <h3 class="mb-4">Listado de Estadísticas</h3>
+    <div th:unless="${usuario.usuario_id != null}" class="table-container">
+        <h3 class="mb-4">Listado de Usuarios</h3>
         <table class="table table-bordered">
             <thead class="thead-dark">
             <tr>
                 <th>ID</th>
-                <th>Vida</th>
-                <th>Regeneración de Vida</th>
-                <th>Escudo</th>
-                <th>Energía</th>
-                <th>Regeneración de Energía</th>
-                <th>Maná</th>
-                <th>Regeneración de Maná</th>
-                <th>Ataque Físico</th>
-                <th>Ataque Mágico</th>
-                <th>Defensa Física</th>
-                <th>Defensa Mágica</th>
+                <th>Nombre Público</th>
+                <th>Nombre Privado</th>
+                <th>Correo</th>
+                <th>Estado de Cuenta</th>
+                <th>Tipo de Usuario</th>
                 <th>Acciones</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="estadistica : ${estadisticas}">
-                <td th:text="${estadistica.estadistica_id}"></td>
-                <td th:text="${estadistica.vida}"></td>
-                <td th:text="${estadistica.regeneracionVida}"></td>
-                <td th:text="${estadistica.escudo}"></td>
-                <td th:text="${estadistica.energia}"></td>
-                <td th:text="${estadistica.regeneracionEnergia}"></td>
-                <td th:text="${estadistica.mana}"></td>
-                <td th:text="${estadistica.regeneracionMana}"></td>
-                <td th:text="${estadistica.ataqueFisico}"></td>
-                <td th:text="${estadistica.ataqueMagico}"></td>
-                <td th:text="${estadistica.defensaFisica}"></td>
-                <td th:text="${estadistica.defensaMagica}"></td>
+            <tr th:each="usuario : ${usuarios}">
+                <td th:text="${usuario.usuario_id}"></td>
+                <td th:text="${usuario.nombre_usuario_pub}"></td>
+                <td th:text="${usuario.nombre_usuario_priv}"></td>
+                <td th:text="${usuario.correo}"></td>
+                <td th:text="${usuario.estado_cuenta ? 'Activa' : 'Inactiva'}"></td>
+                <td th:text="${usuario.tipoUsuario}"></td>
                 <td>
-                    <a href="#" th:href="@{/admin/estadisticas/edit/{id}(id=${estadistica.estadistica_id})}" class="btn btn-warning btn-sm">Editar</a>
-                    <a href="#" th:href="@{/admin/estadisticas/delete/{id}(id=${estadistica.estadistica_id})}" class="btn btn-danger btn-sm">Eliminar</a>
+                    <a href="#" th:href="@{/admin/usuarios/edit/{id}(id=${usuario.usuario_id})}" class="btn btn-warning btn-sm">Editar</a>
+                    <a href="#" th:href="@{/admin/usuarios/delete/{id}(id=${usuario.usuario_id})}" class="btn btn-danger btn-sm">Eliminar</a>
                 </td>
             </tr>
             </tbody>
         </table>
     </div>
-
-
-
 </div>
+
 
 <!-- Footer -->
 <footer class="mt-5 py-3">
@@ -251,11 +220,7 @@
     </div>
 </footer>
 
-
 <!-- Agregar Bootstrap JS para que los dropdowns funcionen -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-
-
-
 </body>
 </html>

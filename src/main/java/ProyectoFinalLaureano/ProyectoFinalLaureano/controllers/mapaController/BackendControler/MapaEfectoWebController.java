@@ -19,8 +19,10 @@ import java.io.IOException;
 import java.util.List;
 
 @Controller
-@RequestMapping("/admin/mapasEfecto")
+@RequestMapping("/admin/mapa/mapasEfecto")
 public class MapaEfectoWebController {
+
+    private final String rutaHTML ="/admin/mapa/mapasEfecto";
 
     @Autowired
     private MapaEfectoService service;
@@ -39,8 +41,8 @@ public class MapaEfectoWebController {
     @GetMapping
     public String listar(Model model) {
         try {
-            try{ ml = mapaService.getAll();}catch (Exception e){}
-            try{ el = efectoEstadoService.getAll();}catch (Exception e){}
+             ml = mapaService.getAll();
+             el = efectoEstadoService.getAll();
             List<MapaEfecto> mapasMonstruo = service.getAll();
             model.addAttribute("mapasEfecto", mapasMonstruo);
             model.addAttribute("mapaEfecto", new MapaEfecto());
@@ -48,10 +50,10 @@ public class MapaEfectoWebController {
             model.addAttribute("efectoList", el);
 
 
-            return "admin/mapasEfecto";
+            return rutaHTML;
         } catch (Exception e) {
             model.addAttribute("error", "Error al cargar los efectos de mapa: " + e.getMessage());
-            return "admin/mapasEfecto";
+            return rutaHTML;
         }
     }
 
@@ -62,10 +64,10 @@ public class MapaEfectoWebController {
             model.addAttribute("mapaEfecto", mapaMonstruo);
             model.addAttribute("mapaList", ml);
             model.addAttribute("efectoList", el);
-            return "admin/mapasEfecto";
+            return rutaHTML;
         } catch (Exception e) {
             model.addAttribute("error", "Error al cargar el efecto de mapa para editar: " + e.getMessage());
-            return "admin/mapasEfecto";
+            return rutaHTML;
         }
     }
 
@@ -73,10 +75,10 @@ public class MapaEfectoWebController {
     public String guardar(@ModelAttribute("mapaEfecto") MapaEfecto mapaMonstruo, Model model) throws IOException {
         try {
             service.setItem(mapaMonstruo);
-            return "redirect:/admin/mapasEfecto";
+            return "redirect:"+rutaHTML;
         } catch (Exception e) {
             model.addAttribute("error", "Error al guardar el efecto de mapa: " + e.getMessage());
-            return "admin/mapasEfecto";
+            return rutaHTML;
         }
     }
 
@@ -84,10 +86,10 @@ public class MapaEfectoWebController {
     public String eliminar(@PathVariable("id") Long id, Model model) {
         try {
             service.deleteByID(id);
-            return "redirect:/admin/mapasEfecto";
+            return "redirect:"+rutaHTML;
         } catch (Exception e) {
             model.addAttribute("error", "Error al eliminar el efecto de mapa: " + e.getMessage());
-            return "admin/mapasEfecto";
+            return rutaHTML;
         }
     }
 }

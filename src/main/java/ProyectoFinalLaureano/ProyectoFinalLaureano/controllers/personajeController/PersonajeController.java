@@ -83,7 +83,7 @@ public class PersonajeController {
         personajeDTO.setImagen(personaje.getImagen_modelo());
         personajeDTO.setNombre(personaje.getNombre());
         personajeDTO.setCreacion(personaje.getFecha_creacion());
-        personajeDTO.setClase(clasePersonajeService.getByID(personaje.getClase_personaje()));
+        personajeDTO.setClase(personaje.getClase_personaje());
         personajeDTO.setNivel(personaje.getNivel());
         personajeDTO.setXp_acumulada(personaje.getXp_acumulada());
         personajeDTO.setAlmas(personaje.getAlmas());
@@ -98,7 +98,7 @@ public class PersonajeController {
         List<InventarioDTO> inventariosDTO = new ArrayList<>();
         for (InventarioPersonaje inventario : inventarioPersonajes) {
             InventarioDTO inventarioDTO = new InventarioDTO();
-            inventarioDTO.setItem(itemService.getByID(inventario.getItem())); // Obtener el item.
+            inventarioDTO.setItem(inventario.getItem()); // Obtener el item.
             inventarioDTO.setCantidad(inventario.getCantidad());
             inventarioDTO.setEquipado(inventario.isEquipado());
             inventariosDTO.add(inventarioDTO);

@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @NoArgsConstructor
@@ -21,7 +22,7 @@ public class PersonajeDTO {
 
     private String nombre;
 
-    private LocalDateTime creacion;
+    private Date creacion;
 
     private int nivel;
 

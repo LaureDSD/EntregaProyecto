@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/admin/itemsEfectos")
+@RequestMapping("/admin/item/itemsEfectos")
 public class ItemEfectoWebController {
+
+    private final String rutaHTML = "/admin/item/itemsEfectos";
 
     @Autowired
     private ItemEfectoService itemEfectoService;
@@ -31,17 +33,17 @@ public class ItemEfectoWebController {
     @GetMapping
     public String listar(Model model) {
         try {
-            try{il = itemService.getAll();}catch (Exception e ){ throw e;}
-            try{el = efectoEstadoService.getAll();}catch (Exception e ){ throw e;}
+            il = itemService.getAll();
+            el = efectoEstadoService.getAll();
             List<ItemEfecto> itemsEfectos = itemEfectoService.getAll();
             model.addAttribute("itemsEfectos", itemsEfectos);
             model.addAttribute("itemEfecto", new ItemEfecto());
             model.addAttribute("itemList", il);
             model.addAttribute("efectoList", el);
-            return "admin/itemsEfectos";
+            return rutaHTML;
         } catch (Exception e) {
             model.addAttribute("error", "Error al cargar los items de efectos: " + e.getMessage());
-            return "admin/itemsEfectos";
+            return rutaHTML;
         }
     }
 
@@ -52,10 +54,10 @@ public class ItemEfectoWebController {
             model.addAttribute("itemEfecto", itemEfecto);
             model.addAttribute("itemList", il);
             model.addAttribute("efectoList", el);
-            return "admin/itemsEfectos";
+            return rutaHTML;
         } catch (Exception e) {
             model.addAttribute("error", "Error al cargar el item de efecto para editar: " + e.getMessage());
-            return "admin/itemsEfectos";
+            return rutaHTML;
         }
     }
 
@@ -63,10 +65,10 @@ public class ItemEfectoWebController {
     public String guardar(@ModelAttribute("itemEfecto") ItemEfecto itemEfecto, Model model) {
         try {
             itemEfectoService.setItem(itemEfecto);
-            return "redirect:/admin/itemsEfectos";
+            return "redirect:"+rutaHTML;
         } catch (Exception e) {
             model.addAttribute("error", "Error al guardar el item de efecto: " + e.getMessage());
-            return "admin/itemsEfectos";
+            return rutaHTML;
         }
     }
 
@@ -74,10 +76,10 @@ public class ItemEfectoWebController {
     public String eliminar(@PathVariable("id") Long id, Model model) {
         try {
             itemEfectoService.deleteByID(id);
-            return "redirect:/admin/itemsEfectos";
+            return "redirect:"+rutaHTML;
         } catch (Exception e) {
             model.addAttribute("error", "Error al eliminar el item de efecto: " + e.getMessage());
-            return "admin/itemsEfectos";
+            return rutaHTML;
         }
     }
 }

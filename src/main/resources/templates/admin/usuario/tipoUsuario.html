@@ -129,58 +129,61 @@
     </div>
 </nav>
 
-
 <!-- Contenido principal -->
 <div class="container mt-4">
     <!-- Mensaje de Error si ocurre algún problema -->
     <div th:if="${error}" class="alert alert-danger">
         <p th:text="${error}"></p>
     </div>
-    <h1 class="mb-4">Gestión de Usuarios</h1>
-    <!-- Lista de Usuarios -->
-    <section class="mt-5">
-        <h2>Lista de Usuarios</h2>
-        <table class="table table-striped table-hover">
-            <thead class="table-dark">
+
+    <h2 class="text-center mb-4">Gestión de Tipos de Usuario</h2>
+
+    <!-- Formulario de Estado (Crear o Editar) -->
+    <div class="form-container">
+        <h3 th:text="${tipoUsuario.tipo_usuario_id != null ? 'Editar Tipo de Usuario' : 'Crear Nuevo Tipo de Usuario'}"></h3>
+        <form th:action="@{/admin/tipoUsuario/save}" th:object="${tipoUsuario}" method="post">
+            <input type="hidden" th:field="*{tipo_usuario_id}" />
+
+            <div class="form-group mb-3">
+                <label for="nombre" class="form-label">Nombre</label>
+                <input type="text" id="nombre" th:field="*{nombre}" class="form-control" placeholder="Nombre del tipo de usuario" required />
+            </div>
+            <div class="form-group mb-3">
+                <label for="descripcion" class="form-label">Descripción</label>
+                <textarea id="descripcion" th:field="*{descripcion}" class="form-control" placeholder="Descripción del tipo de usuario" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">
+                <span th:text="${tipoUsuario.tipo_usuario_id != null ? 'Actualizar' : 'Crear'}"></span>
+            </button>
+        </form>
+    </div>
+
+    <div th:unless="${tipoUsuario.tipo_usuario_id != null}" class="table-container">
+        <h3 class="mb-4">Listado de Tipos de Usuario</h3>
+        <table class="table table-bordered">
+            <thead class="thead-dark">
             <tr>
                 <th>ID</th>
-                <th>Nombre Usuario Privado</th>
-                <th>Nombre Usuario Público</th>
-                <th>Correo</th>
-                <th>Fecha Creación</th>
-                <th>Última Conexión</th>
-                <th>Estado Cuenta</th>
-                <th>Tipo Usuario</th>
-                <th>Personajes</th>
-                <th>Imagen Perfil</th>
+                <th>Nombre</th>
+                <th>Descripción</th>
                 <th>Acciones</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="usuario : ${usuarios}">
-                <td th:text="${usuario.usuario_id}"></td>
-                <td th:text="${usuario.nombre_usuario_priv}"></td>
-                <td th:text="${usuario.nombre_usuario_pub}"></td>
-                <td th:text="${usuario.correo}"></td>
-                <td th:text="${usuario.fecha_creacion}"></td>
-                <td th:text="${usuario.ultima_conexion}"></td>
-                <td th:text="${usuario.estado_cuenta ? 'Activo' : 'Inactivo'}"></td>
-                <td th:text="${usuario.tipoUsuario}"></td>
-                <td th:text="${usuario.limite_personajes}"></td>
+            <tr th:each="tipoUsuario : ${tiposUsuario}">
+                <td th:text="${tipoUsuario.tipo_usuario_id}"></td>
+                <td th:text="${tipoUsuario.nombre}"></td>
+                <td th:text="${tipoUsuario.descripcion}"></td>
                 <td>
-                    <img th:if="${usuario.imagen_perfil}" th:src="@{'/uploads/' + ${usuario.imagen_perfil}}" alt="Imagen de perfil" class="img-fluid"/>
-                </td>
-                <td>
-                    <a th:href="@{'/admin/usuario/edit/' + ${usuario.usuario_id}}" class="btn btn-sm btn-primary">Editar</a> |
-                    <a th:href="@{'/admin/usuario/delete/' + ${usuario.usuario_id}}"
-                       class="btn btn-sm btn-danger"
-                       onclick="return confirm('¿Estás seguro de eliminar este usuario?');">Eliminar</a>
+                    <a href="#" th:href="@{/admin/tipoUsuario/edit/{id}(id=${tipoUsuario.tipo_usuario_id})}" class="btn btn-warning btn-sm">Editar</a>
+                    <a href="#" th:href="@{/admin/tipoUsuario/delete/{id}(id=${tipoUsuario.tipo_usuario_id})}" class="btn btn-danger btn-sm">Eliminar</a>
                 </td>
             </tr>
             </tbody>
         </table>
-    </section>
+    </div>
 </div>
+
 
 <!-- Footer -->
 <footer class="mt-5 py-3">

@@ -25,7 +25,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-        <a class="navbar-brand" th:href="@{/admin/dashboard}" >API</a>
+        <a class="navbar-brand" th:href="@{/admin/monstruosHabilidades}" >API</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -62,7 +62,8 @@
                         <li><a class="dropdown-item" th:href="@{/admin/tipoMonstruo}">Tipo de Monstruo</a></li>
                         <li><a class="dropdown-item" th:href="@{/admin/monstruos}">Monstruos</a></li>
                         <li><a class="dropdown-item" th:href="@{/admin/monstruosItems}">Monstruos y Drops</a></li>
-                        <li><a class="dropdown-item" th:href="@{/admin/logJugador}">Registro de Jugador y Monstruo</a></li>
+                        <li><a class="dropdown-item" th:href="@{/admin/monstruosHabilidades}">Monstruos y Habilidades</a></li>
+                        <li><a class="dropdown-item" th:href="@{/admin/logJugadores}">Registro de Jugador y Monstruo</a></li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
@@ -83,7 +84,7 @@
                     <ul class="dropdown-menu" aria-labelledby="gruposDropdown">
                         <li><a class="dropdown-item" th:href="@{/admin/tiposGrupo}">Tipo de Grupo</a></li>
                         <li><a class="dropdown-item" th:href="@{/admin/grupos}">Grupos</a></li>
-                        <li><a class="dropdown-item" th:href="@{/admin/lideresGrupos}">Grupos</a></li>
+                        <li><a class="dropdown-item" th:href="@{/admin/lideresGrupos}">Lideres</a></li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
@@ -132,113 +133,110 @@
     </div>
 </nav>
 
-
 <!-- Contenido principal -->
-<<div class="container mt-4">
-    <!-- Mensaje de Error si ocurre algún problema -->
+<div class="container mt-4">
+    <!-- Mensaje de error -->
     <div th:if="${error}" class="alert alert-danger">
         <p th:text="${error}"></p>
     </div>
 
-    <h2 class="text-center mb-4">Gestión de Habilidades</h2>
+    <h2 class="text-center mb-4">Gestión de Logros de Personajes</h2>
 
     <!-- Formulario de Estado (Crear o Editar) -->
     <div class="form-container">
-        <h3 th:text="${habilidad.habilidad_id != null ? 'Editar Habilidad' : 'Crear Nueva Habilidad'}"></h3>
-        <form th:action="@{/admin/habilidades/save}" th:object="${habilidad}" method="post">
-            <input type="hidden" th:field="*{habilidad_id}" />
+        <h3 th:text="${logroPersonaje.personajeId != null ? 'Editar Logro de Personaje' : 'Asignar Nuevo Logro'}"></h3>
+        <form th:action="@{/admin/personajesLogros/save}" th:object="${logroPersonaje}" method="post">
+            <input type="hidden" th:field="*{personajeId}" />
 
             <div class="form-group mb-3">
-                <label for="nombre" class="form-label">Nombre</label>
-                <input type="text" id="nombre" th:field="*{nombre}" class="form-control" placeholder="Nombre de la habilidad" required />
-            </div>
-            <div class="form-group mb-3">
-                <label for="imagen" class="form-label">Imagen</label>
-                <input type="text" id="imagen" th:field="*{imagen}" class="form-control" placeholder="URL de la imagen" required />
-            </div>
-            <div class="form-group mb-3">
-                <label for="descripcion" class="form-label">Descripción</label>
-                <textarea id="descripcion" th:field="*{descripcion}" class="form-control" placeholder="Descripción de la habilidad" required></textarea>
-            </div>
-            <div class="form-group mb-3">
-                <label for="nivel_maximo" class="form-label">Nivel Máximo</label>
-                <input type="number" id="nivel_maximo" th:field="*{nivel_maximo}" class="form-control" placeholder="Nivel máximo de la habilidad" required />
-            </div>
-            <div class="form-group mb-3">
-                <label for="requisito_nivel" class="form-label">Requisito de Nivel</label>
-                <input type="number" id="requisito_nivel" th:field="*{requisito_nivel}" class="form-control" placeholder="Nivel requerido para aprender" required />
-            </div>
-            <div class="form-group mb-3">
-                <label for="tipoHabilidad" class="form-label">Tipo de Habilidad</label>
-                <select id="tipoHabilidad" th:field="*{tipoHabilidad}" class="form-control" required>
-                    <option value="ofensiva" th:selected="*{tipoHabilidad} == 'ofensiva'">Ofensiva</option>
-                    <option value="defensiva" th:selected="*{tipoHabilidad} == 'defensiva'">Defensiva</option>
-                    <option value="apoyo" th:selected="*{tipoHabilidad} == 'apoyo'">Apoyo</option>
+                <label for="personaje" class="form-label">Personaje</label>
+                <select id="personaje" th:field="*{personaje}" class="form-control" required>
+                    <option th:each="personaje : ${personajeList}"
+                            th:value="${personaje.personaje_id}"
+                            th:text="${personaje.nombre}"
+                            th:selected="*{personaje.personaje_id} == ${personaje.personaje_id}"></option>
                 </select>
             </div>
-            <div class="form-group mb-3">
-                <label for="objetivoHabilidad" class="form-label">Objetivo de Habilidad</label>
-                <select id="objetivoHabilidad" th:field="*{objetivoHabilidad}" class="form-control" required>
-                    <option value="enemigo" th:selected="*{objetivoHabilidad} == 'enemigo'">Enemigo</option>
-                    <option value="jugador" th:selected="*{objetivoHabilidad} == 'jugador'">Jugador</option>
-                    <option value="aliado" th:selected="*{objetivoHabilidad} == 'aliado'">Aliado</option>
-                    <option value="todo" th:selected="*{objetivoHabilidad} == 'todo'">Todo</option>
-                </select>
-            </div>
-            <div class="form-group mb-3">
-                <label for="area_efecto" class="form-label">Área de Efecto</label>
-                <input type="number" step="0.01" id="area_efecto" th:field="*{area_efecto}" class="form-control" placeholder="Área de efecto de la habilidad" required />
-            </div>
-            <div class="form-group mb-3">
-                <label for="unidades_afectadas" class="form-label">Unidades Afectadas</label>
-                <input type="number" id="unidades_afectadas" th:field="*{unidades_afectadas}" class="form-control" placeholder="Número de unidades afectadas" required />
-            </div>
-            <div class="form-group mb-3">
-                <label for="enfriamiento" class="form-label">Enfriamiento</label>
 
-                <input type="number" id="enfriamiento" th:field="*{enfriamiento}" class="form-control" placeholder="Tiempo de enfriamiento" required />
+            <div class="form-group mb-3">
+                <label for="normal" class="form-label">Enemigos Normales Derrotados</label>
+                <input type="number" id="normal" th:field="*{normal}" class="form-control" placeholder="Número de enemigos normales derrotados" required />
             </div>
 
             <div class="form-group mb-3">
-                <label for="estadisticas" class="form-label">Estadistica</label>
-                <input type="number" id="estadisticas" th:field="*{estadisticas.estadistica_id}" class="form-control" placeholder="estadistica" required />
+                <label for="miniboss" class="form-label">Minibosses Derrotados</label>
+                <input type="number" id="miniboss" th:field="*{miniboss}" class="form-control" placeholder="Número de minibosses derrotados" required />
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="boss" class="form-label">Bosses Derrotados</label>
+                <input type="number" id="boss" th:field="*{boss}" class="form-control" placeholder="Número de bosses derrotados" required />
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="muertes_totales" class="form-label">Muertes Totales</label>
+                <input type="number" id="muertes_totales" th:field="*{muertes_totales}" class="form-control" placeholder="Número total de muertes" required />
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="total_daño_inflijido" class="form-label">Daño Total Infligido</label>
+                <input type="number" id="total_daño_inflijido" th:field="*{total_daño_inflijido}" class="form-control" placeholder="Daño total infligido" required />
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="total_daño_recibido" class="form-label">Daño Total Recibido</label>
+                <input type="number" id="total_daño_recibido" th:field="*{total_daño_recibido}" class="form-control" placeholder="Daño total recibido" required />
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="tiempo_total_jugado" class="form-label">Tiempo Total Jugado</label>
+                <input type="number" id="tiempo_total_jugado" th:field="*{tiempo_total_jugado}" class="form-control" placeholder="Tiempo total jugado (en segundos)" required />
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="mazmorras_totales_superadas" class="form-label">Mazmorras Superadas</label>
+                <input type="number" id="mazmorras_totales_superadas" th:field="*{mazmorras_totales_superadas}" class="form-control" placeholder="Número de mazmorras superadas" required />
             </div>
 
             <button type="submit" class="btn btn-primary">
-                <span th:text="${habilidad.habilidad_id != null ? 'Actualizar' : 'Crear'}"></span>
+                <span th:text="${logroPersonaje.personajeId != null ? 'Actualizar' : 'Asignar'}"></span>
             </button>
         </form>
     </div>
 
-    <div th:unless="${habilidad.habilidad_id != null}" class="table-container">
-        <h3 class="mb-4">Listado de Habilidades</h3>
+    <div th:unless="${logroPersonaje.personajeId != null}" class="table-container">
+        <h3 class="mb-4">Listado de Logros de Personajes</h3>
         <table class="table table-bordered">
             <thead class="thead-dark">
             <tr>
                 <th>ID</th>
-                <th>Nombre</th>
-                <th>Tipo</th>
-                <th>Objetivo</th>
-                <th>Área de Efecto</th>
-                <th>Unidades Afectadas</th>
-                <th>Enfriamiento</th>
-                <th>Estadisticas</th>
+                <th>Personaje</th>
+                <th>Enemigos Normales</th>
+                <th>Minibosses</th>
+                <th>Bosses</th>
+                <th>Muertes Totales</th>
+                <th>Daño Infligido</th>
+                <th>Daño Recibido</th>
+                <th>Tiempo Jugado</th>
+                <th>Mazmorras Superadas</th>
                 <th>Acciones</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="habilidad : ${habilidades}">
-                <td th:text="${habilidad.habilidad_id}"></td>
-                <td th:text="${habilidad.nombre}"></td>
-                <td th:text="${habilidad.tipoHabilidad}"></td>
-                <td th:text="${habilidad.objetivoHabilidad}"></td>
-                <td th:text="${habilidad.area_efecto}"></td>
-                <td th:text="${habilidad.unidades_afectadas}"></td>
-                <td th:text="${habilidad.enfriamiento}"></td>
-                <td th:text="${habilidad.estadisticas.estadistica_id}"></td>
+            <tr th:each="logro : ${personajesLogros}">
+                <td th:text="${logro.personajeId}"></td>
+                <td th:text="${logro.personaje.nombre}"></td>
+                <td th:text="${logro.normal}"></td>
+                <td th:text="${logro.miniboss}"></td>
+                <td th:text="${logro.boss}"></td>
+                <td th:text="${logro.muertes_totales}"></td>
+                <td th:text="${logro.total_daño_inflijido}"></td>
+                <td th:text="${logro.total_daño_recibido}"></td>
+                <td th:text="${logro.tiempo_total_jugado}"></td>
+                <td th:text="${logro.mazmorras_totales_superadas}"></td>
                 <td>
-                    <a href="#" th:href="@{/admin/habilidades/edit/{id}(id=${habilidad.habilidad_id})}" class="btn btn-warning btn-sm">Editar</a>
-                    <a href="#" th:href="@{/admin/habilidades/delete/{id}(id=${habilidad.habilidad_id})}" class="btn btn-danger btn-sm">Eliminar</a>
+                    <a href="#" th:href="@{/admin/personajesLogros/edit/{id}(id=${logro.personajeId})}" class="btn btn-warning btn-sm">Editar</a>
+                    <a href="#" th:href="@{/admin/personajesLogros/delete/{id}(id=${logro.personajeId})}" class="btn btn-danger btn-sm">Eliminar</a>
                 </td>
             </tr>
             </tbody>

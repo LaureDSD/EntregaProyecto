@@ -15,9 +15,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/admin/habilidadesEfectos")
+@RequestMapping("/admin/habilidad/habilidadesEfectos")
 public class HabilidadEfectoWebController {
 
+
+    private final String rutaHTML = "/admin/habilidad/habilidadesEfectos"
+;
     @Autowired
     private HabilidadEfectoService service;
 
@@ -34,17 +37,17 @@ public class HabilidadEfectoWebController {
     @GetMapping
     public String listar(Model model) {
         try {
-            try{ el = efectoEstadoService.getAll(); }catch (Exception e){}
-            try{ hl = habilidadService.getAll(); }catch (Exception e){}
+            el = efectoEstadoService.getAll();
+            hl = habilidadService.getAll();
             List<HabilidadEfecto> habilidades = service.getAll();
             model.addAttribute("habilidadesEfectos", habilidades);
             model.addAttribute("habilidadEfecto", new HabilidadEfecto());
             model.addAttribute("habilidadLista", hl);
             model.addAttribute("efectoLista", el);
-            return "admin/habilidadesEfectos";
+            return rutaHTML;
         } catch (Exception e) {
             model.addAttribute("error", "Error al cargar las habilidades: " + e.getMessage());
-            return "admin/habilidadesEfectos";
+            return rutaHTML;
         }
     }
 
@@ -56,10 +59,10 @@ public class HabilidadEfectoWebController {
             model.addAttribute("habilidadEfecto", habilidadEfecto);
             model.addAttribute("habilidadLista",hl);
             model.addAttribute("efectoLista", el);
-            return "admin/habilidadesEfectos";
+            return rutaHTML;
         } catch (Exception e) {
             model.addAttribute("error", "Error al cargar el efecto para editar: " + e.getMessage());
-            return "admin/habilidadesEfectos";
+            return rutaHTML;
         }
     }
 
@@ -68,10 +71,10 @@ public class HabilidadEfectoWebController {
     public String guardar(@ModelAttribute("habilidadEfecto") HabilidadEfecto habilidadEfecto, Model model) {
         try {
             service.setItem(habilidadEfecto);
-            return "redirect:/admin/habilidadesEfectos";
+            return "redirect:"+rutaHTML;
         } catch (Exception e) {
             model.addAttribute("error", "Error al guardar el efecto: " + e.getMessage());
-            return "admin/habilidadesEfectos";
+            return rutaHTML;
         }
     }
 
@@ -80,10 +83,10 @@ public class HabilidadEfectoWebController {
     public String eliminar(@PathVariable("id") Long id, Model model) {
         try {
             service.deleteByID(id);
-            return "redirect:/admin/habilidadesEfectos";
+            return "redirect:"+rutaHTML;
         } catch (Exception e) {
             model.addAttribute("error", "Error al eliminar el efecto: " + e.getMessage());
-            return "admin/habilidadesEfectos";
+            return rutaHTML;
         }
     }
 }

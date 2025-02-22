@@ -66,7 +66,7 @@ public class InventarioController {
     // Conversor Unico
     private  InventarioDTO conversorInventarioDTO(InventarioPersonaje inventarioPersonaje) {
         InventarioDTO inventarioDTO = new InventarioDTO();
-        inventarioDTO.setItem( itemService.getByID(inventarioPersonaje.getItem()));
+        inventarioDTO.setItem( inventarioPersonaje.getItem());
         inventarioDTO.setCantidad(inventarioPersonaje.getCantidad());
         inventarioDTO.setFecha_obtencion(inventarioPersonaje.getFecha_obtencion());
         return inventarioDTO;

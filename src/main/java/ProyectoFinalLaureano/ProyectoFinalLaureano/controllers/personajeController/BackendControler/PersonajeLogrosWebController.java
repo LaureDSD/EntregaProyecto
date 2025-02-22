@@ -1,7 +1,9 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.personajeController.BackendControler;
 
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.LogrosPersonaje;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.Personaje;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.persoanjeService.LogrosPersonajeService;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.services.persoanjeService.PersoanjeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,11 +12,17 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/admin/personajesLogros")
+@RequestMapping("/admin/personaje/personajesLogros")
 public class PersonajeLogrosWebController {
+
+    private final String rutaHTML ="/admin/personaje/personajesLogros";
 
     @Autowired
     private LogrosPersonajeService logrosPersonajeService;
+
+    @Autowired
+    private PersoanjeService persoanjeService;
+    private List<Personaje> pl;
 
     // Endpoint para mostrar la lista de logros de personajes
     @GetMapping
@@ -23,10 +31,11 @@ public class PersonajeLogrosWebController {
             List<LogrosPersonaje> logros = logrosPersonajeService.getAll();
             model.addAttribute("personajesLogros", logros);
             model.addAttribute("personajeLogro", new LogrosPersonaje());
-            return "admin/personajesLogros";
+            model.addAttribute("personajeList", pl );
+            return rutaHTML;
         } catch (Exception e) {
             model.addAttribute("error", "Error al cargar los logros de personajes: " + e.getMessage());
-            return "admin/personajesLogros";
+            return rutaHTML;
         }
     }
 
@@ -36,10 +45,11 @@ public class PersonajeLogrosWebController {
         try {
             LogrosPersonaje logro = (id != null) ? logrosPersonajeService.getByID(id) : new LogrosPersonaje();
             model.addAttribute("logroPersonaje", logro);
-            return "admin/personajesLogros";
+            model.addAttribute("personajeList", pl );
+            return rutaHTML;
         } catch (Exception e) {
             model.addAttribute("error", "Error al cargar el logro para editar: " + e.getMessage());
-            return "admin/personajesLogros";
+            return rutaHTML;
         }
     }
 
@@ -48,10 +58,10 @@ public class PersonajeLogrosWebController {
     public String guardar(@ModelAttribute("logroPersonaje") LogrosPersonaje logro, Model model) {
         try {
             logrosPersonajeService.setItem(logro);
-            return "redirect:/admin/personajesLogros";
+            return "redirect:"+rutaHTML;
         } catch (Exception e) {
             model.addAttribute("error", "Error al guardar el logro: " + e.getMessage());
-            return "admin/personajesLogros";
+            return rutaHTML;
         }
     }
 
@@ -60,10 +70,10 @@ public class PersonajeLogrosWebController {
     public String eliminar(@PathVariable("id") Long id, Model model) {
         try {
             logrosPersonajeService.deleteByID(id);
-            return "redirect:/admin/personajesLogros";
+            return "redirect:"+rutaHTML;
         } catch (Exception e) {
             model.addAttribute("error", "Error al eliminar el logro: " + e.getMessage());
-            return "admin/personajesLogros";
+            return rutaHTML;
         }
     }
 }

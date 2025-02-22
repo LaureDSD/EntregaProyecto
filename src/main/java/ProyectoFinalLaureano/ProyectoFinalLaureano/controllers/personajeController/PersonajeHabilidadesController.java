@@ -74,8 +74,8 @@ public class PersonajeHabilidadesController {
         PersonajeHabilidadDTO dto = new PersonajeHabilidadDTO();
         if (!listaHabilidades.isEmpty()) {
 
-            dto.setPersonaje( personajeController.conversorPersonajeDTO( persoanjeService.getByID(listaHabilidades.get(0).getPersonaje())));
-            dto.setHabilidades( listaHabilidades.stream().map( e -> habilidadService.getByID(e.getHabilidad())).toList());
+            dto.setPersonaje( personajeController.conversorPersonajeDTO( persoanjeService.getByID(listaHabilidades.get(0).getPersonaje().getPersonaje_id())));
+            dto.setHabilidades( listaHabilidades.stream().map( e -> habilidadService.getByID(e.getHabilidad().getHabilidad_id())).toList());
         }
         return dto;
     }

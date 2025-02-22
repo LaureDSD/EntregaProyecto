@@ -12,8 +12,10 @@ import java.io.IOException;
 import java.util.List;
 
 @Controller
-@RequestMapping("/admin/tipoItem")
+@RequestMapping("/admin/item/tipoItem")
 public class TipoItemWebController {
+
+    private final String rutaHTML ="/admin/item/tipoItem";
 
     @Autowired
     private TipoItemService tipoItemService;
@@ -25,10 +27,10 @@ public class TipoItemWebController {
             List<TipoItem> tiposItem = tipoItemService.getAll();
             model.addAttribute("tiposItem", tiposItem);
             model.addAttribute("tipoItem", new TipoItem());
-            return "admin/tipoItem";
+            return rutaHTML;
         } catch (Exception e) {
             model.addAttribute("error", "Error al cargar los tipos de item: " + e.getMessage());
-            return "admin/tipoItem";
+            return rutaHTML;
         }
     }
 
@@ -38,10 +40,10 @@ public class TipoItemWebController {
         try {
             TipoItem tipoItem = (id != null) ? tipoItemService.getByID(id) : new TipoItem();
             model.addAttribute("tipoItem", tipoItem);
-            return "admin/tipoItem";
+            return rutaHTML;
         } catch (Exception e) {
             model.addAttribute("error", "Error al cargar el tipo de item para editar: " + e.getMessage());
-            return "admin/tipoItem";
+            return rutaHTML;
         }
     }
 
@@ -50,10 +52,10 @@ public class TipoItemWebController {
     public String guardarTipoItem(@ModelAttribute("tipoItem") TipoItem tipoItem, Model model) throws IOException {
         try {
             tipoItemService.setItem(tipoItem);
-            return "redirect:/admin/tipoItem";
+            return "redirect:"+rutaHTML;
         } catch (Exception e) {
             model.addAttribute("error", "Error al guardar el tipo de item: " + e.getMessage());
-            return "admin/tipoItem";
+            return rutaHTML;
         }
     }
 
@@ -62,10 +64,10 @@ public class TipoItemWebController {
     public String eliminarTipoItem(@PathVariable("id") Long id, Model model) {
         try {
             tipoItemService.deleteByID(id);
-            return "redirect:/admin/tipoItem";
+            return "redirect:"+rutaHTML;
         } catch (Exception e) {
             model.addAttribute("error", "Error al eliminar el tipo de item: " + e.getMessage());
-            return "redirect:/admin/tipoItem";
+            return rutaHTML;
         }
     }
 }

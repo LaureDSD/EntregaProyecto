@@ -14,8 +14,10 @@ import java.io.IOException;
 import java.util.List;
 
 @Controller
-@RequestMapping("/admin/npcs")
+@RequestMapping("/admin/npc/npcs")
 public class NpcWebController {
+
+    private final String rutaHTML ="/admin/npc/npcs";
 
     @Autowired
     private NpcService npcService;
@@ -30,10 +32,10 @@ public class NpcWebController {
             model.addAttribute("npcs", npcs);
             model.addAttribute("npc", new Npc());
             model.addAttribute("tiposNpc", tipoNPC.getAll());
-            return "admin/npcs";
+            return rutaHTML;
         } catch (Exception e) {
             model.addAttribute("error", "Error al cargar los NPCs: " + e.getMessage());
-            return "admin/npcs";
+            return rutaHTML;
         }
     }
 
@@ -43,10 +45,10 @@ public class NpcWebController {
             Npc npc = (id != null) ? npcService.getByID(id) : new Npc();
             model.addAttribute("npc", npc);
             model.addAttribute("tiposNpc", tipoNPC.getAll());
-            return "admin/npcs";
+            return rutaHTML;
         } catch (Exception e) {
             model.addAttribute("error", "Error al cargar el NPC para editar: " + e.getMessage());
-            return "admin/npcs";
+            return rutaHTML;
         }
     }
 
@@ -54,10 +56,10 @@ public class NpcWebController {
     public String guardar(@ModelAttribute("npc") Npc npc, Model model) throws IOException {
         try {
             npcService.setItem(npc);
-            return "redirect:/admin/npcs";
+            return "redirect:"+rutaHTML;
         } catch (Exception e) {
             model.addAttribute("error", "Error al guardar el NPC: " + e.getMessage());
-            return "admin/npcs";
+            return rutaHTML;
         }
     }
 
@@ -65,10 +67,10 @@ public class NpcWebController {
     public String eliminar(@PathVariable("id") Long id, Model model) {
         try {
             npcService.deleteByID(id);
-            return "redirect:/admin/npcs";
+            return "redirect:"+rutaHTML;
         } catch (Exception e) {
             model.addAttribute("error", "Error al eliminar el NPC: " + e.getMessage());
-            return "admin/npcs";
+            return rutaHTML;
         }
     }
 }

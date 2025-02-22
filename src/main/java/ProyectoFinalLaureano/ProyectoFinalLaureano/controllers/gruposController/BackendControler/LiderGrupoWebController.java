@@ -16,8 +16,10 @@ import java.util.Date;
 import java.util.List;
 
 @Controller
-@RequestMapping("/admin/lideresGrupos")
+@RequestMapping("/admin/grupo/lideresGrupos")
 public class LiderGrupoWebController {
+
+    private String rutaHTML = "/admin/grupo/lideresGrupos";
 
     @Autowired
     private LiderGrupoService service;
@@ -35,17 +37,17 @@ public class LiderGrupoWebController {
     @GetMapping
     public String listar(Model model) {
         try {
-            try { gl = grupoService.getAll(); } catch (Exception e){throw  e;}
-            try { pl = personajeService.getAll(); } catch (Exception e){throw  e;}
+            gl = grupoService.getAll();
+            pl = personajeService.getAll();
             List<LiderGrupo> lideresGrupos = service.findAll();
             model.addAttribute("lideresGrupos", lideresGrupos);
             model.addAttribute("liderGrupo", new LiderGrupo());
             model.addAttribute("grupoList", gl);
             model.addAttribute("personajeList", pl);
-            return "admin/lideresGrupos"; // Vista
+            return rutaHTML;
         } catch (Exception e) {
             model.addAttribute("error", "Error al cargar los líderes de grupos: " + e.getMessage());
-            return "admin/lideresGrupos";
+            return rutaHTML;
         }
     }
 
@@ -57,10 +59,10 @@ public class LiderGrupoWebController {
             model.addAttribute("liderGrupo", liderGrupo);
             model.addAttribute("grupoList", gl);
             model.addAttribute("personajeList", pl);
-            return "admin/lideresGrupos";
+            return rutaHTML;
         } catch (Exception e) {
             model.addAttribute("error", "Error al cargar el líder del grupo para editar: " + e.getMessage());
-            return "admin/lideresGrupos";
+            return rutaHTML;
         }
     }
 
@@ -70,10 +72,10 @@ public class LiderGrupoWebController {
         try {
             liderGrupo.setFechaNombramiento( new Date());
             service.save(liderGrupo);
-            return "redirect:/admin/lideresGrupos";
+            return "redirect:"+rutaHTML;
         } catch (Exception e) {
             model.addAttribute("error", "Error al guardar el líder del grupo: " + e.getMessage());
-            return "admin/lideresGrupos";
+            return rutaHTML;
         }
     }
 
@@ -82,10 +84,10 @@ public class LiderGrupoWebController {
     public String eliminar(@PathVariable("id") Long id, Model model) {
         try {
             service.deleteById(id);
-            return "redirect:/admin/lideresGrupos";
+            return "redirect:"+rutaHTML;
         } catch (Exception e) {
             model.addAttribute("error", "Error al eliminar el líder del grupo: " + e.getMessage());
-            return "admin/lideresGrupos";
+            return rutaHTML;
         }
     }
 }

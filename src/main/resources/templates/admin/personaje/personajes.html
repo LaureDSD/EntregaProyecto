@@ -129,49 +129,114 @@
     </div>
 </nav>
 
+<div class="container mt-4">
+    <!-- Mostrar mensaje de error si existe -->
+    <div th:if="${error}" class="alert alert-danger">
+        <p th:text="${error}"></p>
+    </div>
+
+    <h2 class="text-center mb-4">Gestión de Personajes</h2>
+
+    <!-- Formulario de creación/edición de personajes -->
+    <div class="form-container">
+        <h3 th:text="${personaje.personaje_id != null ? 'Editar Personaje' : 'Crear Nuevo Personaje'}"></h3>
+        <form th:action="@{/admin/personajes/save}" th:object="${personaje}" method="post">
+            <input type="hidden" th:field="*{personaje_id}" />
+
+            <div class="form-group mb-3">
+                <label for="nombre" class="form-label">Nombre</label>
+                <input type="text" id="nombre" th:field="*{nombre}" class="form-control" placeholder="Nombre del personaje" required />
+            </div>
+            <div class="form-group mb-3">
+                <label for="imagen_modelo" class="form-label">Imagen del Modelo</label>
+                <input type="text" id="imagen_modelo" th:field="*{imagen_modelo}" class="form-control" placeholder="URL de la imagen del modelo" />
+            </div>
+            <!--
+            <div class="form-group mb-3">
+                <label for="fecha_creacion" class="form-label">Fecha de Creación</label>
+                <input type="datetime-local" id="fecha_creacion" th:field="*{fecha_creacion}" class="form-control" required />
+            </div>-->
+            <div class="form-group mb-3">
+                <label for="nivel" class="form-label">Nivel</label>
+                <input type="number" id="nivel" th:field="*{nivel}" class="form-control" placeholder="Nivel del personaje" required min="1" />
+            </div>
+            <div class="form-group mb-3">
+                <label for="xp_acumulada" class="form-label">Experiencia Acumulada</label>
+                <input type="number" id="xp_acumulada" th:field="*{xp_acumulada}" class="form-control" placeholder="XP acumulada" required min="0" />
+            </div>
+            <div class="form-group mb-3">
+                <label for="almas" class="form-label">Almas</label>
+                <input type="number" id="almas" th:field="*{almas}" class="form-control" placeholder="Almas acumuladas" required min="0" />
+            </div>
+            <div class="form-group mb-3">
+                <label for="capacidad_inventario" class="form-label">Capacidad de Inventario</label>
+                <input type="number" id="capacidad_inventario" th:field="*{capacidad_inventario}" class="form-control" placeholder="Capacidad del inventario" required min="1" />
+            </div>
 
 
+            <div class="form-group mb-3">
+                <label for="c" class="form-label">Habilidad</label>
+                <select id="c" th:field="*{clase_personaje}" class="form-control" required>
+                    <option th:each="e : ${clasePersonajeList}" th:value="${e.clase_id}" th:text="${e.nombre}"></option>
+                </select>
+            </div>
 
-<!-- Contenido principal -->
 
-    <div class="container mt-4">
-        <!-- Mensaje de Error si ocurre algún problema -->
-        <div th:if="${error}" class="alert alert-danger">
-            <p th:text="${error}"></p>
-        </div>
-        <h1 class="mb-4">Gestión de Clases de Personaje</h1>
-        <!-- Lista de Clases de Personaje -->
-        <section class="mt-5">
-            <h2>Lista de Clases de Personaje</h2>
-            <table class="table table-striped table-hover">
-                <thead class="table-dark">
-                <tr>
-                    <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Descripción</th>
-                    <th>Imagen</th>
-                    <th>Acciones</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="clase : ${clasesPersonaje}">
-                    <td th:text="${clase.clase_id}"></td>
-                    <td th:text="${clase.nombre}"></td>
-                    <td th:text="${clase.descripcion}"></td>
-                    <td>
-                        <img th:if="${clase.imagen}" th:src="@{'/uploads/' + ${clase.imagen}}" alt="Imagen" class="img-fluid"/>
-                    </td>
-                    <td>
-                        <a th:href="@{'/admin/tipoPersonaje/edit/' + ${clase.clase_id}}" class="btn btn-sm btn-primary">Editar</a> |
-                        <a th:href="@{'/admin/tipoPersonaje/delete/' + ${clase.clase_id}}"
-                           class="btn btn-sm btn-danger" onclick="return confirm('¿Estás seguro de eliminar esta clase?');">Eliminar</a>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </section>
+            <div class="form-group mb-3">
+                <label for="grupo" class="form-label">Grupo</label>
+                <select id="grupo" th:field="*{grupo}" class="form-control">
+                    <option value="" th:text="'Selecciona un grupo'">Selecciona un grupo</option>
+                    <option th:each="grupo : ${grupoList}" th:value="${grupo.grupo_id}" th:text="${grupo.nombre}"></option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">
+                <span th:text="${personaje.personaje_id != null ? 'Actualizar' : 'Crear'}"></span>
+            </button>
+        </form>
+    </div>
+
+    <!-- Listado de personajes -->
+    <div class="table-container">
+        <h3 class="mb-4">Listado de Personajes</h3>
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Imagen Modelo</th>
+                <th>Fecha Creación</th>
+                <th>Nivel</th>
+                <th>EXP Acumulada</th>
+                <th>Almas</th>
+                <th>Limi. Inventario</th>
+                <th>Clase</th>
+                <th>Grupo</th>
+                <th>Acciones</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="personaje : ${personajes}">
+                <td th:text="${personaje.personaje_id}"></td>
+                <td th:text="${personaje.nombre}"></td>
+                <td th:text="${personaje.imagen_modelo}"></td>
+                <td th:text="${personaje.fecha_creacion}"></td>
+                <td th:text="${personaje.nivel}"></td>
+                <td th:text="${personaje.xp_acumulada}"></td>
+                <td th:text="${personaje.almas}"></td>
+                <td th:text="${personaje.capacidad_inventario}"></td>
+                <td th:text="${personaje.clase_personaje.nombre}"></td>
+                <td th:text="${personaje.grupo != null ? personaje.grupo.nombre : 'No asignado'}"></td>
+                <td>
+                    <a href="#" th:href="@{/admin/personajes/edit/{id}(id=${personaje.personaje_id})}" class="btn btn-warning btn-sm">Editar</a>
+                    <a href="#" th:href="@{/admin/personajes/delete/{id}(id=${personaje.personaje_id})}" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de que quieres eliminar este personaje?')">Eliminar</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
     </div>
 </div>
+
 
 <!-- Footer -->
 <footer class="mt-5 py-3">

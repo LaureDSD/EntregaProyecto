@@ -8,9 +8,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
 @Controller
-@RequestMapping("/admin/estados")
+@RequestMapping("/admin/estado/estados")
 public class EfectoWebController {
+
+    private final String rutaHTML = "/admin/estado/estados";
 
     @Autowired
     private EfectoEstadoService service;
@@ -22,35 +25,34 @@ public class EfectoWebController {
             List<EfectoEstado> estados = service.getAll();
             model.addAttribute("estados", estados);
             model.addAttribute("estado", new EfectoEstado());
-            return "admin/estados";
+            return rutaHTML;
         } catch (Exception e) {
-            e.printStackTrace();
-            model.addAttribute("error", "Error al cargar los estados");
-            return "admin/estados";
+            model.addAttribute("error", "Error al cargar los estados: " + e.getMessage());
+            return rutaHTML;
         }
     }
 
     // Guardar o actualizar
     @PostMapping("/save")
-    public String guardar(@ModelAttribute("estado") EfectoEstado estado) {
+    public String guardar(@ModelAttribute("estado") EfectoEstado estado, Model model) {
         try {
             service.setItem(estado);
-            return "redirect:/admin/estados";
+            return "redirect:" + rutaHTML;
         } catch (Exception e) {
-            e.printStackTrace();
-            return "redirect:/admin/estados";
+            model.addAttribute("error", "Error al guardar el estado: " + e.getMessage());
+            return rutaHTML;
         }
     }
 
     // Eliminar
     @GetMapping("/delete/{id}")
-    public String eliminar(@PathVariable("id") Long id) {
+    public String eliminar(@PathVariable("id") Long id, Model model) {
         try {
             service.deleteByID(id);
-            return "redirect:/admin/estados";
+            return "redirect:" + rutaHTML;
         } catch (Exception e) {
-            e.printStackTrace();
-            return "redirect:/admin/estados";
+            model.addAttribute("error", "Error al eliminar el estado: " + e.getMessage());
+            return rutaHTML;
         }
     }
 
@@ -60,10 +62,10 @@ public class EfectoWebController {
         try {
             EfectoEstado estado = service.getByID(id);
             model.addAttribute("estado", estado);
-            return "admin/estados";
+            return rutaHTML;
         } catch (Exception e) {
-            e.printStackTrace();
-            return "redirect:/admin/estados";
+            model.addAttribute("error", "Error al cargar el estado para editar: " + e.getMessage());
+            return rutaHTML;
         }
     }
 }

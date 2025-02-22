@@ -14,8 +14,10 @@ import java.io.IOException;
 import java.util.List;
 
 @Controller
-@RequestMapping("/admin/mapas")
+@RequestMapping("/admin/mapa/mapas")
 public class MapaWebController {
+
+    private final String rutaHTML ="/admin/mapa/mapas";
 
     @Autowired
     private MapaService service;
@@ -29,15 +31,15 @@ public class MapaWebController {
     @GetMapping
     public String listar(Model model) {
         try {
-            try{ tml =  tipoMapaService.getAll(); }catch (Exception e){}
+            tml =  tipoMapaService.getAll();
             List<Mapa> mapas = service.getAll();
             model.addAttribute("mapas", mapas);
             model.addAttribute("mapa", new Mapa());
             model.addAttribute("tiposMapa",tml );
-            return "admin/mapas";
+            return rutaHTML;
         } catch (Exception e) {
             model.addAttribute("error", "Error al cargar los mapas: " + e.getMessage());
-            return "admin/mapas";
+            return rutaHTML;
         }
     }
 
@@ -48,10 +50,10 @@ public class MapaWebController {
             Mapa mapa = (id != null) ? service.getByID(id) : new Mapa();
             model.addAttribute("mapa", mapa);
             model.addAttribute("tiposMapa",tml );
-            return "admin/mapas";
+            return rutaHTML;
         } catch (Exception e) {
             model.addAttribute("error", "Error al cargar el mapa para editar: " + e.getMessage());
-            return "admin/mapas";
+            return rutaHTML;
         }
     }
 
@@ -60,10 +62,10 @@ public class MapaWebController {
     public String guardar(@ModelAttribute("mapa") Mapa mapa, Model model) throws IOException {
         try {
             service.setItem(mapa);
-            return "redirect:/admin/mapas";
+            return "redirect:"+rutaHTML;
         } catch (Exception e) {
             model.addAttribute("error", "Error al guardar el mapa: " + e.getMessage());
-            return "admin/mapas";
+            return rutaHTML;
         }
     }
 
@@ -72,10 +74,10 @@ public class MapaWebController {
     public String eliminar(@PathVariable("id") Long id, Model model) {
         try {
             service.deleteByID(id);
-            return "redirect:/admin/mapas";
+            return "redirect:"+rutaHTML;
         } catch (Exception e) {
             model.addAttribute("error", "Error al eliminar el mapa: " + e.getMessage());
-            return "admin/mapas";
+            return rutaHTML;
         }
     }
 }

@@ -15,8 +15,10 @@ import java.io.IOException;
 import java.util.List;
 
 @Controller
-@RequestMapping("/admin/monstruosItems")
+@RequestMapping("/admin/monstruo/monstruosItems")
 public class MonstruosItemsWebController {
+
+    private final String rutaHTML ="/admin/monstruo/monstruosItems";
 
     @Autowired
     private MonstruoItemService monstruoItemService;
@@ -33,17 +35,17 @@ public class MonstruosItemsWebController {
     @GetMapping
     public String listar(Model model) {
         try {
-            try{ ml = monstruosService.getAll();}catch (Exception e){throw e;}
-            try{il = itemService.getAll();}catch (Exception e){throw e;}
+            ml = monstruosService.getAll();
+            il = itemService.getAll();
             List<MonstruoItem> monstruosItems = monstruoItemService.getAll();
             model.addAttribute("monstruosItems", monstruosItems);
             model.addAttribute("monstruoItem", new MonstruoItem());
             model.addAttribute("monstruoList", ml);
             model.addAttribute("itemList", il);
-            return "admin/monstruosItems";
+            return rutaHTML;
         } catch (Exception e) {
             model.addAttribute("error", "Error al cargar los items de monstruos: " + e.getMessage());
-            return "admin/monstruosItems";
+            return rutaHTML;
         }
     }
 
@@ -54,10 +56,10 @@ public class MonstruosItemsWebController {
             model.addAttribute("monstruoItem", monstruoItem);
             model.addAttribute("monstruoList", ml);
             model.addAttribute("itemList", il);
-            return "admin/monstruosItems";
+            return rutaHTML;
         } catch (Exception e) {
             model.addAttribute("error", "Error al cargar el item de monstruo para editar: " + e.getMessage());
-            return "admin/monstruosItems";
+            return rutaHTML;
         }
     }
 
@@ -65,10 +67,10 @@ public class MonstruosItemsWebController {
     public String guardar(@ModelAttribute("monstruoItem") MonstruoItem monstruoItem, Model model) throws IOException {
         try {
             monstruoItemService.setItem(monstruoItem);
-            return "redirect:/admin/monstruosItems";
+            return "redirect:"+rutaHTML;
         } catch (Exception e) {
             model.addAttribute("error", "Error al guardar el item de monstruo: " + e.getMessage());
-            return "admin/monstruosItems";
+            return rutaHTML;
         }
     }
 
@@ -76,10 +78,10 @@ public class MonstruosItemsWebController {
     public String eliminar(@PathVariable("id") Long id, Model model) {
         try {
             monstruoItemService.deleteByID(id);
-            return "redirect:/admin/monstruosItems";
+            return "redirect:"+rutaHTML;
         } catch (Exception e) {
             model.addAttribute("error", "Error al eliminar el item de monstruo: " + e.getMessage());
-            return "admin/monstruosItems";
+            return rutaHTML;
         }
     }
 }

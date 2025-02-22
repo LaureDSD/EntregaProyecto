@@ -18,8 +18,10 @@ import java.util.Date;
 import java.util.List;
 
 @Controller
-@RequestMapping("/admin/logTransacciones")
+@RequestMapping("/admin/log/logTransacciones")
 public class LogTransaccionesWebController {
+
+    private final String rutaHTML ="/admin/log/logTransacciones";
 
     @Autowired
     private LogTransaccionesService service;
@@ -47,10 +49,10 @@ public class LogTransaccionesWebController {
             model.addAttribute("personajeList", pl);
             model.addAttribute("itemList", il);
             model.addAttribute("npcList", nl);
-            return "admin/logTransacciones";
+            return rutaHTML;
         } catch (Exception e) {
             model.addAttribute("error", "Error al cargar los logs de transacciones: " + e.getMessage());
-            return "admin/logTransacciones";
+            return rutaHTML;
         }
     }
 
@@ -62,10 +64,10 @@ public class LogTransaccionesWebController {
             model.addAttribute("personajeList", pl);
             model.addAttribute("itemList", pl);
             model.addAttribute("npcList", nl);
-            return "admin/logTransacciones";
+            return rutaHTML;
         } catch (Exception e) {
             model.addAttribute("error", "Error al cargar el log de transacciones para editar: " + e.getMessage());
-            return "admin/logTransacciones";
+            return rutaHTML;
         }
     }
 
@@ -74,10 +76,10 @@ public class LogTransaccionesWebController {
         try {
             logTransacciones.setFecha_transaccion( new Date());
             service.setItem(logTransacciones);
-            return "redirect:/admin/logTransacciones";
+            return "redirect:"+rutaHTML;
         } catch (Exception e) {
             model.addAttribute("error", "Error al guardar el log de transacciones: " + e.getMessage());
-            return "admin/logTransacciones";
+            return rutaHTML;
         }
     }
 
@@ -85,10 +87,10 @@ public class LogTransaccionesWebController {
     public String eliminar(@PathVariable("id") Long id, Model model) {
         try {
             service.deleteByID(id);
-            return "redirect:/admin/logTransacciones";
+            return "redirect:"+rutaHTML;
         } catch (Exception e) {
             model.addAttribute("error", "Error al eliminar el log de transacciones: " + e.getMessage());
-            return "admin/logTransacciones";
+            return rutaHTML;
         }
     }
 }

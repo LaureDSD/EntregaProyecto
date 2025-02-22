@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/admin/tiposNpc")
+@RequestMapping("/admin/npc/tiposNpc")
 public class TipoNpcWebController {
+
+    private final String rutaHTML = "/admin/npc/tiposNpc";
 
     @Autowired
     private TipoNpcService tipoNpcService;
@@ -23,10 +25,10 @@ public class TipoNpcWebController {
             List<TipoNPC> tiposNpc = tipoNpcService.getAll();
             model.addAttribute("tiposNpc", tiposNpc);
             model.addAttribute("tipoNpc", new TipoNPC());
-            return "admin/tiposNpc";
+            return rutaHTML;
         } catch (Exception e) {
             model.addAttribute("error", "Error al cargar los tipos de NPC: " + e.getMessage());
-            return "admin/tiposNpc";
+            return rutaHTML;
         }
     }
 
@@ -35,10 +37,10 @@ public class TipoNpcWebController {
         try {
             TipoNPC tipoNpc = (id != null) ? tipoNpcService.getByID(id) : new TipoNPC();
             model.addAttribute("tipoNpc", tipoNpc);
-            return "admin/tiposNpc";
+            return rutaHTML;
         } catch (Exception e) {
             model.addAttribute("error", "Error al cargar el tipo de NPC para editar: " + e.getMessage());
-            return "admin/tiposNpc";
+            return rutaHTML;
         }
     }
 
@@ -47,10 +49,10 @@ public class TipoNpcWebController {
     public String guardar(@ModelAttribute("tipoNpc") TipoNPC tipoNpc, Model model) {
         try {
             tipoNpcService.setItem(tipoNpc);
-            return "redirect:/admin/tiposNpc";
+            return "redirect:"+rutaHTML;
         } catch (Exception e) {
             model.addAttribute("error", "Error al guardar el tipo de NPC: " + e.getMessage());
-            return "admin/tiposNpc";
+            return rutaHTML;
         }
     }
 
@@ -58,10 +60,10 @@ public class TipoNpcWebController {
     public String eliminar(@PathVariable("id") Long id, Model model) {
         try {
             tipoNpcService.deleteByID(id);
-            return "redirect:/admin/tiposNpc";
+            return "redirect:"+rutaHTML;
         } catch (Exception e) {
             model.addAttribute("error", "Error al eliminar el tipo de NPC: " + e.getMessage());
-            return "admin/tiposNpc";
+            return rutaHTML;
         }
     }
 }

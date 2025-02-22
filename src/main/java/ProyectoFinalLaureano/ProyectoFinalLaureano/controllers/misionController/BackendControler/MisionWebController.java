@@ -12,8 +12,10 @@ import java.io.IOException;
 import java.util.List;
 
 @Controller
-@RequestMapping("/admin/misiones")
+@RequestMapping("/admin/mision/misiones")
 public class MisionWebController {
+
+    private final String rutaHTML ="/admin/mision/misiones";
 
     @Autowired
     private MisionService service;
@@ -24,10 +26,10 @@ public class MisionWebController {
             List<Mision> misiones = service.getAll();
             model.addAttribute("misiones", misiones);
             model.addAttribute("mision", new Mision());
-            return "admin/misiones";
+            return rutaHTML;
         } catch (Exception e) {
             model.addAttribute("error", "Error al cargar las misiones: " + e.getMessage());
-            return "admin/misiones";
+            return rutaHTML;
         }
     }
 
@@ -36,10 +38,10 @@ public class MisionWebController {
         try {
             Mision mision = (id != null) ? service.getByID(id) : new Mision();
             model.addAttribute("mision", mision);
-            return "admin/misiones";
+            return rutaHTML;
         } catch (Exception e) {
             model.addAttribute("error", "Error al cargar la misión para editar: " + e.getMessage());
-            return "admin/misiones";
+            return rutaHTML;
         }
     }
 
@@ -47,10 +49,10 @@ public class MisionWebController {
     public String guardar(@ModelAttribute("mision") Mision mision, Model model) throws IOException {
         try {
             service.setItem(mision);
-            return "redirect:/admin/misiones";
+            return "redirect:"+rutaHTML;
         } catch (Exception e) {
             model.addAttribute("error", "Error al guardar la misión: " + e.getMessage());
-            return "admin/misiones";
+            return rutaHTML;
         }
     }
 
@@ -58,10 +60,10 @@ public class MisionWebController {
     public String eliminar(@PathVariable("id") Long id, Model model) {
         try {
             service.deleteByID(id);
-            return "redirect:/admin/misiones";
+            return "redirect:"+rutaHTML;
         } catch (Exception e) {
             model.addAttribute("error", "Error al eliminar la misión: " + e.getMessage());
-            return "admin/misiones";
+            return rutaHTML;
         }
     }
 }

@@ -33,15 +33,13 @@ public class PersonajeHabilidad {
     private double probabilidadFallo;
 
     // Relación con la tabla personaje
-    //@ManyToOne()
-    //@Join
-    @Column(name = "personaje_id", insertable = false, updatable = false)
+    @ManyToOne()
+    @JoinColumn(name = "personaje_id", insertable = false, updatable = false)
     //@JsonIgnore // Excluir esta relación en la serialización JSON
-    private Long personaje;
+    private Personaje personaje;
 
     // Relación con la tabla habilidad
-    //@ManyToOne()
-    //@Join
-    @Column(name = "habilidad_id", insertable = false, updatable = false)
-    private Long habilidad;
+    @ManyToOne()
+    @JoinColumn(name = "habilidad_id", insertable = false, updatable = false)
+    private Habilidad habilidad;
 }

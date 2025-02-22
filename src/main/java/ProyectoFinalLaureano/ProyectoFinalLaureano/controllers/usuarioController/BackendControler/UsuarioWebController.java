@@ -1,5 +1,6 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.usuarioController.BackendControler;
 
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.usuario.TipoUsuario;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.usuario.Usuario;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.usuarioService.TipoUsuarioService;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.usuarioService.UsuarioService;
@@ -12,29 +13,31 @@ import java.io.IOException;
 import java.util.List;
 
 @Controller
-@RequestMapping("/admin/usuarios")
+@RequestMapping("/admin/usuario/usuarios")
 public class UsuarioWebController {
+
+    private final String rutaHTML ="/admin/usuario/usuarios";
 
     @Autowired
     private UsuarioService usuarioService;
 
     @Autowired
     private TipoUsuarioService tipoUsuarioService;
-
-
+    private List<TipoUsuario> tl;
 
     // Endpoint para mostrar la lista de usuarios
     @GetMapping
     public String showUsuariosList(Model model) {
         try {
-            try{}catch (Exception e){throw  e;}
-
+            tl = tipoUsuarioService.getAll();
             List<Usuario> usuarios = usuarioService.getAll();
             model.addAttribute("usuarios", usuarios);
-            return "admin/usuarios";
+            model.addAttribute("usuario", new Usuario());
+            model.addAttribute("tipoUsuarioList", tl);
+            return rutaHTML;
         } catch (Exception e) {
             model.addAttribute("error", "Error al cargar los usuarios: " + e.getMessage());
-            return "admin/usuarios";
+            return rutaHTML;
         }
     }
 
@@ -43,11 +46,12 @@ public class UsuarioWebController {
     public String editarUsuario(@PathVariable("id") Long id, Model model) {
         try {
             Usuario usuario = (id != null) ? usuarioService.getByID(id) : new Usuario();
+            model.addAttribute("tipoUsuarioList", tl);
             model.addAttribute("usuario", usuario);
-            return "admin/usuarios";
+            return rutaHTML;
         } catch (Exception e) {
             model.addAttribute("error", "Error al cargar el usuario para editar: " + e.getMessage());
-            return "admin/usuarios";
+            return rutaHTML;
         }
     }
 
@@ -56,10 +60,10 @@ public class UsuarioWebController {
     public String guardarUsuario(@ModelAttribute("usuario") Usuario usuario, Model model) throws IOException {
         try {
             usuarioService.setItem(usuario);
-            return "redirect:/admin/usuarios";
+            return "redirect:"+rutaHTML;
         } catch (Exception e) {
             model.addAttribute("error", "Error al guardar el usuario: " + e.getMessage());
-            return "admin/usuarios";
+            return rutaHTML;
         }
     }
 
@@ -68,10 +72,10 @@ public class UsuarioWebController {
     public String eliminarUsuario(@PathVariable("id") Long id, Model model) {
         try {
             usuarioService.deleteByID(id);
-            return "redirect:/admin/usuarios";
+            return "redirect:"+rutaHTML;
         } catch (Exception e) {
             model.addAttribute("error", "Error al eliminar el usuario: " + e.getMessage());
-            return "admin/usuarios";
+            return rutaHTML;
         }
     }
 }

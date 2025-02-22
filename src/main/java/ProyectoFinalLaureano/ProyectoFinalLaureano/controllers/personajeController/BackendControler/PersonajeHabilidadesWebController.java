@@ -1,8 +1,12 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.personajeController.BackendControler;
 
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.habilidad.Habilidad;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.monstruo.MonstruoHabilidad;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.Personaje;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.PersonajeHabilidad;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.services.habilidadService.HabilidadService;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.persoanjeService.HabilidadesPersonajeService;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.services.persoanjeService.PersoanjeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,26 +14,37 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
 @Controller
-@RequestMapping("/admin/persoanjesHabilidades")
+@RequestMapping("/admin/personaje/personajesHabilidades")
 public class PersonajeHabilidadesWebController {
+
+    private final String rutaHTML = "/admin/personajesHabilidades";
 
     @Autowired
     private HabilidadesPersonajeService habilidadesPersonajeService;
 
-    // Endpoint para mostrar la lista de habilidades de personaje
+    @Autowired
+    private HabilidadService habilidadService;
+    private List<Habilidad> hl;
+
+    @Autowired
+    private PersoanjeService persoanjeService;
+    private List<Personaje> pl;
+
     @GetMapping
     public String listar(Model model) {
         try {
-            try{}catch (Exception e){throw  e;}
-            try{}catch (Exception e){throw  e;}
-            List<PersonajeHabilidad> habilidades = habilidadesPersonajeService.getAll();
-            model.addAttribute("persoanjesHabilidades", habilidades);
+            pl = persoanjeService.getAll();
+            hl = habilidadService.getAll();
+            model.addAttribute("persoanjesHabilidades", habilidadesPersonajeService.getAll());
             model.addAttribute("persoanjeHabilidad", new MonstruoHabilidad());
-            return "admin/persoanjesHabilidades";
+            model.addAttribute("personajeList", pl );
+            model.addAttribute("habilidadList", hl );
+            return rutaHTML;
         } catch (Exception e) {
-            model.addAttribute("error", "Error al cargar las habilidades de los personajes: " + e.getMessage());
-            return "admin/persoanjesHabilidades";
+            model.addAttribute("error", "Error al cargar: " + e.getMessage());
+            return rutaHTML;
         }
     }
 
@@ -38,10 +53,12 @@ public class PersonajeHabilidadesWebController {
         try {
             PersonajeHabilidad personajeHabilidad = (id != null) ? habilidadesPersonajeService.getByID(id) : new PersonajeHabilidad();
             model.addAttribute("personajeHabilidad", personajeHabilidad);
-            return "admin/persoanjesHabilidades";
+            model.addAttribute("personajeList", pl );
+            model.addAttribute("habilidadList", hl );
+            return rutaHTML;
         } catch (Exception e) {
-            model.addAttribute("error", "Error al cargar la habilidad del personaje para editar: " + e.getMessage());
-            return "admin/persoanjesHabilidades";
+            model.addAttribute("error", "Error al cargar:" + e.getMessage());
+            return rutaHTML;
         }
     }
 
@@ -49,10 +66,10 @@ public class PersonajeHabilidadesWebController {
     public String guardar(@ModelAttribute("personajeHabilidad") PersonajeHabilidad personajeHabilidad, Model model) {
         try {
             habilidadesPersonajeService.setItem(personajeHabilidad);
-            return "redirect:/admin/persoanjesHabilidades";
+            return "redirect:"+rutaHTML;
         } catch (Exception e) {
-            model.addAttribute("error", "Error al guardar la habilidad del personaje: " + e.getMessage());
-            return "admin/persoanjesHabilidades";
+            model.addAttribute("error", "Error al guardar:" + e.getMessage());
+            return rutaHTML;
         }
     }
 
@@ -60,10 +77,10 @@ public class PersonajeHabilidadesWebController {
     public String eliminar(@PathVariable("id") Long id, Model model) {
         try {
             habilidadesPersonajeService.deleteByID(id);
-            return "redirect:/admin/persoanjesHabilidades";
+            return "redirect:"+rutaHTML;
         } catch (Exception e) {
-            model.addAttribute("error", "Error al eliminar la habilidad del personaje: " + e.getMessage());
-            return "admin/persoanjesHabilidades";
+            model.addAttribute("error", "Error al eliminar:" + e.getMessage());
+            return rutaHTML;
         }
     }
 }

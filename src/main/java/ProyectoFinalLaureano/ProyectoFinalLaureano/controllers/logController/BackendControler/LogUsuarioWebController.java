@@ -14,8 +14,10 @@ import java.util.Date;
 import java.util.List;
 
 @Controller
-@RequestMapping("/admin/logUsuarios")
+@RequestMapping("/admin/log/logUsuarios")
 public class LogUsuarioWebController {
+
+    private final String rutaHTML = "/admin/log/logUsuarios";
 
     @Autowired
     private LogUsuarioService service;
@@ -28,15 +30,15 @@ public class LogUsuarioWebController {
     @GetMapping
     public String listar(Model model) {
         try {
-            try{ul = usuarioService.getAll();}catch (Exception e){throw  e;}
+            ul = usuarioService.getAll();
             List<LogUsuario> logUsuarios = service.getAll();
             model.addAttribute("logUsuarios", logUsuarios);
             model.addAttribute("logUsuario", new LogUsuario());
             model.addAttribute("usuarioList", ul);
-            return "admin/logUsuarios";
+            return rutaHTML;
         } catch (Exception e) {
             model.addAttribute("error", "Error al cargar los logs de usuarios: " + e.getMessage());
-            return "admin/logUsuarios";
+            return rutaHTML;
         }
     }
 
@@ -46,10 +48,10 @@ public class LogUsuarioWebController {
             LogUsuario logUsuario = (id != null) ? service.getByID(id) : new LogUsuario();
             model.addAttribute("logUsuario", logUsuario);
             model.addAttribute("listaUsuarios", ul);
-            return "admin/logUsuarios";
+            return rutaHTML;
         } catch (Exception e) {
             model.addAttribute("error", "Error al cargar el log de usuario para editar: " + e.getMessage());
-            return "admin/logUsuarios";
+            return rutaHTML;
         }
     }
 
@@ -58,10 +60,10 @@ public class LogUsuarioWebController {
         try {
             logUsuario.setFechaLog(new Date());
             service.setItem(logUsuario);
-            return "redirect:/admin/logUsuarios";
+            return "redirect:"+rutaHTML;
         } catch (Exception e) {
             model.addAttribute("error", "Error al guardar el log de usuario: " + e.getMessage());
-            return "admin/logUsuarios";
+            return rutaHTML;
         }
     }
 
@@ -69,10 +71,10 @@ public class LogUsuarioWebController {
     public String eliminar(@PathVariable("id") Long id, Model model) {
         try {
             service.deleteByID(id);
-            return "redirect:/admin/logUsuarios";
+            return "redirect:"+rutaHTML;
         } catch (Exception e) {
             model.addAttribute("error", "Error al eliminar el log de usuario: " + e.getMessage());
-            return "admin/logUsuarios";
+            return rutaHTML;
         }
     }
 }

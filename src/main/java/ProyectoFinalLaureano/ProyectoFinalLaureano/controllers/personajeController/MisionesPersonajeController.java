@@ -86,7 +86,7 @@ public class MisionesPersonajeController {
         personajeDTO.setImagen(personaje.getImagen_modelo());
         personajeDTO.setNombre(personaje.getNombre());
         personajeDTO.setCreacion(personaje.getFecha_creacion());
-        personajeDTO.setClase( clasePersonajeService.getByID(personaje.getClase_personaje()));
+        personajeDTO.setClase( personaje.getClase_personaje());
         personajeDTO.setNivel(personaje.getNivel());
         personajeDTO.setXp_acumulada(personaje.getXp_acumulada());
         personajeDTO.setAlmas(personaje.getAlmas());
@@ -101,7 +101,7 @@ public class MisionesPersonajeController {
         List<InventarioDTO> lsdto  = new ArrayList<>();
         InventarioDTO i = new InventarioDTO();
         ip.forEach( e -> {
-                    i.setItem( itemService.getByID(e.getItem()));
+                    i.setItem( itemService.getByID(e.getItem().getItem_id()));
                     i.setCantidad(e.getCantidad());
                     i.setCantidad(e.getCantidad());
                     i.setEquipado(e.isEquipado());

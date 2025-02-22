@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/admin/grupos")
+@RequestMapping("/admin/grupo/grupos")
 public class GrupoWebController {
+
+    private String rutaHTML = "/admin/grupo/grupos";
 
     @Autowired
     private GrupoService grupoService;
@@ -24,14 +26,14 @@ public class GrupoWebController {
     @GetMapping
     public String listar(Model model) {
         try {
-            List<Grupo> grupos = grupoService.getAll(); // Obtener todos los grupos
+            List<Grupo> grupos = grupoService.getAll();
             model.addAttribute("grupos", grupos);
-            model.addAttribute("grupo", new Grupo()); // Crear un objeto vacío para agregar un nuevo grupo
-            model.addAttribute("tiposGrupo", tipoGrupoService.getAll()); // Obtener todos los tipos de grupo
-            return "admin/grupos"; // Vista de administración
+            model.addAttribute("grupo", new Grupo());
+            model.addAttribute("tiposGrupo", tipoGrupoService.getAll());
+            return rutaHTML;
         } catch (Exception e) {
             model.addAttribute("error", "Error al cargar los grupos: " + e.getMessage());
-            return "admin/grupos"; // En caso de error, volver a la vista
+            return rutaHTML;
         }
     }
 
@@ -39,13 +41,13 @@ public class GrupoWebController {
     @GetMapping("/edit/{id}")
     public String editar(@PathVariable("id") Long id, Model model) {
         try {
-            Grupo grupo = (id != null) ? grupoService.getByID(id) : new Grupo(); // Buscar el grupo por ID o crear uno nuevo
-            model.addAttribute("grupo", grupo); // Añadir el grupo al modelo
-            model.addAttribute("tiposGrupo", tipoGrupoService.getAll()); // Añadir los tipos de grupo disponibles
-            return "admin/grupos"; // Vista para editar el grupo
+            Grupo grupo = (id != null) ? grupoService.getByID(id) : new Grupo();
+            model.addAttribute("grupo", grupo);
+            model.addAttribute("tiposGrupo", tipoGrupoService.getAll());
+            return rutaHTML;
         } catch (Exception e) {
             model.addAttribute("error", "Error al cargar el grupo para editar: " + e.getMessage());
-            return "admin/grupos"; // En caso de error, volver a la vista
+            return rutaHTML;
         }
     }
 
@@ -53,11 +55,11 @@ public class GrupoWebController {
     @PostMapping("/save")
     public String guardar(@ModelAttribute("grupo") Grupo grupo, Model model) {
         try {
-            grupoService.setItem(grupo); // Guardar el grupo
-            return "redirect:/admin/grupos"; // Redirigir al listado de grupos
+            grupoService.setItem(grupo);
+            return "redirect:"+rutaHTML;
         } catch (Exception e) {
             model.addAttribute("error", "Error al guardar el grupo: " + e.getMessage());
-            return "admin/grupos"; // En caso de error, volver a la vista
+            return rutaHTML;
         }
     }
 
@@ -65,11 +67,11 @@ public class GrupoWebController {
     @GetMapping("/delete/{id}")
     public String eliminar(@PathVariable("id") Long id, Model model) {
         try {
-            grupoService.deleteByID(id); // Eliminar el grupo por ID
-            return "redirect:/admin/grupos"; // Redirigir al listado de grupos
+            grupoService.deleteByID(id);
+            return "redirect:"+rutaHTML;
         } catch (Exception e) {
             model.addAttribute("error", "Error al eliminar el grupo: " + e.getMessage());
-            return "admin/grupos"; // En caso de error, volver a la vista
+            return rutaHTML;
         }
     }
 }

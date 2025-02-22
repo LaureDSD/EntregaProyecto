@@ -13,6 +13,7 @@ import lombok.Setter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 // (Correcto)
@@ -43,7 +44,7 @@ public class Personaje {
     //Fecha de creacion
     @Column(name = "fecha_creacion", nullable = false)
     @Schema(description = "Fecha y hora de creación del personaje", example = "2023-10-01T12:00:00")
-    private LocalDateTime fecha_creacion;
+    private Date fecha_creacion;
 
     //Nivel del persoanje
     @Column(name = "nivel", nullable = false)
@@ -68,7 +69,6 @@ public class Personaje {
     //RelacionCon Estadisticas
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "estadistica_id")
-    @JsonIgnore // Excluir esta relación en la serialización JSON
     private EstadisticasGenerales estadisticas;
 
     // Relación Muchos a Uno con Usuario
@@ -85,9 +85,10 @@ public class Personaje {
     private LogrosPersonaje logros;
 
     //Clase
-    @Column(name = "clase_id", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "clase_id", nullable = false)
     @Schema(description = "Clase del persoanje asociado")
-    private Long clase_personaje;
+    private ClasePersonaje clase_personaje;
 
     //Grupo
     @ManyToOne

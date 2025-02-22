@@ -13,8 +13,10 @@ import java.io.IOException;
 import java.util.List;
 
 @Controller
-@RequestMapping("/admin/items")
+@RequestMapping("/admin/item/items")
 public class ItemWebController {
+
+    private final String rutaHTML = "/admin/item/items";
 
     @Autowired
     private ItemService itemService;
@@ -28,15 +30,15 @@ public class ItemWebController {
     @GetMapping
     public String listarItem(Model model) {
         try {
-            try{ til = tipoItemService.getAll(); }catch (Exception e ){throw e;}
+            til = tipoItemService.getAll();
             List<Item> items = itemService.getAll();
             model.addAttribute("items", items);
             model.addAttribute("item", new Item());
             model.addAttribute("tiposItem", til );
-            return "admin/items";
+            return rutaHTML;
         } catch (Exception e) {
             model.addAttribute("error", "Error al cargar los items: " + e.getMessage());
-            return "admin/items";
+            return rutaHTML;
         }
     }
 
@@ -47,10 +49,10 @@ public class ItemWebController {
             Item item = (id != null) ? itemService.getByID(id) : new Item();
             model.addAttribute("item", item);
             model.addAttribute("tiposItem", til );
-            return "admin/items";
+            return rutaHTML;
         } catch (Exception e) {
             model.addAttribute("error", "Error al cargar el item para editar: " + e.getMessage());
-            return "admin/items";
+            return rutaHTML;
         }
     }
 
@@ -59,10 +61,10 @@ public class ItemWebController {
     public String guardarItem(@ModelAttribute("item") Item item, Model model) {
         try {
             itemService.setItem(item);
-            return "redirect:/admin/items";
+            return "redirect:"+rutaHTML;
         } catch (Exception e) {
             model.addAttribute("error", "Error al guardar el item: " + e.getMessage());
-            return "admin/items";
+            return rutaHTML;
         }
     }
 
@@ -71,10 +73,10 @@ public class ItemWebController {
     public String eliminarItem(@PathVariable("id") Long id, Model model) {
         try {
             itemService.deleteByID(id);
-            return "redirect:/admin/items";
+            return "redirect:"+rutaHTML;
         } catch (Exception e) {
             model.addAttribute("error", "Error al eliminar el item: " + e.getMessage());
-            return "admin/items";
+            return rutaHTML;
         }
     }
 }

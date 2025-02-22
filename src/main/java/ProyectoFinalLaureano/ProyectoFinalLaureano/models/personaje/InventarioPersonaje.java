@@ -23,21 +23,19 @@ public class InventarioPersonaje {
     private Long personaje_inventario_id;
 
     //Relacion de persoanje con item N:1
-    //@ManyToOne
+    @ManyToOne
     //@MapsId("personaje_id")
-    //@Join
-    @Column(name = "personaje_id", nullable = false)
+    @JoinColumn(name = "personaje_id", nullable = false)
     //@JsonIgnore
     @Schema(description = "Personaje asociado al inventario")
-    private Long personaje;
+    private Personaje personaje;
 
     //Relacion de item con persoanje N:1
-    //@ManyToOne
+    @ManyToOne
     //@MapsId("item_id")
-    //@Join
-    @Column(name = "item_id", nullable = false)
+    @JoinColumn(name = "item_id", nullable = false)
     @Schema(description = "Ítem en el inventario")
-    private Long item;
+    private Item item;
 
     //Cantidad especifica en el inventario
     @Column(name = "cantidad", nullable = false)

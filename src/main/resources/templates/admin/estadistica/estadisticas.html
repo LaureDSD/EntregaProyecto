@@ -3,8 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Dashboard - Backend</title>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -133,21 +131,123 @@
     </div>
 </nav>
 
-<!-- Mensaje de Error si ocurre algún problema -->
-<div th:if="${error}" class="alert alert-danger">
-    <p th:text="${error}"></p>
-</div>
+
+
+
+
 
 
 <!-- Contenido principal -->
 <div class="container mt-4">
-    <h1 class="mb-4">Dashboard</h1>
-    <div class="card">
-        <div class="card-body">
-            <p>Bienvenido al panel de administración.</p>
-            <div id="contenido"></div>
-        </div>
+    <!-- Mensaje de Error si ocurre algún problema -->
+    <div th:if="${error}" class="alert alert-danger">
+        <p th:text="${error}"></p>
     </div>
+
+    <h2 class="text-center mb-4">Gestión de Estadisticas</h2>
+
+    <!-- Formulario de Estado (Crear o Editar) -->
+    <div class="form-container">
+        <h3 th:text="${estadistica.estadistica_id != null ? 'Editar Estadística' : 'Crear Nueva Estadística'}"></h3>
+        <form th:action="@{/admin/estadistica/estadisticas/save}" th:object="${estadistica}" method="post">
+            <input type="hidden" th:field="*{estadistica_id}" />
+
+            <div class="form-group mb-3">
+                <label for="vida" class="form-label">Vida</label>
+                <input type="number" id="vida" th:field="*{vida}" class="form-control" placeholder="Vida base de la entidad" required />
+            </div>
+            <div class="form-group mb-3">
+                <label for="regeneracionVida" class="form-label">Regen. de Vida</label>
+                <input type="number" id="regeneracionVida" th:field="*{regeneracionVida}" class="form-control" placeholder="Regeneración de vida base" required />
+            </div>
+            <div class="form-group mb-3">
+                <label for="escudo" class="form-label">Escudo</label>
+                <input type="number" id="escudo" th:field="*{escudo}" class="form-control" placeholder="Escudo base de la entidad" required />
+            </div>
+            <div class="form-group mb-3">
+                <label for="energia" class="form-label">Energía</label>
+                <input type="number" id="energia" th:field="*{energia}" class="form-control" placeholder="Energía base de la entidad" required />
+            </div>
+            <div class="form-group mb-3">
+                <label for="regeneracionEnergia" class="form-label">Regen. de Energía</label>
+                <input type="number" id="regeneracionEnergia" th:field="*{regeneracionEnergia}" class="form-control" placeholder="Regeneración de energía base" required />
+            </div>
+            <div class="form-group mb-3">
+                <label for="mana" class="form-label">Maná</label>
+                <input type="number" id="mana" th:field="*{mana}" class="form-control" placeholder="Maná base de la entidad" required />
+            </div>
+            <div class="form-group mb-3">
+                <label for="regeneracionMana" class="form-label">Regen. de Maná</label>
+                <input type="number" id="regeneracionMana" th:field="*{regeneracionMana}" class="form-control" placeholder="Regeneración de maná base" required />
+            </div>
+            <div class="form-group mb-3">
+                <label for="ataqueFisico" class="form-label">Ataque Físico</label>
+                <input type="number" id="ataqueFisico" th:field="*{ataqueFisico}" class="form-control" placeholder="Ataque físico base de la entidad" required />
+            </div>
+            <div class="form-group mb-3">
+                <label for="ataqueMagico" class="form-label">Ataque Mágico</label>
+                <input type="number" id="ataqueMagico" th:field="*{ataqueMagico}" class="form-control" placeholder="Ataque mágico base de la entidad" required />
+            </div>
+            <div class="form-group mb-3">
+                <label for="defensaFisica" class="form-label">Defensa Física</label>
+                <input type="number" id="defensaFisica" th:field="*{defensaFisica}" class="form-control" placeholder="Defensa física de la entidad" required />
+            </div>
+            <div class="form-group mb-3">
+                <label for="defensaMagica" class="form-label">Defensa Mágica</label>
+                <input type="number" id="defensaMagica" th:field="*{defensaMagica}" class="form-control" placeholder="Defensa mágica de la entidad" required />
+            </div>
+            <button type="submit" class="btn btn-primary">
+                <span th:text="${estadistica.estadistica_id != null ? 'Actualizar' : 'Crear'}"></span>
+            </button>
+        </form>
+    </div>
+
+
+    <div th:unless="${estadistica.estadistica_id != null}" class="table-container">
+        <h3 class="mb-4">Listado de Estadísticas</h3>
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+            <tr>
+                <th>ID</th>
+                <th>Vida</th>
+                <th>Regeneración de Vida</th>
+                <th>Escudo</th>
+                <th>Energía</th>
+                <th>Regeneración de Energía</th>
+                <th>Maná</th>
+                <th>Regeneración de Maná</th>
+                <th>Ataque Físico</th>
+                <th>Ataque Mágico</th>
+                <th>Defensa Física</th>
+                <th>Defensa Mágica</th>
+                <th>Acciones</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="estadistica : ${estadisticas}">
+                <td th:text="${estadistica.estadistica_id}"></td>
+                <td th:text="${estadistica.vida}"></td>
+                <td th:text="${estadistica.regeneracionVida}"></td>
+                <td th:text="${estadistica.escudo}"></td>
+                <td th:text="${estadistica.energia}"></td>
+                <td th:text="${estadistica.regeneracionEnergia}"></td>
+                <td th:text="${estadistica.mana}"></td>
+                <td th:text="${estadistica.regeneracionMana}"></td>
+                <td th:text="${estadistica.ataqueFisico}"></td>
+                <td th:text="${estadistica.ataqueMagico}"></td>
+                <td th:text="${estadistica.defensaFisica}"></td>
+                <td th:text="${estadistica.defensaMagica}"></td>
+                <td>
+                    <a href="#" th:href="@{/admin/estadistica/estadisticas/edit/{id}(id=${estadistica.estadistica_id})}" class="btn btn-warning btn-sm">Editar</a>
+                    <a href="#" th:href="@{/admin/estadistica/estadisticas/delete/{id}(id=${estadistica.estadistica_id})}" class="btn btn-danger btn-sm">Eliminar</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+
 </div>
 
 <!-- Footer -->
@@ -160,7 +260,7 @@
 
 <!-- Agregar Bootstrap JS para que los dropdowns funcionen -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 
 
 </body>

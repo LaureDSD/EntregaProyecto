@@ -14,8 +14,10 @@ import java.io.IOException;
 import java.util.List;
 
 @Controller
-@RequestMapping("/admin/npcsItems")
+@RequestMapping("/admin/npc/npcsItems")
 public class NpcItemWebController {
+
+    private final String rutaHTML = "/admin/npc/npcsItems";
 
     @Autowired
     private NpcItemService npcItemService;
@@ -34,10 +36,10 @@ public class NpcItemWebController {
             model.addAttribute("npcItem", new NpcItem());
             model.addAttribute("npcList", npcService.getAll());
             model.addAttribute("itemList", itemService.getAll());
-            return "admin/npcsItems";
+            return rutaHTML;
         } catch (Exception e) {
             model.addAttribute("error", "Error al cargar los items de NPC: " + e.getMessage());
-            return "admin/npcsItems";
+            return rutaHTML;
         }
     }
 
@@ -48,10 +50,10 @@ public class NpcItemWebController {
             model.addAttribute("npcItem", npcItem);
             model.addAttribute("npcList", npcService.getAll());
             model.addAttribute("itemList", itemService.getAll());
-            return "admin/npcsItems";
+            return rutaHTML;
         } catch (Exception e) {
             model.addAttribute("error", "Error al cargar el item de NPC para editar: " + e.getMessage());
-            return "admin/npcsItems";
+            return rutaHTML;
         }
     }
 
@@ -59,10 +61,10 @@ public class NpcItemWebController {
     public String guardar(@ModelAttribute("npcItem") NpcItem npcItem, Model model) throws IOException {
         try {
             npcItemService.setItem(npcItem);
-            return "redirect:/admin/npcsItems";
+            return "redirect:"+rutaHTML;
         } catch (Exception e) {
             model.addAttribute("error", "Error al guardar el item de NPC: " + e.getMessage());
-            return "admin/npcsItems";
+            return rutaHTML;
         }
     }
 
@@ -70,10 +72,10 @@ public class NpcItemWebController {
     public String eliminar(@PathVariable("id") Long id, Model model) {
         try {
             npcItemService.deleteByID(id);
-            return "redirect:/admin/npcsItems";
+            return "redirect:"+rutaHTML;
         } catch (Exception e) {
             model.addAttribute("error", "Error al eliminar el item de NPC: " + e.getMessage());
-            return "admin/npcsItems";
+            return rutaHTML;
         }
     }
 }

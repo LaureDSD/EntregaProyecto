@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 // (Correcto)
 @NoArgsConstructor
@@ -41,7 +42,7 @@ public class PersonajeMision {
     //Fecha en la que se recive la mision
     @Column(name = "fecha_inicio", nullable = false)
     @Schema(description = "Fecha y hora de inicio de la misión", example = "2023-10-01T12:00:00")
-    private LocalDateTime fecha_inicio;
+    private Date fecha_inicio;
 
     //Fecha en la que se termina
     @Column(name = "fecha_fin")

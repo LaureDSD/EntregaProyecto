@@ -1,4 +1,4 @@
-package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers;
+package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.habilidadController.BackendControler;
 
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.habilidad.Habilidad;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.habilidadService.HabilidadService;
@@ -11,8 +11,10 @@ import java.io.IOException;
 import java.util.List;
 
 @Controller
-@RequestMapping("/admin/habilidades")
+@RequestMapping("/admin/habilidad/habilidades")
 public class HabilidadWebController {
+
+    private final String rutaHTML = "/admin/habilidad/habilidades";
 
     @Autowired
     private HabilidadService service;
@@ -23,10 +25,10 @@ public class HabilidadWebController {
             List<Habilidad> habilidades = service.getAll();
             model.addAttribute("habilidades", habilidades);
             model.addAttribute("habilidad", new Habilidad());
-            return "admin/habilidades";
+            return rutaHTML;
         } catch (Exception e) {
             model.addAttribute("error", "Error al cargar las habilidades: " + e.getMessage());
-            return "admin/habilidades";
+            return rutaHTML;
         }
     }
 
@@ -35,10 +37,10 @@ public class HabilidadWebController {
         try {
             Habilidad habilidad = (id != null) ? service.getByID(id) : new Habilidad();
             model.addAttribute("habilidad", habilidad);
-            return "admin/habilidades";
+            return rutaHTML;
         } catch (Exception e) {
             model.addAttribute("error", "Error al cargar la habilidad para editar: " + e.getMessage());
-            return "admin/habilidades";
+            return rutaHTML;
         }
     }
 
@@ -46,10 +48,10 @@ public class HabilidadWebController {
     public String guardar(@ModelAttribute("habilidad") Habilidad habilidad, Model model) throws IOException {
         try {
             service.setItem(habilidad);
-            return "redirect:/admin/habilidades";
+            return "redirect:"+rutaHTML;
         } catch (Exception e) {
             model.addAttribute("error", "Error al guardar la habilidad: " + e.getMessage());
-            return "admin/habilidades";
+            return rutaHTML;
         }
     }
 
@@ -57,10 +59,10 @@ public class HabilidadWebController {
     public String eliminar(@PathVariable("id") Long id, Model model) {
         try {
             service.deleteByID(id);
-            return "redirect:/admin/habilidades";
+            return "redirect:"+rutaHTML;
         } catch (Exception e) {
             model.addAttribute("error", "Error al eliminar la habilidad: " + e.getMessage());
-            return "admin/habilidades";
+            return rutaHTML;
         }
     }
 }

@@ -15,8 +15,10 @@ import java.io.IOException;
 import java.util.List;
 
 @Controller
-@RequestMapping("/admin/monstruosHabilidades")
+@RequestMapping("/admin/monstruo/monstruosHabilidades")
 public class MonstruosHabilidadesWebController {
+
+    private final String rutaHTML ="/admin/monstruo/monstruosHabilidades";
 
     @Autowired
     private MonstruoHabilidadService monstruoHabilidadService;
@@ -33,17 +35,17 @@ public class MonstruosHabilidadesWebController {
     @GetMapping
     public String listar(Model model) {
         try {
-            try{ml = monstruosService.getAll();}catch (Exception e){throw e;}
-            try{hl = habilidadService.getAll();}catch (Exception e){throw e;}
+            ml = monstruosService.getAll();
+            hl = habilidadService.getAll();
             List<MonstruoHabilidad> monstruosHabilidades = monstruoHabilidadService.getAll();
             model.addAttribute("monstruosHabilidades", monstruosHabilidades);
             model.addAttribute("monstruoHabilidad", new MonstruoHabilidad());
             model.addAttribute("monstruoList",ml);
             model.addAttribute("habilidadList", hl);
-            return "admin/monstruosHabilidades";
+            return rutaHTML;
         } catch (Exception e) {
             model.addAttribute("error", "Error al cargar las habilidades de monstruos: " + e.getMessage());
-            return "admin/monstruosHabilidades";
+            return rutaHTML;
         }
     }
 
@@ -54,10 +56,10 @@ public class MonstruosHabilidadesWebController {
             model.addAttribute("monstruoHabilidad", monstruoHabilidad);
             model.addAttribute("monstruoList",ml);
             model.addAttribute("habilidadList", hl);
-            return "admin/monstruosHabilidades";
+            return rutaHTML;
         } catch (Exception e) {
             model.addAttribute("error", "Error al cargar la habilidad del monstruo para editar: " + e.getMessage());
-            return "admin/monstruosHabilidades";
+            return rutaHTML;
         }
     }
 
@@ -65,10 +67,10 @@ public class MonstruosHabilidadesWebController {
     public String guardar(@ModelAttribute("monstruoHabilidad") MonstruoHabilidad monstruoHabilidad, Model model) throws IOException {
         try {
             monstruoHabilidadService.setItem(monstruoHabilidad);
-            return "redirect:/admin/monstruosHabilidades";
+            return "redirect:"+rutaHTML;
         } catch (Exception e) {
             model.addAttribute("error", "Error al guardar la habilidad del monstruo: " + e.getMessage());
-            return "admin/monstruosHabilidades";
+            return rutaHTML;
         }
     }
 
@@ -76,10 +78,10 @@ public class MonstruosHabilidadesWebController {
     public String eliminar(@PathVariable("id") Long id, Model model) {
         try {
             monstruoHabilidadService.deleteByID(id);
-            return "redirect:/admin/monstruosHabilidades";
+            return "redirect:"+rutaHTML;
         } catch (Exception e) {
             model.addAttribute("error", "Error al eliminar la habilidad del monstruo: " + e.getMessage());
-            return "admin/monstruosHabilidades";
+            return rutaHTML;
         }
     }
 }
