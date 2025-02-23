@@ -65,12 +65,13 @@ public class PersonajeController {
     @PostMapping("/")
     @Operation(summary = "Crear un nuevo personaje", description = "Crea un nuevo personaje con la información proporcionada")
     public PersonajeDTO guardarPersonaje(@RequestBody Personaje personajeGuardar) {
-        long num = 1L ;
+        long usr = 1L ;
         if((personajeGuardar.getUsuario()) != null){
-            num = personajeGuardar.getUsuario().getUsuario_id();
+            usr = personajeGuardar.getUsuario().getUsuario_id();
         }
+        personajeGuardar.setEstadisticas(new EstadisticasGenerales());
         personajeGuardar.setLogros(new LogrosPersonaje());
-        personajeGuardar.setUsuario(usuarioService.getByID(num));
+        personajeGuardar.setUsuario(usuarioService.getByID(usr));
         return conversorPersonajeDTO(personajeService.setItem(personajeGuardar));
     }
 
