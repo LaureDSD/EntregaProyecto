@@ -11,7 +11,7 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
-public class PersonajeHabilidadCompletoDTO {
+public class PersonajeHabilidadDetailDTO {
     private Personaje personaje;
-    private List<Habilidad> Habilidades;
+    private Habilidad Habilidad;
 }

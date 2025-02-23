@@ -41,7 +41,7 @@ public class MonstruoHabilidadController {
         }
     }
 
-    @PostMapping("/{monstruo_habilidad_id}")
+    @PostMapping("")
     @Operation(summary = "Crear una nueva habilidad para un monstruo")
     public MonstruoHabilidad guardarHabilidadMonstruo(@RequestBody MonstruoHabilidad habilidadGuardar) {
         return monstruoHabilidadService.setItem(habilidadGuardar);

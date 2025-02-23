@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/admin/admin/Informacionlogs")
+@RequestMapping("/admin/Informacionlogs")
 @Tag(name = "LogPersonajeMonstruo", description = "API para gestionar logs de personajes y monstruos")
 public class LogPersonajeController {
 
@@ -23,7 +23,7 @@ public class LogPersonajeController {
      *
      * @return Lista de logs de personajes y monstruos.
      */
-    @GetMapping("/logpersonaje/")
+    @GetMapping("/personaje/")
     @Operation(summary = "Obtener todos los logs de personajes y monstruos")
     public ResponseEntity<?> obtenerPersonajesLog() {
         try {

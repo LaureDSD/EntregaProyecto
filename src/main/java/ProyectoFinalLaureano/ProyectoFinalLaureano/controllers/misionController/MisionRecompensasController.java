@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/mision")
+@RequestMapping("/api/misionItem")
 public class MisionRecompensasController {
 
     @Autowired
@@ -17,18 +17,18 @@ public class MisionRecompensasController {
 
     //CRUD objetos de mision
 
-    @GetMapping("/objeto/")
+    @GetMapping("")
     public List<MisionItem> obtenerListaObjetos(){
         return  misionObjetosService.getAll();
     }
 
 
-    @GetMapping("{misionId}/objeto/{objetoId}")
+    @GetMapping("/{mision_Item_Id}")
     public MisionItem obtenerObjetos(@RequestParam Long id){
         return misionObjetosService.getByID(id);
     }
 
-    @PutMapping("{misionId}/objeto/{objetoId}")
+    @PutMapping("/{mision_Item_Id}")
     public ResponseEntity<Object> actualizarObjetos(@PathVariable Long id, @RequestBody MisionItem objetoActualizar){
         if(objetoActualizar.getMision_item_id().equals(id)) {
             return ResponseEntity.ok( misionObjetosService.setItem(objetoActualizar));
@@ -37,7 +37,7 @@ public class MisionRecompensasController {
         }
     }
 
-    @PostMapping("{misionId}/objeto/")
+    @PostMapping("")
     public ResponseEntity<Object> guardarObjetos(@PathVariable Long id,@RequestBody MisionItem objetoGuardar){
         if(objetoGuardar.getMision_item_id().equals(id)) {
             return ResponseEntity.ok( misionObjetosService.setItem(objetoGuardar));
@@ -46,7 +46,7 @@ public class MisionRecompensasController {
         }
     }
 
-    @DeleteMapping("{misionId}/objeto/{objetoId}")
+    @DeleteMapping("/{mision_Item_Id}")
     public void borrarObjetos(@PathVariable Long id,@PathVariable Long id_objeto){
         misionObjetosService.deleteByID(id);
     }

@@ -27,12 +27,9 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     @Lazy  // Hace que la inyección sea perezosa y evite la dependencia circular
     private UserDetailsServiceImpl userDetailsService;
 
-
     public JwtRequestFilter(UserDetailsServiceImpl userDetailsService) {
         this.userDetailsService = userDetailsService;
     }
-
-
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)

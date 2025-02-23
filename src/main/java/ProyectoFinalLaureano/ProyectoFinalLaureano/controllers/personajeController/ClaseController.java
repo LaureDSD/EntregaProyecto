@@ -1,5 +1,6 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.personajeController;
 
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.estadisticasGenerales.EstadisticasGenerales;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.ClasePersonaje;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.persoanjeService.ClasePersonajeService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -43,6 +44,9 @@ public class ClaseController {
     @PostMapping("/clase")
     @Operation(summary = "Crear una nueva clase de personaje")
     public ClasePersonaje guardarClasePersonaje(@RequestBody ClasePersonaje clasePersonajeGuardar) {
+        if(clasePersonajeGuardar.getClase_id() == null){
+            clasePersonajeGuardar.setEstadisticas( new EstadisticasGenerales());
+        }
         return clasePersonajeService.setItem(clasePersonajeGuardar);
     }
 

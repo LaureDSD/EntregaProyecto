@@ -1,5 +1,8 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.personajeController;
 
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.estadisticasGenerales.EstadisticasGenerales;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.ClasePersonaje;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.LogrosPersonaje;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.PersonajeItem;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.Personaje;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.personajeDTO.InventarioDTO;
@@ -8,8 +11,10 @@ import ProyectoFinalLaureano.ProyectoFinalLaureano.services.itemService.ItemServ
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.persoanjeService.ClasePersonajeService;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.persoanjeService.InventarioPersonajeService;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.persoanjeService.PersoanjeService;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.services.usuarioService.UsuarioService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,6 +37,9 @@ public class PersonajeController {
 
     @Autowired
     private ItemService itemService;
+
+    @Autowired
+    private UsuarioService usuarioService;
 
     // CRUD PERSONAJE
 
@@ -57,6 +65,12 @@ public class PersonajeController {
     @PostMapping("/")
     @Operation(summary = "Crear un nuevo personaje", description = "Crea un nuevo personaje con la información proporcionada")
     public PersonajeDTO guardarPersonaje(@RequestBody Personaje personajeGuardar) {
+        long num = 1L ;
+        if((personajeGuardar.getUsuario()) != null){
+            num = personajeGuardar.getUsuario().getUsuario_id();
+        }
+        personajeGuardar.setLogros(new LogrosPersonaje());
+        personajeGuardar.setUsuario(usuarioService.getByID(num));
         return conversorPersonajeDTO(personajeService.setItem(personajeGuardar));
     }
 

@@ -30,13 +30,13 @@ public class PersonajeItemController {
     }
 
 
-    @GetMapping("/{personajeId}/inventario/{itemId}")
+    @GetMapping("/inventario/{itemId}")
     @Operation(summary = "Obtener un ítem específico del inventario de un personaje")
     public InventarioDTO obtenerInventarioPersonaje(@PathVariable Long id) {
         return conversorInventarioDTO(inventarioPersonajeService.getByID(id));
     }
 
-    @PutMapping("/{personajeId}/inventario/{itemId}")
+    @PutMapping("/inventario/{itemId}")
     @Operation(summary = "Actualizar un ítem en el inventario de un personaje")
     public ResponseEntity<Object> actualizarInventarioPersonaje(@PathVariable Long id, @RequestBody PersonajeItem inventarioActualizar) {
         if (inventarioActualizar.getPersonaje_inventario_id().equals(id)) {
@@ -52,7 +52,7 @@ public class PersonajeItemController {
         return conversorInventarioDTO(inventarioPersonajeService.setItem(inventarioGuardar));
     }
 
-    @DeleteMapping("/{personajeId}/inventario/{itemId}")
+    @DeleteMapping("/inventario/{itemId}")
     @Operation(summary = "Eliminar un ítem del inventario de un personaje")
     public void borrarInventarioPersonaje(@PathVariable Long id) {
         inventarioPersonajeService.deleteByID(id);

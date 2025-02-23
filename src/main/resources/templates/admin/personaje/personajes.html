@@ -169,12 +169,14 @@
                 <input type="number" id="capacidad_inventario" th:field="*{capacidad_inventario}" class="form-control" placeholder="Capacidad del inventario" required min="1" />
             </div>
 
+
             <div class="form-group mb-3">
                 <label for="c" class="form-label">Clase Personaje</label>
                 <select id="c" th:field="*{clase_personaje}" class="form-control" required>
                     <option th:each="e : ${clasePersonajeList}" th:value="${e.clase_id}" th:text="${e.nombre}"></option>
                 </select>
             </div>
+
 
             <div class="form-group mb-3">
                 <label for="grupo" class="form-label">Grupo</label>
@@ -192,147 +194,104 @@
                 </select>
             </div>
 
-            <div th:if="${personaje.personaje_id != null}">
-                <!-- Mostrar solo si estamos editando un personaje (cuando personaje_id no es null) -->
-                <h4 class="mt-4">Estadísticas Generales</h4>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-group mb-3">
-                            <label for="vida" class="form-label">Vida </label>
-                            <input type="number" id="vida" th:field="*{estadisticas.vida}" class="form-control" placeholder="Vida base" />
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group mb-3">
-                            <label for="regeneracionVida" class="form-label">Regeneración de Vida </label>
-                            <input type="number" id="regeneracionVida" th:field="*{estadisticas.regeneracionVida}" class="form-control" placeholder="Regeneración de vida" />
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group mb-3">
-                            <label for="escudo" class="form-label">Escudo </label>
-                            <input type="number" id="escudo" th:field="*{estadisticas.escudo}" class="form-control" placeholder="Escudo base" />
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-group mb-3">
-                            <label for="energia" class="form-label">Energía </label>
-                            <input type="number" id="energia" th:field="*{estadisticas.energia}" class="form-control" placeholder="Energía base" />
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group mb-3">
-                            <label for="regeneracionEnergia" class="form-label">Regeneración de Energía</label>
-                            <input type="number" id="regeneracionEnergia" th:field="*{estadisticas.regeneracionEnergia}" class="form-control" placeholder="Regeneración de energía" />
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group mb-3">
-                            <label for="mana" class="form-label">Maná Base</label>
-                            <input type="number" id="mana" th:field="*{estadisticas.mana}" class="form-control" placeholder="Maná base" />
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-group mb-3">
-                            <label for="regeneracionMana" class="form-label">Regeneraciónde Maná</label>
-                            <input type="number" id="regeneracionMana" th:field="*{estadisticas.regeneracionMana}" class="form-control" placeholder="Regeneración de maná" />
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group mb-3">
-                            <label for="ataqueFisico" class="form-label">Ataque Físico</label>
-                            <input type="number" id="ataqueFisico" th:field="*{estadisticas.ataqueFisico}" class="form-control" placeholder="Ataque físico" />
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group mb-3">
-                            <label for="ataqueMagico" class="form-label">Ataque Mágico</label>
-                            <input type="number" id="ataqueMagico" th:field="*{estadisticas.ataqueMagico}" class="form-control" placeholder="Ataque mágico" />
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-group mb-3">
-                            <label for="defensaFisica" class="form-label">Defensa Física</label>
-                            <input type="number" id="defensaFisica" th:field="*{estadisticas.defensaFisica}" class="form-control" placeholder="Defensa física" />
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group mb-3">
-                            <label for="defensaMagica" class="form-label">Defensa Mágica</label>
-                            <input type="number" id="defensaMagica" th:field="*{estadisticas.defensaMagica}" class="form-control" placeholder="Defensa mágica" />
-                        </div>
-                    </div>
-                </div>
 
-                <h4 class="mt-4">Logros Generales</h4>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-group mb-3">
-                            <label for="normal" class="form-label">Enemigos Normales Derrotados</label>
-                            <input type="number" id="normal" th:field="*{logros.normal}" class="form-control" placeholder="Número de enemigos normales derrotados" value="0" />
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group mb-3">
-                            <label for="miniboss" class="form-label">Minibosses Derrotados</label>
-                            <input type="number" id="miniboss" th:field="*{logros.miniboss}" class="form-control" placeholder="Número de minibosses derrotados" value="0" />
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group mb-3">
-                            <label for="boss" class="form-label">Bosses Derrotados</label>
-                            <input type="number" id="boss" th:field="*{logros.boss}" class="form-control" placeholder="Número de bosses derrotados" value="0" />
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-group mb-3">
-                            <label for="muertes_totales" class="form-label">Muertes Totales</label>
-                            <input type="number" id="muertes_totales" th:field="*{logros.muertes_totales}" class="form-control" placeholder="Número total de muertes" value="0" />
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group mb-3">
-                            <label for="total_daño_inflijido" class="form-label">Daño Total Infligido</label>
-                            <input type="number" id="total_daño_inflijido" th:field="*{logros.total_daño_inflijido}" class="form-control" placeholder="Daño total infligido" value="0" />
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group mb-3">
-                            <label for="total_daño_recibido" class="form-label">Daño Total Recibido</label>
-                            <input type="number" id="total_daño_recibido" th:field="*{logros.total_daño_recibido}" class="form-control" placeholder="Daño total recibido" value="0" />
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-group mb-3">
-                            <label for="tiempo_total_jugado" class="form-label">Tiempo Total Jugado</label>
-                            <input type="number" id="tiempo_total_jugado" th:field="*{logros.tiempo_total_jugado}" class="form-control" placeholder="Tiempo total jugado (en segundos)" value="0" />
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group mb-3">
-                            <label for="misiones_completadas" class="form-label">Misiones Completadas</label>
-                            <input type="number" id="misiones_completadas" th:field="*{logros.misiones_completadas}" class="form-control" placeholder="Número de misiones completadas" value="0" />
-                        </div>
-                    </div>
-                </div>
+            <h4 class="mt-4">Estadísticas Generales</h4>
+
+            <div class="form-group mb-3">
+                <label for="vida" class="form-label">Vida </label>
+                <input type="number" id="vida" th:field="*{estadisticas.vida}" class="form-control" placeholder="Vida base" />
+            </div>
+            <div class="form-group mb-3">
+                <label for="regeneracionVida" class="form-label">Regeneración de Vida </label>
+                <input type="number" id="regeneracionVida" th:field="*{estadisticas.regeneracionVida}" class="form-control" placeholder="Regeneración de vida" />
+            </div>
+            <div class="form-group mb-3">
+                <label for="escudo" class="form-label">Escudo </label>
+                <input type="number" id="escudo" th:field="*{estadisticas.escudo}" class="form-control" placeholder="Escudo base" />
+            </div>
+            <div class="form-group mb-3">
+                <label for="energia" class="form-label">Energía </label>
+                <input type="number" id="energia" th:field="*{estadisticas.energia}" class="form-control" placeholder="Energía base" />
+            </div>
+            <div class="form-group mb-3">
+                <label for="regeneracionEnergia" class="form-label">Regeneración de Energía</label>
+                <input type="number" id="regeneracionEnergia" th:field="*{estadisticas.regeneracionEnergia}" class="form-control" placeholder="Regeneración de energía" />
+            </div>
+            <div class="form-group mb-3">
+                <label for="mana" class="form-label">Maná Base</label>
+                <input type="number" id="mana" th:field="*{estadisticas.mana}" class="form-control" placeholder="Maná base" />
+            </div>
+            <div class="form-group mb-3">
+                <label for="regeneracionMana" class="form-label">Regeneraciónde Maná</label>
+                <input type="number" id="regeneracionMana" th:field="*{estadisticas.regeneracionMana}" class="form-control" placeholder="Regeneración de maná" />
+            </div>
+            <div class="form-group mb-3">
+                <label for="ataqueFisico" class="form-label">Ataque Físico</label>
+                <input type="number" id="ataqueFisico" th:field="*{estadisticas.ataqueFisico}" class="form-control" placeholder="Ataque físico" />
+            </div>
+            <div class="form-group mb-3">
+                <label for="ataqueMagico" class="form-label">Ataque Mágico</label>
+                <input type="number" id="ataqueMagico" th:field="*{estadisticas.ataqueMagico}" class="form-control" placeholder="Ataque mágico" />
+            </div>
+            <div class="form-group mb-3">
+                <label for="defensaFisica" class="form-label">Defensa Física</label>
+                <input type="number" id="defensaFisica" th:field="*{estadisticas.defensaFisica}" class="form-control" placeholder="Defensa física" />
+            </div>
+            <div class="form-group mb-3">
+                <label for="defensaMagica" class="form-label">Defensa Mágica</label>
+                <input type="number" id="defensaMagica" th:field="*{estadisticas.defensaMagica}" class="form-control" placeholder="Defensa mágica" />
             </div>
 
+
+            <h4 class="mt-4">Logros Generales</h4>
+            <div class="form-group mb-3">
+                <label for="normal" class="form-label">Enemigos Normales Derrotados</label>
+                <input type="number" id="normal" th:field="*{logros.normal}" class="form-control" placeholder="Número de enemigos normales derrotados" required />
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="miniboss" class="form-label">Minibosses Derrotados</label>
+                <input type="number" id="miniboss" th:field="*{logros.miniboss}" class="form-control" placeholder="Número de minibosses derrotados" required />
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="boss" class="form-label">Bosses Derrotados</label>
+                <input type="number" id="boss" th:field="*{logros.boss}" class="form-control" placeholder="Número de bosses derrotados" required />
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="muertes_totales" class="form-label">Muertes Totales</label>
+                <input type="number" id="muertes_totales" th:field="*{logros.muertes_totales}" class="form-control" placeholder="Número total de muertes" required />
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="total_daño_inflijido" class="form-label">Daño Total Infligido</label>
+                <input type="number" id="total_daño_inflijido" th:field="*{logros.total_daño_inflijido}" class="form-control" placeholder="Daño total infligido" required />
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="total_daño_recibido" class="form-label">Daño Total Recibido</label>
+                <input type="number" id="total_daño_recibido" th:field="*{logros.total_daño_recibido}" class="form-control" placeholder="Daño total recibido" required />
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="tiempo_total_jugado" class="form-label">Tiempo Total Jugado</label>
+                <input type="number" id="tiempo_total_jugado" th:field="*{logros.tiempo_total_jugado}" class="form-control" placeholder="Tiempo total jugado (en segundos)" required />
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="mazmorras_totales_superadas" class="form-label">Mazmorras Superadas</label>
+                <input type="number" id="mazmorras_totales_superadas" th:field="*{logros.mazmorras_totales_superadas}" class="form-control" placeholder="Número de mazmorras superadas" required />
+            </div>
+
+
+
+
             <button type="submit" class="btn btn-primary">
-                <span th:text="${personaje.personaje_id != null ? 'Actualizar' : 'Crear'}"></span> Personaje
+                <span th:text="${personaje.personaje_id != null ? 'Actualizar' : 'Crear'}"></span>
             </button>
         </form>
     </div>
-
 
     <!-- Listado de personajes -->
     <div class="table-container">

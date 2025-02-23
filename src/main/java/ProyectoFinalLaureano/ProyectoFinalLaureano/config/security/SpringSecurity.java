@@ -45,19 +45,17 @@ public class SpringSecurity {
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
                         // Swagger UI
-                        .requestMatchers("/v3/api-docs/**",
+                        .requestMatchers("/v3/api-docs/**","url/**",
                                 "/swagger-ui/**",
                                 "/swagger-ui.html",
                                 "/swagger-resources/**",
                                 "/webjars/**").permitAll()
                         .requestMatchers("/auth/**").permitAll()
                         //.requestMatchers("/api/**").permitAll()
-                        .requestMatchers("admin/**").permitAll()
-                        //.requestMatchers("**").permitAll()
-                        //Indica la referecia de autoridad del tipo usuario, en este caso el id de la tabla.
-                        .requestMatchers("/api/**").hasAnyAuthority("1", "2","3")
-                        .requestMatchers("/mod/**").hasAnyAuthority("2", "3")
-                        //.requestMatchers("/admin/**").hasAuthority("3")
+                        .requestMatchers("**").permitAll()
+                        //.requestMatchers("/api/**").hasAnyAuthority("1", "2","3")
+                        //.requestMatchers("/logs/**").hasAnyAuthority("2", "3")
+                        .requestMatchers("/admin/**").hasAuthority("3")
                         .anyRequest().authenticated()
                 )
                 .authenticationProvider(authenticationProvider())

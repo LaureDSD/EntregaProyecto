@@ -9,6 +9,5 @@ import java.util.List;
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario,Long> {
     List<Usuario> getByTipoUsuario(Long tu);
-
     Usuario findByCorreo(String email);
 }

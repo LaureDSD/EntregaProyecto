@@ -41,7 +41,7 @@ public class ItemEfectoController {
         }
     }
 
-    @PostMapping("/{objeto_efecto_id}")
+    @PostMapping("")
     @Operation(summary = "Crear un nuevo efecto para un ítem")
     public ItemEfecto guardarEfectoItem(@RequestBody ItemEfecto efectoGuardar) {
         return itemEfectoService.setItem(efectoGuardar);

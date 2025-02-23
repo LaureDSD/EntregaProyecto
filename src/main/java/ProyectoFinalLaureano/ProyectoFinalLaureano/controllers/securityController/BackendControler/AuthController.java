@@ -51,11 +51,11 @@ public class AuthController {
     @PostMapping("/register")
     public String register(@ModelAttribute Usuario usuario, Model model) {
         try {
-            usuario.setUsuario_id(null); // Asegúrate de que el ID sea nulo para crear un nuevo usuario
-            usuario.setLimite_personajes(3); // Establece el límite de personajes
-            usuario.setFecha_creacion(new Date()); // Establece la fecha de creación
-            usuario.setUltima_conexion(new Date()); // Establece la fecha de inicio de sesión
-            usuario.setEstado_cuenta(true); // Establece el estado de la cuenta como activa
+            usuario.setUsuario_id(null);
+            usuario.setLimite_personajes(3);
+            usuario.setFecha_creacion(new Date());
+            usuario.setUltima_conexion(new Date());
+            usuario.setEstado_cuenta(true);
 
 
             if (usuarioService.setItem(usuario) == null) {
