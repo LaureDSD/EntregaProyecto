@@ -94,9 +94,9 @@ public class MisionesPersonajeController {
         personajeDTO.setNivel(personaje.getNivel());
         personajeDTO.setXp_acumulada(personaje.getXp_acumulada());
         personajeDTO.setAlmas(personaje.getAlmas());
-        //personajeDTO.setLogros(personaje.getLogros());
+        personajeDTO.setLogros(personaje.getLogros());
         personajeDTO.setCapacidad_inventario(personaje.getCapacidad_inventario());
-        //personajeDTO.setInventario( inventarioDTO(personaje.getPersonaje_id()));
+        personajeDTO.setInventario( inventarioDTO(personaje.getInventario()));
         personajeDTO.setEstadisticas(personaje.getEstadisticas());
         return personajeDTO;
     }

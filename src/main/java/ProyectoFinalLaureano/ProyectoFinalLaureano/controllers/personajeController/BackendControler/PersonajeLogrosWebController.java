@@ -45,7 +45,7 @@ public class PersonajeLogrosWebController {
     public String editar(@PathVariable("id") Long id, Model model) {
         try {
             LogrosPersonaje logro = (id != null) ? logrosPersonajeService.getByID(id) : new LogrosPersonaje();
-            model.addAttribute("logrosPersonaje", logro);
+            model.addAttribute("personajeLogro", logro);
             model.addAttribute("personajeList", pl);
             return rutaHTML;
         } catch (Exception e) {
@@ -56,7 +56,7 @@ public class PersonajeLogrosWebController {
 
     // Endpoint para guardar un logro
     @PostMapping("/save")
-    public String guardar(@ModelAttribute("logrosPersonaje") LogrosPersonaje logro, Model model) {
+    public String guardar(@ModelAttribute("personajeLogro") LogrosPersonaje logro, Model model) {
         try {
             logrosPersonajeService.setItem(logro);
             return "redirect:"+rutaHTML;

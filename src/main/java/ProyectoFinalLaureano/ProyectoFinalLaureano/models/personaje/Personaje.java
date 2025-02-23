@@ -2,6 +2,8 @@ package ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje;
 
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.estadisticasGenerales.EstadisticasGenerales;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.grupos.Grupo;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.grupos.LiderGrupo;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.log.LogPersonajeMonstruo;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.usuario.Usuario;
 import jakarta.persistence.*;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -12,6 +14,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
+import java.util.List;
 
 // (Correcto)
 @NoArgsConstructor
@@ -75,12 +78,13 @@ public class Personaje {
     @Schema(description = "Usuario al que pertenece el personaje")
     @JsonIgnore // Excluir esta relación en la serialización JSON
     private Usuario usuario;
-/*
-    //Logros del persoanje
+
+    // Logros del personaje
     @OneToOne(cascade = CascadeType.ALL)
-    @Schema(description = "Logros del persoanje")
-    @JoinColumn(name = "logro_id")
-    private LogrosPersonaje logros;*/
+    @Schema(description = "Logros del personaje")
+    @JoinColumn(name = "logro_id") // Columna que hace la referencia a LogrosPersonaje
+    private LogrosPersonaje logros;
+
 
     //Clase
     @ManyToOne
@@ -96,12 +100,12 @@ public class Personaje {
     @JsonIgnore // Excluir esta relación en la serialización JSON
     private Grupo grupo;
 
-    /*
+
     // Relación Uno a Muchos con InventarioPersonaje
     @OneToMany(mappedBy = "personaje", cascade = CascadeType.ALL)
     @Schema(description = "Ítems en el inventario del personaje")
     @JsonIgnore // Excluir esta relación en la serialización JSON
-    private List<InventarioPersonaje> inventario;
+    private List<PersonajeItem> inventario;
 
 
     //Union con habilidad
@@ -122,7 +126,7 @@ public class Personaje {
 
     // Relacion persoanje con lider 1:1
     @OneToOne(mappedBy = "personaje", cascade = CascadeType.ALL)
-    private LiderGrupo liderGrupo;*/
+    private LiderGrupo liderDeGrupo;
 
 
 }

@@ -72,10 +72,10 @@ public class LogrosPersonaje {
     @Schema(description = "Número total de mazmorras superadas", example = "1")
     private int mazmorras_totales_superadas;
 
-/*
     // Relación con la tabla Personajes (One-to-One)
-    @OneToOne(mappedBy = "personaje_id", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "logros", cascade = CascadeType.ALL)
     @Schema(description = "Personaje asociado a estos logros.")
     @JsonIgnore // Excluir esta relación en la serialización JSON
-    private Personaje personaje;*/
+    private Personaje personaje;
+
 }
