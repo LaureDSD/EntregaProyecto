@@ -29,6 +29,11 @@ public class TipoItem {
     @Schema(description = "Nombre del tipo de ítem", example = "consumible")
     private String nombre;
 
+    //Noombre del tipo de item
+    @Column(name = "imagen")
+    @Schema(description = "imagen del ítem", example = "consumible.jpg")
+    private String imagen;
+
     //Descripcion del item
     @Column(name = "descripcion", columnDefinition = "TEXT")
     @Schema(description = "Descripción del tipo de ítem", example = "Consumibles que pueden ser usados para restaurar salud, energía, etc.")

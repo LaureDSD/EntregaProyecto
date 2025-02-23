@@ -142,7 +142,7 @@
     <!-- Formulario para crear o editar la relación entre ítem y efecto -->
     <div class="form-container">
         <h3 th:text="${itemEfecto.item_efecto_id != null ? 'Editar Relación' : 'Crear Nueva Relación'}"></h3>
-        <form th:action="@{/admin/itemsEfectos/save}" th:object="${itemEfecto}" method="post">
+        <form th:action="@{/admin/item/itemsEfectos/save}" th:object="${itemEfecto}" method="post">
             <input type="hidden" th:field="*{item_efecto_id}" />
 
             <!-- Seleccionar Ítem -->

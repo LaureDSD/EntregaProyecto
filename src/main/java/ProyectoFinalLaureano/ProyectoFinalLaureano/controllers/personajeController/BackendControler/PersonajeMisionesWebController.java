@@ -39,7 +39,7 @@ public class PersonajeMisionesWebController {
             ml = misionService.getAll();
             List<PersonajeMision> misiones = personajeMisionService.getAll();
             model.addAttribute("personajesMisiones", misiones);
-            model.addAttribute("personajeMisione", new Mision());
+            model.addAttribute("personajeMision", new PersonajeMision());
             model.addAttribute("personajeList", pl );
             model.addAttribute("misionList", ml );
             return rutaHTML;
@@ -68,6 +68,7 @@ public class PersonajeMisionesWebController {
     @PostMapping("/save")
     public String guardar(@ModelAttribute("personajeMision") PersonajeMision mision, Model model) {
         try {
+
             personajeMisionService.setItem(mision);
             return "redirect:"+rutaHTML;
         } catch (Exception e) {

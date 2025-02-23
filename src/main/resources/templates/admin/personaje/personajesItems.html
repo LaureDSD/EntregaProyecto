@@ -140,31 +140,24 @@
 
     <h2 class="text-center mb-4">Gestión de Inventarios de Personajes</h2>
 
+
     <!-- Formulario de Estado (Crear o Editar) -->
     <div class="form-container">
-        <h3 th:text="${inventarioPersonaje.personaje_inventario_id != null ? 'Editar Inventario' : 'Crear Nuevo Inventario'}"></h3>
-        <form th:action="@{/admin/personaje/persoanjesItems/save}" th:object="${inventarioPersonaje}" method="post">
+        <h3 th:text="${personajeItem.personaje_inventario_id != null ? 'Editar Inventario' : 'Crear Nuevo Inventario'}"></h3>
+        <form th:action="@{/admin/personaje/personajesItems/save}" th:object="${personajeItem}" method="post">
             <input type="hidden" th:field="*{personaje_inventario_id}" />
+
 
             <div class="form-group mb-3">
                 <label for="personaje" class="form-label">Personaje</label>
                 <select id="personaje" th:field="*{personaje}" class="form-control" required>
-                    <option th:each="personaje : ${personajeList}"
-                            th:value="${personaje.personaje_id}"
-                            th:text="${personaje.nombre}"
-                            th:selected="*{personaje.personaje_id} == ${personaje.personaje_id}">
-                    </option>
+                    <option th:each="tipo : ${personajeList}" th:value="${tipo.personaje_id}" th:text="${tipo.nombre}"></option>
                 </select>
             </div>
-
             <div class="form-group mb-3">
-                <label for="item" class="form-label">Ítem</label>
+                <label for="item" class="form-label">Item</label>
                 <select id="item" th:field="*{item}" class="form-control" required>
-                    <option th:each="item : ${itemList}"
-                            th:value="${item.item_id}"
-                            th:text="${item.nombre}"
-                            th:selected="*{item.item_id} == ${item.item_id}">
-                    </option>
+                    <option th:each="tipo : ${itemList}" th:value="${tipo.item_id}" th:text="${tipo.nombre}"></option>
                 </select>
             </div>
 
@@ -187,12 +180,12 @@
             </div>
 
             <button type="submit" class="btn btn-primary">
-                <span th:text="${inventarioPersonaje.personaje_inventario_id != null ? 'Actualizar' : 'Crear'}"></span>
+                <span th:text="${personajeItem.personaje_inventario_id != null ? 'Actualizar' : 'Crear'}"></span>
             </button>
         </form>
     </div>
 
-    <div th:unless="${inventarioPersonaje.personaje_inventario_id != null}" class="table-container">
+    <div th:unless="${personajeItem.personaje_inventario_id != null}" class="table-container">
         <h3 class="mb-4">Listado de Inventarios de Personajes</h3>
         <table class="table table-bordered">
             <thead class="thead-dark">
@@ -207,7 +200,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="inventario : ${persoanjesItems}">
+            <tr th:each="inventario : ${personajesItems}">
                 <td th:text="${inventario.personaje_inventario_id}"></td>
                 <td th:text="${inventario.personaje.nombre}"></td>
                 <td th:text="${inventario.item.nombre}"></td>
@@ -215,13 +208,16 @@
                 <td th:text="${inventario.equipado ? 'Sí' : 'No'}"></td>
                 <td th:text="${inventario.fecha_obtencion}"></td>
                 <td>
-                    <a href="#" th:href="@{/admin/personaje/persoanjesItems/edit/{id}(id=${inventario.personaje_inventario_id})}" class="btn btn-warning btn-sm">Editar</a>
-                    <a href="#" th:href="@{/admin/personaje/persoanjesItems/delete/{id}(id=${inventario.personaje_inventario_id})}" class="btn btn-danger btn-sm">Eliminar</a>
+                    <a href="#" th:href="@{/admin/personaje/personajesItems/edit/{id}(id=${inventario.personaje_inventario_id})}" class="btn btn-warning btn-sm">Editar</a>
+                    <a href="#" th:href="@{/admin/personaje/personajesItems/delete/{id}(id=${inventario.personaje_inventario_id})}" class="btn btn-danger btn-sm">Eliminar</a>
                 </td>
             </tr>
             </tbody>
         </table>
     </div>
+
+
+
 </div>
 
 

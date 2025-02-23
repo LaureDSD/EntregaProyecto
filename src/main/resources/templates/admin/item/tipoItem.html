@@ -154,6 +154,11 @@
                 <input type="text" id="nombre" th:field="*{nombre}" class="form-control" placeholder="Nombre del tipo de ítem" required />
             </div>
 
+            <div class="form-group mb-3">
+                <label for="imagen" class="form-label">Imagen</label>
+                <input type="text" id="imagen" th:field="*{imagen}" class="form-control" placeholder="imagen del ítem" required />
+            </div>
+
             <!-- Descripción del Tipo de Ítem -->
             <div class="form-group mb-3">
                 <label for="descripcion" class="form-label">Descripción</label>
@@ -175,6 +180,7 @@
                 <th>ID</th>
                 <th>Nombre</th>
                 <th>Descripción</th>
+                <th>Imagen</th>
                 <th>Acciones</th>
             </tr>
             </thead>
@@ -183,6 +189,7 @@
                 <td th:text="${tipoItem.tipoItemId}"></td>
                 <td th:text="${tipoItem.nombre}"></td>
                 <td th:text="${tipoItem.descripcion}"></td>
+                <td th:text="${tipoItem.imagen}"></td>
                 <td>
                     <a href="#" th:href="@{/admin/item/tipoItem/edit/{id}(id=${tipoItem.tipoItemId})}" class="btn btn-warning btn-sm">Editar</a>
                     <a href="#" th:href="@{/admin/item/tipoItem/delete/{id}(id=${tipoItem.tipoItemId})}" class="btn btn-danger btn-sm">Eliminar</a>

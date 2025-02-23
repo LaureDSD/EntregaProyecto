@@ -144,7 +144,7 @@
     <!-- Formulario para crear o editar un tipo de NPC -->
     <div class="form-container">
         <h3 th:text="${tipoNpc.tipo_npc_id != null ? 'Editar Tipo de NPC' : 'Crear Nuevo Tipo de NPC'}"></h3>
-        <form th:action="@{/admin/npc/tiposNpc/save}" th:object="${tipoNpc}" method="post">
+        <form th:action="@{/admin/npc/tipoNpc/save}" th:object="${tipoNpc}" method="post">
             <input type="hidden" th:field="*{tipo_npc_id}" />
 
             <!-- Nombre del tipo de NPC -->
@@ -183,8 +183,8 @@
                 <td th:text="${tipoNpc.nombre}"></td>
                 <td th:text="${tipoNpc.descripcion}"></td>
                 <td>
-                    <a href="#" th:href="@{/admin/npc/tiposNpc/edit/{id}(id=${tipoNpc.tipo_npc_id})}" class="btn btn-warning btn-sm">Editar</a>
-                    <a href="#" th:href="@{/admin/npc/tiposNpc/delete/{id}(id=${tipoNpc.tipo_npc_id})}" class="btn btn-danger btn-sm">Eliminar</a>
+                    <a href="#" th:href="@{/admin/npc/tipoNpc/edit/{id}(id=${tipoNpc.tipo_npc_id})}" class="btn btn-warning btn-sm">Editar</a>
+                    <a href="#" th:href="@{/admin/npc/tipoNpc/delete/{id}(id=${tipoNpc.tipo_npc_id})}" class="btn btn-danger btn-sm">Eliminar</a>
                 </td>
             </tr>
             </tbody>

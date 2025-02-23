@@ -5,10 +5,12 @@ import ProyectoFinalLaureano.ProyectoFinalLaureano.models.grupos.Grupo;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.npc.Npc;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.ClasePersonaje;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.Personaje;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.usuario.Usuario;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.estadisticasService.EstadisticasService;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.grupoService.GrupoService;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.persoanjeService.ClasePersonajeService;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.persoanjeService.PersoanjeService;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.services.usuarioService.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,17 +37,23 @@ public class PersonajeWebController {
     private GrupoService grupoService;
     private List<Grupo> gl;
 
+    @Autowired
+    private UsuarioService usuarioService;
+    private List<Usuario> ul;
+
     // Listado de Personajes
     @GetMapping
     public String listarPersonaje(Model model) {
         try {
             gl = grupoService.getAll();
             cpl =clasePersonajeService.getAll();
+            ul = usuarioService.getAll();
             List<Personaje> personaje = personajeService.getAll();
             model.addAttribute("personajes", personaje);
             model.addAttribute("personaje", new Personaje());
             model.addAttribute("grupoList", gl);
             model.addAttribute("clasePersonajeList", cpl);
+            model.addAttribute("usuarioList", ul);
             return rutaHTML;
         } catch (Exception e) {
             model.addAttribute("error", "Error al cargar los personajes: " + e.getMessage());
@@ -61,6 +69,7 @@ public class PersonajeWebController {
             model.addAttribute("personaje", personaje);
             model.addAttribute("grupoList", gl);
             model.addAttribute("clasePersonajeList", cpl);
+            model.addAttribute("usuarioList", ul);
             return rutaHTML;
         } catch (Exception e) {
             model.addAttribute("error", "Error al cargar los datos del personaje: " + e.getMessage());

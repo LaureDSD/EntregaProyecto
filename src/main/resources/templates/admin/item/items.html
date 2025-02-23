@@ -146,49 +146,128 @@
 
     <h2 class="text-center mb-4">Gestión de Ítems</h2>
 
-    <!-- Formulario para crear o editar un ítem -->
     <div class="form-container">
         <h3 th:text="${item.item_id != null ? 'Editar Ítem' : 'Crear Nuevo Ítem'}"></h3>
         <form th:action="@{/admin/item/items/save}" th:object="${item}" method="post">
             <input type="hidden" th:field="*{item_id}" />
 
-            <!-- Nombre del Ítem -->
-            <div class="form-group mb-3">
-                <label for="nombre" class="form-label">Nombre</label>
-                <input type="text" id="nombre" th:field="*{nombre}" class="form-control" placeholder="Nombre del ítem" required />
+            <div class="row">
+
+                <div class="col-md-6">
+
+                    <div class="form-group mb-3">
+                        <label for="nombre" class="form-label">Nombre</label>
+                        <input type="text" id="nombre" th:field="*{nombre}" class="form-control" placeholder="Nombre del ítem" required />
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="imagen" class="form-label">Imagen</label>
+                        <input type="text" id="imagen" th:field="*{imagen}" class="form-control" placeholder="Imagen del ítem" required />
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="descripcion" class="form-label">Descripción</label>
+                        <textarea id="descripcion" th:field="*{descripcion}" class="form-control" placeholder="Descripción del ítem" required></textarea>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="tipoItem" class="form-label">Tipo de Ítem</label>
+                        <select id="tipoItem" th:field="*{tipoItem}" class="form-control" required>
+                            <option th:each="tipo : ${tiposItem}" th:value="${tipo.tipoItemId}" th:text="${tipo.nombre}"></option>
+                        </select>
+                    </div>
+                </div>
+
+
+                <div class="col-md-6">
+
+                    <div class="form-group mb-3">
+                        <label for="acumulaciones_max" class="form-label">Acumulaciones Máximas</label>
+                        <input type="number" id="acumulaciones_max" th:field="*{acumulaciones_max}" class="form-control" placeholder="Acumulaciones máximas" required />
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="equipable" class="form-label">Equipable</label>
+                        <input type="checkbox" id="equipable" th:field="*{equipable}" class="form-check-input" />
+                    </div>
+
+                    <!-- Estadísticas Generales -->
+                    <h4 class="mt-4">Estadísticas que modifica</h4>
+
+                    <div class="form-group mb-3">
+                        <label for="vida" class="form-label">Vida</label>
+                        <input type="number" id="vida" th:field="*{estadisticas.vida}" class="form-control" placeholder="Vida base" />
+                    </div>
+
+                    <!-- Regeneración/Reducción de Vida -->
+                    <div class="form-group mb-3">
+                        <label for="regeneracionVida" class="form-label">Regeneración/Reducción de Vida</label>
+                        <input type="number" id="regeneracionVida" th:field="*{estadisticas.regeneracionVida}" class="form-control" placeholder="Regeneración de vida" />
+                    </div>
+
+                    <!-- Escudo -->
+                    <div class="form-group mb-3">
+                        <label for="escudo" class="form-label">Escudo</label>
+                        <input type="number" id="escudo" th:field="*{estadisticas.escudo}" class="form-control" placeholder="Escudo base" />
+                    </div>
+
+                    <!-- Energía -->
+                    <div class="form-group mb-3">
+                        <label for="energia" class="form-label">Energía</label>
+                        <input type="number" id="energia" th:field="*{estadisticas.energia}" class="form-control" placeholder="Energía base" />
+                    </div>
+
+                    <!-- Regeneración/Reducción de Energía -->
+                    <div class="form-group mb-3">
+                        <label for="regeneracionEnergia" class="form-label">Regeneración/Reducción de Energía</label>
+                        <input type="number" id="regeneracionEnergia" th:field="*{estadisticas.regeneracionEnergia}" class="form-control" placeholder="Regeneración de energía" />
+                    </div>
+
+                    <!-- Maná Base -->
+                    <div class="form-group mb-3">
+                        <label for="mana" class="form-label">Maná Base</label>
+                        <input type="number" id="mana" th:field="*{estadisticas.mana}" class="form-control" placeholder="Maná base" />
+                    </div>
+
+                    <!-- Regeneración/Reducción de Maná -->
+                    <div class="form-group mb-3">
+                        <label for="regeneracionMana" class="form-label">Regeneración/Reducción de Maná</label>
+                        <input type="number" id="regeneracionMana" th:field="*{estadisticas.regeneracionMana}" class="form-control" placeholder="Regeneración de maná" />
+                    </div>
+
+                    <!-- Ataque Físico -->
+                    <div class="form-group mb-3">
+                        <label for="ataqueFisico" class="form-label">Ataque Físico</label>
+                        <input type="number" id="ataqueFisico" th:field="*{estadisticas.ataqueFisico}" class="form-control" placeholder="Ataque físico" />
+                    </div>
+
+                    <!-- Ataque Mágico -->
+                    <div class="form-group mb-3">
+                        <label for="ataqueMagico" class="form-label">Ataque Mágico</label>
+                        <input type="number" id="ataqueMagico" th:field="*{estadisticas.ataqueMagico}" class="form-control" placeholder="Ataque mágico" />
+                    </div>
+
+                    <!-- Defensa Física -->
+                    <div class="form-group mb-3">
+                        <label for="defensaFisica" class="form-label">Defensa Física</label>
+                        <input type="number" id="defensaFisica" th:field="*{estadisticas.defensaFisica}" class="form-control" placeholder="Defensa física" />
+                    </div>
+
+                    <!-- Defensa Mágica -->
+                    <div class="form-group mb-3">
+                        <label for="defensaMagica" class="form-label">Defensa Mágica</label>
+                        <input type="number" id="defensaMagica" th:field="*{estadisticas.defensaMagica}" class="form-control" placeholder="Defensa mágica" />
+                    </div>
+                </div>
             </div>
 
-            <!-- Imagen del Ítem -->
-            <div class="form-group mb-3">
-                <label for="imagen" class="form-label">Imagen</label>
-                <input type="text" id="imagen" th:field="*{imagen}" class="form-control" placeholder="Imagen del ítem" required />
-            </div>
-
-            <!-- Descripción del Ítem -->
-            <div class="form-group mb-3">
-                <label for="descripcion" class="form-label">Descripción</label>
-                <textarea id="descripcion" th:field="*{descripcion}" class="form-control" placeholder="Descripción del ítem" required></textarea>
-            </div>
-
-            <!-- Tipo de Ítem -->
-            <div class="form-group mb-3">
-                <label for="tipoItem" class="form-label">Tipo de Ítem</label>
-                <select id="tipoItem" th:field="*{tipoItem}" class="form-control" required>
-                    <option th:each="tipo : ${tiposItem}" th:value="${tipo.tipoItemId}" th:text="${tipo.nombre}"></option>
-                </select>
-            </div>
-
-            <!-- Acumulaciones Máximas -->
-            <div class="form-group mb-3">
-                <label for="acumulaciones_max" class="form-label">Acumulaciones Máximas</label>
-                <input type="number" id="acumulaciones_max" th:field="*{acumulaciones_max}" class="form-control" placeholder="Acumulaciones máximas" required />
-            </div>
-
+            <!-- Botón de envío -->
             <button type="submit" class="btn btn-primary">
                 <span th:text="${item.item_id != null ? 'Actualizar' : 'Crear'}"></span>
             </button>
         </form>
     </div>
+
 
     <!-- Listado de Ítems -->
     <div th:unless="${item.item_id != null}" class="table-container">

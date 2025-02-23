@@ -48,6 +48,11 @@ public class Item {
     @Schema(description = "Descripción del ítem", example = "Restaura 50 puntos de vida")
     private String descripcion;
 
+    //Restriccion item
+    @Column(name = "equipable", columnDefinition = "TEXT")
+    @Schema(description = "Indica si es equipable del ítem", example = "True")
+    private boolean equipable;
+
     //Acumulaciones maximas o staks
     @Column(name = "acumulaciones_max", nullable = false)
     @Schema(description = "Cantidad máxima de acumulaciones del ítem", example = "99")

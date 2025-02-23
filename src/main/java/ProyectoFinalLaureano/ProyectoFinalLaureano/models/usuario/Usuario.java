@@ -10,6 +10,7 @@ import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -71,12 +72,14 @@ public class Usuario {
 
     //Ultima conexion
     @NotNull
+    @DateTimeFormat
     @Column(name = "ultima_conexion")
     @Schema(description = "Fecha y hora de la última conexión del usuario", example = "2023-10-01T12:00:00")
     private Date ultima_conexion;
 
     //Fecha en la que se crea el usuario
     @NotNull
+    @DateTimeFormat
     @Column(name = "fecha_creacion", nullable = false)
     @Schema(description = "Fecha y hora de creación del usuario", example = "2023-10-01T12:00:00")
     private Date fecha_creacion = new Date();

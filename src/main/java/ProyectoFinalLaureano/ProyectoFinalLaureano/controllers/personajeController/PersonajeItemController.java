@@ -1,6 +1,6 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.personajeController;
 
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.InventarioPersonaje;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.PersonajeItem;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.personajeDTO.InventarioDTO;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.itemService.ItemService;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.persoanjeService.InventarioPersonajeService;
@@ -15,7 +15,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/personaje")
 @Tag(name = "InventarioPersonaje", description = "API para gestionar el inventario de personajes")
-public class InventarioController {
+public class PersonajeItemController {
 
     @Autowired
     private InventarioPersonajeService inventarioPersonajeService;
@@ -38,7 +38,7 @@ public class InventarioController {
 
     @PutMapping("/{personajeId}/inventario/{itemId}")
     @Operation(summary = "Actualizar un ítem en el inventario de un personaje")
-    public ResponseEntity<Object> actualizarInventarioPersonaje(@PathVariable Long id, @RequestBody InventarioPersonaje inventarioActualizar) {
+    public ResponseEntity<Object> actualizarInventarioPersonaje(@PathVariable Long id, @RequestBody PersonajeItem inventarioActualizar) {
         if (inventarioActualizar.getPersonaje_inventario_id().equals(id)) {
             return ResponseEntity.ok(conversorInventarioDTO(inventarioPersonajeService.setItem(inventarioActualizar)));
         } else {
@@ -48,7 +48,7 @@ public class InventarioController {
 
     @PostMapping("/inventario/")
     @Operation(summary = "Crear un nuevo ítem en el inventario de un personaje")
-    public InventarioDTO guardarInventarioPersonaje(@RequestBody InventarioPersonaje inventarioGuardar) {
+    public InventarioDTO guardarInventarioPersonaje(@RequestBody PersonajeItem inventarioGuardar) {
         return conversorInventarioDTO(inventarioPersonajeService.setItem(inventarioGuardar));
     }
 
@@ -59,12 +59,12 @@ public class InventarioController {
     }
 
     // Conversor Lista
-    public  List<InventarioDTO> conversorListaInventarioDTO(List<InventarioPersonaje> l) {
+    public  List<InventarioDTO> conversorListaInventarioDTO(List<PersonajeItem> l) {
         return l.stream().map(this::conversorInventarioDTO).toList();
     }
 
     // Conversor Unico
-    private  InventarioDTO conversorInventarioDTO(InventarioPersonaje inventarioPersonaje) {
+    private  InventarioDTO conversorInventarioDTO(PersonajeItem inventarioPersonaje) {
         InventarioDTO inventarioDTO = new InventarioDTO();
         inventarioDTO.setItem( inventarioPersonaje.getItem());
         inventarioDTO.setCantidad(inventarioPersonaje.getCantidad());

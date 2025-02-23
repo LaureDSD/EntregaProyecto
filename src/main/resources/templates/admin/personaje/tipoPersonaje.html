@@ -141,29 +141,113 @@
 
     <h2 class="text-center mb-4">Gestión de Clases de Personaje</h2>
 
-    <!-- Formulario de Estado (Crear o Editar) -->
     <div class="form-container">
         <h3 th:text="${clasePersonaje.clase_id != null ? 'Editar Clase de Personaje' : 'Crear Nueva Clase de Personaje'}"></h3>
         <form th:action="@{/admin/personaje/tipoPersonaje/save}" th:object="${clasePersonaje}" method="post">
             <input type="hidden" th:field="*{clase_id}" />
 
-            <div class="form-group mb-3">
-                <label for="nombre" class="form-label">Nombre de la Clase</label>
-                <input type="text" id="nombre" th:field="*{nombre}" class="form-control" placeholder="Nombre de la clase" required />
+            <div class="row">
+                <!-- Columna 1 -->
+                <div class="col-md-6">
+                    <!-- Nombre de la Clase -->
+                    <div class="form-group mb-3">
+                        <label for="nombre" class="form-label">Nombre de la Clase</label>
+                        <input type="text" id="nombre" th:field="*{nombre}" class="form-control" placeholder="Nombre de la clase" required />
+                    </div>
+
+                    <!-- Imagen de la Clase -->
+                    <div class="form-group mb-3">
+                        <label for="imagen" class="form-label">Imagen de la Clase</label>
+                        <input type="text" id="imagen" th:field="*{imagen}" class="form-control" placeholder="Imagen de la clase (URL)" />
+                    </div>
+
+                    <!-- Descripción de la Clase -->
+                    <div class="form-group mb-3">
+                        <label for="descripcion" class="form-label">Descripción de la Clase</label>
+                        <textarea id="descripcion" th:field="*{descripcion}" class="form-control" placeholder="Descripción de la clase" rows="4" required></textarea>
+                    </div>
+                </div>
+
+                <!-- Columna 2 -->
+                <div class="col-md-6">
+                    <!-- Estadísticas Generales -->
+                    <h4 class="mt-4">Estadísticas Base</h4>
+
+                    <!-- Vida -->
+                    <div class="form-group mb-3">
+                        <label for="vida" class="form-label">Vida</label>
+                        <input type="number" id="vida" th:field="*{estadisticas.vida}" class="form-control" placeholder="Vida base" />
+                    </div>
+
+                    <!-- Regeneración/Reducción de Vida -->
+                    <div class="form-group mb-3">
+                        <label for="regeneracionVida" class="form-label">Regeneración/Reducción de Vida</label>
+                        <input type="number" id="regeneracionVida" th:field="*{estadisticas.regeneracionVida}" class="form-control" placeholder="Regeneración de vida" />
+                    </div>
+
+                    <!-- Escudo -->
+                    <div class="form-group mb-3">
+                        <label for="escudo" class="form-label">Escudo</label>
+                        <input type="number" id="escudo" th:field="*{estadisticas.escudo}" class="form-control" placeholder="Escudo base" />
+                    </div>
+
+                    <!-- Energía -->
+                    <div class="form-group mb-3">
+                        <label for="energia" class="form-label">Energía</label>
+                        <input type="number" id="energia" th:field="*{estadisticas.energia}" class="form-control" placeholder="Energía base" />
+                    </div>
+
+                    <!-- Regeneración/Reducción de Energía -->
+                    <div class="form-group mb-3">
+                        <label for="regeneracionEnergia" class="form-label">Regeneración/Reducción de Energía</label>
+                        <input type="number" id="regeneracionEnergia" th:field="*{estadisticas.regeneracionEnergia}" class="form-control" placeholder="Regeneración de energía" />
+                    </div>
+
+                    <!-- Maná Base -->
+                    <div class="form-group mb-3">
+                        <label for="mana" class="form-label">Maná Base</label>
+                        <input type="number" id="mana" th:field="*{estadisticas.mana}" class="form-control" placeholder="Maná base" />
+                    </div>
+
+                    <!-- Regeneración/Reducción de Maná -->
+                    <div class="form-group mb-3">
+                        <label for="regeneracionMana" class="form-label">Regeneración/Reducción de Maná</label>
+                        <input type="number" id="regeneracionMana" th:field="*{estadisticas.regeneracionMana}" class="form-control" placeholder="Regeneración de maná" />
+                    </div>
+
+                    <!-- Ataque Físico -->
+                    <div class="form-group mb-3">
+                        <label for="ataqueFisico" class="form-label">Ataque Físico</label>
+                        <input type="number" id="ataqueFisico" th:field="*{estadisticas.ataqueFisico}" class="form-control" placeholder="Ataque físico" />
+                    </div>
+
+                    <!-- Ataque Mágico -->
+                    <div class="form-group mb-3">
+                        <label for="ataqueMagico" class="form-label">Ataque Mágico</label>
+                        <input type="number" id="ataqueMagico" th:field="*{estadisticas.ataqueMagico}" class="form-control" placeholder="Ataque mágico" />
+                    </div>
+
+                    <!-- Defensa Física -->
+                    <div class="form-group mb-3">
+                        <label for="defensaFisica" class="form-label">Defensa Física</label>
+                        <input type="number" id="defensaFisica" th:field="*{estadisticas.defensaFisica}" class="form-control" placeholder="Defensa física" />
+                    </div>
+
+                    <!-- Defensa Mágica -->
+                    <div class="form-group mb-3">
+                        <label for="defensaMagica" class="form-label">Defensa Mágica</label>
+                        <input type="number" id="defensaMagica" th:field="*{estadisticas.defensaMagica}" class="form-control" placeholder="Defensa mágica" />
+                    </div>
+                </div>
             </div>
-            <div class="form-group mb-3">
-                <label for="imagen" class="form-label">Imagen de la Clase</label>
-                <input type="text" id="imagen" th:field="*{imagen}" class="form-control" placeholder="Imagen de la clase (URL)" />
-            </div>
-            <div class="form-group mb-3">
-                <label for="descripcion" class="form-label">Descripción de la Clase</label>
-                <textarea id="descripcion" th:field="*{descripcion}" class="form-control" placeholder="Descripción de la clase" rows="4" required></textarea>
-            </div>
+
+            <!-- Botón de envío -->
             <button type="submit" class="btn btn-primary">
                 <span th:text="${clasePersonaje.clase_id != null ? 'Actualizar' : 'Crear'}"></span>
             </button>
         </form>
     </div>
+
 
     <div th:unless="${clasePersonaje.clase_id != null}" class="table-container">
         <h3 class="mb-4">Listado de Clases de Personaje</h3>

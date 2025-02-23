@@ -8,6 +8,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Date;
+
 // (Correcto)
 @NoArgsConstructor
 @Entity
@@ -27,19 +29,14 @@ public class PersonajeHabilidad {
     @Schema(description = "Nivelde la habilidad asiganada", example = "10")
     private int nivelHabilidad;
 
-    //Posibilidad de fallar
-    @Column(name = "probabilidad_fallo", nullable = false)
-    @Schema(description = "Probabilidad de fallar de la habilidad por el persoanje", example = "10")
-    private double probabilidadFallo;
 
     // Relación con la tabla personaje
     @ManyToOne()
-    @JoinColumn(name = "personaje_id", insertable = false, updatable = false)
-    //@JsonIgnore // Excluir esta relación en la serialización JSON
+    @JoinColumn(name = "personaje_id")
     private Personaje personaje;
 
     // Relación con la tabla habilidad
     @ManyToOne()
-    @JoinColumn(name = "habilidad_id", insertable = false, updatable = false)
+    @JoinColumn(name = "habilidad_id")
     private Habilidad habilidad;
 }

@@ -28,6 +28,7 @@ public class PersonajeLogrosWebController {
     @GetMapping
     public String listar(Model model) {
         try {
+            pl = persoanjeService.getAll();
             List<LogrosPersonaje> logros = logrosPersonajeService.getAll();
             model.addAttribute("personajesLogros", logros);
             model.addAttribute("personajeLogro", new LogrosPersonaje());
@@ -44,8 +45,8 @@ public class PersonajeLogrosWebController {
     public String editar(@PathVariable("id") Long id, Model model) {
         try {
             LogrosPersonaje logro = (id != null) ? logrosPersonajeService.getByID(id) : new LogrosPersonaje();
-            model.addAttribute("logroPersonaje", logro);
-            model.addAttribute("personajeList", pl );
+            model.addAttribute("logrosPersonaje", logro);
+            model.addAttribute("personajeList", pl);
             return rutaHTML;
         } catch (Exception e) {
             model.addAttribute("error", "Error al cargar el logro para editar: " + e.getMessage());
@@ -55,7 +56,7 @@ public class PersonajeLogrosWebController {
 
     // Endpoint para guardar un logro
     @PostMapping("/save")
-    public String guardar(@ModelAttribute("logroPersonaje") LogrosPersonaje logro, Model model) {
+    public String guardar(@ModelAttribute("logrosPersonaje") LogrosPersonaje logro, Model model) {
         try {
             logrosPersonajeService.setItem(logro);
             return "redirect:"+rutaHTML;

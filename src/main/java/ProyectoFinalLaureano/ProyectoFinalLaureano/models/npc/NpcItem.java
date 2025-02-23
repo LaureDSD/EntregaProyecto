@@ -43,14 +43,14 @@ public class NpcItem {
     // Relación con la tabla npc N:1
     @ManyToOne()
     //@MapsId("npc_id")
-    @JoinColumn(name = "npc_id", insertable = false, updatable = false)
+    @JoinColumn(name = "npc_id")
     //@JsonIgnore // Excluir esta relación en la serialización JSON
     private Npc npc;
 
     // Relación con la tabla items N:1
     @ManyToOne()
     //@MapsId("item_id")
-    @JoinColumn(name = "item_id", insertable = false, updatable = false)
+    @JoinColumn(name = "item_id")
     //@JsonIgnore // Excluir esta relación en la serialización JSON
     private Item item;
 }

@@ -1,6 +1,6 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.personajeController;
 
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.InventarioPersonaje;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.PersonajeItem;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.Personaje;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.PersonajeMision;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.personajeDTO.InventarioDTO;
@@ -8,6 +8,7 @@ import ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.personajeDTO.Person
 import ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.personajeDTO.PersonajeMisionDTO;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.itemService.ItemService;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.persoanjeService.ClasePersonajeService;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.services.persoanjeService.InventarioPersonajeService;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.persoanjeService.PersonajeMisionService; // Corregido el nombre del servicio
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -29,6 +30,9 @@ public class MisionesPersonajeController {
 
     @Autowired
     private ClasePersonajeService clasePersonajeService;
+
+    @Autowired
+    private InventarioPersonajeService inventarioPersonajeService;
 
     @Autowired
     private ItemService itemService;
@@ -90,14 +94,14 @@ public class MisionesPersonajeController {
         personajeDTO.setNivel(personaje.getNivel());
         personajeDTO.setXp_acumulada(personaje.getXp_acumulada());
         personajeDTO.setAlmas(personaje.getAlmas());
-        personajeDTO.setLogros(personaje.getLogros());
+        //personajeDTO.setLogros(personaje.getLogros());
         personajeDTO.setCapacidad_inventario(personaje.getCapacidad_inventario());
-        personajeDTO.setInventario( inventarioDTO(personaje.getInventario()));
+        //personajeDTO.setInventario( inventarioDTO(personaje.getPersonaje_id()));
         personajeDTO.setEstadisticas(personaje.getEstadisticas());
         return personajeDTO;
     }
 
-    public List<InventarioDTO> inventarioDTO(List<InventarioPersonaje> ip){
+    public List<InventarioDTO> inventarioDTO(List<PersonajeItem> ip){
         List<InventarioDTO> lsdto  = new ArrayList<>();
         InventarioDTO i = new InventarioDTO();
         ip.forEach( e -> {

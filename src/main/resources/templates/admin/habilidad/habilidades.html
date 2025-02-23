@@ -141,6 +141,176 @@
 
     <h2 class="text-center mb-4">Gestión de Habilidades</h2>
 
+    <div class="form-container">
+        <h3 th:text="${habilidad.habilidad_id != null ? 'Editar Habilidad' : 'Crear Nueva Habilidad'}" class="text-center mb-4"></h3>
+        <form th:action="@{/admin/habilidad/habilidades/save}" th:object="${habilidad}" method="post">
+            <input type="hidden" th:field="*{habilidad_id}" />
+
+            <!-- Fila 1: Nombre y Imagen -->
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="nombre" class="form-label">Nombre</label>
+                    <input type="text" id="nombre" th:field="*{nombre}" class="form-control" placeholder="Nombre de la habilidad" required />
+                </div>
+
+                <div class="col-md-6">
+                    <label for="imagen" class="form-label">Imagen</label>
+                    <input type="text" id="imagen" th:field="*{imagen}" class="form-control" placeholder="URL de la imagen" />
+                </div>
+            </div>
+
+            <!-- Fila 2: Descripción -->
+            <div class="row mb-3">
+                <div class="col-12">
+                    <label for="descripcion" class="form-label">Descripción</label>
+                    <textarea id="descripcion" th:field="*{descripcion}" class="form-control" placeholder="Descripción de la habilidad" rows="4" required></textarea>
+                </div>
+            </div>
+
+            <!-- Fila 3: Nivel Máximo y Requisito Nivel -->
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="nivel_maximo" class="form-label">Nivel Máximo</label>
+                    <input type="number" id="nivel_maximo" th:field="*{nivel_maximo}" class="form-control" placeholder="Nivel máximo de la habilidad" required />
+                </div>
+
+                <div class="col-md-6">
+                    <label for="requisito_nivel" class="form-label">Requisito de Nivel</label>
+                    <input type="number" id="requisito_nivel" th:field="*{requisito_nivel}" class="form-control" placeholder="Nivel requerido para aprender" required />
+                </div>
+            </div>
+
+            <!-- Fila 4: Tipo de Habilidad y Objetivo de Habilidad -->
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="tipoHabilidad" class="form-label">Tipo de Habilidad</label>
+                    <select id="tipoHabilidad" th:field="*{tipoHabilidad}" class="form-control" required>
+                        <option value="OFENSIVA" th:selected="*{tipoHabilidad} == 'ofensiva'">Ofensiva</option>
+                        <option value="DEFENSIVA" th:selected="*{tipoHabilidad} == 'defensiva'">Defensiva</option>
+                        <option value="APOYO" th:selected="*{tipoHabilidad} == 'apoyo'">Apoyo</option>
+                    </select>
+                </div>
+
+                <div class="col-md-6">
+                    <label for="objetivoHabilidad" class="form-label">Objetivo de Habilidad</label>
+                    <select id="objetivoHabilidad" th:field="*{objetivoHabilidad}" class="form-control" required>
+                        <option value="ENEMIGO" th:selected="*{objetivoHabilidad} == 'enemigo'">Enemigo</option>
+                        <option value="JUGADOR" th:selected="*{objetivoHabilidad} == 'jugador'">Jugador</option>
+                        <option value="ALIADO" th:selected="*{objetivoHabilidad} == 'aliado'">Aliado</option>
+                        <option value="TODO" th:selected="*{objetivoHabilidad} == 'todo'">Todo</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Fila 5: Área de Efecto y Unidades Afectadas -->
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="area_efecto" class="form-label">Área de Efecto</label>
+                    <input type="number" step="0.01" id="area_efecto" th:field="*{area_efecto}" class="form-control" placeholder="Área de efecto de la habilidad" required />
+                </div>
+
+                <div class="col-md-6">
+                    <label for="unidades_afectadas" class="form-label">Unidades Afectadas</label>
+                    <input type="number" id="unidades_afectadas" th:field="*{unidades_afectadas}" class="form-control" placeholder="Número de unidades afectadas" required />
+                </div>
+            </div>
+
+            <!-- Fila 6: Enfriamiento -->
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="enfriamiento" class="form-label">Enfriamiento</label>
+                    <input type="number" id="enfriamiento" th:field="*{enfriamiento}" class="form-control" placeholder="Tiempo de enfriamiento" required />
+                </div>
+            </div>
+
+            <!-- Fila 7: Estadísticas Generales -->
+            <div class="col-12 mb-4">
+                <h4>Estadísticas Afectadas</h4>
+            </div>
+
+            <!-- Fila 8: Vida y Regeneración de Vida -->
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="vida" class="form-label">Vida Base</label>
+                    <input type="number" id="vida" th:field="*{estadisticas.vida}" class="form-control" placeholder="Vida base" />
+                </div>
+
+                <div class="col-md-6">
+                    <label for="regeneracionVida" class="form-label">Regeneración/Reduccion de Vida</label>
+                    <input type="number" id="regeneracionVida" th:field="*{estadisticas.regeneracionVida}" class="form-control" placeholder="Regeneración de vida" />
+                </div>
+            </div>
+
+            <!-- Fila 9: Escudo y Energía -->
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="escudo" class="form-label">Escudo</label>
+                    <input type="number" id="escudo" th:field="*{estadisticas.escudo}" class="form-control" placeholder="Escudo base" />
+                </div>
+
+                <div class="col-md-6">
+                    <label for="energia" class="form-label">Energía Base</label>
+                    <input type="number" id="energia" th:field="*{estadisticas.energia}" class="form-control" placeholder="Energía base" />
+                </div>
+            </div>
+
+            <!-- Fila 10: Regeneración de Energía y Maná Base -->
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="regeneracionEnergia" class="form-label">Regeneración/Reduccion de Energía</label>
+                    <input type="number" id="regeneracionEnergia" th:field="*{estadisticas.regeneracionEnergia}" class="form-control" placeholder="Regeneración de energía" />
+                </div>
+
+                <div class="col-md-6">
+                    <label for="mana" class="form-label">Maná Base</label>
+                    <input type="number" id="mana" th:field="*{estadisticas.mana}" class="form-control" placeholder="Maná base" />
+                </div>
+            </div>
+
+            <!-- Fila 11: Regeneración de Maná y Ataque Físico -->
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="regeneracionMana" class="form-label">Regeneración/Reduccion de Maná</label>
+                    <input type="number" id="regeneracionMana" th:field="*{estadisticas.regeneracionMana}" class="form-control" placeholder="Regeneración de maná" />
+                </div>
+
+                <div class="col-md-6">
+                    <label for="ataqueFisico" class="form-label">Ataque Físico</label>
+                    <input type="number" id="ataqueFisico" th:field="*{estadisticas.ataqueFisico}" class="form-control" placeholder="Ataque físico" />
+                </div>
+            </div>
+
+            <!-- Fila 12: Ataque Mágico y Defensa Física -->
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="ataqueMagico" class="form-label">Ataque Mágico</label>
+                    <input type="number" id="ataqueMagico" th:field="*{estadisticas.ataqueMagico}" class="form-control" placeholder="Ataque mágico" />
+                </div>
+
+                <div class="col-md-6">
+                    <label for="defensaFisica" class="form-label">Defensa Física</label>
+                    <input type="number" id="defensaFisica" th:field="*{estadisticas.defensaFisica}" class="form-control" placeholder="Defensa física" />
+                </div>
+            </div>
+
+            <!-- Fila 13: Defensa Mágica -->
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="defensaMagica" class="form-label">Defensa Mágica</label>
+                    <input type="number" id="defensaMagica" th:field="*{estadisticas.defensaMagica}" class="form-control" placeholder="Defensa mágica" />
+                </div>
+            </div>
+
+            <!-- Botón de Enviar -->
+            <div class="col-12 text-center mt-4">
+                <button type="submit" class="btn btn-primary">
+                    <span th:text="${habilidad.habilidad_id != null ? 'Actualizar' : 'Crear'}"></span>
+                </button>
+            </div>
+        </form>
+    </div>
+
+
     <div th:unless="${habilidad.habilidad_id != null}" class="table-container">
         <h3 class="mb-4">Listado de Habilidades</h3>
         <table class="table table-bordered">
@@ -176,115 +346,6 @@
         </table>
     </div>
 
-    <!-- Formulario de Estado (Crear o Editar) -->
-    <div class="form-container">
-        <h3 th:text="${habilidad.habilidad_id != null ? 'Editar Habilidad' : 'Crear Nueva Habilidad'}"></h3>
-        <form th:action="@{/admin/habilidad/habilidades/save}" th:object="${habilidad}" method="post">
-            <input type="hidden" th:field="*{habilidad_id}" />
-
-            <div class="form-group mb-3">
-                <label for="nombre" class="form-label">Nombre</label>
-                <input type="text" id="nombre" th:field="*{nombre}" class="form-control" placeholder="Nombre de la habilidad" required />
-            </div>
-            <div class="form-group mb-3">
-                <label for="imagen" class="form-label">Imagen</label>
-                <input type="text" id="imagen" th:field="*{imagen}" class="form-control" placeholder="URL de la imagen"  />
-            </div>
-            <div class="form-group mb-3">
-                <label for="descripcion" class="form-label">Descripción</label>
-                <textarea id="descripcion" th:field="*{descripcion}" class="form-control" placeholder="Descripción de la habilidad" required></textarea>
-            </div>
-            <div class="form-group mb-3">
-                <label for="nivel_maximo" class="form-label">Nivel Máximo</label>
-                <input type="number" id="nivel_maximo" th:field="*{nivel_maximo}" class="form-control" placeholder="Nivel máximo de la habilidad" required />
-            </div>
-            <div class="form-group mb-3">
-                <label for="requisito_nivel" class="form-label">Requisito de Nivel</label>
-                <input type="number" id="requisito_nivel" th:field="*{requisito_nivel}" class="form-control" placeholder="Nivel requerido para aprender" required />
-            </div>
-            <div class="form-group mb-3">
-                <label for="tipoHabilidad" class="form-label">Tipo de Habilidad</label>
-                <select id="tipoHabilidad" th:field="*{tipoHabilidad}" class="form-control" required>
-                    <option value="OFENSIVA" th:selected="*{tipoHabilidad} == 'ofensiva'">Ofensiva</option>
-                    <option value="DEFENSIVA" th:selected="*{tipoHabilidad} == 'defensiva'">Defensiva</option>
-                    <option value="APOYO" th:selected="*{tipoHabilidad} == 'apoyo'">Apoyo</option>
-                </select>
-            </div>
-            <div class="form-group mb-3">
-                <label for="objetivoHabilidad" class="form-label">Objetivo de Habilidad</label>
-                <select id="objetivoHabilidad" th:field="*{objetivoHabilidad}" class="form-control" required>
-                    <option value="ENEMIGO" th:selected="*{objetivoHabilidad} == 'enemigo'">Enemigo</option>
-                    <option value="JUGADOR" th:selected="*{objetivoHabilidad} == 'jugador'">Jugador</option>
-                    <option value="ALIADO" th:selected="*{objetivoHabilidad} == 'aliado'">Aliado</option>
-                    <option value="TODO" th:selected="*{objetivoHabilidad} == 'todo'">Todo</option>
-                </select>
-            </div>
-            <div class="form-group mb-3">
-                <label for="area_efecto" class="form-label">Área de Efecto</label>
-                <input type="number" step="0.01" id="area_efecto" th:field="*{area_efecto}" class="form-control" placeholder="Área de efecto de la habilidad" required />
-            </div>
-            <div class="form-group mb-3">
-                <label for="unidades_afectadas" class="form-label">Unidades Afectadas</label>
-                <input type="number" id="unidades_afectadas" th:field="*{unidades_afectadas}" class="form-control" placeholder="Número de unidades afectadas" required />
-            </div>
-            <div class="form-group mb-3">
-                <label for="enfriamiento" class="form-label">Enfriamiento</label>
-                <input type="number" id="enfriamiento" th:field="*{enfriamiento}" class="form-control" placeholder="Tiempo de enfriamiento" required />
-            </div>
-
-            <!-- Campos de Estadísticas Generales -->
-            <h4 class="mt-4">Estadísticas Generales</h4>
-
-            <div class="form-group mb-3">
-                <label for="vida" class="form-label">Vida </label>
-                <input type="number" id="vida" th:field="*{estadisticas.vida}" class="form-control" placeholder="Vida base" />
-            </div>
-            <div class="form-group mb-3">
-                <label for="regeneracionVida" class="form-label">Regeneración de Vida </label>
-                <input type="number" id="regeneracionVida" th:field="*{estadisticas.regeneracionVida}" class="form-control" placeholder="Regeneración de vida" />
-            </div>
-            <div class="form-group mb-3">
-                <label for="escudo" class="form-label">Escudo </label>
-                <input type="number" id="escudo" th:field="*{estadisticas.escudo}" class="form-control" placeholder="Escudo base" />
-            </div>
-            <div class="form-group mb-3">
-                <label for="energia" class="form-label">Energía </label>
-                <input type="number" id="energia" th:field="*{estadisticas.energia}" class="form-control" placeholder="Energía base" />
-            </div>
-            <div class="form-group mb-3">
-                <label for="regeneracionEnergia" class="form-label">Regeneración de Energía</label>
-                <input type="number" id="regeneracionEnergia" th:field="*{estadisticas.regeneracionEnergia}" class="form-control" placeholder="Regeneración de energía" />
-            </div>
-            <div class="form-group mb-3">
-                <label for="mana" class="form-label">Maná Base</label>
-                <input type="number" id="mana" th:field="*{estadisticas.mana}" class="form-control" placeholder="Maná base" />
-            </div>
-            <div class="form-group mb-3">
-                <label for="regeneracionMana" class="form-label">Regeneración de Maná</label>
-                <input type="number" id="regeneracionMana" th:field="*{estadisticas.regeneracionMana}" class="form-control" placeholder="Regeneración de maná" />
-            </div>
-            <div class="form-group mb-3">
-                <label for="ataqueFisico" class="form-label">Ataque Físico</label>
-                <input type="number" id="ataqueFisico" th:field="*{estadisticas.ataqueFisico}" class="form-control" placeholder="Ataque físico" />
-            </div>
-            <div class="form-group mb-3">
-                <label for="ataqueMagico" class="form-label">Ataque Mágico</label>
-                <input type="number" id="ataqueMagico" th:field="*{estadisticas.ataqueMagico}" class="form-control" placeholder="Ataque mágico" />
-            </div>
-            <div class="form-group mb-3">
-                <label for="defensaFisica" class="form-label">Defensa Física</label>
-                <input type="number" id="defensaFisica" th:field="*{estadisticas.defensaFisica}" class="form-control" placeholder="Defensa física" />
-            </div>
-            <div class="form-group mb-3">
-                <label for="defensaMagica" class="form-label">Defensa Mágica</label>
-                <input type="number" id="defensaMagica" th:field="*{estadisticas.defensaMagica}" class="form-control" placeholder="Defensa mágica" />
-            </div>
-
-            <button type="submit" class="btn btn-primary">
-                <span th:text="${habilidad.habilidad_id != null ? 'Actualizar' : 'Crear'}"></span>
-            </button>
-        </form>
-    </div>
 
 
 </div>

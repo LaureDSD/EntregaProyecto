@@ -19,7 +19,7 @@ import java.util.List;
 @RequestMapping("/admin/personaje/personajesHabilidades")
 public class PersonajeHabilidadesWebController {
 
-    private final String rutaHTML = "/admin/personajes/personajesHabilidades";
+    private final String rutaHTML = "/admin/personaje/personajesHabilidades";
 
     @Autowired
     private HabilidadesPersonajeService habilidadesPersonajeService;
@@ -37,8 +37,8 @@ public class PersonajeHabilidadesWebController {
         try {
             pl = persoanjeService.getAll();
             hl = habilidadService.getAll();
-            model.addAttribute("persoanjesHabilidades", habilidadesPersonajeService.getAll());
-            model.addAttribute("persoanjeHabilidad", new MonstruoHabilidad());
+            model.addAttribute("personajesHabilidades", habilidadesPersonajeService.getAll());
+            model.addAttribute("personajeHabilidad", new PersonajeHabilidad());
             model.addAttribute("personajeList", pl );
             model.addAttribute("habilidadList", hl );
             return rutaHTML;

@@ -20,17 +20,9 @@ public class LogrosPersonaje {
 
     //ID del persoaje correspondiente
     @Id
-    @Column(name = "personaje_id")
-    @Schema(description = "ID único del personaje (clave foránea)", example = "1")
-    private Long personajeId;
-
-    //Persoaje relacionado con latabla de logros
-    @OneToOne
-    @MapsId("persoanje_id")
-    @JoinColumn(name = "personaje_id")
-    @JsonIgnore
-    @Schema(description = "Personaje asociado a estas estadísticas")
-    private Personaje personaje;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Schema(description = "ID único de tabla logros", example = "1")
+    private Long logro_id;
 
     //Registro de monstruos normales cazados
     @NotNull
@@ -79,4 +71,11 @@ public class LogrosPersonaje {
     @Column(name = "mazmorras_totales_superadas", nullable = false)
     @Schema(description = "Número total de mazmorras superadas", example = "1")
     private int mazmorras_totales_superadas;
+
+/*
+    // Relación con la tabla Personajes (One-to-One)
+    @OneToOne(mappedBy = "personaje_id", cascade = CascadeType.ALL)
+    @Schema(description = "Personaje asociado a estos logros.")
+    @JsonIgnore // Excluir esta relación en la serialización JSON
+    private Personaje personaje;*/
 }

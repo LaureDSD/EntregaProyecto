@@ -143,7 +143,7 @@
 
     <!-- Formulario para crear o editar un item de NPC -->
     <div class="form-container">
-        <h3 th:text="${npcItem.npc_producto_id != null ? 'Editar Item de NPC' : 'Crear Nuevo Item de NPC'}"></h3>
+        <h3 th:text="${npcItem.npc_producto_id != null ? 'Editar Item de NPC' : 'Agregar Nuevo Item de NPC'}"></h3>
         <form th:action="@{/admin/npc/npcsItems/save}" th:object="${npcItem}" method="post">
             <input type="hidden" th:field="*{npc_producto_id}" />
 
@@ -166,14 +166,14 @@
             </div>
 
             <div class="form-group mb-3">
-                <label for="npc" class="form-label">Habilidad</label>
+                <label for="npc" class="form-label">Npc</label>
                 <select id="npc" th:field="*{npc}" class="form-control" required>
                     <option th:each="tipo : ${npcList}" th:value="${tipo.npc_id}" th:text="${tipo.nombre}"></option>
                 </select>
             </div>
 
             <div class="form-group mb-3">
-                <label for="item" class="form-label">Habilidad</label>
+                <label for="item" class="form-label">Item</label>
                 <select id="item" th:field="*{item}" class="form-control" required>
                     <option th:each="tipo : ${itemList}" th:value="${tipo.item_id}" th:text="${tipo.nombre}"></option>
                 </select>

@@ -2,7 +2,7 @@ package ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.personajeDTO;
 
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.estadisticasGenerales.EstadisticasGenerales;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.ClasePersonaje;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.LogrosPersonaje;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -32,7 +32,7 @@ public class PersonajeDTO {
 
     private EstadisticasGenerales estadisticas;
 
-    private LogrosPersonaje logros;
+    //private LogrosPersonaje logros;
 
     private ClasePersonaje clase;
 

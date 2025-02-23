@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/personaje")
+@RequestMapping("/api/logros")
 @Tag(name = "Personaje Logros Controller", description = "Operaciones CRUD para la gestión de logros de personajes")
 public class LogrosPersonajeController {
 
@@ -20,42 +20,42 @@ public class LogrosPersonajeController {
 
     // CRUD LOGROS PERSONAJE
 
-    @GetMapping("/logros/")
+    @GetMapping("/")
     @Operation(summary = "Obtener todos los logros de los personajes", description = "Retorna una lista de todos los logros asociados a los personajes")
     public List<LogrosPersonaje> obtenerListaLogrosPersonajes() {
         return logrosPersonajeService.getAll();
     }
 
-    @GetMapping("/{personajeId}/logros/")
+    @GetMapping("/{logros_id}")
     @Operation(summary = "Obtener logros de un personaje específico", description = "Retorna los logros asociados a un personaje específico")
-    public LogrosPersonaje obtenerLogrosPersonaje(@PathVariable Long personajeId) {
-        return logrosPersonajeService.getByID(personajeId);
+    public LogrosPersonaje obtenerLogrosPersonaje(@PathVariable Long logros_id) {
+        return logrosPersonajeService.getByID(logros_id);
     }
 
-    @PutMapping("/{personajeId}/logros/")
+    @PutMapping("/{personajeId}")
     @Operation(summary = "Actualizar un logro de un personaje", description = "Actualiza la información de un logro específico asociado a un personaje")
     public ResponseEntity<Object> actualizarLogroPersonaje(
-            @PathVariable Long personajeId,
+            @PathVariable Long logros_id,
             @RequestBody LogrosPersonaje logroActualizar) {
-        if (logroActualizar.getPersonajeId().equals(personajeId)) {
+        if (logroActualizar.getLogro_id().equals(logros_id)) {
             return ResponseEntity.ok(logrosPersonajeService.setItem(logroActualizar));
         } else {
             return ResponseEntity.badRequest().body("El ID proporcionado no coincide con el ID del logro del personaje.");
         }
     }
 
-    @PostMapping("/{personajeId}/logros/")
+    @PostMapping("/{logros_id}")
     @Operation(summary = "Crear un nuevo logro para un personaje", description = "Crea un nuevo logro asociado a un personaje")
     public LogrosPersonaje guardarLogroPersonaje(
-            @PathVariable Long personajeId,
+            @PathVariable Long logros_id,
             @RequestBody LogrosPersonaje logroGuardar) {
-        logroGuardar.setPersonajeId(personajeId);
+        logroGuardar.setLogro_id(logros_id);
         return logrosPersonajeService.setItem(logroGuardar);
     }
 
-    @DeleteMapping("/{personajeId}/logros/")
+    @DeleteMapping("/{logros_Id}")
     @Operation(summary = "Eliminar un logro de un personaje", description = "Elimina un logro específico asociado a un personaje")
-    public void borrarLogroPersonaje(@PathVariable Long personajeId) {
-        logrosPersonajeService.deleteByID(personajeId);
+    public void borrarLogroPersonaje(@PathVariable Long logros_Id) {
+        logrosPersonajeService.deleteByID(logros_Id);
     }
 }

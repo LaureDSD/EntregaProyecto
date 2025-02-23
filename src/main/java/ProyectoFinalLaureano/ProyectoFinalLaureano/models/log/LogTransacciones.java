@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -67,6 +68,7 @@ public class LogTransacciones {
     private int precio_almas;
 
     //Fecha de transacion
+    @DateTimeFormat
     @Column(name = "fecha_transaccion", nullable = false)
     @Schema(description = "Fecha y hora de la transacción", example = "2023-10-01T12:00:00")
     private Date fecha_transaccion = new Date();

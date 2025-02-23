@@ -6,18 +6,20 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.format.annotation.DateTimeFormat;
 
-import java.time.LocalDateTime;
+import java.util.Date;
+
 @NoArgsConstructor
 @Entity
 @Table(name = "inventario_personaje")
 @Schema(description = "Entidad que representa el inventario de un personaje")
 @Getter
 @Setter
-public class InventarioPersonaje {
+public class PersonajeItem {
 
     //Clase que relaciona las dos claves de la tabla persoanje_id e item_id
+    @Getter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long personaje_inventario_id;
@@ -48,7 +50,10 @@ public class InventarioPersonaje {
     private boolean equipado;
 
     //Fecha de obtencion del item (Por si pongo caducidad/degradacion)
+    @DateTimeFormat
     @Column(name = "fecha_obtencion", nullable = false)
     @Schema(description = "Fecha y hora de obtención del ítem", example = "2023-10-01T12:00:00")
-    private LocalDateTime fecha_obtencion;
+    private Date fecha_obtencion;
+
+
 }

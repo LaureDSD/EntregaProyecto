@@ -139,22 +139,52 @@
     </div>
 
     <h2 class="text-center mb-4">Gestión de Logros de Personajes</h2>
+<!--
+    <div th:unless="${logrosPersonaje != null}" class="table-container">
+        <h3 class="mb-4">Listado de Logros de Personajes</h3>
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+            <tr>
+                <th>ID</th>
+                <th>Personaje</th>
+                <th>Enemigos N.</th>
+                <th>Minibosses</th>
+                <th>Bosses</th>
+                <th>Muertes Totales</th>
+                <th>Daño Infligido</th>
+                <th>Daño Recibido</th>
+                <th>Tiempo Jugado</th>
+                <th>Mazmorras Superadas</th>
+                <th>Acciones</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="logro : ${personajesLogros}">
+                <td th:text="${logro.logro_id}"></td>
+                <td th:text="${logro.personaje.nombre}"></td>
+                <td th:text="${logro.normal}"></td>
+                <td th:text="${logro.miniboss}"></td>
+                <td th:text="${logro.boss}"></td>
+                <td th:text="${logro.muertes_totales}"></td>
+                <td th:text="${logro.total_daño_inflijido}"></td>
+                <td th:text="${logro.total_daño_recibido}"></td>
+                <td th:text="${logro.tiempo_total_jugado}"></td>
+                <td th:text="${logro.mazmorras_totales_superadas}"></td>
+                <td>
+                    <a href="#" th:href="@{/admin/personaje/personajesLogros/edit/{id}(id=${logro.logro_id})}" class="btn btn-warning btn-sm">Editar</a>
+                    <a href="#" th:href="@{/admin/personaje/personajesLogros/delete/{id}(id=${logro.logro_id})}" class="btn btn-danger btn-sm">Eliminar</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+-->
 
-    <!-- Formulario de Estado (Crear o Editar) -->
+    <!-- Formulario de Estado (Crear o Editar)
     <div class="form-container">
-        <h3 th:text="${logroPersonaje.personajeId != null ? 'Editar Logro de Personaje' : 'Asignar Nuevo Logro'}"></h3>
-        <form th:action="@{/admin/personaje/personajesLogros/save}" th:object="${logroPersonaje}" method="post">
-            <input type="hidden" th:field="*{personajeId}" />
-
-            <div class="form-group mb-3">
-                <label for="personaje" class="form-label">Personaje</label>
-                <select id="personaje" th:field="*{personaje}" class="form-control" required>
-                    <option th:each="personaje : ${personajeList}"
-                            th:value="${personaje.personaje_id}"
-                            th:text="${personaje.nombre}"
-                            th:selected="*{personaje.personaje_id} == ${personaje.personaje_id}"></option>
-                </select>
-            </div>
+        <h3 th:text="${logrosPersonaje != null ? 'Editar Logro de Personaje' : 'Asignar Nuevo Logro'}"></h3>
+        <form th:action="@{/admin/personaje/personajesLogros/save}" th:object="${logrosPersonaje}" method="post">
+            <input type="hidden" th:field="*{logro_id}" />
 
             <div class="form-group mb-3">
                 <label for="normal" class="form-label">Enemigos Normales Derrotados</label>
@@ -197,49 +227,14 @@
             </div>
 
             <button type="submit" class="btn btn-primary">
-                <span th:text="${logroPersonaje.personajeId != null ? 'Actualizar' : 'Asignar'}"></span>
+                <span th:text="${logrosPersonaje != null ? 'Actualizar' : 'Asignar'}"></span>
             </button>
         </form>
-    </div>
+    </div>-->
 
-    <div th:unless="${logroPersonaje.personajeId != null}" class="table-container">
-        <h3 class="mb-4">Listado de Logros de Personajes</h3>
-        <table class="table table-bordered">
-            <thead class="thead-dark">
-            <tr>
-                <th>ID</th>
-                <th>Personaje</th>
-                <th>Enemigos Normales</th>
-                <th>Minibosses</th>
-                <th>Bosses</th>
-                <th>Muertes Totales</th>
-                <th>Daño Infligido</th>
-                <th>Daño Recibido</th>
-                <th>Tiempo Jugado</th>
-                <th>Mazmorras Superadas</th>
-                <th>Acciones</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="logro : ${personajesLogros}">
-                <td th:text="${logro.personajeId}"></td>
-                <td th:text="${logro.personaje.nombre}"></td>
-                <td th:text="${logro.normal}"></td>
-                <td th:text="${logro.miniboss}"></td>
-                <td th:text="${logro.boss}"></td>
-                <td th:text="${logro.muertes_totales}"></td>
-                <td th:text="${logro.total_daño_inflijido}"></td>
-                <td th:text="${logro.total_daño_recibido}"></td>
-                <td th:text="${logro.tiempo_total_jugado}"></td>
-                <td th:text="${logro.mazmorras_totales_superadas}"></td>
-                <td>
-                    <a href="#" th:href="@{/admin/personaje/personajesLogros/edit/{id}(id=${logro.personajeId})}" class="btn btn-warning btn-sm">Editar</a>
-                    <a href="#" th:href="@{/admin/personaje/personajesLogros/delete/{id}(id=${logro.personajeId})}" class="btn btn-danger btn-sm">Eliminar</a>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
+
+
+<h2>Fuera de Servicio</h2>
 </div>
 
 

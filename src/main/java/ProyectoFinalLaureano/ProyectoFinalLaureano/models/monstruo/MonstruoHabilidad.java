@@ -24,7 +24,7 @@ public class MonstruoHabilidad {
     //Nivel de la habilidad
     @Column(name = "nivel_habilidad", nullable = false)
     @Schema(description = "Nivel de la habilidad del monstruo", example = "1")
-    private Long nivelHabilidad;
+    private int nivelHabilidad;
 
     //Posibilidad de acertar
     @Column(name = "probabilidad_uso", nullable = false)
@@ -38,11 +38,11 @@ public class MonstruoHabilidad {
 
     // Relación con la tabla monstruo N:1
     @ManyToOne()
-    @JoinColumn(name = "monstruo_id", insertable = false, updatable = false)
+    @JoinColumn(name = "monstruo_id")
     private Monstruo monstruo;
 
     // Relación con la tabla habilidad N:1
     @ManyToOne()
-    @JoinColumn(name = "habilidad_id", insertable = false, updatable = false)
+    @JoinColumn(name = "habilidad_id")
     private Habilidad habilidad;
 }

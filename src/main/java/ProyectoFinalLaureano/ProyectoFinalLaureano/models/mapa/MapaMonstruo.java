@@ -28,13 +28,13 @@ public class MapaMonstruo {
 
     // Relación con la tabla mapa N:1
     @ManyToOne()
-    @JoinColumn(name = "mapa_id", insertable = false, updatable = false)
+    @JoinColumn(name = "mapa_id")
     @Schema(description = "Nombre del mapa", example = "2")
     private Mapa mapa;
 
     // Relación con la tabla monstruo N:1
     @ManyToOne()
-    @JoinColumn(name = "monstruo_id", insertable = false, updatable = false)
+    @JoinColumn(name = "monstruo_id")
     @Schema(description = "Nombre del monstruo", example = "1")
     private Monstruo monstruo;
 }

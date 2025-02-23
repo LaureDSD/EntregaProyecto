@@ -1,7 +1,7 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.personajeController.BackendControler;
 
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.item.Item;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.InventarioPersonaje;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.PersonajeItem;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.Personaje;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.itemService.ItemService;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.persoanjeService.InventarioPersonajeService;
@@ -15,7 +15,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/admin/personaje/personajesItems")
-public class InventarioWebController {
+public class PersonajeItemWebController {
 
     private final String rutaHTML = "/admin/personaje/personajesItems";
 
@@ -36,9 +36,10 @@ public class InventarioWebController {
         try {
             pl = persoanjeService.getAll();
             il = itemService.getAll();
-            List<InventarioPersonaje> inventarios = inventarioService.getAll();
-            model.addAttribute("persoanjesItems", inventarios);
-            model.addAttribute("persoanjeItem", new InventarioPersonaje());
+            List<PersonajeItem> inventarios = inventarioService.getAll();
+            System.out.println(inventarios.size()+"======================================================CARGADO=====================================================================");
+            model.addAttribute("personajesItems", inventarios);
+            model.addAttribute("personajeItem", new PersonajeItem());
             model.addAttribute("itemList", il);
             model.addAttribute("personajeList", pl );
             return rutaHTML;
@@ -51,8 +52,8 @@ public class InventarioWebController {
     @GetMapping("/edit/{id}")
     public String editar(@PathVariable("id") Long id, Model model) {
         try {
-            InventarioPersonaje inventarioPersonaje = (id != null) ? inventarioService.getByID(id) : new InventarioPersonaje();
-            model.addAttribute("inventarioPersonaje", inventarioPersonaje);
+            PersonajeItem inventarioPersonaje = (id != null) ? inventarioService.getByID(id) : new PersonajeItem();
+            model.addAttribute("personajeItem", inventarioPersonaje);
             model.addAttribute("itemList", il);
             model.addAttribute("personajeList", pl );
             return rutaHTML;
@@ -63,7 +64,7 @@ public class InventarioWebController {
     }
 
     @PostMapping("/save")
-    public String guardar(@ModelAttribute("inventarioPersonaje") InventarioPersonaje inventarioPersonaje, Model model) {
+    public String guardar(@ModelAttribute("personajeItem") PersonajeItem inventarioPersonaje, Model model) {
         try {
             inventarioService.setItem(inventarioPersonaje);
             return "redirect:"+rutaHTML;

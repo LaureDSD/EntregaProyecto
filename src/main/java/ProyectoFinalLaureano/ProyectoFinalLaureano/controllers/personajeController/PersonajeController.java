@@ -1,7 +1,6 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.personajeController;
 
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.item.Item;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.InventarioPersonaje;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.PersonajeItem;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje.Personaje;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.personajeDTO.InventarioDTO;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.personajeDTO.PersonajeDTO;
@@ -87,16 +86,16 @@ public class PersonajeController {
         personajeDTO.setNivel(personaje.getNivel());
         personajeDTO.setXp_acumulada(personaje.getXp_acumulada());
         personajeDTO.setAlmas(personaje.getAlmas());
-        personajeDTO.setLogros(personaje.getLogros());
+        //personajeDTO.setLogros(personaje.getLogros());
         personajeDTO.setCapacidad_inventario(personaje.getCapacidad_inventario());
-        personajeDTO.setInventario(inventarioDTO(personaje.getInventario())); // Llamada al método que obtiene el inventario.
+        //personajeDTO.setInventario(inventarioDTO( personaje.getPersonaje_id() ));
         personajeDTO.setEstadisticas(personaje.getEstadisticas());
         return personajeDTO;
     }
 
-    public List<InventarioDTO> inventarioDTO(List<InventarioPersonaje> inventarioPersonajes) {
+    public List<InventarioDTO> inventarioDTO(List<PersonajeItem> inventarioPersonajes) {
         List<InventarioDTO> inventariosDTO = new ArrayList<>();
-        for (InventarioPersonaje inventario : inventarioPersonajes) {
+        for (PersonajeItem inventario : inventarioPersonajes) {
             InventarioDTO inventarioDTO = new InventarioDTO();
             inventarioDTO.setItem(inventario.getItem()); // Obtener el item.
             inventarioDTO.setCantidad(inventario.getCantidad());

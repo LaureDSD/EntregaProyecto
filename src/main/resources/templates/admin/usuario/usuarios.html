@@ -190,7 +190,9 @@
                 <th>Nombre Privado</th>
                 <th>Correo</th>
                 <th>Estado de Cuenta</th>
-                <th>Tipo de Usuario</th>
+                <th>Tipo</th>
+                <th>Creacion</th>
+                <th>Limite Peersonajes</th>
                 <th>Acciones</th>
             </tr>
             </thead>
@@ -202,6 +204,8 @@
                 <td th:text="${usuario.correo}"></td>
                 <td th:text="${usuario.estado_cuenta ? 'Activa' : 'Inactiva'}"></td>
                 <td th:text="${usuario.tipoUsuario}"></td>
+                <td th:text="${usuario.fecha_creacion}"></td>
+                <td th:text="${usuario.limite_personajes}"></td>
                 <td>
                     <a href="#" th:href="@{/admin/usuario/usuarios/edit/{id}(id=${usuario.usuario_id})}" class="btn btn-warning btn-sm">Editar</a>
                     <a href="#" th:href="@{/admin/usuario/usuarios/delete/{id}(id=${usuario.usuario_id})}" class="btn btn-danger btn-sm">Eliminar</a>

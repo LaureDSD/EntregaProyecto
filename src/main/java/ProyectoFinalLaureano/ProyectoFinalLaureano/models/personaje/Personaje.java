@@ -2,8 +2,6 @@ package ProyectoFinalLaureano.ProyectoFinalLaureano.models.personaje;
 
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.estadisticasGenerales.EstadisticasGenerales;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.grupos.Grupo;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.grupos.LiderGrupo;
-import ProyectoFinalLaureano.ProyectoFinalLaureano.models.log.LogPersonajeMonstruo;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.usuario.Usuario;
 import jakarta.persistence.*;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -11,10 +9,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.format.annotation.DateTimeFormat;
 
-import java.time.LocalDateTime;
 import java.util.Date;
-import java.util.List;
 
 // (Correcto)
 @NoArgsConstructor
@@ -42,6 +39,7 @@ public class Personaje {
     private String nombre;
 
     //Fecha de creacion
+    @DateTimeFormat
     @Column(name = "fecha_creacion", nullable = false)
     @Schema(description = "Fecha y hora de creación del personaje", example = "2023-10-01T12:00:00")
     private Date fecha_creacion;
@@ -77,18 +75,19 @@ public class Personaje {
     @Schema(description = "Usuario al que pertenece el personaje")
     @JsonIgnore // Excluir esta relación en la serialización JSON
     private Usuario usuario;
-
+/*
     //Logros del persoanje
-    @OneToOne(mappedBy = "personaje", cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
     @Schema(description = "Logros del persoanje")
-    @JsonIgnore // Excluir esta relación en la serialización JSON
-    private LogrosPersonaje logros;
+    @JoinColumn(name = "logro_id")
+    private LogrosPersonaje logros;*/
 
     //Clase
     @ManyToOne
     @JoinColumn(name = "clase_id", nullable = false)
     @Schema(description = "Clase del persoanje asociado")
     private ClasePersonaje clase_personaje;
+
 
     //Grupo
     @ManyToOne
@@ -97,7 +96,7 @@ public class Personaje {
     @JsonIgnore // Excluir esta relación en la serialización JSON
     private Grupo grupo;
 
-
+    /*
     // Relación Uno a Muchos con InventarioPersonaje
     @OneToMany(mappedBy = "personaje", cascade = CascadeType.ALL)
     @Schema(description = "Ítems en el inventario del personaje")
@@ -123,7 +122,7 @@ public class Personaje {
 
     // Relacion persoanje con lider 1:1
     @OneToOne(mappedBy = "personaje", cascade = CascadeType.ALL)
-    private LiderGrupo liderGrupo;
+    private LiderGrupo liderGrupo;*/
 
 
 }

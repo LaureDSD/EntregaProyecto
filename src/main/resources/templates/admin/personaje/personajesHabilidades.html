@@ -143,26 +143,20 @@
     <!-- Formulario de Estado (Crear o Editar) -->
     <div class="form-container">
         <h3 th:text="${personajeHabilidad.personaje_habilidad_id != null ? 'Editar Habilidad de Personaje' : 'Asignar Nueva Habilidad'}"></h3>
-        <form th:action="@{/admin/personaje/persoanjesHabilidades/save}" th:object="${personajeHabilidad}" method="post">
+        <form th:action="@{/admin/personaje/personajesHabilidades/save}" th:object="${personajeHabilidad}" method="post">
             <input type="hidden" th:field="*{personaje_habilidad_id}" />
 
             <div class="form-group mb-3">
-                <label for="personaje" class="form-label">Personaje</label>
+                <label for="personaje" class="form-label">Habilidad</label>
                 <select id="personaje" th:field="*{personaje}" class="form-control" required>
-                    <option th:each="personaje : ${personajeList}"
-                            th:value="${personaje.personaje_id}"
-                            th:text="${personaje.nombre}"
-                            th:selected="*{personaje.personaje_id} == ${personaje.personaje_id}"></option>
+                    <option th:each="tipo : ${personajeList}" th:value="${tipo.personaje_id}" th:text="${tipo.nombre}"></option>
                 </select>
             </div>
 
             <div class="form-group mb-3">
                 <label for="habilidad" class="form-label">Habilidad</label>
                 <select id="habilidad" th:field="*{habilidad}" class="form-control" required>
-                    <option th:each="habilidad : ${habilidadList}"
-                            th:value="${habilidad.habilidad_id}"
-                            th:text="${habilidad.nombre}"
-                            th:selected="*{habilidad.habilidad_id} == ${habilidad.habilidad_id}"></option>
+                    <option th:each="tipo : ${habilidadList}" th:value="${tipo.habilidad_id}" th:text="${tipo.nombre}"></option>
                 </select>
             </div>
 
@@ -171,17 +165,13 @@
                 <input type="number" id="nivelHabilidad" th:field="*{nivelHabilidad}" class="form-control" placeholder="Nivel de habilidad" required />
             </div>
 
-            <div class="form-group mb-3">
-                <label for="probabilidadFallo" class="form-label">Probabilidad de Fallo</label>
-                <input type="number" step="0.01" id="probabilidadFallo" th:field="*{probabilidadFallo}" class="form-control" placeholder="Probabilidad de fallo" required />
-            </div>
 
             <button type="submit" class="btn btn-primary">
                 <span th:text="${personajeHabilidad.personaje_habilidad_id != null ? 'Actualizar' : 'Asignar'}"></span>
             </button>
         </form>
     </div>
-
+    <br>
     <div th:unless="${personajeHabilidad.personaje_habilidad_id != null}" class="table-container">
         <h3 class="mb-4">Listado de Habilidades de Personajes</h3>
         <table class="table table-bordered">
@@ -191,17 +181,15 @@
                 <th>Personaje</th>
                 <th>Habilidad</th>
                 <th>Nivel de Habilidad</th>
-                <th>Probabilidad de Fallo</th>
                 <th>Acciones</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="personajeHabilidad : ${persoanjesHabilidades}">
+            <tr th:each="personajeHabilidad : ${personajesHabilidades}">
                 <td th:text="${personajeHabilidad.personaje_habilidad_id}"></td>
                 <td th:text="${personajeHabilidad.personaje.nombre}"></td>
                 <td th:text="${personajeHabilidad.habilidad.nombre}"></td>
                 <td th:text="${personajeHabilidad.nivelHabilidad}"></td>
-                <td th:text="${personajeHabilidad.probabilidadFallo}"></td>
                 <td>
                     <a href="#" th:href="@{/admin/personaje/persoanjesHabilidades/edit/{id}(id=${personajeHabilidad.personaje_habilidad_id})}" class="btn btn-warning btn-sm">Editar</a>
                     <a href="#" th:href="@{/admin/personaje/persoanjesHabilidades/delete/{id}(id=${personajeHabilidad.personaje_habilidad_id})}" class="btn btn-danger btn-sm">Eliminar</a>
@@ -210,6 +198,10 @@
             </tbody>
         </table>
     </div>
+
+
+
+
 </div>
 
 

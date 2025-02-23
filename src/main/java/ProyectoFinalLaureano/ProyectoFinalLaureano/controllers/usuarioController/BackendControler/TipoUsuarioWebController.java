@@ -65,7 +65,7 @@ public class TipoUsuarioWebController {
             tipoUsuarioService.deleteByID(id);
             return "redirect:"+rutaHTML;
         } catch (Exception e) {
-            model.addAttribute("error", "Error al eliminar el tipo de usuario: " + e.getMessage());
+            model.addAttribute("error", "Error al eliminar el tipo de usuario: " + e.getMessage() + "Aqui no se borra nada  :)");
             return rutaHTML;
         }
     }

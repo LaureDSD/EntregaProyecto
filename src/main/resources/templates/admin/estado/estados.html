@@ -141,26 +141,178 @@
 
     <h2 class="text-center mb-4">Gestión de Estados</h2>
 
-    <!-- Formulario de Estado (Crear o Editar) -->
     <div class="form-container">
-        <h3 th:text="${estado.efecto_id != null ? 'Editar Estado' : 'Crear Estado'}"></h3>
+        <h3 th:text="${estado.efecto_id != null ? 'Editar Estado' : 'Crear Estado'}" class="text-center mb-4"></h3>
+
+        <!-- Formulario con diseño mejorado -->
         <form th:action="@{/admin/estado/estados/save}" th:object="${estado}" method="post" class="form-group">
-            <input type="hidden" th:field="*{efecto_id}"/>
 
-            <div class="mb-3">
-                <label for="nombre" class="form-label">Nombre</label>
-                <input type="text" id="nombre" th:field="*{nombre}" class="form-control" required/>
+            <!-- Campo oculto para ID -->
+            <input type="hidden" th:field="*{efecto_id}" />
+
+            <!-- Sección Principal -->
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <!-- Nombre del efecto -->
+                    <div class="form-group">
+                        <label for="nombre" class="form-label">Nombre del efecto</label>
+                        <input type="text" id="nombre" th:field="*{nombre}" class="form-control" placeholder="Nombre del efecto" required />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <!-- Imagen del icono -->
+                    <div class="form-group">
+                        <label for="imagen_icono" class="form-label">Imagen del icono (URL)</label>
+                        <input type="text" id="imagen_icono" th:field="*{imagen_icono}" class="form-control" placeholder="URL del icono" />
+                    </div>
+                </div>
             </div>
 
-            <div class="mb-3">
-                <label for="descripcion" class="form-label">Descripción</label>
-                <input type="text" id="descripcion" th:field="*{descripcion}" class="form-control"/>
+            <!-- Descripción del efecto -->
+            <div class="form-group mb-4">
+                <label for="descripcion" class="form-label">Descripción del efecto</label>
+                <textarea id="descripcion" th:field="*{descripcion}" class="form-control" placeholder="Descripción detallada del efecto" rows="4" required></textarea>
             </div>
-            <button type="submit" class="btn btn-success" th:text="${estado.efecto_id != null ? 'Actualizar' : 'Crear'}"></button>
+
+            <!-- Sección de Efecto y Objetivo -->
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <!-- Tipo de efecto -->
+                    <div class="form-group">
+                        <label for="tipo" class="form-label">Tipo de efecto</label>
+                        <select id="tipo" th:field="*{tipo}" class="form-control">
+                            <option value="BUFF">Buff</option>
+                            <option value="DEBUFF">Debuff</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <!-- Tipo de entidad afectada -->
+                    <div class="form-group">
+                        <label for="tipo_afectado" class="form-label">Tipo de entidad afectada</label>
+                        <select id="tipo_afectado" th:field="*{tipo_afectado}" class="form-control">
+                            <option value="PERSONAJE">Personaje</option>
+                            <option value="MONSTRUO">Monstruo</option>
+                            <option value="TODO">Todo</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Duración e intervalos -->
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <!-- Duración del efecto -->
+                    <div class="form-group">
+                        <label for="duracion_efecto" class="form-label">Duración del efecto (en turnos)</label>
+                        <input type="number" id="duracion_efecto" th:field="*{duracion_efecto}" class="form-control" placeholder="Duración en turnos" required />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <!-- Intervalos de efecto -->
+                    <div class="form-group">
+                        <label for="intervalos_efecto" class="form-label">Intervalos de efecto (en turnos)</label>
+                        <input type="number" id="intervalos_efecto" th:field="*{intervalos_efecto}" class="form-control" placeholder="Intervalos de efecto" required />
+                    </div>
+                </div>
+            </div>
+
+            <!-- Número de acumulaciones -->
+            <div class="form-group mb-4">
+                <label for="acumulaciones" class="form-label">Número de acumulaciones</label>
+                <input type="number" id="acumulaciones" th:field="*{acumulaciones}" class="form-control" placeholder="Número de acumulaciones" required />
+            </div>
+
+            <!-- Sección de Estadísticas Generales -->
+            <h4 class="mt-4 mb-3 text-center">Estadísticas a las que afecta</h4>
+
+            <div class="row mb-4">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="vida" class="form-label">Vida</label>
+                        <input type="number" id="vida" th:field="*{estadisticas.vida}" class="form-control" placeholder="Vida base" />
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="regeneracionVida" class="form-label">Regeneración de Vida</label>
+                        <input type="number" id="regeneracionVida" th:field="*{estadisticas.regeneracionVida}" class="form-control" placeholder="Regeneración de vida" />
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="escudo" class="form-label">Escudo</label>
+                        <input type="number" id="escudo" th:field="*{estadisticas.escudo}" class="form-control" placeholder="Escudo base" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-4">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="energia" class="form-label">Energía</label>
+                        <input type="number" id="energia" th:field="*{estadisticas.energia}" class="form-control" placeholder="Energía base" />
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="regeneracionEnergia" class="form-label">Regeneración de Energía</label>
+                        <input type="number" id="regeneracionEnergia" th:field="*{estadisticas.regeneracionEnergia}" class="form-control" placeholder="Regeneración de energía" />
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="mana" class="form-label">Maná Base</label>
+                        <input type="number" id="mana" th:field="*{estadisticas.mana}" class="form-control" placeholder="Maná base" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-4">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="regeneracionMana" class="form-label">Regeneración de Maná</label>
+                        <input type="number" id="regeneracionMana" th:field="*{estadisticas.regeneracionMana}" class="form-control" placeholder="Regeneración de maná" />
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="ataqueFisico" class="form-label">Ataque Físico</label>
+                        <input type="number" id="ataqueFisico" th:field="*{estadisticas.ataqueFisico}" class="form-control" placeholder="Ataque físico" />
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="ataqueMagico" class="form-label">Ataque Mágico</label>
+                        <input type="number" id="ataqueMagico" th:field="*{estadisticas.ataqueMagico}" class="form-control" placeholder="Ataque mágico" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-4">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="defensaFisica" class="form-label">Defensa Física</label>
+                        <input type="number" id="defensaFisica" th:field="*{estadisticas.defensaFisica}" class="form-control" placeholder="Defensa física" />
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="defensaMagica" class="form-label">Defensa Mágica</label>
+                        <input type="number" id="defensaMagica" th:field="*{estadisticas.defensaMagica}" class="form-control" placeholder="Defensa mágica" />
+                    </div>
+                </div>
+            </div>
+
+            <!-- Botón de acción -->
+            <div class="text-center">
+                <button type="submit" class="btn btn-success" th:text="${estado.efecto_id != null ? 'Actualizar' : 'Crear'}"></button>
+            </div>
         </form>
     </div>
 
-    <!-- Si no estamos editando, mostramos el listado de estados -->
+
+    <!-- listado de estados -->
     <div th:unless="${estado.efecto_id != null}" class="table-container">
         <h3>Listado de Estados</h3>
         <!-- Tabla con los Estados -->
@@ -179,14 +331,18 @@
                 <td th:text="${estado.descripcion}"></td>
                 <td>
                     <!-- Botón para editar -->
-                    <a class="btn btn-primary btn-sm" th:href="@{/admin/estados/edit/{id}(id=${estado.efecto_id})}">Editar</a>
+                    <a class="btn btn-primary btn-sm" th:href="@{/admin/estado/estados/edit/{id}(id=${estado.efecto_id})}">Editar</a>
                     <!-- Botón para eliminar -->
-                    <a class="btn btn-danger btn-sm" th:href="@{/admin/estados/delete/{id}(id=${estado.efecto_id})}" onclick="return confirm('¿Estás seguro de eliminar?');">Eliminar</a>
+                    <a class="btn btn-danger btn-sm" th:href="@{/admin/estado/estados/delete/{id}(id=${estado.efecto_id})}" onclick="return confirm('¿Estás seguro de eliminar?');">Eliminar</a>
                 </td>
             </tr>
             </tbody>
         </table>
     </div>
+
+</div>
+
+
 
 
 

@@ -142,7 +142,7 @@
     <!-- Formulario para crear o editar un tipo de mapa -->
     <div class="form-container">
         <h3 th:text="${tipoMapa.tipoMapaId != null ? 'Editar Tipo de Mapa' : 'Crear Nuevo Tipo de Mapa'}"></h3>
-        <form th:action="@{/admin/mapa/tiposMapa/save}" th:object="${tipoMapa}" method="post">
+        <form th:action="@{/admin/mapa/tipoMapa/save}" th:object="${tipoMapa}" method="post">
             <input type="hidden" th:field="*{tipoMapaId}" />
 
             <!-- Nombre del Tipo de Mapa -->
@@ -181,8 +181,8 @@
                 <td th:text="${tipoMapa.nombre}"></td>
                 <td th:text="${tipoMapa.descripcion}"></td>
                 <td>
-                    <a href="#" th:href="@{/admin/mapa/tiposMapa/edit/{id}(id=${tipoMapa.tipoMapaId})}" class="btn btn-warning btn-sm">Editar</a>
-                    <a href="#" th:href="@{/admin/mapa/tiposMapa/delete/{id}(id=${tipoMapa.tipoMapaId})}" class="btn btn-danger btn-sm">Eliminar</a>
+                    <a href="#" th:href="@{/admin/mapa/tipoMapa/edit/{id}(id=${tipoMapa.tipoMapaId})}" class="btn btn-warning btn-sm">Editar</a>
+                    <a href="#" th:href="@{/admin/mapa/tipoMapa/delete/{id}(id=${tipoMapa.tipoMapaId})}" class="btn btn-danger btn-sm">Eliminar</a>
                 </td>
             </tr>
             </tbody>

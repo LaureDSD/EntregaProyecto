@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -44,6 +45,7 @@ public class LogUsuario {
     private String mensaje;
 
     //Fecha de emision
+    @DateTimeFormat
     @Column(name = "fecha_log", nullable = false)
     @Schema(description = "Fecha y hora del log", example = "2023-10-01T12:00:00")
     private Date fechaLog = new Date();

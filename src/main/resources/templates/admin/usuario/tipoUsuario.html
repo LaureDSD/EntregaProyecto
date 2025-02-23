@@ -142,7 +142,6 @@
     <div class="form-container">
         <h3 th:text="${tipoUsuario.tipo_usuario_id != null ? 'Editar Tipo de Usuario' : 'Crear Nuevo Tipo de Usuario'}"></h3>
         <form th:action="@{/admin/usuario/tipoUsuario/save}" th:object="${tipoUsuario}" method="post">
-            <input type="hidden" th:field="*{tipo_usuario_id}" />
 
             <div class="form-group mb-3">
                 <label for="nombre" class="form-label">Nombre</label>

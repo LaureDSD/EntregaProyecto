@@ -154,7 +154,7 @@
     <!-- Formulario para crear o editar misión -->
     <div class="form-container">
         <h3 th:text="${mision.mision_id != null ? 'Editar Misión' : 'Crear Nueva Misión'}"></h3>
-        <form th:action="@{/admin/mison/misiones/save}" th:object="${mision}" method="post">
+        <form th:action="@{/admin/mision/misiones/save}" th:object="${mision}" method="post">
             <input type="hidden" th:field="*{mision_id}" />
 
             <div class="form-group mb-3">
@@ -219,8 +219,8 @@
                 <td th:text="${mision.recompensa_experiencia}"></td>
                 <td th:text="${mision.tiempo_limite}"></td>
                 <td>
-                    <a href="#" th:href="@{/admin/mison/misiones/edit/{id}(id=${mision.mision_id})}" class="btn btn-warning btn-sm">Editar</a>
-                    <a href="#" th:href="@{/admin/mison/misiones/delete/{id}(id=${mision.mision_id})}" class="btn btn-danger btn-sm">Eliminar</a>
+                    <a href="#" th:href="@{/admin/mision/misiones/edit/{id}(id=${mision.mision_id})}" class="btn btn-warning btn-sm">Editar</a>
+                    <a href="#" th:href="@{/admin/mision/misiones/delete/{id}(id=${mision.mision_id})}" class="btn btn-danger btn-sm">Eliminar</a>
                 </td>
             </tr>
             </tbody>

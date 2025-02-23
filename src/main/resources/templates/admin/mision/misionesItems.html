@@ -142,7 +142,7 @@
     <!-- Formulario para crear o editar un ítem de misión -->
     <div class="form-container">
         <h3 th:text="${misionItem.mision_item_id != null ? 'Editar Ítem de Misión' : 'Crear Nuevo Ítem de Misión'}"></h3>
-        <form th:action="@{/admin/mison/misionesItems/save}" th:object="${misionItem}" method="post">
+        <form th:action="@{/admin/mision/misionesItems/save}" th:object="${misionItem}" method="post">
             <input type="hidden" th:field="*{mision_item_id}" />
 
             <!-- Misión Relacionada -->
@@ -196,8 +196,8 @@
                 <td th:text="${misionItem.item.nombre}"></td>
                 <td th:text="${misionItem.cantidad}"></td>
                 <td>
-                    <a href="#" th:href="@{/admin/mison/misionesItems/edit/{id}(id=${misionItem.mision_item_id})}" class="btn btn-warning btn-sm">Editar</a>
-                    <a href="#" th:href="@{/admin/mison/misionesItems/delete/{id}(id=${misionItem.mision_item_id})}" class="btn btn-danger btn-sm">Eliminar</a>
+                    <a href="#" th:href="@{/admin/mision/misionesItems/edit/{id}(id=${misionItem.mision_item_id})}" class="btn btn-warning btn-sm">Editar</a>
+                    <a href="#" th:href="@{/admin/mision/misionesItems/delete/{id}(id=${misionItem.mision_item_id})}" class="btn btn-danger btn-sm">Eliminar</a>
                 </td>
             </tr>
             </tbody>

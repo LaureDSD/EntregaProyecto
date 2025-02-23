@@ -55,11 +55,12 @@ public class Mision {
     @Schema(description = "Fecha límite para completar la misión", example = "30")
     private int tiempo_limite; //Minutos
 
+    /*
     // Relación con PersonajeMision 1:N
     @OneToMany(mappedBy = "mision", cascade = CascadeType.ALL)
     @JsonIgnore // Excluir esta relación en la serialización JSON
     @Schema(description = "Personajes asociados a esta misión")
-    private List<PersonajeMision> personajes;
+    private List<PersonajeMision> personajes;*/
 
     // Relación con MisionObjeto 1:N
     @OneToMany(mappedBy = "mision", cascade = CascadeType.ALL)
