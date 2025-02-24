@@ -3,6 +3,7 @@ package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.mapaController;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.mapa.Mapa;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.mapa.TipoMapa;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.mapaService.MapaService;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.services.mapaService.TipoMapaService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,9 @@ public class MapaController {
 
     @Autowired
     private MapaService mapaService;
+
+    @Autowired
+    private TipoMapaService tipoMapaService;
 
     @GetMapping("/")
     @Operation(summary = "Obtener todos los mapas o filtrar por tipo de mapa")
@@ -50,6 +54,12 @@ public class MapaController {
     @PostMapping
     @Operation(summary = "Crear un nuevo mapa")
     public Mapa guardarMapa(@RequestBody Mapa mapaGuardar) {
+        // Mejora de input
+        Long tipo = 1L;
+        if(mapaGuardar.getTipoMapa().getTipoMapaId() != null){
+            tipo = mapaGuardar.getTipoMapa().getTipoMapaId();
+        }
+        mapaGuardar.setTipoMapa(tipoMapaService.getByID(tipo));
         return mapaService.setItem(mapaGuardar);
     }
 

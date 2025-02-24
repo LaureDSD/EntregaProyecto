@@ -65,6 +65,7 @@ public class PersonajeController {
     @PostMapping("/")
     @Operation(summary = "Crear un nuevo personaje", description = "Crea un nuevo personaje con la información proporcionada")
     public PersonajeDTO guardarPersonaje(@RequestBody Personaje personajeGuardar) {
+        //Optimizacion de imput
         long usr = 1L ;
         if((personajeGuardar.getUsuario()) != null){
             usr = personajeGuardar.getUsuario().getUsuario_id();

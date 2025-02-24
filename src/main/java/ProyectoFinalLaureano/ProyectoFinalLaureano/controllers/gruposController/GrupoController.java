@@ -2,7 +2,9 @@ package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.gruposController
 
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.grupos.Grupo;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.grupos.TipoGrupo;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.repositories.personajeRepository.PersonajeRepository;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.grupoService.GrupoService;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.services.grupoService.TipoGrupoService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,9 @@ public class GrupoController {
 
     @Autowired
     private GrupoService grupoService;
+
+    @Autowired
+    private TipoGrupoService tipoGrupoService;
 
     /**
      * Obtener todos los grupos o filtrar por tipo de grupo.
@@ -96,6 +101,12 @@ public class GrupoController {
     @Operation(summary = "Crear un nuevo grupo")
     public ResponseEntity<?> guardarGrupo(@RequestBody Grupo grupoGuardar) {
         try {
+            //Mejora para Imputs
+            long tipo = 1l;
+            if(grupoGuardar.getTipoGrupo().getTipo_grupo_id()!=null){
+                tipo = grupoGuardar.getTipoGrupo().getTipo_grupo_id();
+            }
+            grupoGuardar.setTipoGrupo( tipoGrupoService.getByID(tipo));
             Grupo grupoNuevo = grupoService.setItem(grupoGuardar);
             return ResponseEntity.status(201).body(grupoNuevo);
         } catch (Exception e) {

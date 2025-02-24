@@ -1,5 +1,6 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.monstruoController;
 
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.estadisticasGenerales.EstadisticasGenerales;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.monstruo.Monstruo;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.monstruo.MonstruoItem;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.monsrtuoDTO.DropsDTO;
@@ -56,6 +57,8 @@ public class MonstruoController {
     @PostMapping
     @Operation(summary = "Crear un nuevo monstruo")
     public MonstruoDTO guardarMonstruo(@RequestBody Monstruo monstruoGuardar) {
+        //Mejora de input
+        if(monstruoGuardar.getEstadisticas()==null){monstruoGuardar.setEstadisticas(new EstadisticasGenerales());}
         return conversorMonstruoDTO(monstruosService.setItem(monstruoGuardar));
     }
 

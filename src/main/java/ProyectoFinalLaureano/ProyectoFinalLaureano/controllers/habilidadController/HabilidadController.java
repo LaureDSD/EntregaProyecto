@@ -1,5 +1,6 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.habilidadController;
 
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.estadisticasGenerales.EstadisticasGenerales;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.habilidad.Habilidad;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.habilidad.enums.ObjetivoHabilidad;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.habilidad.enums.TipoHabilidad;
@@ -93,6 +94,8 @@ public class HabilidadController {
     @Operation(summary = "Crear una nueva habilidad")
     public ResponseEntity<?> guardarHabilidad(@RequestBody Habilidad habilidadGuardar) {
         try {
+            //Mejora de input
+            habilidadGuardar.setEstadisticas(new EstadisticasGenerales());
             return ResponseEntity.status(201).body(habilidadService.setItem(habilidadGuardar));
         } catch (Exception e) {
             return ResponseEntity.status(500).body("Error al crear la habilidad: " + e.getMessage());

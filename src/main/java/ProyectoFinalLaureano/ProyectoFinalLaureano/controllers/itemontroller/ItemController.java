@@ -1,8 +1,11 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.itemontroller;
 
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.estadisticasGenerales.EstadisticasGenerales;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.item.Item;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.item.TipoItem;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.itemService.ItemService;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.services.itemService.TipoItemService;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.services.usuarioService.TipoUsuarioService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +21,9 @@ public class ItemController {
 
     @Autowired
     private ItemService itemService;
+
+    @Autowired
+    private TipoItemService tipoItemService;
 
     @GetMapping("/")
     @Operation(summary = "Obtener todos los ítems o filtrar por tipo de ítem")
@@ -50,6 +56,16 @@ public class ItemController {
     @PostMapping
     @Operation(summary = "Crear un nuevo ítem")
     public Item guardarItem(@RequestBody Item itemGuardar) {
+        //Mejora de input
+        long tipo = 1L;
+        if(itemGuardar.getTipoItem().getTipoItemId()!=null){
+            tipo = itemGuardar.getTipoItem().getTipoItemId();
+        }
+        itemGuardar.setTipoItem( tipoItemService.getByID( 1L ));
+
+        if(itemGuardar.getEstadisticas()==null){
+            itemGuardar.setEstadisticas(new EstadisticasGenerales());
+        };
         return itemService.setItem(itemGuardar);
     }
 

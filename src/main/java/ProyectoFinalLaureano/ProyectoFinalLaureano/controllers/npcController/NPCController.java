@@ -7,6 +7,7 @@ import ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.npcDTO.NpcDTO;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.npcDTO.TiendaDTO;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.itemService.ItemService;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.npcService.NpcService;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.services.npcService.TipoNpcService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,9 @@ public class NPCController {
 
     @Autowired
     private ItemService itemService;
+
+    @Autowired
+    private TipoNpcService tipoNpcService;
 
     @GetMapping("/")
     @Operation(summary = "Obtener todos los NPCs o filtrar por tipo de NPC")
@@ -55,6 +59,12 @@ public class NPCController {
     @PostMapping
     @Operation(summary = "Crear un nuevo NPC")
     public NpcDTO guardarNPC(@RequestBody Npc npcGuardar) {
+        //Optimizacion de imput
+        long tipo = 1L;
+        if(npcGuardar.getTipoNPC().getTipo_npc_id()!=null){
+            tipo = npcGuardar.getTipoNPC().getTipo_npc_id();
+        }
+        npcGuardar.setTipoNPC( tipoNpcService.getByID(tipo));
         return conversorNPCDTO(npcService.setItem(npcGuardar));
     }
 
