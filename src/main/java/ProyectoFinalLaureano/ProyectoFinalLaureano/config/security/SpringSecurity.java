@@ -55,7 +55,7 @@ public class SpringSecurity {
                         .requestMatchers("**").permitAll()
                         //.requestMatchers("/api/**").hasAnyAuthority("1", "2","3")
                         //.requestMatchers("/logs/**").hasAnyAuthority("2", "3")
-                        .requestMatchers("/admin/**").hasAuthority("3")
+                        //.requestMatchers("/admin/**").hasAuthority("3")
                         .anyRequest().authenticated()
                 )
                 .authenticationProvider(authenticationProvider())
