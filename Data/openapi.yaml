@@ -1,0 +1,4298 @@
+openapi: 3.0.1
+info:
+  title: API_RPG_DOCUMENTACION
+  description: Documentacion
+  contact:
+    name: Documentacion de puntos de acceso a la API
+    url: url
+    email: laureano.de.sousa@iessanmamede.com
+  version: '1.0'
+servers:
+  - url: http://localhost:8080
+    description: Generated server url
+tags:
+  - name: Usuario Controller
+    description: Operaciones CRUD para la gestión de usuarios
+  - name: ClasePersonaje
+    description: API para gestionar clases de personajes
+  - name: MonstruoHabilidad
+    description: API para gestionar habilidades de monstruos
+  - name: LogTransacciones
+    description: API para gestionar logs de transacciones
+  - name: InventarioPersonaje
+    description: API para gestionar el inventario de personajes
+  - name: Monstruo
+    description: API para gestionar monstruos
+  - name: LiderGrupo
+    description: API para gestionar líderes de grupos
+  - name: NPC
+    description: API para gestionar NPCs
+  - name: Grupo
+    description: API para gestionar grupos
+  - name: Mapa
+    description: API para gestionar mapas
+  - name: TipoItem
+    description: API para gestionar tipos de ítems
+  - name: EfectoEstado
+    description: API para gestionar efectos de estado
+  - name: EstadisticasGenerales
+    description: API para gestionar estadísticas generales
+  - name: Personaje Logros Controller
+    description: Operaciones CRUD para la gestión de logros de personajes
+  - name: TipoNPC
+    description: API para gestionar tipos de NPCs
+  - name: Habilidad
+    description: API para gestionar habilidades
+  - name: Usuario Tipo Controller
+    description: Operaciones CRUD para la gestión de tipos de usuario
+  - name: ObjetoEfecto
+    description: API para gestionar efectos de objetos (ítems)
+  - name: LogPersonajeMonstruo
+    description: API para gestionar logs de personajes y monstruos
+  - name: TipoMapa
+    description: API para gestionar tipos de mapas
+  - name: MapaMonstruo
+    description: API para gestionar monstruos en mapas
+  - name: Objeto
+    description: API para gestionar objetos (ítems)
+  - name: Personaje Habilidades Controller
+    description: Operaciones CRUD para la gestión de habilidades de personajes
+  - name: TipoGrupo
+    description: API para gestionar tipos de grupos
+  - name: MapaEfecto
+    description: API para gestionar efectos en mapas
+  - name: TipoMonstruo
+    description: API para gestionar tipos de monstruos
+  - name: LogUsuario
+    description: API para gestionar logs de usuarios
+  - name: NPCProducto
+    description: API para gestionar productos en la tienda de NPCs
+  - name: MonstruoDrop
+    description: API para gestionar drops de objetos de monstruos
+  - name: Personaje Controller
+    description: Operaciones CRUD para la gestión de personajes
+  - name: Personaje Misiones Controller
+    description: Operaciones CRUD para la gestión de misiones de personajes
+paths:
+  /api/usuario/{id}:
+    get:
+      tags:
+        - Usuario Controller
+      summary: Obtener un usuario por ID
+      description: Retorna un usuario específico basado en su ID
+      operationId: obtenerUsuario
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+    put:
+      tags:
+        - Usuario Controller
+      summary: Actualizar un usuario
+      description: Actualiza la información de un usuario existente
+      operationId: actualizarUsuario
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Usuario'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+    delete:
+      tags:
+        - Usuario Controller
+      summary: Eliminar un usuario
+      description: Elimina un usuario basado en su ID
+      operationId: borrarUsuario
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+  /api/usuario/tipo/{id}:
+    get:
+      tags:
+        - Usuario Tipo Controller
+      summary: Obtener un tipo de usuario por ID
+      description: Retorna un tipo de usuario específico basado en su ID
+      operationId: obtenerTipoUsuario
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/TipoUsuario'
+    put:
+      tags:
+        - Usuario Tipo Controller
+      summary: Actualizar un tipo de usuario
+      description: Actualiza la información de un tipo de usuario existente
+      operationId: actualizarTipoUsuario
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TipoUsuario'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+    delete:
+      tags:
+        - Usuario Tipo Controller
+      summary: Eliminar un tipo de usuario
+      description: Elimina un tipo de usuario basado en su ID
+      operationId: borrarTipoUsuario
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+  /api/tipoGrupo/{id}:
+    get:
+      tags:
+        - TipoGrupo
+      summary: Obtener un tipo de grupo por ID
+      operationId: obtener
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+    put:
+      tags:
+        - TipoGrupo
+      summary: Actualizar un tipo de grupo por ID
+      operationId: actualizar
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TipoGrupo'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+    delete:
+      tags:
+        - TipoGrupo
+      summary: Eliminar un tipo de grupo por ID
+      operationId: borrar
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+  /api/personajeMision/{personaje_mision_id}:
+    get:
+      tags:
+        - Personaje Misiones Controller
+      summary: Obtener una misión específica de un personaje
+      description: Retorna una misión específica asociada a un personaje
+      operationId: obtenerMisionPersonaje
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PersonajeMision'
+    put:
+      tags:
+        - Personaje Misiones Controller
+      summary: Actualizar una misión de un personaje
+      description: Actualiza la información de una misión específica asociada a un personaje
+      operationId: actualizarMisionPersonaje
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PersonajeMision'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+    delete:
+      tags:
+        - Personaje Misiones Controller
+      summary: Eliminar una misión de un personaje
+      description: Elimina una misión específica asociada a un personaje
+      operationId: borrarMisionPersonaje
+      parameters: []
+      responses:
+        '200':
+          description: OK
+  /api/personajeHabilidad/{personaje_habilidad_id}:
+    get:
+      tags:
+        - Personaje Habilidades Controller
+      summary: Obtener una habilidad específica de un personaje
+      description: Retorna una habilidad específica asociada a un personaje
+      operationId: obtenerHabilidadPersonaje
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PersonajeHabilidad'
+    put:
+      tags:
+        - Personaje Habilidades Controller
+      summary: Actualizar una habilidad de un personaje
+      description: Actualiza la información de una habilidad específica asociada a un personaje
+      operationId: actualizarHabilidadPersonaje
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PersonajeHabilidad'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+    delete:
+      tags:
+        - Personaje Habilidades Controller
+      summary: Eliminar una habilidad de un personaje
+      description: Elimina una habilidad específica asociada a un personaje
+      operationId: borrarHabilidadPersonaje
+      parameters: []
+      responses:
+        '200':
+          description: OK
+  /api/personaje/{id}:
+    get:
+      tags:
+        - Personaje Controller
+      summary: Obtener un personaje por ID
+      description: Retorna un personaje específico basado en su ID
+      operationId: obtenerPersonaje
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PersonajeDTO'
+    put:
+      tags:
+        - Personaje Controller
+      summary: Actualizar un personaje
+      description: Actualiza la información de un personaje existente
+      operationId: actualizarPersonaje
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Personaje'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PersonajeDTO'
+    delete:
+      tags:
+        - Personaje Controller
+      summary: Eliminar un personaje
+      description: Elimina un personaje basado en su ID
+      operationId: borrarPersonaje
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+  /api/personaje/inventario/{itemId}:
+    get:
+      tags:
+        - InventarioPersonaje
+      summary: Obtener un ítem específico del inventario de un personaje
+      operationId: obtenerInventarioPersonaje
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InventarioDTO'
+    put:
+      tags:
+        - InventarioPersonaje
+      summary: Actualizar un ítem en el inventario de un personaje
+      operationId: actualizarInventarioPersonaje
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PersonajeItem'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+    delete:
+      tags:
+        - InventarioPersonaje
+      summary: Eliminar un ítem del inventario de un personaje
+      operationId: borrarInventarioPersonaje
+      parameters: []
+      responses:
+        '200':
+          description: OK
+  /api/personaje/clase/{id}:
+    get:
+      tags:
+        - ClasePersonaje
+      summary: Obtener una clase de personaje por ID
+      operationId: obtenerClasePersonaje
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ClasePersonaje'
+    put:
+      tags:
+        - ClasePersonaje
+      summary: Actualizar una clase de personaje por ID
+      operationId: actualizarClasePersonaje
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClasePersonaje'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+    delete:
+      tags:
+        - ClasePersonaje
+      summary: Eliminar una clase de personaje por ID
+      operationId: borrarClasePersonaje
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+  /api/objetoEfecto/{objeto_efecto_id}:
+    get:
+      tags:
+        - ObjetoEfecto
+      summary: Obtener un efecto específico de un ítem
+      operationId: obtenerEfectoItem
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ItemEfecto'
+    put:
+      tags:
+        - ObjetoEfecto
+      summary: Actualizar un efecto de un ítem
+      operationId: actualizarEfectoItem
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ItemEfecto'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+    delete:
+      tags:
+        - ObjetoEfecto
+      summary: Eliminar un efecto de un ítem
+      operationId: borrarEfectoItem
+      parameters: []
+      responses:
+        '200':
+          description: OK
+  /api/objeto/{id}:
+    get:
+      tags:
+        - Objeto
+      summary: Obtener un ítem por ID
+      operationId: obtenerItem
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Item'
+    put:
+      tags:
+        - Objeto
+      summary: Actualizar un ítem por ID
+      operationId: actualizarItem
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Item'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+    delete:
+      tags:
+        - Objeto
+      summary: Eliminar un ítem por ID
+      operationId: borrarItem
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+  /api/objeto/tipo/{id}:
+    get:
+      tags:
+        - TipoItem
+      summary: Obtener un tipo de ítem por ID
+      operationId: obtenerTipoItem
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/TipoItem'
+    put:
+      tags:
+        - TipoItem
+      summary: Actualizar un tipo de ítem por ID
+      operationId: actualizarTipoItem
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TipoItem'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+    delete:
+      tags:
+        - TipoItem
+      summary: Eliminar un tipo de ítem por ID
+      operationId: borrarTipoItem
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+  /api/npc/{id}:
+    get:
+      tags:
+        - NPC
+      summary: Obtener un NPC por ID
+      operationId: obtenerNPC
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/NpcDTO'
+    put:
+      tags:
+        - NPC
+      summary: Actualizar un NPC por ID
+      operationId: actualizarNPC
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Npc'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+    delete:
+      tags:
+        - NPC
+      summary: Eliminar un NPC por ID
+      operationId: borrarNPC
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+  /api/npc/tipo/{id}:
+    get:
+      tags:
+        - TipoNPC
+      summary: Obtener un tipo de NPC por ID
+      operationId: obtenerTipoNPC
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/TipoNPC'
+    put:
+      tags:
+        - TipoNPC
+      summary: Actualizar un tipo de NPC por ID
+      operationId: actualizarTipoNPC
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TipoNPC'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+    delete:
+      tags:
+        - TipoNPC
+      summary: Eliminar un tipo de NPC por ID
+      operationId: borrarTipoNPC
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+  /api/npc/tienda/{Id}:
+    put:
+      tags:
+        - NPCProducto
+      summary: Actualizar un producto en la tienda de un NPC
+      operationId: actualizarProductoTiendaNPC
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NpcItem'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+  /api/monstruoHabilidad/{monstruo_habilidad_id}:
+    get:
+      tags:
+        - MonstruoHabilidad
+      summary: Obtener una habilidad específica de un monstruo
+      operationId: obtenerHabilidadMonstruo
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/MonstruoHabilidad'
+    put:
+      tags:
+        - MonstruoHabilidad
+      summary: Actualizar una habilidad de un monstruo
+      operationId: actualizarHabilidadMonstruo
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MonstruoHabilidad'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+    delete:
+      tags:
+        - MonstruoHabilidad
+      summary: Eliminar una habilidad de un monstruo
+      operationId: borrarHabilidadMonstruo
+      parameters: []
+      responses:
+        '200':
+          description: OK
+  /api/monstruo/{id}:
+    get:
+      tags:
+        - Monstruo
+      summary: Obtener un monstruo por ID
+      operationId: obtenerMonstruo
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/MonstruoDTO'
+    put:
+      tags:
+        - Monstruo
+      summary: Actualizar un monstruo por ID
+      operationId: actualizarMonstruo
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Monstruo'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+    delete:
+      tags:
+        - Monstruo
+      summary: Eliminar un monstruo por ID
+      operationId: borrarMonstruo
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+  /api/monstruo/tipo/{id}:
+    get:
+      tags:
+        - TipoMonstruo
+      summary: Obtener un tipo de monstruo por ID
+      operationId: obtenerTipoMonstruo
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/TipoMonstruo'
+    put:
+      tags:
+        - TipoMonstruo
+      summary: Actualizar un tipo de monstruo por ID
+      operationId: actualizarTipoMonstruo
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TipoMonstruo'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+    delete:
+      tags:
+        - TipoMonstruo
+      summary: Eliminar un tipo de monstruo por ID
+      operationId: borrarTipoMonstruo
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+  /api/monstruo/drop/{dropId}:
+    get:
+      tags:
+        - MonstruoDrop
+      summary: Obtener un drop de objeto específico por ID de monstruo y ID de drop
+      operationId: obtenerDropObjeto
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/MonstruoItem'
+    put:
+      tags:
+        - MonstruoDrop
+      summary: Actualizar un drop de objeto por ID de monstruo y ID de drop
+      operationId: actualizarDropObjeto
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MonstruoItem'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+    delete:
+      tags:
+        - MonstruoDrop
+      summary: Eliminar un drop de objeto por ID de monstruo y ID de drop
+      operationId: borrarDropObjeto
+      parameters: []
+      responses:
+        '200':
+          description: OK
+  /api/misionItem/{mision_Item_Id}:
+    get:
+      tags:
+        - mision-recompensas-controller
+      operationId: obtenerObjetos
+      parameters:
+        - name: id
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/MisionItem'
+    put:
+      tags:
+        - mision-recompensas-controller
+      operationId: actualizarObjetos
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MisionItem'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+    delete:
+      tags:
+        - mision-recompensas-controller
+      operationId: borrarObjetos
+      parameters: []
+      responses:
+        '200':
+          description: OK
+  /api/mision/{id}:
+    get:
+      tags:
+        - mision-controller
+      operationId: obtenerMisones
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/MisionDTO'
+    put:
+      tags:
+        - mision-controller
+      operationId: actualizarMisones
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Mision'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+    delete:
+      tags:
+        - mision-controller
+      operationId: borrarMisones
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+  /api/mapaMonstruo/{mapa_monstruo_id}:
+    get:
+      tags:
+        - MapaMonstruo
+      summary: Obtener un monstruo específico de un mapa
+      operationId: obtenerMonstruoMapa
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/MapaMonstruo'
+    put:
+      tags:
+        - MapaMonstruo
+      summary: Actualizar un monstruo de un mapa
+      operationId: actualizarMonstruoMapa
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MapaMonstruo'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+    post:
+      tags:
+        - MapaMonstruo
+      summary: Crear un nuevo monstruo en un mapa
+      operationId: guardarMonstruoMapa
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MapaMonstruo'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/MapaMonstruo'
+    delete:
+      tags:
+        - MapaMonstruo
+      summary: Eliminar un monstruo de un mapa
+      operationId: borrarMonstruoMapa
+      parameters: []
+      responses:
+        '200':
+          description: OK
+  /api/mapaEfecto/{mapa_efecto_id}:
+    get:
+      tags:
+        - MapaEfecto
+      summary: Obtener un efecto específico de un mapa
+      operationId: obtenerEfectoMapa
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/MapaEfecto'
+    put:
+      tags:
+        - MapaEfecto
+      summary: Actualizar un efecto de un mapa
+      operationId: actualizarEfectoMapa
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MapaEfecto'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+    post:
+      tags:
+        - MapaEfecto
+      summary: Crear un nuevo efecto en un mapa
+      operationId: guardarEfectoMapa
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MapaEfecto'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/MapaEfecto'
+    delete:
+      tags:
+        - MapaEfecto
+      summary: Eliminar un efecto de un mapa
+      operationId: borrarEfectoMapa
+      parameters: []
+      responses:
+        '200':
+          description: OK
+  /api/mapa/{id}:
+    get:
+      tags:
+        - Mapa
+      summary: Obtener un mapa por ID
+      operationId: obtenerMapa
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Mapa'
+    put:
+      tags:
+        - Mapa
+      summary: Actualizar un mapa por ID
+      operationId: actualizarMapa
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Mapa'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+    delete:
+      tags:
+        - Mapa
+      summary: Eliminar un mapa por ID
+      operationId: borrarMapa
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+  /api/mapa/tipo/{id}:
+    get:
+      tags:
+        - TipoMapa
+      summary: Obtener un tipo de mapa por ID
+      operationId: obtenerTipoMapa
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/TipoMapa'
+    put:
+      tags:
+        - TipoMapa
+      summary: Actualizar un tipo de mapa por ID
+      operationId: actualizarTipoMapa
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TipoMapa'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+    delete:
+      tags:
+        - TipoMapa
+      summary: Eliminar un tipo de mapa por ID
+      operationId: borrarTipoMapa
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+  /api/logros/{personajeId}:
+    put:
+      tags:
+        - Personaje Logros Controller
+      summary: Actualizar un logro de un personaje
+      description: Actualiza la información de un logro específico asociado a un personaje
+      operationId: actualizarLogroPersonaje
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LogrosPersonaje'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+  /api/habilidadEfecto/{habilidad_efecto_id}:
+    get:
+      tags:
+        - habilidad-efecto-controller
+      operationId: obtenerEfectos_1
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+    put:
+      tags:
+        - habilidad-efecto-controller
+      operationId: actualizarEfecto
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HabilidadEfecto'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+    delete:
+      tags:
+        - habilidad-efecto-controller
+      operationId: borrarEfecto
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+  /api/habilidad/{id}:
+    get:
+      tags:
+        - Habilidad
+      summary: Obtener una habilidad por ID
+      operationId: obtenerHabilidad
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+    put:
+      tags:
+        - Habilidad
+      summary: Actualizar una habilidad por ID
+      operationId: actualizarHabilidad
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Habilidad'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+    delete:
+      tags:
+        - Habilidad
+      summary: Eliminar una habilidad por ID
+      operationId: borrarHabilidad
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+  /api/grupos/{id}:
+    get:
+      tags:
+        - Grupo
+      summary: Obtener un grupo por ID
+      operationId: obtenerGrupo
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+    put:
+      tags:
+        - Grupo
+      summary: Actualizar un grupo por ID
+      operationId: actualizarGrupo
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Grupo'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+    delete:
+      tags:
+        - Grupo
+      summary: Eliminar un grupo por ID
+      operationId: borrarGrupo
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+  /api/estadisticas/{id}:
+    get:
+      tags:
+        - EstadisticasGenerales
+      summary: Obtener una estadística general por ID
+      operationId: obtenerEstadistica
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+    put:
+      tags:
+        - EstadisticasGenerales
+      summary: Actualizar una estadística general por ID
+      operationId: actualizarEstadistica
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EstadisticasGenerales'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+    delete:
+      tags:
+        - EstadisticasGenerales
+      summary: Eliminar una estadística general por ID
+      operationId: borrarEstadistica
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+  /api/efectos/{id}:
+    get:
+      tags:
+        - EfectoEstado
+      summary: Obtener un efecto de estado por ID
+      operationId: obtener_2
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+    put:
+      tags:
+        - EfectoEstado
+      summary: Actualizar un efecto de estado por ID
+      operationId: actualizar_1
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EfectoEstado'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+    delete:
+      tags:
+        - EfectoEstado
+      summary: Eliminar un efecto de estado por ID
+      operationId: borrar_1
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+  /admin/api/Informacionlogs/transaccion/{id}:
+    get:
+      tags:
+        - LogTransacciones
+      summary: Obtener un log de transacción por ID
+      operationId: obtenerlogTransaccionesServiceLog
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+    put:
+      tags:
+        - LogTransacciones
+      summary: Actualizar un log de transacción por ID
+      operationId: actualizarlogTransaccionesServiceLog
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LogTransacciones'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+    delete:
+      tags:
+        - LogTransacciones
+      summary: Eliminar un log de transacción por ID
+      operationId: borrarlogTransaccionesServiceLog
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+  /admin/Informacionlogs/usuario/{id}:
+    get:
+      tags:
+        - LogUsuario
+      summary: Obtener un log de usuario por ID
+      operationId: obtenerUsuarioLog
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+    put:
+      tags:
+        - LogUsuario
+      summary: Actualizar un log de usuario por ID
+      operationId: actualizarUsuarioLog
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LogUsuario'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+    delete:
+      tags:
+        - LogUsuario
+      summary: Eliminar un log de usuario por ID
+      operationId: borrarUsuarioLog
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+  /admin/Informacionlogs/personaje/{id}:
+    get:
+      tags:
+        - LogPersonajeMonstruo
+      summary: Obtener un log de personaje o monstruo por ID
+      operationId: obtenerPersonajeLog
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+    put:
+      tags:
+        - LogPersonajeMonstruo
+      summary: Actualizar un log de personaje o monstruo por ID
+      operationId: actualizarPersonajeLog
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LogPersonajeMonstruo'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+    delete:
+      tags:
+        - LogPersonajeMonstruo
+      summary: Eliminar un log de personaje o monstruo por ID
+      operationId: borrarPersonajeLog
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+  /api/usuario:
+    get:
+      tags:
+        - Usuario Controller
+      summary: Obtener lista de usuarios
+      description: Retorna una lista de usuarios. Si se proporciona un ID de tipo de usuario, filtra por ese tipo.
+      operationId: obtenerListaUsuarios
+      parameters:
+        - name: id
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+    post:
+      tags:
+        - Usuario Controller
+      summary: Crear un nuevo usuario
+      description: Crea un nuevo usuario con la información proporcionada
+      operationId: guardarUsuario
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Usuario'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+  /api/usuario/tipo:
+    get:
+      tags:
+        - Usuario Tipo Controller
+      summary: Obtener todos los tipos de usuario
+      description: Retorna una lista de todos los tipos de usuario
+      operationId: obtenerTiposUsuario
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TipoUsuario'
+    post:
+      tags:
+        - Usuario Tipo Controller
+      summary: Crear un nuevo tipo de usuario
+      description: Crea un nuevo tipo de usuario con la información proporcionada
+      operationId: guardarTipoUsuario
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TipoUsuario'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/TipoUsuario'
+  /api/tipoGrupo:
+    post:
+      tags:
+        - TipoGrupo
+      summary: Crear un nuevo tipo de grupo
+      operationId: guardar
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TipoGrupo'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+  /api/personajeMision:
+    post:
+      tags:
+        - Personaje Misiones Controller
+      summary: Crear una nueva misión para un personaje
+      description: Crea una nueva misión asociada a un personaje
+      operationId: guardarMisionPersonaje
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PersonajeMision'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PersonajeMision'
+  /api/personajeHabilidad:
+    get:
+      tags:
+        - Personaje Habilidades Controller
+      summary: Obtener todas las habilidades de los personajes
+      description: Retorna una lista de todas las habilidades asociadas a los personajes
+      operationId: obtenerListaHabilidadesPersonajes
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PersonajeHabilidadDTO'
+    post:
+      tags:
+        - Personaje Habilidades Controller
+      summary: Crear una nueva habilidad para un personaje
+      description: Crea una nueva habilidad asociada a un personaje
+      operationId: guardarHabilidadPersonaje
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PersonajeHabilidad'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PersonajeHabilidad'
+  /api/personaje/inventario/:
+    get:
+      tags:
+        - InventarioPersonaje
+      summary: Obtener todos los inventarios de personajes
+      operationId: obtenerListaInventarioPersonajes
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InventarioDTO'
+    post:
+      tags:
+        - InventarioPersonaje
+      summary: Crear un nuevo ítem en el inventario de un personaje
+      operationId: guardarInventarioPersonaje
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PersonajeItem'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InventarioDTO'
+  /api/personaje/clase:
+    post:
+      tags:
+        - ClasePersonaje
+      summary: Crear una nueva clase de personaje
+      operationId: guardarClasePersonaje
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClasePersonaje'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ClasePersonaje'
+  /api/personaje/:
+    get:
+      tags:
+        - Personaje Controller
+      summary: Obtener todos los personajes
+      description: Retorna una lista de todos los personajes
+      operationId: obtenerPersonajes
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PersonajeDTO'
+    post:
+      tags:
+        - Personaje Controller
+      summary: Crear un nuevo personaje
+      description: Crea un nuevo personaje con la información proporcionada
+      operationId: guardarPersonaje
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Personaje'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PersonajeDTO'
+  /api/objeto:
+    post:
+      tags:
+        - Objeto
+      summary: Crear un nuevo ítem
+      operationId: guardarItem
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Item'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Item'
+  /api/objetoEfecto:
+    get:
+      tags:
+        - ObjetoEfecto
+      summary: Obtener todos los efectos de ítems
+      operationId: obtenerListaEfectosItems
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ItemEfecto'
+    post:
+      tags:
+        - ObjetoEfecto
+      summary: Crear un nuevo efecto para un ítem
+      operationId: guardarEfectoItem
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ItemEfecto'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ItemEfecto'
+  /api/objeto/tipo:
+    post:
+      tags:
+        - TipoItem
+      summary: Crear un nuevo tipo de ítem
+      operationId: guardarTipoItem
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TipoItem'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/TipoItem'
+  /api/npc:
+    post:
+      tags:
+        - NPC
+      summary: Crear un nuevo NPC
+      operationId: guardarNPC
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Npc'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/NpcDTO'
+  /api/npc/tipo:
+    post:
+      tags:
+        - TipoNPC
+      summary: Crear un nuevo tipo de NPC
+      operationId: guardarTipoNPC
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TipoNPC'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/TipoNPC'
+  /api/npc/tienda/:
+    get:
+      tags:
+        - NPCProducto
+      summary: Obtener todos los productos de las tiendas de NPCs
+      operationId: obtenerListaTiendaNPCs
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NpcItem'
+    post:
+      tags:
+        - NPCProducto
+      summary: Crear un nuevo producto en la tienda de un NPC
+      operationId: guardarProductoTiendaNPC
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NpcItem'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/NpcItem'
+  /api/monstruo:
+    post:
+      tags:
+        - Monstruo
+      summary: Crear un nuevo monstruo
+      operationId: guardarMonstruo
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Monstruo'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/MonstruoDTO'
+  /api/monstruoHabilidad:
+    get:
+      tags:
+        - MonstruoHabilidad
+      summary: Obtener todas las habilidades de monstruos
+      operationId: obtenerListaHabilidadesMonstruos
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MonstruoHabilidad'
+    post:
+      tags:
+        - MonstruoHabilidad
+      summary: Crear una nueva habilidad para un monstruo
+      operationId: guardarHabilidadMonstruo
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MonstruoHabilidad'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/MonstruoHabilidad'
+  /api/monstruo/tipo:
+    post:
+      tags:
+        - TipoMonstruo
+      summary: Crear un nuevo tipo de monstruo
+      operationId: guardarTipoMonstruo
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TipoMonstruo'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/TipoMonstruo'
+  /api/monstruo/drop/:
+    get:
+      tags:
+        - MonstruoDrop
+      summary: Obtener todos los drops de objetos
+      operationId: obtenerListaDropsObjetos
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MonstruoItem'
+    post:
+      tags:
+        - MonstruoDrop
+      summary: Crear un nuevo drop de objeto para un monstruo
+      operationId: guardarDropObjeto
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MonstruoItem'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/MonstruoItem'
+  /api/mision:
+    post:
+      tags:
+        - mision-controller
+      operationId: guardarMisones
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Mision'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/MisionDTO'
+  /api/misionItem:
+    get:
+      tags:
+        - mision-recompensas-controller
+      operationId: obtenerListaObjetos
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MisionItem'
+    post:
+      tags:
+        - mision-recompensas-controller
+      operationId: guardarObjetos
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MisionItem'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+  /api/mapa:
+    post:
+      tags:
+        - Mapa
+      summary: Crear un nuevo mapa
+      operationId: guardarMapa
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Mapa'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Mapa'
+  /api/mapa/tipo:
+    post:
+      tags:
+        - TipoMapa
+      summary: Crear un nuevo tipo de mapa
+      operationId: guardarTipoMapa
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TipoMapa'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/TipoMapa'
+  /api/logros/{logros_id}:
+    get:
+      tags:
+        - Personaje Logros Controller
+      summary: Obtener logros de un personaje específico
+      description: Retorna los logros asociados a un personaje específico
+      operationId: obtenerLogrosPersonaje
+      parameters:
+        - name: logros_id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/LogrosPersonaje'
+    post:
+      tags:
+        - Personaje Logros Controller
+      summary: Crear un nuevo logro para un personaje
+      description: Crea un nuevo logro asociado a un personaje
+      operationId: guardarLogroPersonaje
+      parameters:
+        - name: logros_id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LogrosPersonaje'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/LogrosPersonaje'
+  /api/lidergrupo:
+    get:
+      tags:
+        - LiderGrupo
+      summary: Obtener todos los líderes de grupos
+      operationId: getAllLiderGrupo
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+    post:
+      tags:
+        - LiderGrupo
+      summary: Crear un nuevo líder de grupo
+      operationId: createLiderGrupo
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LiderGrupo'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+  /api/habilidad:
+    post:
+      tags:
+        - Habilidad
+      summary: Crear una nueva habilidad
+      operationId: guardarHabilidad
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Habilidad'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+  /api/habilidadEfecto:
+    get:
+      tags:
+        - habilidad-efecto-controller
+      operationId: obtenerEfectos
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+    post:
+      tags:
+        - habilidad-efecto-controller
+      operationId: guardarEfecto
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HabilidadEfecto'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+  /api/grupos:
+    post:
+      tags:
+        - Grupo
+      summary: Crear un nuevo grupo
+      operationId: guardarGrupo
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Grupo'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+  /api/estadisticas/:
+    get:
+      tags:
+        - EstadisticasGenerales
+      summary: Obtener todas las estadísticas generales
+      operationId: obtenerEstadisticas
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+    post:
+      tags:
+        - EstadisticasGenerales
+      summary: Crear una nueva estadística general
+      operationId: guardarEstadistica
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EstadisticasGenerales'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+  /api/efectos:
+    post:
+      tags:
+        - EfectoEstado
+      summary: Crear un nuevo efecto de estado
+      operationId: guardar_1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EfectoEstado'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+  /admin/api/Informacionlogs/transaccion:
+    post:
+      tags:
+        - LogTransacciones
+      summary: Crear un nuevo log de transacción
+      operationId: guardarlogTransaccionesServiceLog
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LogTransacciones'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+  /admin/Informacionlogs/usuario:
+    post:
+      tags:
+        - LogUsuario
+      summary: Crear un nuevo log de usuario
+      operationId: guardarUsuarioLog
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LogUsuario'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+  /admin/Informacionlogs/personaje:
+    post:
+      tags:
+        - LogPersonajeMonstruo
+      summary: Crear un nuevo log de personaje o monstruo
+      operationId: guardarPersonajeLog
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LogPersonajeMonstruo'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+  /api/tipoGrupo/:
+    get:
+      tags:
+        - TipoGrupo
+      summary: Obtener todos los tipos de grupos
+      operationId: obtener_1
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+  /api/personaje/clase/:
+    get:
+      tags:
+        - ClasePersonaje
+      summary: Obtener todas las clases de personajes
+      operationId: obtenerListaClasesPersonaje
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ClasePersonaje'
+  /api/objeto/tipo/:
+    get:
+      tags:
+        - TipoItem
+      summary: Obtener todos los tipos de ítems
+      operationId: obtenerListaTiposItem
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TipoItem'
+  /api/objeto/:
+    get:
+      tags:
+        - Objeto
+      summary: Obtener todos los ítems o filtrar por tipo de ítem
+      operationId: obtenerListaItems
+      parameters:
+        - name: id
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Item'
+  /api/npc/tipo/:
+    get:
+      tags:
+        - TipoNPC
+      summary: Obtener todos los tipos de NPCs
+      operationId: obtenerListaTiposNPC
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TipoNPC'
+  /api/npc/tienda/{productoId}:
+    get:
+      tags:
+        - NPCProducto
+      summary: Obtener un producto específico de la tienda de un NPC
+      operationId: obtenerProductoTiendaNPC
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/NpcItem'
+    delete:
+      tags:
+        - NPCProducto
+      summary: Eliminar un producto de la tienda de un NPC
+      operationId: borrarProductoTiendaNPC
+      parameters: []
+      responses:
+        '200':
+          description: OK
+  /api/npc/:
+    get:
+      tags:
+        - NPC
+      summary: Obtener todos los NPCs o filtrar por tipo de NPC
+      operationId: obtenerListaNPCs
+      parameters:
+        - name: tipoNPC
+          in: query
+          required: false
+          schema:
+            $ref: '#/components/schemas/TipoNPC'
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NpcDTO'
+  /api/monstruo/tipo/:
+    get:
+      tags:
+        - TipoMonstruo
+      summary: Obtener todos los tipos de monstruos
+      operationId: obtenerListaTiposMonstruo
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TipoMonstruo'
+  /api/monstruo/:
+    get:
+      tags:
+        - Monstruo
+      summary: Obtener todos los monstruos
+      operationId: obtenerListaMonstruos
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MonstruoDTO'
+  /api/mision/:
+    get:
+      tags:
+        - mision-controller
+      operationId: obtenerMisones_1
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MisionDTO'
+  /api/mapaMonstruo:
+    get:
+      tags:
+        - MapaMonstruo
+      summary: Obtener todos los monstruos de todos los mapas
+      operationId: obtenerListaMonstruoMapas
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MapaMonstruo'
+  /api/mapaEfecto:
+    get:
+      tags:
+        - MapaEfecto
+      summary: Obtener todos los efectos de todos los mapas
+      operationId: obtenerListaEfectoMapas
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MapaEfecto'
+  /api/mapa/tipo/:
+    get:
+      tags:
+        - TipoMapa
+      summary: Obtener todos los tipos de mapas
+      operationId: obtenerListaTipoMapa
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TipoMapa'
+  /api/mapa/:
+    get:
+      tags:
+        - Mapa
+      summary: Obtener todos los mapas o filtrar por tipo de mapa
+      operationId: obtenerListaMapas
+      parameters:
+        - name: id
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Mapa'
+  /api/logros/:
+    get:
+      tags:
+        - Personaje Logros Controller
+      summary: Obtener todos los logros de los personajes
+      description: Retorna una lista de todos los logros asociados a los personajes
+      operationId: obtenerListaLogrosPersonajes
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LogrosPersonaje'
+  /api/lidergrupo/{id}:
+    get:
+      tags:
+        - LiderGrupo
+      summary: Obtener un líder de grupo por ID
+      operationId: getLiderGrupoById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+    delete:
+      tags:
+        - LiderGrupo
+      summary: Eliminar un líder de grupo por ID
+      operationId: deleteLiderGrupo
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+  /api/habilidad/:
+    get:
+      tags:
+        - Habilidad
+      summary: Obtener todas las habilidades o filtrar por tipo y objetivo
+      operationId: obtenerLista
+      parameters:
+        - name: tipoHabilidad
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - OFENSIVA
+              - DEFENSIVA
+              - APOYO
+        - name: objetivoHabilidad
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - JUGADOR
+              - ALIADO
+              - ENEMIGO
+              - TODO
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+  /api/grupos/:
+    get:
+      tags:
+        - Grupo
+      summary: Obtener todos los grupos o filtrar por tipo de grupo
+      operationId: obtenerLista_1
+      parameters:
+        - name: tipoGrupoId
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+  /api/efectos/:
+    get:
+      tags:
+        - EfectoEstado
+      summary: Obtener todos los efectos de estado
+      operationId: obtenerUsuario_1
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+  /admin/api/Informacionlogs/transaccion/:
+    get:
+      tags:
+        - LogTransacciones
+      summary: Obtener todos los logs de transacciones o filtrar por tipo de transacción
+      operationId: obtenerLista_2
+      parameters:
+        - name: tipoTransaccion
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - COMPRA
+              - VENTA
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+  /admin/Informacionlogs/personaje/:
+    get:
+      tags:
+        - LogPersonajeMonstruo
+      summary: Obtener todos los logs de personajes y monstruos
+      operationId: obtenerPersonajesLog
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+  /admin/Informacionlogs/logusuario/:
+    get:
+      tags:
+        - LogUsuario
+      summary: Obtener todos los logs de usuarios o filtrar por tipo de log
+      operationId: obtenerLista_3
+      parameters:
+        - name: tipoLog
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - INFORMACION
+              - FALLO
+              - ADVERTENCIA
+              - CREACION
+              - ACTUALIZACION
+              - BORRADO
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+  /api/logros/{logros_Id}:
+    delete:
+      tags:
+        - Personaje Logros Controller
+      summary: Eliminar un logro de un personaje
+      description: Elimina un logro específico asociado a un personaje
+      operationId: borrarLogroPersonaje
+      parameters:
+        - name: logros_Id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+components:
+  schemas:
+    Usuario:
+      required:
+        - contraseña
+        - correo
+        - estado_cuenta
+        - fecha_creacion
+        - limite_personajes
+        - nombre_usuario_priv
+        - nombre_usuario_pub
+        - tipoUsuario
+        - ultima_conexion
+      type: object
+      properties:
+        usuario_id:
+          type: integer
+          description: ID único del usuario
+          format: int64
+          example: 1
+        imagen_perfil:
+          type: string
+          description: URL de la imagen de perfil del usuario
+          example: img1.jpg
+        nombre_usuario_pub:
+          maxLength: 100
+          minLength: 0
+          type: string
+          description: Nombre público del usuario
+          example: Usuario1
+        limite_personajes:
+          type: integer
+          description: Límite de personajes que puede crear el usuario
+          format: int32
+          example: 3
+        nombre_usuario_priv:
+          maxLength: 100
+          minLength: 0
+          type: string
+          description: Nombre privado del usuario (para login)
+          example: user1
+        correo:
+          maxLength: 100
+          minLength: 0
+          type: string
+          description: Correo electrónico del usuario
+          example: user1@example.com
+        contraseña:
+          type: string
+          description: Contraseña del usuario
+          example: password1
+        ultima_conexion:
+          type: string
+          description: Fecha y hora de la última conexión del usuario
+          format: date-time
+        fecha_creacion:
+          type: string
+          description: Fecha y hora de creación del usuario
+          format: date-time
+        estado_cuenta:
+          type: boolean
+          description: Estado de la cuenta del usuario (activa/inactiva)
+          example: true
+        tipoUsuario:
+          type: integer
+          description: Tipo de usuario asociado
+          format: int64
+      description: Entidad que representa a un usuario en el sistema
+    TipoUsuario:
+      required:
+        - nombre
+      type: object
+      properties:
+        tipo_usuario_id:
+          type: integer
+          description: ID único del tipo de usuario
+          format: int64
+          example: 1
+        nombre:
+          maxLength: 100
+          minLength: 0
+          type: string
+          description: Nombre del tipo de usuario
+          example: usuario
+        descripcion:
+          type: string
+          description: Descripción del tipo de usuario
+          example: Acceso básico al juego
+      description: Entidad que representa un tipo de usuario en el sistema
+    TipoGrupo:
+      type: object
+      properties:
+        tipo_grupo_id:
+          type: integer
+          description: ID único del tipo de grupo.
+          format: int64
+          example: 1
+        nombre:
+          type: string
+          description: Nombre del tipo de grupo.
+          example: Equipo de Aventureros
+        numeroIntegrantesMax:
+          type: integer
+          description: Número máximo de integrantes permitidos en el grupo.
+          format: int32
+          example: 5
+        compartenExpDrops:
+          type: boolean
+          description: Indica si los miembros del grupo comparten experiencia y drops.
+          example: true
+        descripcion:
+          type: string
+          description: Descripción del tipo de grupo.
+          example: Grupo para misiones de alto nivel.
+      description: Entidad que representa un tipo de grupo en el sistema.
+    ClasePersonaje:
+      required:
+        - estadisticas
+        - nombre
+      type: object
+      properties:
+        clase_id:
+          type: integer
+          description: ID único del tipo de clase
+          format: int64
+          example: 1
+        nombre:
+          maxLength: 100
+          minLength: 0
+          type: string
+          description: Nombre de la clase
+          example: Mago
+        imagen:
+          type: string
+          description: Imagen del la clase
+          example: mago.jpg
+        descripcion:
+          type: string
+          description: Descripción del la clase
+          example: Especialista en ehchizos y ataques a larga distabcia
+        estadisticas:
+          $ref: '#/components/schemas/EstadisticasGenerales'
+      description: Entidad que representa una clase de personaje
+    EstadisticasGenerales:
+      type: object
+      properties:
+        estadistica_id:
+          type: integer
+          description: ID único de las estadísticas generales.
+          format: int64
+          example: 1
+        vida:
+          type: integer
+          description: Vida base de la entidad.
+          format: int32
+          example: 100
+        regeneracionVida:
+          type: integer
+          description: Regeneración de vida base por intervalo de tiempo.
+          format: int32
+          example: 5
+        escudo:
+          type: integer
+          description: Escudo base de la entidad.
+          format: int32
+          example: 50
+        energia:
+          type: integer
+          description: Energía base de la entidad.
+          format: int32
+          example: 100
+        regeneracionEnergia:
+          type: integer
+          description: Regeneración de energía base por intervalo de tiempo.
+          format: int32
+          example: 10
+        mana:
+          type: integer
+          description: Maná base entidad.
+          format: int32
+          example: 100
+        regeneracionMana:
+          type: integer
+          description: Regeneración de maná base por intervalo de tiempo.
+          format: int32
+          example: 5
+        ataqueFisico:
+          type: integer
+          description: Ataque físico base entidad.
+          format: int32
+          example: 20
+        ataqueMagico:
+          type: integer
+          description: Ataque mágico base entidad
+          format: int32
+          example: 15
+        defensaFisica:
+          type: integer
+          description: Defensa física entidad.
+          format: int32
+          example: 10
+        defensaMagica:
+          type: integer
+          description: Defensa mágica entidad.
+          format: int32
+          example: 10
+      description: Modelo que representa las estadísticas generales de un personaje, monstruo o efecto.
+    Grupo:
+      type: object
+      properties:
+        grupo_id:
+          type: integer
+          description: ID único del grupo.
+          format: int64
+          example: 1
+        imagenLogo:
+          type: string
+          description: URL de la imagen del logo del grupo.
+          example: https://example.com/logo.png
+        nombre:
+          type: string
+          description: Nombre del grupo.
+          example: Los Valientes
+        descripcion:
+          type: string
+          description: Descripción del grupo.
+          example: Grupo dedicado a explorar mazmorras peligrosas.
+        liderGrupo:
+          $ref: '#/components/schemas/LiderGrupo'
+      description: Entidad que representa un grupo en el sistema.
+    LiderGrupo:
+      type: object
+      properties:
+        lider_grupo_id:
+          type: integer
+          format: int64
+        grupo:
+          $ref: '#/components/schemas/Grupo'
+        personaje:
+          $ref: '#/components/schemas/Personaje'
+        fechaNombramiento:
+          type: string
+          format: date-time
+    LogrosPersonaje:
+      required:
+        - boss
+        - mazmorras_totales_superadas
+        - miniboss
+        - muertes_totales
+        - normal
+        - tiempo_total_jugado
+        - total_daño_inflijido
+        - total_daño_recibido
+      type: object
+      properties:
+        logro_id:
+          type: integer
+          description: ID único de tabla logros
+          format: int64
+          example: 1
+        normal:
+          type: integer
+          description: Número de enemigos normales derrotados
+          format: int32
+          example: 10
+        miniboss:
+          type: integer
+          description: Número de minibosses derrotados
+          format: int32
+          example: 2
+        boss:
+          type: integer
+          description: Número de bosses derrotados
+          format: int32
+          example: 1
+        muertes_totales:
+          type: integer
+          description: Número total de muertes del personaje
+          format: int32
+          example: 0
+        total_daño_inflijido:
+          type: integer
+          description: Daño total infligido por el personaje
+          format: int32
+          example: 500
+        total_daño_recibido:
+          type: integer
+          description: Daño total recibido por el personaje
+          format: int32
+          example: 200
+        tiempo_total_jugado:
+          type: integer
+          description: Tiempo total jugado por el personaje (en segundos)
+          format: int32
+          example: 3600
+        mazmorras_totales_superadas:
+          type: integer
+          description: Número total de mazmorras superadas
+          format: int32
+          example: 1
+      description: Entidad que representa el registro de actividades de un personaje
+    Mision:
+      type: object
+      properties:
+        mision_id:
+          type: integer
+          description: ID único de la misión
+          format: int64
+          example: 1
+        nombre:
+          type: string
+          description: Nombre de la misión
+          example: Cazar Goblin
+        descripcion:
+          type: string
+          description: Descripción de la misión
+          example: Derrota a 5 Goblins
+        nivel_minimo:
+          type: integer
+          description: Nivel mínimo requerido para la misión
+          format: int32
+          example: 1
+        recompensa_almas:
+          type: integer
+          description: Almas otorgadas como recompensa
+          format: int32
+          example: 50
+        recompensa_experiencia:
+          type: integer
+          description: Experiencia otorgada como recompensa
+          format: int32
+          example: 100
+        tiempo_limite:
+          type: integer
+          description: Fecha límite para completar la misión
+          format: int32
+          example: 30
+      description: Entidad que representa una misión en el sistema
+    Personaje:
+      type: object
+      properties:
+        personaje_id:
+          type: integer
+          description: ID único del personaje
+          format: int64
+          example: 1
+        imagen_modelo:
+          type: string
+          description: URL de la imagen del modelo del personaje
+          example: model1.jpg
+        nombre:
+          type: string
+          description: Nombre del personaje
+          example: Guerrero1
+        fecha_creacion:
+          type: string
+          description: Fecha y hora de creación del personaje
+          format: date-time
+        nivel:
+          type: integer
+          description: Nivel del personaje
+          format: int32
+          example: 1
+        xp_acumulada:
+          type: integer
+          description: Experiencia acumulada del personaje
+          format: int32
+          example: 0
+        almas:
+          type: integer
+          description: Almas acumuladas por el personaje
+          format: int32
+          example: 0
+        capacidad_inventario:
+          type: integer
+          description: Capacidad del inventario del personaje
+          format: int32
+          example: 20
+        estadisticas:
+          $ref: '#/components/schemas/EstadisticasGenerales'
+        usuario:
+          $ref: '#/components/schemas/Usuario'
+        logros:
+          $ref: '#/components/schemas/LogrosPersonaje'
+        clase_personaje:
+          $ref: '#/components/schemas/ClasePersonaje'
+        liderDeGrupo:
+          $ref: '#/components/schemas/LiderGrupo'
+      description: Entidad que representa un personaje en el sistema
+    PersonajeMision:
+      type: object
+      properties:
+        persoanje_mision_id:
+          type: integer
+          format: int64
+        personaje:
+          $ref: '#/components/schemas/Personaje'
+        mision:
+          $ref: '#/components/schemas/Mision'
+        fecha_inicio:
+          type: string
+          description: Fecha y hora de inicio de la misión
+          format: date-time
+        fecha_fin:
+          type: string
+          description: Fecha y hora de finalización de la misión
+          format: date-time
+        estado:
+          type: string
+          description: Estado de la misión (en_progreso, completada, fallida)
+          example: en_progreso
+          enum:
+            - EN_PROGRESO
+            - COMPLETADA
+            - FALLIDA
+      description: Entidad que representa la relación entre un personaje y una misión
+    Habilidad:
+      type: object
+      properties:
+        habilidad_id:
+          type: integer
+          description: ID único de la habilidad
+          format: int64
+          example: 1
+        imagen:
+          type: string
+          description: URL de la imagen de la habilidad
+          example: habilidad1.png
+        nombre:
+          type: string
+          description: Nombre de la habilidad
+          example: Corte rápido
+        descripcion:
+          type: string
+          description: Descripción de la habilidad
+          example: Un ataque rápido con la espada
+        nivel_maximo:
+          type: integer
+          description: Nivel máximo de la habilidad
+          format: int32
+          example: 5
+        requisito_nivel:
+          type: integer
+          description: Nivel requerido para aprender la habilidad
+          format: int32
+          example: 1
+        tipoHabilidad:
+          type: string
+          description: Tipo de habilidad (ofensiva, defensiva, apoyo)
+          example: ofensiva
+          enum:
+            - OFENSIVA
+            - DEFENSIVA
+            - APOYO
+        objetivoHabilidad:
+          type: string
+          description: Objetivo de la habilidad (jugador, aliado, enemigo, todo)
+          example: enemigo
+          enum:
+            - JUGADOR
+            - ALIADO
+            - ENEMIGO
+            - TODO
+        area_efecto:
+          type: number
+          description: Área de efecto de la habilidad
+          format: double
+          example: 1
+        unidades_afectadas:
+          type: integer
+          description: Número de unidades afectadas por la habilidad
+          format: int32
+          example: 1
+        estadisticas:
+          $ref: '#/components/schemas/EstadisticasGenerales'
+        enfriamiento:
+          type: integer
+          description: Tiempo de enfriamiento de la habilidad
+          format: int32
+          example: 2
+      description: Entidad que representa una habilidad en el sistema
+    PersonajeHabilidad:
+      type: object
+      properties:
+        personaje_habilidad_id:
+          type: integer
+          format: int64
+        nivelHabilidad:
+          type: integer
+          description: Nivelde la habilidad asiganada
+          format: int32
+          example: 10
+        personaje:
+          $ref: '#/components/schemas/Personaje'
+        habilidad:
+          $ref: '#/components/schemas/Habilidad'
+      description: Entidad que genera que represenata la relacion entre persoanje y habilidad
+    InventarioDTO:
+      type: object
+      properties:
+        item:
+          $ref: '#/components/schemas/Item'
+        cantidad:
+          type: integer
+          format: int32
+        equipado:
+          type: boolean
+        fecha_obtencion:
+          type: string
+          format: date-time
+    Item:
+      type: object
+      properties:
+        item_id:
+          type: integer
+          description: ID único del ítem
+          format: int64
+          example: 1
+        nombre:
+          type: string
+          description: Nombre del ítem
+          example: Poción de Vida
+        imagen:
+          type: string
+          description: Imagen del ítem
+          example: Poción_de_Vida.jpg
+        descripcion:
+          type: string
+          description: Descripción del ítem
+          example: Restaura 50 puntos de vida
+        equipable:
+          type: boolean
+          description: Indica si es equipable del ítem
+          example: true
+        acumulaciones_max:
+          type: integer
+          description: Cantidad máxima de acumulaciones del ítem
+          format: int32
+          example: 99
+        estadisticas:
+          $ref: '#/components/schemas/EstadisticasGenerales'
+      description: Entidad que representa un ítem en el sistema
+    PersonajeDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        imagen:
+          type: string
+        nombre:
+          type: string
+        creacion:
+          type: string
+          format: date-time
+        nivel:
+          type: integer
+          format: int32
+        xp_acumulada:
+          type: integer
+          format: int32
+        almas:
+          type: integer
+          format: int32
+        estadisticas:
+          $ref: '#/components/schemas/EstadisticasGenerales'
+        logros:
+          $ref: '#/components/schemas/LogrosPersonaje'
+        clase:
+          $ref: '#/components/schemas/ClasePersonaje'
+        capacidad_inventario:
+          type: integer
+          format: int32
+        inventario:
+          type: array
+          items:
+            $ref: '#/components/schemas/InventarioDTO'
+    PersonajeItem:
+      type: object
+      properties:
+        personaje_inventario_id:
+          type: integer
+          format: int64
+        personaje:
+          $ref: '#/components/schemas/Personaje'
+        item:
+          $ref: '#/components/schemas/Item'
+        cantidad:
+          type: integer
+          description: Cantidad del ítem en el inventario
+          format: int32
+          example: 1
+        equipado:
+          type: boolean
+          description: Indica si el ítem está equipado
+          example: false
+        fecha_obtencion:
+          type: string
+          description: Fecha y hora de obtención del ítem
+          format: date-time
+      description: Entidad que representa el inventario de un personaje
+    EfectoEstado:
+      type: object
+      properties:
+        efecto_id:
+          type: integer
+          description: ID único del efecto
+          format: int64
+          example: 1
+        imagen_icono:
+          type: string
+          description: URL del icono del efecto
+          example: potenciacion.png
+        nombre:
+          type: string
+          description: Nombre del efecto
+          example: Fuerza
+        descripcion:
+          type: string
+          description: Descripción del efecto
+          example: Aumenta el ataque en 5 puntos
+        tipo:
+          type: string
+          description: Tipo de efecto (buff, debuff)
+          example: buff
+          enum:
+            - BUFF
+            - DEBUFF
+        tipo_afectado:
+          type: string
+          description: Tipo de entidad afectada (personaje, monstruo, todo)
+          example: personaje
+          enum:
+            - PERSONAJE
+            - MONSTRUO
+            - TODO
+        duracion_efecto:
+          type: number
+          description: Duración del efecto en turnos
+          format: double
+          example: 5
+        intervalos_efecto:
+          type: number
+          description: Intervalos de aplicación del efecto
+          format: double
+          example: 1
+        acumulaciones:
+          type: integer
+          description: Número de acumulaciones del efecto
+          format: int32
+          example: 0
+        estadisticas:
+          $ref: '#/components/schemas/EstadisticasGenerales'
+      description: Entidad que representa un efecto o estado en el sistema
+    ItemEfecto:
+      type: object
+      properties:
+        item_efecto_id:
+          type: integer
+          format: int64
+        item:
+          $ref: '#/components/schemas/Item'
+        efecto:
+          $ref: '#/components/schemas/EfectoEstado'
+      description: Entidad que representa la relación entre un ítem y un efecto
+    TipoItem:
+      type: object
+      properties:
+        tipoItemId:
+          type: integer
+          description: ID único del tipo de ítem
+          format: int64
+          example: 1
+        nombre:
+          type: string
+          description: Nombre del tipo de ítem
+          example: consumible
+        imagen:
+          type: string
+          description: imagen del ítem
+          example: consumible.jpg
+        descripcion:
+          type: string
+          description: Descripción del tipo de ítem
+          example: Consumibles que pueden ser usados para restaurar salud, energía, etc.
+      description: Entidad que representa un tipo de ítem en el sistema
+    Npc:
+      type: object
+      properties:
+        npc_id:
+          type: integer
+          description: ID único del NPC
+          format: int64
+          example: 1
+        nombre:
+          type: string
+          description: Nombre del NPC
+          example: Aldeano
+        descripcion:
+          type: string
+          description: Descripción del NPC
+          example: Un aldeano común que ofrece misiones simples
+        imagen:
+          type: string
+          description: URL de la imagen del NPC
+          example: aldeano.jpg
+        tipoNPC:
+          $ref: '#/components/schemas/TipoNPC'
+      description: Entidad que representa un NPC en el sistema
+    TipoNPC:
+      type: object
+      properties:
+        tipo_npc_id:
+          type: integer
+          description: ID único del tipo de NPC
+          format: int64
+          example: 1
+        nombre:
+          type: string
+          description: Nombre del tipo de NPC
+          example: Aldeano
+        descripcion:
+          type: string
+          description: Descripción del tipo de NPC
+          example: Un aldeano común que ofrece misiones simples
+      description: Entidad que representa un tipo de NPC en el sistema
+    NpcItem:
+      required:
+        - cantidadVenta
+        - precioCompra
+        - precioVenta
+      type: object
+      properties:
+        npc_producto_id:
+          type: integer
+          format: int64
+        precioCompra:
+          type: integer
+          description: Precio al que el NPC compra el ítem
+          format: int32
+          example: 500
+        precioVenta:
+          type: integer
+          description: Precio al que el NPC vende el ítem
+          format: int32
+          example: 700
+        cantidadVenta:
+          type: integer
+          description: Cantidad de ítems disponibles para la venta por el NPC
+          format: int32
+          example: 50
+        npc:
+          $ref: '#/components/schemas/Npc'
+        item:
+          $ref: '#/components/schemas/Item'
+      description: Entidad que representa los productos que un NPC puede vender o comprar
+    Monstruo:
+      type: object
+      properties:
+        monstruo_id:
+          type: integer
+          description: ID único del monstruo
+          format: int64
+          example: 1
+        nombre:
+          type: string
+          description: Nombre del monstruo
+          example: Goblin
+        tipo_monstruo:
+          $ref: '#/components/schemas/TipoMonstruo'
+        nivel:
+          type: integer
+          description: Nivel del monstruo
+          format: int32
+          example: 1
+        descripcion:
+          type: string
+          description: Descripción del monstruo
+          example: Un pequeño monstruo verde
+        imagen:
+          type: string
+          description: URL de la imagen del monstruo
+          example: goblin.jpg
+        almasOtrogadas:
+          type: integer
+          description: Almas que otorga el monstruo al ser derrotado
+          format: int32
+          example: 10
+        experienciaOtorgada:
+          type: integer
+          description: Experiencia que otorga el monstruo al ser derrotado
+          format: int32
+          example: 5
+      description: Entidad que representa un monstruo en el sistema
+    MonstruoHabilidad:
+      type: object
+      properties:
+        monstruo_habilidad_id:
+          type: integer
+          format: int64
+        nivelHabilidad:
+          type: integer
+          description: Nivel de la habilidad del monstruo
+          format: int32
+          example: 1
+        probabilidadUso:
+          type: number
+          description: Probabilidad de uso de la habilidad por el monstruo
+          format: double
+          example: 100
+        probabilidadFallo:
+          type: number
+          description: Probabilidad de fallar de la habilidad por el monstruo
+          format: double
+          example: 100
+        monstruo:
+          $ref: '#/components/schemas/Monstruo'
+        habilidad:
+          $ref: '#/components/schemas/Habilidad'
+      description: Entidad que representa la relación entre los monstruos y las habilidades que poseen
+    TipoMonstruo:
+      type: object
+      properties:
+        tipo_monstruo_id:
+          type: integer
+          description: ID único del tipo de monstruo
+          format: int64
+          example: 1
+        nombre:
+          type: string
+          description: Nombre del tipo de monstruo
+          example: normal
+        descripcion:
+          type: string
+          description: Descripción del tipo de monstruo
+          example: Monstruos comunes que se encuentran en cualquier zona
+      description: Entidad que representa un tipo de monstruo en el sistema
+      example: 1
+    MonstruoItem:
+      type: object
+      properties:
+        monstruo_item_id:
+          type: integer
+          format: int64
+        monstruo:
+          $ref: '#/components/schemas/Monstruo'
+        item:
+          $ref: '#/components/schemas/Item'
+        probabilidad:
+          type: integer
+          description: Probabilidad de que el objeto sea soltado
+          format: int32
+          example: 100
+      description: Entidad que representa los objetos que un monstruo puede soltar
+    MisionItem:
+      type: object
+      properties:
+        mision_item_id:
+          type: integer
+          format: int64
+        mision:
+          $ref: '#/components/schemas/Mision'
+        item:
+          $ref: '#/components/schemas/Item'
+        cantidad:
+          type: integer
+          description: Cantidad del ítem de recompensa
+          format: int32
+          example: 1
+      description: Entidad que representa los objetos de recompensa de una misión
+    Mapa:
+      type: object
+      properties:
+        mapa_id:
+          type: integer
+          description: ID único del mapa
+          format: int64
+          example: 1
+        nombre:
+          type: string
+          description: Nombre del mapa
+          example: Mazmorra Oscura
+        descripcion:
+          type: string
+          description: Descripción del mapa
+          example: Una mazmorra llena de peligros
+        imagen:
+          type: string
+          description: URL de la imagen del mapa
+          example: mazmorra.jpg
+        nivel_recomendado:
+          type: integer
+          description: Nivel recomendado para el mapa
+          format: int32
+          example: 1
+      description: Entidad que representa un mapa en el sistema
+      example: 2
+    MapaMonstruo:
+      type: object
+      properties:
+        mapa_monstruo_id:
+          type: integer
+          format: int64
+        probabilidadAparicion:
+          type: integer
+          description: Probabilidad de aparición del monstruo en el mapa
+          format: int32
+          example: 75
+        mapa:
+          $ref: '#/components/schemas/Mapa'
+        monstruo:
+          $ref: '#/components/schemas/Monstruo'
+      description: Entidad que representa la relación entre los mapas y los monstruos con su probabilidad de aparición
+    MapaEfecto:
+      type: object
+      properties:
+        mapa_efecto_id:
+          type: integer
+          format: int64
+        mapa:
+          $ref: '#/components/schemas/Mapa'
+        efecto:
+          $ref: '#/components/schemas/EfectoEstado'
+      description: Entidad que representa la relación entre un mapa y un efecto
+    TipoMapa:
+      type: object
+      properties:
+        tipoMapaId:
+          type: integer
+          description: ID único del tipo de mapa
+          format: int64
+          example: 1
+        nombre:
+          type: string
+          description: Nombre del tipo de mapa
+          example: mazmorra
+        descripcion:
+          type: string
+          description: Descripción del tipo de mapa
+          example: Un lugar peligroso lleno de enemigos y tesoros
+      description: Entidad que representa un tipo de mapa en el sistema
+    HabilidadEfecto:
+      type: object
+      properties:
+        habilidad_efecto_id:
+          type: integer
+          format: int64
+        habilidad:
+          $ref: '#/components/schemas/Habilidad'
+        efecto:
+          $ref: '#/components/schemas/EfectoEstado'
+      description: Entidad que representa la relación entre una habilidad y un efecto
+    LogTransacciones:
+      type: object
+      properties:
+        transaccion_id:
+          type: integer
+          description: ID único de la transacción
+          format: int64
+          example: 1
+        personaje:
+          $ref: '#/components/schemas/Personaje'
+        npc:
+          $ref: '#/components/schemas/Npc'
+        item:
+          $ref: '#/components/schemas/Item'
+        tipoTransaccion:
+          type: string
+          description: Tipo de transacción (compra/venta)
+          example: compra
+          enum:
+            - COMPRA
+            - VENTA
+        cantidad:
+          type: integer
+          description: Cantidad de ítems involucrados en la transacción
+          format: int32
+          example: 1
+        precio_almas:
+          type: integer
+          description: Precio en almas de la transacción
+          format: int32
+          example: 50
+        fecha_transaccion:
+          type: string
+          description: Fecha y hora de la transacción
+          format: date-time
+      description: Entidad que representa una transacción entre un NPC y un personaje
+    LogUsuario:
+      type: object
+      properties:
+        log_id:
+          type: integer
+          description: ID único del log
+          format: int64
+          example: 1
+        usuario:
+          $ref: '#/components/schemas/Usuario'
+        tipoLog:
+          type: string
+          description: Tipo de log
+          example: informacion
+          enum:
+            - INFORMACION
+            - FALLO
+            - ADVERTENCIA
+            - CREACION
+            - ACTUALIZACION
+            - BORRADO
+        mensaje:
+          type: string
+          description: Mensaje del log
+          example: Error al guardar los datos
+        fechaLog:
+          type: string
+          description: Fecha y hora del log
+          format: date-time
+      description: Entidad que representa los registros de logs del sistema
+    LogPersonajeMonstruo:
+      type: object
+      properties:
+        registro_id:
+          type: integer
+          format: int64
+        personaje:
+          $ref: '#/components/schemas/Personaje'
+        monstruo:
+          $ref: '#/components/schemas/Monstruo'
+        fechaCaza:
+          type: string
+          format: date-time
+        almasObtenidas:
+          type: integer
+          format: int32
+        danoRealizado:
+          type: integer
+          format: int32
+        danoRecivido:
+          type: integer
+          format: int32
+        experienciaObtenida:
+          type: integer
+          format: int32
+      description: Entidad que representa los registros de logros del personaje
+    NpcDTO:
+      type: object
+      properties:
+        nombre:
+          type: string
+        descripcion:
+          type: string
+        imagen:
+          type: string
+        tipoNPC:
+          $ref: '#/components/schemas/TipoNPC'
+        tienda:
+          type: array
+          items:
+            $ref: '#/components/schemas/TiendaDTO'
+        id:
+          type: integer
+          format: int64
+    TiendaDTO:
+      type: object
+      properties:
+        item:
+          $ref: '#/components/schemas/Item'
+        npc:
+          $ref: '#/components/schemas/Npc'
+        precioCompra:
+          type: integer
+          format: int32
+        precioVenta:
+          type: integer
+          format: int32
+        cantidadVenta:
+          type: integer
+          format: int32
+    DropsDTO:
+      type: object
+      properties:
+        item:
+          $ref: '#/components/schemas/Item'
+        probabilidad:
+          type: integer
+          format: int32
+    MonstruoDTO:
+      type: object
+      properties:
+        nombre:
+          type: string
+        tipo:
+          $ref: '#/components/schemas/TipoMonstruo'
+        nivel:
+          type: integer
+          format: int32
+        descripcion:
+          type: string
+        imagen:
+          type: string
+        estadisticas:
+          $ref: '#/components/schemas/EstadisticasGenerales'
+        almas:
+          type: integer
+          format: int32
+        experiencia:
+          type: integer
+          format: int32
+        drops:
+          type: array
+          items:
+            $ref: '#/components/schemas/DropsDTO'
+        id:
+          type: integer
+          format: int64
+    MisionDTO:
+      type: object
+      properties:
+        nombre:
+          type: string
+        descripcion:
+          type: string
+        nivel:
+          type: integer
+          format: int32
+        almas:
+          type: integer
+          format: int32
+        experiencia:
+          type: integer
+          format: int32
+        tiempo:
+          type: integer
+          format: int32
+        recompensas:
+          type: array
+          items:
+            $ref: '#/components/schemas/RecompensaDTO'
+        id:
+          type: integer
+          format: int64
+    RecompensaDTO:
+      type: object
+      properties:
+        item:
+          $ref: '#/components/schemas/Item'
+        cantidad:
+          type: integer
+          format: int32
+    PersonajeHabilidadDTO:
+      type: object
+      properties:
+        personaje:
+          $ref: '#/components/schemas/PersonajeDTO'
+        habilidades:
+          type: array
+          items:
+            $ref: '#/components/schemas/Habilidad'

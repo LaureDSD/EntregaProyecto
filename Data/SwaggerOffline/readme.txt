@@ -1,0 +1,1 @@
+CAGAR EL YMAL para ver la info en interfaz
