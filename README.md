@@ -89,9 +89,8 @@ La base de datos está diseñada para soportar todas las funcionalidades del sis
 - MySQL instalado y configurado.
 - IDE (IntelliJ IDEA, Eclipse, etc.) o terminal para ejecutar el proyecto.
 - Postman (opcional, para probar los endpoints).
-
-
-POSTAMN PARA IMPORTA SOLO ES ACCEDER A COLLECTIONS , DARLE A LOS TRES PUNTOS Y EXPORTA, PARA IMPORTAR ES CASI LO MISMO.
+- Para exportar postman es acceder a collections, darle a los tres puntos y exportar.
+- Para importar una coleccion accderemos a al workspace, en la parte superior  sale new o import e importamos.
 
 ### Pasos para Configurar y Ejecutar
 
