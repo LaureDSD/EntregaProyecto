@@ -1,5 +1,6 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.usuarioController;
 
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.usuario.TipoUsuario;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.usuario.Usuario;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.modelsDTO.usuarioDTO.UsuarioDTO;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.securityController.CensorController;
@@ -34,7 +35,9 @@ public class UsuarioController {
             if (id == null) {
                 return ResponseEntity.ok( conversorListaUsuarioDTO(usuarioService.getAll()) ) ;
             } else {
-                return ResponseEntity.ok( conversorListaUsuarioDTO(usuarioService.getByTipoUsuarioID(id)));
+                TipoUsuario tu = new TipoUsuario();
+                tu.setTipo_usuario_id(id);
+                return ResponseEntity.ok( conversorListaUsuarioDTO(usuarioService.getByTipoUsuarioID(tu)));
             }
         }catch (Exception e){
             return ResponseEntity.badRequest().body("Ups algo salio mal.");
@@ -108,7 +111,7 @@ public class UsuarioController {
         usuarioDTO.setContrasena(CensorController.ocultarNumero(usuario.getContraseña(), 1));
         usuarioDTO.setLimitePersoanjes(usuario.getLimite_personajes());
         usuarioDTO.setConexion(usuario.getUltima_conexion());
-        usuarioDTO.setTipoUsuario( tipoUsuarioService.getByID(usuario.getTipoUsuario()) );
+        usuarioDTO.setTipoUsuario( usuario.getTipoUsuario() );
         usuarioDTO.setFecha_creacion(usuario.getFecha_creacion());
         usuarioDTO.setEstado(usuario.isEstado_cuenta());
         return usuarioDTO;

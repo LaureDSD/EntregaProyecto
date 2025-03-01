@@ -19,8 +19,9 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import org.springframework.security.config.Customizer;
-import java.util.Arrays;
+
+import java.util.List;
+
 
 @Configuration
 @EnableWebSecurity
@@ -38,24 +39,16 @@ public class SpringSecurity {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(AbstractHttpConfigurer::disable)
-                .cors(Customizer.withDefaults())
+                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .headers(headers -> headers
-                        .frameOptions(frame -> frame.disable()))
-                .sessionManagement(session ->
-                        session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                        .contentSecurityPolicy(csp -> csp.policyDirectives("frame-ancestors 'self'"))
+                )
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)) // Permitir sesiones
                 .authorizeHttpRequests(auth -> auth
-                        // Swagger UI
-                        .requestMatchers("/v3/api-docs/**","url/**",
-                                "/swagger-ui/**",
-                                "/swagger-ui.html",
-                                "/swagger-resources/**",
-                                "/webjars/**").permitAll()
-                        .requestMatchers("/auth/**").permitAll()
-                        //.requestMatchers("/api/**").permitAll()
-                        //.requestMatchers("**").permitAll()
-                        .requestMatchers("/api/**").hasAnyAuthority("1", "2","3")
-                        .requestMatchers("/logs/**").hasAnyAuthority("2", "3")
-                        .requestMatchers("/admin/**").hasAuthority("3")
+                        .requestMatchers("/js/**", "/favicon.ico", "/auth/**", "/login").permitAll()
+                        .requestMatchers("/api/**").hasAnyAuthority("USR", "SAD", "ADM")
+                        .requestMatchers("/logs/**").hasAnyAuthority("SAD", "ADM")
+                        .requestMatchers("/admin/**").hasAuthority("ADM") // Dashboard requiere ADM
                         .anyRequest().authenticated()
                 )
                 .authenticationProvider(authenticationProvider())
@@ -64,13 +57,15 @@ public class SpringSecurity {
         return http.build();
     }
 
+
+
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("*"));
-        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-        configuration.setAllowedHeaders(Arrays.asList("*"));
-        configuration.setExposedHeaders(Arrays.asList("Authorization"));
+        configuration.setAllowedOrigins(List.of("http://localhost:4200")); // Permitir Angular
+        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        configuration.setAllowedHeaders(List.of("*"));
+        configuration.setAllowCredentials(true); // Permitir credenciales (JWT en cookies)
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);

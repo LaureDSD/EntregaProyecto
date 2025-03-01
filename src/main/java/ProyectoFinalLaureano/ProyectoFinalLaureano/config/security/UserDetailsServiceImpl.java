@@ -5,6 +5,7 @@ import ProyectoFinalLaureano.ProyectoFinalLaureano.repositories.usuarioRepositor
 import ProyectoFinalLaureano.ProyectoFinalLaureano.repositories.usuarioRepository.UsuarioRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,6 +14,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
@@ -24,19 +28,14 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     private TipoUsuarioRepository tipoUsuarioRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Usuario usuario = usuarioRepository.findByCorreo(email);
-        if (usuario == null) {
-            throw new UsernameNotFoundException("Usuario no encontrado: " + email);
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        Optional<Usuario> optionalUsuario = Optional.ofNullable(usuarioRepository.findByCorreo(username));
+        if (optionalUsuario.isEmpty()) {
+            throw new UsernameNotFoundException("Usuario no encontrado");
         }
-
-        //Indica la referecia de autoridad del tipo usuario, en este caso el id de la tabla.
-        SimpleGrantedAuthority authority = new SimpleGrantedAuthority(usuario.getTipoUsuario().toString());
-
-        return User.builder()
-                .username(usuario.getCorreo())
-                .password(usuario.getContraseña())
-                .authorities(Collections.singletonList(authority))
-                .build();
+        Usuario usuario = optionalUsuario.get();
+        GrantedAuthority authority = new SimpleGrantedAuthority(usuario.getTipoUsuario().getNombre());
+        return new org.springframework.security.core.userdetails.User(
+                usuario.getCorreo(), usuario.getContraseña(), List.of(authority));
     }
 }

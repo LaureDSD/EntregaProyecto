@@ -4,12 +4,15 @@ import ProyectoFinalLaureano.ProyectoFinalLaureano.config.security.JwtService;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.config.security.UserDetailsServiceImpl;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.usuario.Usuario;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.usuarioService.UsuarioService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -70,6 +73,50 @@ public class AuthController {
     }
 
     @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestParam String correo, @RequestParam String contraseña, HttpServletRequest request) {
+        try {
+            // Autenticar al usuario
+            Authentication authentication = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(correo, contraseña)
+            );
+
+            // Cargar los detalles del usuario
+            UserDetails userDetails = userDetailsService.loadUserByUsername(correo);
+
+            // Obtener el rol del usuario
+            String role = userDetails.getAuthorities().stream()
+                    .map(GrantedAuthority::getAuthority)
+                    .findFirst()
+                    .orElseThrow(() -> new RuntimeException("No se encontró un rol para el usuario"));
+
+            // Generar el token JWT
+            String token = jwtService.generateToken(userDetails.getUsername(), role);
+
+            // Guardar el usuario autenticado en la sesión de Spring Security
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+            request.getSession().setAttribute("SPRING_SECURITY_CONTEXT", SecurityContextHolder.getContext());
+
+            // Devolver el token en la respue
+            System.out.println(token);
+            return ResponseEntity.ok().body(Map.of("token", token));
+
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("error", "Error en la autenticación"));
+        }
+    }
+
+    /*@GetMapping("admin/dashboard")
+    public String getDashboard(Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        System.out.println("Usuario autenticado: " + authentication.getName());
+        System.out.println("Roles: " + authentication.getAuthorities());
+
+        model.addAttribute("usuario", authentication.getName());
+        return "/admin/dashboard"; // Thymeleaf buscará /templates/admin/dashboard.html
+    }*/
+
+
+    /*@PostMapping("/login")
     public ResponseEntity<?> login(@RequestParam String correo, @RequestParam String contraseña, Model model) {
         try {
             System.out.println("Intentando login para: " + correo);
@@ -94,7 +141,7 @@ public class AuthController {
             model.addAttribute("error", "Error en la autenticación: " + e.getMessage());
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("error", "Error en la autenticación"));
         }
-    }
+    }*/
 }
 
 //fetch('/login', {

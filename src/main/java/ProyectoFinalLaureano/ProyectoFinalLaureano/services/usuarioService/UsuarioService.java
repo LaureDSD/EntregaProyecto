@@ -1,5 +1,6 @@
 package ProyectoFinalLaureano.ProyectoFinalLaureano.services.usuarioService;
 
+import ProyectoFinalLaureano.ProyectoFinalLaureano.models.usuario.TipoUsuario;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.usuario.Usuario;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.repositories.usuarioRepository.TipoUsuarioRepository;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.repositories.usuarioRepository.UsuarioRepository;
@@ -34,7 +35,7 @@ public class UsuarioService {
         usuarioRepository.deleteById(id);
     }
 
-    public List<Usuario> getByTipoUsuarioID(Long tu) {
+    public List<Usuario> getByTipoUsuarioID(TipoUsuario tu) {
         return usuarioRepository.getByTipoUsuario(tu);
     }
 }

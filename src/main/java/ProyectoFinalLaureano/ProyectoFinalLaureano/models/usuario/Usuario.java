@@ -92,11 +92,10 @@ public class Usuario {
 
 
     @NotNull
-    //@ManyToOne
+    @ManyToOne
     @Schema(description = "Tipo de usuario asociado")
-    //@Join
-    @Column(name = "tipo_usuario_id", nullable = false)
-    private Long tipoUsuario;
+    @JoinColumn(name = "tipo_usuario_id", nullable = false)
+    private TipoUsuario tipoUsuario;
 
 
     // Relación con Personaje 1:N

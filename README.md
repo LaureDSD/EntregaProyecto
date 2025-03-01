@@ -1,5 +1,8 @@
 # API RPG en Spring Boot
 
+- En thymeleaf, encontrara activas todas las funciones , crea cuenta como administrador en registro  desde localhost/auth/login.
+- Con esta configuracion peudes crear tu primer usurio administador desde interfaz, luego lo desactivas en el html..
+
 ## Descripción del Proyecto
 
 Este proyecto es una API desarrollada en **Spring Boot** que gestiona un sistema de roles (RPG) para usuarios, personajes, misiones, habilidades, inventarios, monstruos, mapas y más. La API está diseñada para ser utilizada en un entorno de juego donde los usuarios pueden crear personajes, realizar misiones, combatir monstruos, adquirir habilidades y gestionar su inventario.
@@ -40,6 +43,7 @@ El sistema implementa un control de acceso basado en roles, donde los usuarios t
 
 - Los usuarios deben iniciar sesión para acceder a las funcionalidades restringidas.
 - La autenticación se realiza mediante **Spring Security** con soporte para formularios de inicio de sesión y autenticación básica.
+- En thymeleaf, encontrara activas todas las finciones , crea cuenta como administrador.
 
 ### 2. Panel de Administración con Thymeleaf
 
