@@ -2,6 +2,7 @@
 
 - En thymeleaf, encontrara activas todas las funciones , crea cuenta como administrador en registro  desde localhost/auth/login.
 - Con esta configuracion peudes crear tu primer usurio administador desde interfaz, luego lo desactivas en el html..
+- .requestMatchers("/api/usuario/**").hasAuthority("ADM") por si acaso aviso,falta esta linea en permisos dde spring security.
 
 spring.application.name=ProyectoFinalAPILaureano
 

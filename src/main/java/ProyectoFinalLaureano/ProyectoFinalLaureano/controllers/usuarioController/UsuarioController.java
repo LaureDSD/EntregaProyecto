@@ -20,6 +20,7 @@ import java.util.stream.Collectors;
 @Tag(name = "Usuario Controller", description = "Operaciones CRUD para la gestión de usuarios")
 public class UsuarioController {
 
+    /*
     @Autowired
     private UsuarioService usuarioService;
 
@@ -116,4 +117,7 @@ public class UsuarioController {
         usuarioDTO.setEstado(usuario.isEstado_cuenta());
         return usuarioDTO;
     }
+
+    */
+
 }

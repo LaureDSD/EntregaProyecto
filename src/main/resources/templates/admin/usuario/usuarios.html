@@ -203,7 +203,7 @@
                 <td th:text="${usuario.nombre_usuario_priv}"></td>
                 <td th:text="${usuario.correo}"></td>
                 <td th:text="${usuario.estado_cuenta ? 'Activa' : 'Inactiva'}"></td>
-                <td th:text="${usuario.tipoUsuario}"></td>
+                <td th:text="${usuario.tipoUsuario.nombre}"></td>
                 <td th:text="${usuario.fecha_creacion}"></td>
                 <td th:text="${usuario.limite_personajes}"></td>
                 <td>

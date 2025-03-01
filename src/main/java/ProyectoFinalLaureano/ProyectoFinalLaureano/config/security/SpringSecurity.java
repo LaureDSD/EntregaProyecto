@@ -48,7 +48,8 @@ public class SpringSecurity {
                         .requestMatchers("/js/**", "/favicon.ico", "/auth/**", "/login").permitAll()
                         .requestMatchers("/api/**").hasAnyAuthority("USR", "SAD", "ADM")
                         .requestMatchers("/logs/**").hasAnyAuthority("SAD", "ADM")
-                        .requestMatchers("/admin/**").hasAuthority("ADM") // Dashboard requiere ADM
+                        .requestMatchers("/admin/**").hasAuthority("ADM")
+                        .requestMatchers("/api/usuario/**").hasAuthority("ADM")
                         .anyRequest().authenticated()
                 )
                 .authenticationProvider(authenticationProvider())

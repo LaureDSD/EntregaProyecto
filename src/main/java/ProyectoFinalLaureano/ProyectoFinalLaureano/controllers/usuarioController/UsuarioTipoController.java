@@ -14,7 +14,7 @@ import java.util.List;
 @RequestMapping("/api/usuario")
 @Tag(name = "Usuario Tipo Controller", description = "Operaciones CRUD para la gestión de tipos de usuario")
 public class UsuarioTipoController {
-
+/*
     @Autowired
     private TipoUsuarioService tipoUsuarioService;
 
@@ -55,4 +55,6 @@ public class UsuarioTipoController {
     public void borrarTipoUsuario(@PathVariable Long id) {
         tipoUsuarioService.deleteByID(id);
     }
+    */
+
 }
