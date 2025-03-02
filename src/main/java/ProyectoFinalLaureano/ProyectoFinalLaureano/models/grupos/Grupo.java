@@ -27,9 +27,9 @@ public class Grupo {
     private Long grupo_id;
 
     //Imagen del; grupo
-    @Column(length = 255)
+    @Column(name = "imagenLogo",length = 255)
     @Schema(description = "URL de la imagen del logo del grupo.", example = "https://example.com/logo.png")
-    private String imagenLogo;
+    private String imagen;
 
     //Nombre del grupo
     @Column(nullable = false, length = 100)

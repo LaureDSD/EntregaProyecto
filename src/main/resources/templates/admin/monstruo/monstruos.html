@@ -141,7 +141,7 @@
     <div class="form-container">
 
         <form th:action="@{/admin/monstruo/monstruos/save}" th:object="${monstruo}" method="post">
-
+            <input type="hidden" th:field="*{monstruo_id}" />
 
             <!-- Nombre del Monstruo -->
             <div class="form-group mb-3">
@@ -151,11 +151,12 @@
 
             <!-- Tipo de Monstruo -->
             <div class="form-group mb-3">
-                <label for="tipo_monstruo" class="form-label">Tipo de Monstruo</label>
-                <select id="tipo_monstruo" th:field="*{tipo_monstruo}" class="form-control" required>
+                <label for="tipomonstruo" class="form-label">Tipo de Monstruo</label>
+                <select id="tipomonstruo" th:field="*{tipo_monstruo}" class="form-control" required>
                     <option th:each="tipo : ${tipoMonstruoList}" th:value="${tipo.tipo_monstruo_id}" th:text="${tipo.nombre}"></option>
                 </select>
             </div>
+
 
             <!-- Nivel del Monstruo -->
             <div class="form-group mb-3">

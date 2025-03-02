@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/objeto")
+@RequestMapping("/api/item")
 @Tag(name = "Objeto", description = "API para gestionar objetos (ítems)")
 public class ItemController {
 
