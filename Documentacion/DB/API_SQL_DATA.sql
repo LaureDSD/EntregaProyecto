@@ -285,7 +285,7 @@ VALUES
   
   
   -- Insertar efectos y estados
-INSERT INTO efectos_estados (imagen_icono, nombre, tipo, tipo_afectado, duracion_efecto, intervalos_efecto, acumulaciones, descripcion, estadistica_id)
+INSERT INTO efectos_estados (imagen, nombre, tipo, tipo_afectado, duracion_efecto, intervalos_efecto, acumulaciones, descripcion, estadistica_id)
 VALUES
     ('fuerza_icono.jpg', 'Fuerza Mejorada', 'BUFF', 'PERSONAJE', 60, 10, 1, 'Aumenta el ataque físico en 20 puntos durante 1 minuto.', 39),
     ('veneno_icono.jpg', 'Veneno', 'DEBUFF', 'MONSTRUO', 30, 5, 3, 'Reduce la vida en 10 puntos cada 5 segundos durante 30 segundos.', 40),

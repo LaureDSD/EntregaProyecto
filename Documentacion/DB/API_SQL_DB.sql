@@ -179,7 +179,7 @@ CREATE TABLE IF NOT EXISTS monstruos (
 -- Tabla: efectos_estados (Corregido)
 CREATE TABLE IF NOT EXISTS efectos_estados (
     efecto_id BIGINT PRIMARY KEY AUTO_INCREMENT,
-    imagen_icono VARCHAR(255),
+    imagen VARCHAR(255),
     nombre VARCHAR(100) NOT NULL,
     tipo ENUM('BUFF', 'DEBUFF') NOT NULL,
     tipo_afectado ENUM('PERSONAJE', 'MONSTRUO', 'TODO') DEFAULT 'PERSONAJE',

@@ -94,7 +94,7 @@ public class Usuario {
     @NotNull
     @ManyToOne
     @Schema(description = "Tipo de usuario asociado")
-    @JoinColumn(name = "tipo_usuario_id", nullable = false)
+    @JoinColumn(name = "tipo_usuario_id")
     private TipoUsuario tipoUsuario;
 
 

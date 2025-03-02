@@ -47,6 +47,7 @@ public class SpringSecurity {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/js/**", "/favicon.ico", "/auth/**", "/login").permitAll()
                         .requestMatchers("/api/**").hasAnyAuthority("USR", "SAD", "ADM")
+                        //.requestMatchers("/api/**").permitAll()
                         .requestMatchers("/logs/**").hasAnyAuthority("SAD", "ADM")
                         .requestMatchers("/admin/**").hasAuthority("ADM")
                         .requestMatchers("/api/usuario/**").hasAuthority("ADM")

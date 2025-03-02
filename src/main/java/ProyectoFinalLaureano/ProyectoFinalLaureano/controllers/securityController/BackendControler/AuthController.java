@@ -3,6 +3,7 @@ package ProyectoFinalLaureano.ProyectoFinalLaureano.controllers.securityControll
 import ProyectoFinalLaureano.ProyectoFinalLaureano.config.security.JwtService;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.config.security.UserDetailsServiceImpl;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.models.usuario.Usuario;
+import ProyectoFinalLaureano.ProyectoFinalLaureano.services.usuarioService.TipoUsuarioService;
 import ProyectoFinalLaureano.ProyectoFinalLaureano.services.usuarioService.UsuarioService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 @Controller
@@ -37,6 +39,9 @@ public class AuthController {
 
     @Autowired
     private JwtService jwtService;
+
+    @Autowired
+    private TipoUsuarioService tipoUsuarioService;
 
     // Método GET para mostrar el formulario de login
     @GetMapping("/login")
@@ -69,6 +74,31 @@ public class AuthController {
         } catch (Exception e) {
             model.addAttribute("error", "Error al registrar: " + e.getMessage());
             return "register"; // Muestra el formulario de registro con el mensaje de error
+        }
+    }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PostMapping("/registro")
+    public ResponseEntity<Map<String, String>> register(@RequestBody Usuario usuario) {
+        Map<String, String> response = new HashMap<>();
+        try {
+            usuario.setUsuario_id(null);
+            usuario.setLimite_personajes(3);
+            usuario.setFecha_creacion(new Date());
+            usuario.setUltima_conexion(new Date());
+            usuario.setEstado_cuenta(true);
+            usuario.setTipoUsuario(tipoUsuarioService.getByID(1L));
+
+            if (usuarioService.setItem(usuario) != null) {
+                response.put("message", "Usuario registrado exitosamente");
+                return ResponseEntity.status(HttpStatus.CREATED).body(response);
+            } else {
+                response.put("error", "Error al guardar el usuario");
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+            }
+        } catch (Exception e) {
+            response.put("error", "Error al registrar: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
         }
     }
 

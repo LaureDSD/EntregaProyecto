@@ -25,9 +25,9 @@ public class EfectoEstado {
     private Long efecto_id;
 
     //Imagen del efecto
-    @Column(name = "imagen_icono", length = 255)
+    @Column(name = "imagen", length = 255)
     @Schema(description = "URL del icono del efecto", example = "potenciacion.png")
-    private String imagen_icono;
+    private String imagen;
 
     //Nomber del efecto
     @Column(name = "nombre", nullable = false, length = 100)

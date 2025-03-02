@@ -55,6 +55,7 @@ public class Grupo {
     private List<Personaje> miembros;
 
     @OneToOne(mappedBy = "grupo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
     private LiderGrupo liderGrupo;
 
 }

@@ -3747,7 +3747,7 @@ components:
           description: ID único del efecto
           format: int64
           example: 1
-        imagen_icono:
+        imagen:
           type: string
           description: URL del icono del efecto
           example: potenciacion.png
